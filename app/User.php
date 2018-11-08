@@ -1,0 +1,129 @@
+<?php
+
+namespace App;
+
+use App\Model\Core\Store;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name','surname', 'email', 'phone','avatar', 'password','active','rol_id','rel_store_id'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];    
+
+    //un usuario posee/pertenece un rol
+    public function rol(){
+        return $this->belongsTo(Model\Admin\Rol::class);
+    }
+
+     //un usuario posee una cuenta
+    public function acount(){
+        return $this->belongsTo(Model\Admin\Acount::class);
+    }
+    
+    /*funciones propias*/
+    public function rol_options(){
+        return json_decode(\Auth::user()->rol->label,true)['options'];        
+    }
+
+    public function edit($id){
+        //verificación de usuario.
+        if( \Auth::user()->id == $id) return true;
+        return false;        
+    }
+
+    public function validateUser(){        
+        //verificación de usuario.
+        if( \Auth::user()->id == $this->id) return true;
+        return false;        
+    }
+
+    public function validateUserStore($store_id){        
+        if(User::where('users.rel_store_id',$store_id)->where('users.rol_id',2)->get()->toArray()[0]['id'] == \Auth::user()->id) return true;
+        return false;
+    }
+
+    public function updateUser($data){
+        //guardamos los datos
+        $this->name = $data['name'];
+        $this->surname = $data['surname'];
+        $this->phone = $data['phone'];
+        $this->email = $data['email'];
+        //FALTA ingresamos a imagen...
+        if(!empty($data['image'])){
+            if($data['image']->isValid()){                      
+                $destinationPath = 'users/'.$this->id.'/profile';
+                $extension = $data['image']->getClientOriginalExtension(); // getting image extension
+                $fileName_image = rand(1,9999999).'.'.$extension; // renameing image
+                $data['image']->move($destinationPath, $fileName_image);                        
+            }            
+            $this->avatar = $fileName_image;
+            
+        }
+        $this->save();         
+
+        return $this;
+    }
+
+    public function store(){
+        return Store::where('id', $this->rel_store_id)->firstOrFail();//consultamos la tienda
+    }    
+
+    //crea el directorio del usuario, para el registro de tenderos
+    public function repository($user_id){
+        //verificacion de existencia de directorio
+        if (is_dir('users/'.$user_id)){
+            return false;
+        }
+        if(!mkdir('users/'.$user_id.'/profile',0777,true)){
+            return false;
+        }
+        chmod('users/'.$user_id, 0777);
+        if (!copy('images/user/default.png', 'users/'.$user_id.'/profile/default.png')) {
+           return false;
+        }
+        chmod('users/'.$user_id.'/profile/default.png', 0777);
+
+        if(!mkdir('users/'.$user_id.'/stores',0777,true)){
+            return false;                                   
+        }                               
+        chmod('users/'.$user_id, 0777);
+
+        //ubicamos la imagen de la tienda de usuario, necesaria para que se cree el directorio
+        if (!copy('images/store/default.png', 'users/'.$user_id.'/stores/default.png')) {
+            return false;    
+        }
+        chmod('users/'.$user_id.'/stores/default.png', 0777);
+
+        if(!mkdir('users/'.$user_id.'/products',0777,true)){
+            return false;                                    
+        }                               
+        chmod('users/'.$user_id, 0777);
+
+        //ubicamos la imagen del producto por defecto
+        if (!copy('images/product/default.png', 'users/'.$user_id.'/products/default.png')) {
+           return false;  
+        }
+        chmod('users/'.$user_id.'/products/default.png', 0777);
+
+        return true;
+    }
+
+}

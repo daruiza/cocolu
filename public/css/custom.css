@@ -1,0 +1,32 @@
+.lang li a{
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 20px;
+    color: #333333;
+    white-space: nowrap;
+    text-decoration: none;
+}
+.menu-lang{
+	text-align: center;
+}
+.bnt-lang{
+ 	padding: 5px 5px;
+}
+
+.alert-dismissible {
+    padding-right: 1rem !important;
+}
+
+.img-container{
+	background-color: rgba(0,0,0,.03);
+    padding: 5%;
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.img-container img{
+	cursor: pointer;
+}
+

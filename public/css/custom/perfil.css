@@ -1,0 +1,30 @@
+/*Perfil de usuario*/
+.data_cell_border {
+	text-align: center;
+	border-bottom: 1px solid;
+	border-bottom-color: #ddd;
+	border-bottom-style: dashed;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.data_cell {
+    text-align: center;    
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+.data_cell_border:hover,
+.data_cell:hover{
+	background: #b2b2b21a;
+}
+/*Fin Perfil de usuario*/
+
+.row-perfil .card .row{
+	margin-bottom: 15px;
+}
+
+.li-option:hover{
+	cursor: pointer;
+	background-color: rgba(0,0,0,.03);
+}
