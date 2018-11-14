@@ -67,7 +67,8 @@ class RegisterController extends Controller
             'name' => ucwords($data['name']),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'rel_store_id' => $data['rel_store_id'],
+            'rel_store_id' => 0,
+            //'rel_store_id' => $data['rel_store_id'],
         ]);
 
     }
