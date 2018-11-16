@@ -112,18 +112,19 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {        
         $user = new User();
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($id);        
         //validación de credenciales de usuario
-        if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);        
-        $store = $user->store();
+        if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);                
+        $store = $user->store();        
         $departments = Department::departments();
         $cities = [];
         if(!empty($store->department)){
             $cities = City::cities($store->department);            
         }
         //enviar los datos
+
         return view('store.edit',compact('store','departments','cities'));
         //return View::make('store.edit');
     }

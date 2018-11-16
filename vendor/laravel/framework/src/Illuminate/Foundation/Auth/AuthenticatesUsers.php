@@ -42,8 +42,8 @@ trait AuthenticatesUsers
             return $this->sendLockoutResponse($request);
         }
 
-        if ($this->attemptLogin($request)) {
-            $this->permits();
+        if ($this->attemptLogin($request)) {            
+            Auth::user()->permits();
             return $this->sendLoginResponse($request);
         }
 
@@ -181,15 +181,5 @@ trait AuthenticatesUsers
     {
         return Auth::guard();
     }
-
-    protected function permits(){
-        $permits = array('modulo'=>
-                            array('active'=>1,
-                                'options'=>array('active'=>1,'menu'=>'top','name'=>'opt')
-                        )
-        );
-        
-        Session::put('permits', $permits); 
-        //dd(Session::get('permits'));
-    }
+    
 }

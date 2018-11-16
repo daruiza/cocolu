@@ -4,6 +4,8 @@ namespace App;
 
 use App\Model\Core\Store;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -124,6 +126,16 @@ class User extends Authenticatable
         chmod('users/'.$user_id.'/products/default.png', 0777);
 
         return true;
+    }
+
+    //asignacion de permisos en session
+    public function permits(){
+        $permits = array();        
+        foreach(Auth::user()->rol()->get()[0]->options()->get() as $key => $option) {
+            if(!array_key_exists($option->module()->get()[0]->name, $permits))$permits[$option->module()->get()[0]->name]=$option->module()->get()[0]->toArray();
+            $permits[$option->module()->get()[0]->name]['options'][$option->id]=$option->toArray();
+        }        
+        Session::put('permits', $permits);
     }
 
 }

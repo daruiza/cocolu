@@ -81,15 +81,15 @@
                                         @foreach ($permit['options'] as $key_option => $option)
                                             
                                             @if($option['active'])
-                                                @if($option['menu'] == 'top')
+                                                @if(json_decode($option['label'], true)['menu'] == 'top')
                                                     <a class="dropdown-item" href="{{ route('rol.index') }}"
                                                        onclick="event.preventDefault();
-                                                                     document.getElementById('{{$permit['action'].'-'.$option['name'].'-form'}}').submit();">
+                                                                     document.getElementById('{{json_decode($permit['label'], true)['action'].'-'.$option['name'].'-form'}}').submit();">
                                                         <i class="{{ json_decode($option['label'], true)['icon'] }}"></i>
                                                         {{  $option['name'] }}
                                                     </a>
 
-                                                    {!! Form::open(array('id'=>$permit['action'].'-'.$option['name'].'-form','route' => $permit['action'].'.'.$option['name'],'method' => $option['method'])) !!}
+                                                    {!! Form::open(array('id'=>json_decode($permit['label'], true)['action'].'-'.$option['name'].'-form','route' => json_decode($permit['label'], true)['action'].'.'.$option['name'],'method' => json_decode($option['label'], true)['method'])) !!}
                                                     {!! Form::close() !!}
                                                 @endif                                            
                                             @endif
