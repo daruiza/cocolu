@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
 			'password'=>\Hash::make('0000'),						
 			'rol_id'=>2,
 			'acount_id'=>1,
-			'rel_store_id'=>0
+			'rel_store_id'=>1
 			)
 		);
 
@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
 			'password'=>\Hash::make('0000'),						
 			'rol_id'=>3,
 			'acount_id'=>1,
-			'rel_store_id'=>0
+			'rel_store_id'=>1
 			)
 		);
     }
