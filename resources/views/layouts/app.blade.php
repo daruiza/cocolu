@@ -48,20 +48,12 @@
                         <!-- Authentication Links -->
                         @guest
                             <div class="dropdown">
-                                <button class="btn dropdown-toggle dropdown-toggle-split" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-flag"></i>
                                 </button>
-                                <div class="dropdown-menu menu-lang" aria-labelledby="dropdownMenuButton">
-                                    <!--
-                                    <a class="dropdown-item" href="{{ route('locale',['lang'=>'es']) }}">Español</a>
-                                    <a class="dropdown-item" href="{{ route('locale',['lang'=>'en']) }}">English</a>
-                                    -->
-                                    <button type="submit" form = "form_locale_en" class="btn bnt-lang">
-                                        {{ __('messages.English') }}
-                                    </button>
-                                    <button type="submit" form = "form_locale_es" class="btn bnt-lang">
-                                        {{ __('messages.Spanish') }}
-                                    </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#" onclick="$('#form_locale_en').submit()" > {{ __('messages.English') }}</a>
+                                    <a class="dropdown-item" href="#" onclick="$('#form_locale_es').submit()" >{{ __('messages.Spanish') }}</a>
                                 </div>
                             </div>
                                                                                    

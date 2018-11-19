@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Model\Core\Store;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -66,9 +67,8 @@ class RegisterController extends Controller
         return User::create([
             'name' => ucwords($data['name']),
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'rel_store_id' => 0,
-            //'rel_store_id' => $data['rel_store_id'],
+            'password' => Hash::make($data['password']),            
+            'rel_store_id' => Store::create(['name' => ucwords($data['name']).'-'.'Store',])->id,
         ]);
 
     }
