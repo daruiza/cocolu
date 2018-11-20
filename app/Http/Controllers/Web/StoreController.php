@@ -137,7 +137,7 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {           
         $this->validator($request->all())->validate();
         if(!empty($request->file('image')))$this->validatorImage(['image'=>$request->file('image')])->validate();
 
@@ -152,16 +152,13 @@ class StoreController extends Controller
             }
         }
 
-
-
+        $message[0][0] = 'editStoreOK';
+        
         $departments = Department::departments();        
         if(!empty($store->department)){
-            $cities = City::cities($store->department);
-            return view('store.edit',compact('store','departments','cities'));
-        }      
-        
-
-        $message[0][0] = 'editStoreOK';            
+            $cities = City::cities($store->department);            
+            return view('store.edit',compact('store','departments','cities'))->with('success', $message);
+        }        
         return view('store.edit',compact('store','departments'))->with('success', $message);
     
     }

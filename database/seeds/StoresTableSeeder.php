@@ -18,7 +18,7 @@ class StoresTableSeeder extends Seeder
 			'city'=>'Medellín',
 			'adress'=>'Cr 1 - 1 # 1',
 			'description'=>'default store',
-			'logo'=>'logo.png',
+			'logo'=>'default.png',
 			'currency'=>'COP',
 			'label'=>'{"menu":"page","icon":"fas fa-list"}',
 			)

@@ -4,5 +4,6 @@ return [
 	"wellcomeUser" => "Bienvenid@ a Cocolú :Name",	
 	"userOK" => "Tu cuenta esta lista. ¡podemos empezar!",
 	"userIN" => "Que bueno tenerte de regreso.",
-	"editUserOK" => "¡Listo el pollo!, tu perfil de usuario se ha editado correctamente"
+	"editUserOK" => "¡Listo el pollo!, tu perfil de usuario se ha editado correctamente",
+	"editStoreOK" => "¡Ecxelente!, tu tienda se ha editado correctamente"
 ];

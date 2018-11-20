@@ -9,7 +9,7 @@
 	    <div class="container">
 	        <div class="row row-edit-perfil">
 
-            	<div class="col-md-8">
+            	<div class="col-md-8">            		
             		@include('layouts.alert')
             		<div class="card">
 	                    <div class="card-header">{{ __('messages.editStore') }}</div>
