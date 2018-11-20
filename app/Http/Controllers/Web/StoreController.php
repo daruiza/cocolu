@@ -137,15 +137,20 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {           
-        $this->validator($request->all())->validate();
+    {
+        //$this->validator($request->all())->validate();
+        if ($this->validator($request->all())->fails()) {
+            return Redirect::back()->withErrors($this->validator($request->all()))->withInput();
+            //return Redirect::back()->withErrors($this->validator($request->all()))->withInput()->with('modulo',$moduledata);
+        }
+
         if(!empty($request->file('image')))$this->validatorImage(['image'=>$request->file('image')])->validate();
 
         $store = new Store();
         $store = Store::find($id);        
         //validamos que la tienda sea del usuario
         $user = new User();        
-        if($user->validateUserStore($store->id)){            
+        if($user->validateUserStore($store->id)){                        
             if(!$store->updateStore($request->all())->id){
                 $message[0][0] = 'sorryNoUpdateStore';            
                 return Redirect::back()->with('danger', $message);

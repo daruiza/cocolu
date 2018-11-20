@@ -8,7 +8,7 @@
 	<div class="flex-center position-ref full-height container">    
 	    <div class="container">
 	        <div class="row row-edit-perfil">
-
+	        	
             	<div class="col-md-8">            		
             		@include('layouts.alert')
             		<div class="card">
