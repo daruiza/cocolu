@@ -24,6 +24,8 @@ return [
     "Hello" => "User Information",   
     "Rol" => "Role",
     "Description" => "Description",
+    "Department"=> "DEPARTMENT",    
+    "City"=> "CITY",    
     "Acount"=>"Acount",
     "Tables"=>"Tables",
     "Products"=>"Products",

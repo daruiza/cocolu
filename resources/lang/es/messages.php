@@ -25,6 +25,8 @@ return [
     "Hello" => "Información de Usuario",
     "Rol" => "Rol",
     "Description" => "Descripción",
+    "Department"=> "DEPARTAMENTO",  
+    "City"=> "MUNICIPIO", 
     "Acount"=>"Cuenta",
     "Tables"=>"Mesas",
     "Products"=>"Productos",

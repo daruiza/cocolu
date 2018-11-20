@@ -25,6 +25,7 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">    
 
     @yield('template')
+    @yield('style')
 </head>
 <body>
     <div id="app">

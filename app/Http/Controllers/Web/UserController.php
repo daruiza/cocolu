@@ -127,7 +127,7 @@ class UserController extends Controller
         Session::flash('_old_input.phone', Auth::user()->phone);
         Session::flash('_old_input.avatar', Auth::user()->avatar);        
 
-        return View::make('user.edit');
+        return View::make('user.edit')->with('data', ['options'=>$user->rol_options()]);
         
     }
 
