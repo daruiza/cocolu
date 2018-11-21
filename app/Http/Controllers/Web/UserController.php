@@ -11,10 +11,13 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Traits\Web\UserRequestTrait;
 
 
 class UserController extends Controller
 {
+
+    use UserRequestTrait;
 
  	public function __construct()
     {
@@ -172,4 +175,5 @@ class UserController extends Controller
     {
         //
     }
+      
 }

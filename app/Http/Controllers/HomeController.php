@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Traits\Web\HomeRequestTrait;
 
 use App;
 
 class HomeController extends Controller
 {
+
+    use HomeRequestTrait;
     /**
      * Create a new controller instance.
      *
@@ -53,5 +57,5 @@ class HomeController extends Controller
         Session::put('applocale', $request->input('lang'));        
         App::setLocale($request->input('lang'));        
         return redirect('/');
-    }
+    }    
 }

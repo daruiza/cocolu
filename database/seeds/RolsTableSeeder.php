@@ -14,19 +14,19 @@ class RolsTableSeeder extends Seeder
         \DB::table('rols')->insert(array(
 			'name'=>'Super-Administrador',
 			'description'=>'superAdmin',
-			'label'=>'{"options":["editProfile","paswordChange","acountSummary","termsConditions"]}'			
+			'label'=>'{"options":["editProfile","passwordChange","acountSummary","termsConditions"]}'			
 			)
 		);
 		\DB::table('rols')->insert(array(
 			'name'=>'Administrador',
 			'description'=>'admin',
-			'label'=>'{"options":["editProfile","editStore","paswordChange","acountSummary","sendSuggestions","termsConditions"]}'
+			'label'=>'{"options":["editProfile","editStore","passwordChange","acountSummary","sendSuggestions","termsConditions"]}'
 			)
 		);
 		\DB::table('rols')->insert(array(
 			'name'=>'Agente',
 			'description'=>'adminMeans',
-			'label'=>'{"options":["editProfile","paswordChange","acountSummary","sendSuggestions","termsConditions"]}'
+			'label'=>'{"options":["editProfile","passwordChange","acountSummary","sendSuggestions","termsConditions"]}'
 			)
 		);
     }

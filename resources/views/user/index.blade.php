@@ -32,6 +32,10 @@
                             <form id="editStore" action="{{ route('store.edit', \Auth::user()->id ) }}" method="GET" style="display: none;">                               
                             </form>
 
+                            <form id="passwordChange" action="{{ route('user.changepassword', \Auth::user()->id) }}" method="POST" style="display: none;">
+                            	@csrf                        
+                            </form>
+
 	                    @endif	                    
                 	</div>
             	</div>

@@ -26,6 +26,10 @@ return [
     "Description" => "Description",
     "Department"=> "DEPARTMENT",    
     "City"=> "CITY",    
+    "DepartmentLabel"=> "Departmant",    
+    "CityLabel"=> "City",
+    "Adress"=> "Adress",
+    "Currency"=> "Currency",     
     "Acount"=>"Acount",
     "Tables"=>"Tables",
     "Products"=>"Products",
@@ -35,5 +39,6 @@ return [
     "Reset Password" => "Reset Password",
     "Send Password Reset Link" => "Send Password Reset Link",
     "Send"=>"Send",
+    "passwordChange"=>"Password Change",
 
 ];

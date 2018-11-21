@@ -5,7 +5,7 @@ namespace App\Http\Traits\Web;
 use App\Model\Core\City;
 use Illuminate\Http\Request;
 
-trait UserRequestAjax
+trait HomeRequestTrait
 {
 	
 	public function consultarcity(Request $request){

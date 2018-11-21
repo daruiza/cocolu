@@ -125,7 +125,7 @@ class StoreController extends Controller
         }
         //enviar los datos
 
-        return view('store.edit',compact('store','departments','cities'));
+        return view('store.edit',compact('store','departments','cities'))->with('data', ['options'=>$user->rol_options()]);;
         //return View::make('store.edit');
     }
 

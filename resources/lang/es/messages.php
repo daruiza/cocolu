@@ -27,6 +27,10 @@ return [
     "Description" => "Descripción",
     "Department"=> "DEPARTAMENTO",  
     "City"=> "MUNICIPIO", 
+    "DepartmentLabel"=> "Departamento",    
+    "CityLabel"=> "Municipio",    
+    "Adress"=> "Dirección",    
+    "Currency"=> "Moneda",     
     "Acount"=>"Cuenta",
     "Tables"=>"Mesas",
     "Products"=>"Productos",
@@ -36,4 +40,5 @@ return [
     "Reset Password" => "Restablecer la contraseña",
     "Send Password Reset Link" => "Enviar contraseña Restablecer enlace",
     "Send"=>"Enviar",
+    "passwordChange"=>"Cambiar Contraseña",
 ];

@@ -31,6 +31,11 @@
 
                             <form id="editStore" action="{{ route('store.edit', \Auth::user()->id ) }}" method="GET" style="display: none;">                               
                             </form>
+                            
+                            <form id="passwordChange" action="{{ route('user.changepassword', \Auth::user()->id) }}" method="POST" style="display: none;">
+                            	@csrf                        
+                            </form>
+                            
 
 	                    @endif	                    
                 	</div>
@@ -123,13 +128,14 @@
 			                            </span>
 			                        @endif
 								</div>
+								<div class="col-md-12 button-submit">
+				        			<button type="submit" class="btn btn-primary" form="edit-form-user">
+				        				{{ __('messages.Send') }}
+				                    </button>
+				        		</div>
 			        		</div>			        		
 	                    </div>
-	                    <div class="col-md-12 button-submit">
-			        			<button type="submit" class="btn btn-primary" form="edit-form-user">
-			        				{{ __('messages.Send') }}
-			                    </button>
-			        		</div>
+	                    
 	                </div>
         		</div>
         	</div>
@@ -164,13 +170,19 @@
 			display: flex;
 		}
 
+		.col-form-label{
+			padding: 0px;
+			padding-top: calc(.375rem + 1px);
+		}
+
 		.button-submit{
 			text-align: right;
 		    padding-right: 20px;
 		    margin-bottom: 20px;
 		}
 		.button-submit button{
-			width: 220px;
+			width: 100%;
+    		margin-top: 10%;
 		}
 	</style>
 @endsection
