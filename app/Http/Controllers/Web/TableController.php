@@ -19,8 +19,9 @@ class TableController extends Controller
      */
     public function index()
     {
-        //dd(Table::find(1)->store()->get());    
-        return View::make('table.index')->with('data', ['tables'=>Table::all()->where('active',1)->toArray()]);
+        //dd(Table::find(1)->store()->get());
+        //dd(Table::all()->where('active',1));
+        return View::make('table.index')->with('data', ['tables'=>Table::all()->where('active',1)]);
     }
 
     /**

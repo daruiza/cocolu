@@ -4,7 +4,7 @@
   	
 @endsection
 
-@section('content')
+@section('content')	
 	<div class="flex-center position-ref full-height container">    
 	    <div class="container">
 	        <div class="row row-edit-perfil">
@@ -29,12 +29,11 @@
             		<div class="card">
 	                    <div class="card-header">{{ __('messages.indexTable') }}</div>
 	                    <div class="card-body">
-	                    	<div class="col-md-8">
-		                    	
-		                    </div>
-	                    	<div class="col-md-4">        			
-			        			
-			        		</div>			        		
+	                    	<div class="col-md-12">	                    		
+		                    	@foreach($data['tables'] as $key => $value)
+		                    		<div>{{$value->name}}</div>
+		                    	@endforeach
+		                    </div>	                    			        		
 	                    </div>
 	                    
 	                </div>
