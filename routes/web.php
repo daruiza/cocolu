@@ -29,7 +29,11 @@ Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');
 
 Route::post('user/changepassword', [
-   'as' => 'user.changepassword', 'uses' => 'Web\UserController@changepassword'
+   'as' => 'user.changepassword', 'uses' => 'Web\UserController@showResetForm'
 ]);
+Route::post('user/passwordrequest', [
+   'as' => 'user.passwordrequest', 'uses' => 'Web\UserController@resetPassword'
+]);
+
 //Route::post('changepassword', 'Web\UserController@changepassword');
 

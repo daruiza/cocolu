@@ -13,8 +13,9 @@ return [
     "Name"=> "Nombre",
     "Surname"=> "Apellido",    
     "Phone"=>"Teléfono",
-    "Confirm Password"=> "Confirmar contraseña",
-    "Reset Password"=> "Reestablecer contraseña",
+    "Confirm Password"=> "Confirmar Contraseña",
+    "Reset Password"=> "Reestablecer Contraseña",
+    "Change Password"=> "Cambiar Contraseña",
     "Send Password Reset Link"=> "Enviar link para reestablecer contraseña",
     "Logout"=> "Cerrar sesión",
     "Profile" => "Perfil",
@@ -41,4 +42,5 @@ return [
     "Send Password Reset Link" => "Enviar contraseña Restablecer enlace",
     "Send"=>"Enviar",
     "passwordChange"=>"Cambiar Contraseña",
+    "acountSummary"=>"Resumen de cuenta",
 ];

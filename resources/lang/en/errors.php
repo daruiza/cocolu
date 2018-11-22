@@ -8,4 +8,5 @@ return [
     "sorryTruncateUser" => "Failed to search your user, please restart the session",
     "errorUser" => "Failed to check user account",
     "userLogOut" =>"Please restart the session so to start to work again",
+    "editPasswordNOOK" => "Do not worry, just that the password field is special",
 ];

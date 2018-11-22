@@ -9,8 +9,7 @@
 	    <div class="container">
 	        <div class="row row-perfil">
             	
-            	<div class="col-md-4 ">            	
-                
+            	<div class="col-md-4 ">
             		<div class="card">
 	                    <div class="card-header">{{ __('messages.Options') }}</div>
 	                    @if (!empty($data['options']) )
@@ -32,10 +31,10 @@
                             <form id="editStore" action="{{ route('store.edit', \Auth::user()->id ) }}" method="GET" style="display: none;">                               
                             </form>
 
-                            <form id="passwordChange" action="{{ route('user.changepassword', \Auth::user()->id) }}" method="POST" style="display: none;">
-                            	@csrf                        
+                            <form id="passwordChange" action="{{ route('user.changepassword') }}" method="POST" style="display: none;">
+                            	@csrf                            	
+                            	<input type="hidden" name="id" value="{{ \Auth::user()->id }}">
                             </form>
-
 	                    @endif	                    
                 	</div>
             	</div>

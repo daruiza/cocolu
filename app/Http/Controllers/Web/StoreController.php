@@ -12,11 +12,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use App\Http\Traits\Web\UserRequestAjax;
+use App\Http\Traits\Web\StoreRequestTrait;
 
 class StoreController extends Controller
 {
 
     use UserRequestAjax;
+    use StoreRequestTrait;
 
     public function __construct()
     {
@@ -125,7 +127,7 @@ class StoreController extends Controller
         }
         //enviar los datos
 
-        return view('store.edit',compact('store','departments','cities'))->with('data', ['options'=>$user->rol_options()]);;
+        return view('store.edit',compact('store','departments','cities'))->with('data', ['options'=>$user->rol_options()]);
         //return View::make('store.edit');
     }
 
@@ -162,9 +164,9 @@ class StoreController extends Controller
         $departments = Department::departments();        
         if(!empty($store->department)){
             $cities = City::cities($store->department);            
-            return view('store.edit',compact('store','departments','cities'))->with('success', $message);
+            return view('store.edit',compact('store','departments','cities'))->with('success', $message)->with('data', ['options'=>$user->rol_options()]);
         }        
-        return view('store.edit',compact('store','departments'))->with('success', $message);
+        return view('store.edit',compact('store','departments'))->with('success', $message)->with('data', ['options'=>$user->rol_options()]);
     
     }
 

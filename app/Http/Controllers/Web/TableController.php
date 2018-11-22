@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Model\Core\Table;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
+use App\Http\Traits\Web\TableRequestTrait;
 
 class TableController extends Controller
 {
+
+    use TableRequestTrait;
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,8 @@ class TableController extends Controller
      */
     public function index()
     {
-        //
+        //dd(Table::find(1)->store()->get());    
+        return View::make('table.index')->with('data', ['tables'=>Table::all()->where('active',1)->toArray()]);
     }
 
     /**

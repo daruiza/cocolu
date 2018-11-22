@@ -11,8 +11,7 @@ class StoresTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('stores')->insert(array(
-        	'id'=>0,
+        \DB::table('stores')->insert(array(        	
 			'name'=>'Default',
 			'department'=>'Antioquia',
 			'city'=>'Medellín',

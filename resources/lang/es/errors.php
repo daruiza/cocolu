@@ -8,6 +8,5 @@ return [
     "sorryTruncateUser" => "Fallo la busqueda de los datos de usuario, porfavor reiniciar la sesión",
     "errorUser" => "Error a consultar la cuenta de usuario",
     "userLogOut" =>"Por favor reinicia la sesion asi no podemos trabajar",
-
-	
+    "editPasswordNOOK" => "¡No te preocupes!, solo que el campo contraseña es especial",
 ];

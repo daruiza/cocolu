@@ -17,6 +17,7 @@ return [
 	"Profile" => "Profile",
     "Surname"=> "Surname",
     "Confirm Password"=> "Confirm Password",
+    "Change Password"=> "Change Password",
     "welcome" => "Welcome to Cocolú",
     "welcomeContent" => "Cocolú is a aplication",
     "NewBar" => "Create new Bar",
@@ -40,5 +41,6 @@ return [
     "Send Password Reset Link" => "Send Password Reset Link",
     "Send"=>"Send",
     "passwordChange"=>"Password Change",
+    "acountSummary"=>"Acount Summary",
 
 ];
