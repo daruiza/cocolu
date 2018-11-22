@@ -29,9 +29,11 @@
             		<div class="card">
 	                    <div class="card-header">{{ __('messages.indexTable') }}</div>
 	                    <div class="card-body">
-	                    	<div class="col-md-12">	                    		
+	                    	<div id="containment-wrapper" class="col-md-12">		
 		                    	@foreach($data['tables'] as $key => $value)
-		                    		<div>{{$value->name}}</div>
+		                    		<div class="ui-widget-content draggable butNotHere">
+									  	<p>{{$value->name}}</p>
+									</div>
 		                    	@endforeach
 		                    </div>	                    			        		
 	                    </div>
@@ -46,13 +48,18 @@
 
 
 @section('script')
-	<script type="text/javascript"> 
-		
+	<script type="text/javascript"> 		
+		$( ".draggable" ).draggable({ 
+			containment: "#containment-wrapper", 
+			scroll: false ,
+			obstacle: ".butNotHere",
+    		preventCollision: true
+    	});		
 	</script>
 @endsection
 
 @section('style')
 	<style type="text/css">		
-		
+		.draggable { width: 150px; height: 150px; padding: 0.5em; border: solid 1px gainsboro;};
 	</style>
 @endsection
