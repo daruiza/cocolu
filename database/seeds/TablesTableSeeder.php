@@ -26,5 +26,35 @@ class TablesTableSeeder extends Seeder
 			'store_id'=>1,			
 			)
 		);		
+
+		\DB::table('tables')->insert(array(        	
+			'name'=>'DefaultTable2',
+			'description'=>'DescriptionTable',			
+			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
+			'store_id'=>1,			
+			)
+		);
+
+		\DB::table('tables')->insert(array(        	
+			'name'=>'DefaultTable3',
+			'description'=>'DescriptionTable',			
+			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
+			'store_id'=>1,			
+			)
+		);
+		\DB::table('tables')->insert(array(        	
+			'name'=>'DefaultTable4',
+			'description'=>'DescriptionTable',			
+			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
+			'store_id'=>1,			
+			)
+		);
+		\DB::table('tables')->insert(array(        	
+			'name'=>'DefaultTable5',
+			'description'=>'DescriptionTable',			
+			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
+			'store_id'=>1,			
+			)
+		);						
     }
 }
