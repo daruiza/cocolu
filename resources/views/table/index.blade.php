@@ -6,7 +6,7 @@
 @section('content')	
 	<div class="flex-center position-ref full-height container">    
 	    <div class="container">
-	        <div class="row row-edit-perfil">
+	        <div class="row">
 
 	        	<div class="col-md-4 ">
             		<div class="card">

@@ -62,35 +62,37 @@
                             <li><a class="nav-link" href="{{ route('register') }}">{{ __('messages.Register') }}</a></li>
                         @else
                             
-                            @foreach (Session::get('permits') as $key_permit => $permit)
-                                
-                                @if($permit['active'])
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                            {{ $key_permit }} <span class="caret"></span>
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                       
-                                        @foreach ($permit['options'] as $key_option => $option)
-                                            
-                                            @if($option['active'])
-                                                @if(json_decode($option['label'], true)['menu'] == 'top')
-                                                    <a class="dropdown-item" href="{{ route('rol.index') }}"
-                                                       onclick="event.preventDefault();
-                                                                     document.getElementById('{{json_decode($permit['label'], true)['action'].'-'.$option['name'].'-form'}}').submit();">
-                                                        <i class="{{ json_decode($option['label'], true)['icon'] }}"></i>
-                                                        {{  $option['name'] }}
-                                                    </a>
+                            @if(Session::has('permits'))
+                                @foreach (Session::get('permits') as $key_permit => $permit)
+                                    
+                                    @if($permit['active'])
+                                        <li class="nav-item dropdown">
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                {{ $key_permit }} <span class="caret"></span>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                       
+                                            @foreach ($permit['options'] as $key_option => $option)
+                                                
+                                                @if($option['active'])
+                                                    @if(json_decode($option['label'], true)['menu'] == 'top')
+                                                        <a class="dropdown-item" href="{{ route(json_decode($permit['label'], true)['action'].'.'.$option['name']) }}"
+                                                           onclick="event.preventDefault();
+                                                                         document.getElementById('{{json_decode($permit['label'], true)['action'].'-'.$option['name'].'-form'}}').submit();">
+                                                            <i class="{{ json_decode($option['label'], true)['icon'] }}"></i>
+                                                            {{  $option['name'] }}
+                                                        </a>
 
-                                                    {!! Form::open(array('id'=>json_decode($permit['label'], true)['action'].'-'.$option['name'].'-form','route' => json_decode($permit['label'], true)['action'].'.'.$option['name'],'method' => json_decode($option['label'], true)['method'])) !!}
-                                                    {!! Form::close() !!}
-                                                @endif                                            
-                                            @endif
+                                                        {!! Form::open(array('id'=>json_decode($permit['label'], true)['action'].'-'.$option['name'].'-form','route' => json_decode($permit['label'], true)['action'].'.'.$option['name'],'method' => json_decode($option['label'], true)['method'])) !!}
+                                                        {!! Form::close() !!}
+                                                    @endif                                            
+                                                @endif
 
-                                        @endforeach
-                                        </div>
-                                    </li>
-                                @endif
-                            @endforeach
+                                            @endforeach
+                                            </div>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            @endif
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

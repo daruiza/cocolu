@@ -30,7 +30,7 @@ class TableController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('table.create')->with('data', []);
     }
 
     /**
