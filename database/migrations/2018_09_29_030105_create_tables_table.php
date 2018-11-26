@@ -17,6 +17,7 @@ class CreateTablesTable extends Migration
             $table->increments('id');
             $table->string('name',128);
             $table->string('description',512)->nullable()->default(null);
+            $table->string('icon', 32)->default(null);
             $table->string('label')->nullable()->default(null);            
             $table->string('order')->default(1);
             $table->boolean('active')->default(true);         

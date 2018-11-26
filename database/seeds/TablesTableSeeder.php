@@ -13,7 +13,8 @@ class TablesTableSeeder extends Seeder
     {
         \DB::table('tables')->insert(array(        	
 			'name'=>'Default',
-			'description'=>'Description',			
+			'description'=>'Description',
+			'icon' => 'fas fa-beer',
 			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',		
 			'store_id'=>1,			
 			)
@@ -21,7 +22,8 @@ class TablesTableSeeder extends Seeder
 
 		\DB::table('tables')->insert(array(        	
 			'name'=>'DefaultTable',
-			'description'=>'DescriptionTable',			
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',			
 			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
 			'store_id'=>1,			
 			)
@@ -29,7 +31,8 @@ class TablesTableSeeder extends Seeder
 
 		\DB::table('tables')->insert(array(        	
 			'name'=>'DefaultTable2',
-			'description'=>'DescriptionTable',			
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',			
 			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
 			'store_id'=>1,			
 			)
@@ -37,21 +40,24 @@ class TablesTableSeeder extends Seeder
 
 		\DB::table('tables')->insert(array(        	
 			'name'=>'DefaultTable3',
-			'description'=>'DescriptionTable',			
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',			
 			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
 			'store_id'=>1,			
 			)
 		);
 		\DB::table('tables')->insert(array(        	
 			'name'=>'DefaultTable4',
-			'description'=>'DescriptionTable',			
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',			
 			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
 			'store_id'=>1,			
 			)
 		);
 		\DB::table('tables')->insert(array(        	
 			'name'=>'DefaultTable5',
-			'description'=>'DescriptionTable',			
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',		
 			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
 			'store_id'=>1,			
 			)

@@ -6,6 +6,8 @@ use App\Model\Core\Table;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Redirect;
+
 use App\Http\Traits\Web\TableRequestTrait;
 
 class TableController extends Controller
@@ -30,7 +32,9 @@ class TableController extends Controller
      */
     public function create()
     {
-        return View::make('table.create')->with('data', []);
+        //return View::make('table.create')->with('data', []);
+        $table = new Table();
+        return view('table.create',compact('table'))->with('data', []);
     }
 
     /**
@@ -41,7 +45,13 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $table = new Table();
+        $table->name = $request->input('name');
+        $table->description = $request->input('description');
+        $table->label = $request->input('label');
+        
+        return view('table.create',compact('table'))->with('success', [['OK']])->with('data', []);
+        //return Redirect::back()->with($request->input())->with('success', [['OK']]);
     }
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Table extends Model
 {
-    protected $fillable = ['id','name','description','label','order','active','store_id'];
+    protected $fillable = ['id','name','description','icon','label','order','active','store_id'];
 
     //una mesa pertenece a una tienda
     public function store(){
