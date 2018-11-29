@@ -64,6 +64,23 @@
 				                    			</div>	                    			
 				                    		</div>
 
+
+				                    		<div class="form-group row">
+				                    			{!! Form::label('icon',__('messages.icon'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+				                    			<div class="col-md-8">
+				                    				@if($errors->has('icon'))
+				                    					{!! Form::select('icon', $table->icons(),null,['class'=>'form-control is-invalid']) !!}
+				                    					<span class="invalid-feedback">
+					                                        <strong>{{ $errors->first('icon') }}</strong>
+					                                    </span>
+				                    				@else
+														{!! Form::select('icon', $table->icons(),key($table->icons()),['class'=>'form-control']) !!}				                    					
+				                    				@endif	
+				                    			</div>	                    			
+				                    		</div>
+
+				                    		
+
 				                    		<div class="form-group row">
 				                    			{!! Form::label('label',__('messages.label'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 				                    			<div class="col-md-8">

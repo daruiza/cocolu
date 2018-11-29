@@ -12,4 +12,14 @@ class Table extends Model
     public function store(){
         return $this->belongsTo(Store::class);
     }
+
+    public function icons()
+    {
+        return [
+            'fas fa-beer' =>'mesaggeSelect.copa',
+            'fas fa-beer2' =>'mesaggeSelect.copa2',
+            'fas fa-beer3' =>'mesaggeSelect.copa3',
+            
+        ];
+    }
 }

@@ -34,6 +34,9 @@ class TableController extends Controller
     {
         //return View::make('table.create')->with('data', []);
         $table = new Table();
+        //data es el listado de iconos disponibles
+        //pero esto no es programación orientda a objetos
+        //$data['icons'] = include 'icons_tabla.php';        
         return view('table.create',compact('table'))->with('data', []);
     }
 
