@@ -16,10 +16,25 @@ class Table extends Model
     public function icons()
     {
         return [
-            'fas fa-beer' =>'mesaggeSelect.copa',
-            'fas fa-beer2' =>'mesaggeSelect.copa2',
-            'fas fa-beer3' =>'mesaggeSelect.copa3',
-            
+            'fas fa-users' =>__('form.SelectUsers'),
+            'fas fa-beer' =>__('form.SelectBeer'),
+            'fas fa-glass-martini' =>__('form.SelectMartini'),
+            'fas fa-birthday-cake' =>__('form.SelectCake'),
+            'fas fa-coffee'=>__('form.SelectCoffe'),
+            'fas fa-dice-d6' => __('form.SelectDice'),
+            'fas fa-feather' => __('form.SelectFeather'),
+            'fas fa-heart' => __('form.Selectheart'),
+            'fas fa-moon' => __('form.SelectMoon'),
+            'fas fa-star' => __('form.SelectStar'),
+            'fas fa-wine-glass' => __('form.SelectWineGlass'),
+            'fas fa-flag' => __('form.SelectFlag'),
+            'fas fa-fire' => __('form.SelectFire'),
+            'fas fa-clipboard' => __('form.SelectClipboard'),
+            'fas fa-bell' => __('form.SelectBell'),
+            'fas fa-archive' => __('form.SelectArchive'),
+            'fab fa-first-order-alt' => __('form.SelectOrder'),
+            'fas fa-cloud' =>__('form.SelectCloud'),
+            'fas fa-couch' => __('form.SelectCouch'),
         ];
     }
 }

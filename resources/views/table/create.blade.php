@@ -36,6 +36,24 @@
 		                    	<div class="row">
 			                    	<div class="col-md-12">
 			                    		{!! Form::model($table,['enctype' => 'multipart/form-data','id'=>'form-table','route'=>['table.store'],'method'=>'POST']) !!}
+
+			                    			<div class="form-group row">
+				                    			{!! Form::label('icon',__('form.LabelIcon'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+				                    			<div class="col-md-8">
+				                    				@if($errors->has('icon'))
+				                    					{!! Form::select('icon', $table->icons(),null,['class'=>'form-control is-invalid']) !!}
+				                    					<span class="invalid-feedback">
+					                                        <strong>
+					                                        	{{ $errors->first('icon') }}
+					                                        </strong>
+					                                    </span>
+				                    				@else
+														{!! Form::select('icon', $table->icons(),key($table->icons()),['class'=>'form-control']) !!}				                    					
+				                    				@endif	
+				                    			</div>	                    			
+				                    		</div>
+				                    		
+				                    		
 			                    			<div class="form-group row">
 				                    			{!! Form::label('name',__('messages.Name'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 				                    			<div class="col-md-8">
@@ -64,23 +82,7 @@
 				                    			</div>	                    			
 				                    		</div>
 
-
-				                    		<div class="form-group row">
-				                    			{!! Form::label('icon',__('messages.icon'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
-				                    			<div class="col-md-8">
-				                    				@if($errors->has('icon'))
-				                    					{!! Form::select('icon', $table->icons(),null,['class'=>'form-control is-invalid']) !!}
-				                    					<span class="invalid-feedback">
-					                                        <strong>{{ $errors->first('icon') }}</strong>
-					                                    </span>
-				                    				@else
-														{!! Form::select('icon', $table->icons(),key($table->icons()),['class'=>'form-control']) !!}				                    					
-				                    				@endif	
-				                    			</div>	                    			
-				                    		</div>
-
 				                    		
-
 				                    		<div class="form-group row">
 				                    			{!! Form::label('label',__('messages.label'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 				                    			<div class="col-md-8">
@@ -150,6 +152,10 @@
 
 
 @section('style')
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <style>
+	select {
+	  font-family: 'FontAwesome';
+	}
 </style>
 @endsection
