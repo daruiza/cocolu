@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 use App\Http\Traits\Web\TableRequestTrait;
 
@@ -21,8 +23,10 @@ class TableController extends Controller
      */
     public function index()
     {
-        //dd(Table::find(1)->store()->get());        
-        return View::make('table.index')->with('data', ['tables'=>Table::all()->where('active',1)]);
+        //dd(Table::find(1)->store()->get());
+        //$tables = Table::all()->where('active',1);        
+        $tables = Table::where('store_id',Auth::user()->store()->id)->where('active',1)->orderBy('id','DESC')->get();
+        return View::make('table.index')->with('data', ['tables'=>$tables]);
     }
 
     /**
@@ -34,6 +38,9 @@ class TableController extends Controller
     {
         //return View::make('table.create')->with('data', []);
         $table = new Table();
+
+        //validar session
+        if(!Auth::check()) return redirect('/');
         //data es el listado de iconos disponibles
         //pero esto no es programación orientda a objetos
         //$data['icons'] = include 'icons_tabla.php';        
@@ -48,10 +55,11 @@ class TableController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validator($request->all())->validate();       
+        Auth::user()->validateUserStore($request->input('store_id'));//validar store
         $table = new Table();
-        $table->name = $request->input('name');
-        $table->description = $request->input('description');
-        $table->label = $request->input('label');
+        //$table->storeTable($request->input());
+        $table::create($request->input());        
         
         return view('table.create',compact('table'))->with('success', [['OK']])->with('data', []);
         //return Redirect::back()->with($request->input())->with('success', [['OK']]);
@@ -100,5 +108,27 @@ class TableController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => '
+                required|
+                string|
+                max:16',
+            'description' => '
+                max:64',
+            'icon' => '
+                required|
+                string|                
+                max:16',
+            'order' => '                
+                numeric|                
+                digits_between:1,512',
+            'active' => '
+                required',
+            
+        ]);
     }
 }

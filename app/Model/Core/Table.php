@@ -13,6 +13,17 @@ class Table extends Model
         return $this->belongsTo(Store::class);
     }
 
+    public function storeTable($data){        
+        $this->name = $data['name'];
+        $this->description = $data['description'];
+        $this->icon = $data['icon'];
+        $this->label = $data['label'];
+        $this->order = $data['order'];
+        $this->active = $data['active'];
+        $this->store_id = $data['store_id'];
+        $this->save();
+    }
+
     public function icons()
     {
         return [

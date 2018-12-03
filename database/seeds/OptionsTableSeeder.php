@@ -28,28 +28,16 @@ class OptionsTableSeeder extends Seeder
 			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>1	
 			)
-		);
-		\DB::table('options')->insert(array(
-			'name'=>'store',			
-			'label'=>'{"menu":"page","method":"post","icon":"fas fa-plus"}',
-			'module_id'=>1	
-			)
-		);
+		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>'{"menu":"page","method":"get","icon":"fas fa-gears"}',
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>1	
 			)
-		);	
-		\DB::table('options')->insert(array(
-			'name'=>'update',			
-			'label'=>'{"menu":"page","method":"put","icon":"fas fa-gears"}',
-			'module_id'=>1	
-			)
-		);	
+		);		
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times"}',
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>1	
 			)
 		);
@@ -72,28 +60,16 @@ class OptionsTableSeeder extends Seeder
 			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>2	
 			)
-		);
-		\DB::table('options')->insert(array(
-			'name'=>'store',			
-			'label'=>'{"menu":"page","method":"post","icon":"fas fa-plus"}',
-			'module_id'=>2	
-			)
-		);
+		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>'{"menu":"page","method":"get","icon":"fas fa-gears"}',
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>2	
 			)
-		);	
-		\DB::table('options')->insert(array(
-			'name'=>'update',			
-			'label'=>'{"menu":"page","method":"put","icon":"fas fa-gears"}',
-			'module_id'=>2	
-			)
-		);	
+		);		
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times"}',
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>2	
 			)
 		);
@@ -117,28 +93,16 @@ class OptionsTableSeeder extends Seeder
 			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>6	
 			)
-		);
-		\DB::table('options')->insert(array(
-			'name'=>'store',			
-			'label'=>'{"menu":"page","method":"post","icon":"fas fa-plus"}',
-			'module_id'=>6
-			)
-		);
+		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>'{"menu":"page","method":"get","icon":"fas fa-gears"}',
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>6
 			)
-		);	
-		\DB::table('options')->insert(array(
-			'name'=>'update',			
-			'label'=>'{"menu":"page","method":"put","icon":"fas fa-gears"}',
-			'module_id'=>6
-			)
-		);	
+		);			
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times"}',
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>6
 			)
 		);

@@ -3,27 +3,27 @@
 @section('template')		          	
 @endsection
 
-@section('content')	
+@section('content')
 	<div class="flex-center position-ref full-height container">    
 	    <div class="container">
 	        <div class="row">
+	        	
+	        	<div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">{{ __('messages.TableService') }}</div>
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @include('layouts.options_page',['model'=>'Tables'])
+                                    </div>
+                                </div>                                                  
+                            </div>                  
+                        </div>                            
+                    </div>
+                </div>   
 
-	        	<div class="col-md-4 ">
-            		<div class="card">
-	                    <div class="card-header">{{ __('messages.TableService') }}</div>
-	                    <div class="card-body">
-	                    	<div class="col-md-8">
-		                    	
-		                    </div>
-	                    	<div class="col-md-4">        			
-			        			
-			        		</div>			        		
-	                    </div>
-	                    
-	                </div>
-            	</div>
-
-            	<div class="col-md-8">            		
+            	<div class="col-md-9">            		
             		@include('layouts.alert')
             		<div class="card">
 	                    <div class="card-header">{{ __('messages.indexTable') }}</div>
@@ -34,7 +34,7 @@
 			                    		
 				                    	@foreach($data['tables'] as $key => $value)
 				                    		<div class="ui-widget-content draggable col-md-3 obstacle ">
-											  	<p>{{$value->name}}</p>
+											  	<p><i class="{{$value->icon}}"> </i>{{$value->name}}</p>
 											</div>
 				                    	@endforeach		                    	
 				                    	</div>
@@ -76,7 +76,7 @@
 			    $(this).addClass("obstacle");
 			});
 
-			$("#containment-wrapper").height($("#containment-wrapper").height()+35);
+			$("#containment-wrapper").height($("#containment-wrapper").height()+55);
 		} 
 			
     	
@@ -95,10 +95,25 @@
 		}
 		.draggable { 
 			/*width: 150px;*/
-			height: 150px; 
+			height: 150px;
 			padding: 0.5em; 
-			border: solid 1px gainsboro;			
+			border: solid 1px gainsboro;
+			text-align: center;		
 		}
+
+		.draggable p:nth-of-type(1) {
+			border-bottom-style: dotted;
+    		border-bottom-width: 1px;
+		}
+		
+		.draggable p:nth-of-type(1)  > i{
+			font-size: 22px;
+    		position: absolute;
+		    top: 10px;
+		    left: 8px;
+		}
+
+		
 
 		@media (min-width: 768px) {
 			.col-md-3{

@@ -37,6 +37,7 @@
 			                    	<div class="col-md-12">
 			                    		{!! Form::model($table,['enctype' => 'multipart/form-data','id'=>'form-table','route'=>['table.store'],'method'=>'POST']) !!}
 
+			                    			{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
 			                    			<div class="form-group row">
 				                    			{!! Form::label('icon',__('form.LabelIcon'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 				                    			<div class="col-md-8">
@@ -96,7 +97,7 @@
 				                    				@endif	
 				                    			</div>	                    			
 				                    		</div>
-
+				                    		<!--
 				                    		<div class="form-group row">
 				                    			{!! form::label('order',__('messages.order'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 				                    			<div class="col-md-8">
@@ -110,17 +111,18 @@
 				                    				@endif	
 				                    			</div>
 				                    		</div>
+				                    		-->
 
 				                    		<div class="form-group row">
 				                    			{!! form::label('active',__('messages.active'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 				                    			<div class="col-md-8">
 				                    				@if($errors->has('active'))
-				                    					{!! Form::text('active',null, ['class'=>'form-control is-invalid']) !!}
+				                    					{!! Form::select('active', ['Inactivo','Activo'],null,['class'=>'form-control']) !!}
 				                    					<span class="invalid-feedback">
 					                                        <strong>{{ $errors->first('active') }}</strong>
 					                                    </span>
-				                    				@else
-				                    					{!! Form::text('active',null, ['class'=>'form-control']) !!}
+				                    				@else				                    					
+				                    					{!! Form::select('active', ['Inactivo','Activo'],null,['class'=>'form-control']) !!}
 				                    				@endif	
 				                    			</div>
 				                    		</div>

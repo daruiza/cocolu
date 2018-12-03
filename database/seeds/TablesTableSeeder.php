@@ -12,7 +12,7 @@ class TablesTableSeeder extends Seeder
     public function run()
     {
         \DB::table('tables')->insert(array(        	
-			'name'=>'Default',
+			'name'=>'DefaultTable Name Long',
 			'description'=>'Description',
 			'icon' => 'fas fa-beer',
 			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',		

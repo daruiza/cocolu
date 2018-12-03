@@ -35,7 +35,9 @@ class OptionsRolsTableSeeder extends Seeder
 			'rol_id'=>1,			
 			'option_id'=>5
 			)
-		);	
+		);
+
+
 		\DB::table('option_rol')->insert(array(
 			'rol_id'=>1,			
 			'option_id'=>6			
@@ -45,9 +47,7 @@ class OptionsRolsTableSeeder extends Seeder
 			'rol_id'=>1,			
 			'option_id'=>7			
 			)
-		);		
-
-
+		);
 		\DB::table('option_rol')->insert(array(
 			'rol_id'=>1,			
 			'option_id'=>8			
@@ -63,63 +63,34 @@ class OptionsRolsTableSeeder extends Seeder
 			'option_id'=>10			
 			)
 		);
+
+		//administrador 
 		\DB::table('option_rol')->insert(array(
-			'rol_id'=>1,			
+			'rol_id'=>2,			
 			'option_id'=>11			
 			)
 		);
 		\DB::table('option_rol')->insert(array(
-			'rol_id'=>1,			
+			'rol_id'=>2,			
 			'option_id'=>12
 			)
 		);	
 		\DB::table('option_rol')->insert(array(
-			'rol_id'=>1,			
+			'rol_id'=>2,			
 			'option_id'=>13			
 			)
 		);	
 		\DB::table('option_rol')->insert(array(
-			'rol_id'=>1,			
+			'rol_id'=>2,			
 			'option_id'=>14			
 			)
 		);
-
-		//administrador 
 		\DB::table('option_rol')->insert(array(
 			'rol_id'=>2,			
 			'option_id'=>15			
 			)
 		);
-		\DB::table('option_rol')->insert(array(
-			'rol_id'=>2,			
-			'option_id'=>16
-			)
-		);
-		\DB::table('option_rol')->insert(array(
-			'rol_id'=>2,			
-			'option_id'=>17			
-			)
-		);
-		\DB::table('option_rol')->insert(array(
-			'rol_id'=>2,			
-			'option_id'=>18
-			)
-		);
-		\DB::table('option_rol')->insert(array(
-			'rol_id'=>2,			
-			'option_id'=>19
-			)
-		);
-		\DB::table('option_rol')->insert(array(
-			'rol_id'=>2,			
-			'option_id'=>20
-			)
-		);
-		\DB::table('option_rol')->insert(array(
-			'rol_id'=>2,			
-			'option_id'=>21
-			)
-		);
+		
 
 		
     }
