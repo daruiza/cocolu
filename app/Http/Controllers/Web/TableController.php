@@ -30,7 +30,11 @@ class TableController extends Controller
     {
         //dd(Table::find(1)->store()->get());
         //$tables = Table::all()->where('active',1);        
-        $tables = Table::where('store_id',Auth::user()->store()->id)->where('active',1)->orderBy('id','DESC')->get();
+        $tables = Table::
+            where('store_id',Auth::user()->store()->id)
+            ->where('active',1)
+            ->orderBy('id','DESC')
+            ->get();
         return View::make('table.index')->with('data', ['tables'=>$tables]);
     }
 
@@ -78,7 +82,7 @@ class TableController extends Controller
      */
     public function show($id)
     {
-        //
+        return 'show';
     }
 
     /**
@@ -112,7 +116,7 @@ class TableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return 'destroy';
     }
 
     protected function validator(array $data)

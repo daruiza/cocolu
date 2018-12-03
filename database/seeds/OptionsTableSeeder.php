@@ -75,7 +75,7 @@ class OptionsTableSeeder extends Seeder
 		);
 
 
-		//Modulo Table opt 15
+		//Modulo Table opt 11
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
 			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
@@ -107,6 +107,12 @@ class OptionsTableSeeder extends Seeder
 			)
 		);
 
+		\DB::table('options')->insert(array(
+			'name'=>'drag',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-arrows-alt"}',
+			'module_id'=>6
+			)
+		);		
 
     }
 }

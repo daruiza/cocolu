@@ -90,6 +90,11 @@ class OptionsRolsTableSeeder extends Seeder
 			'option_id'=>15			
 			)
 		);
+		\DB::table('option_rol')->insert(array(
+			'rol_id'=>2,			
+			'option_id'=>16			
+			)
+		);
 		
 
 		

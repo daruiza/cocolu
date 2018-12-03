@@ -37,3 +37,7 @@ Route::post('user/passwordrequest', [
 
 //Route::post('changepassword', 'Web\UserController@changepassword');
 
+Route::get('table/{id}/drag', [
+   'as' => 'table.drag', 'uses' => 'Web\TableController@drag'
+]);
+
