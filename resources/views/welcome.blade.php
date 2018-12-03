@@ -11,10 +11,9 @@
     <div class="video-container">
         <video loop="loop" id="video_background" autoplay preload muted>
           <source 
-            src="{{ asset('media/EnteringTheStronghold.webm') }}" 
-            src="{{ asset('media/EnteringTheStronghold.mp4') }}"
-            type="video/webm">           
-          </source>
+            src="{{ asset('media/EnteringTheStronghold.webm') }}"             
+            type="video/webm">     
+          
         </video>
     </div>
 @endauth
