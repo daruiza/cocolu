@@ -1,0 +1,39 @@
+.card-body{
+	/*padding: 0.50rem;*/
+}
+#containment-wrapper{
+	/*padding: 0px;*/
+	display: flex;
+	flex-wrap: wrap;
+}
+.draggable { 
+	/*width: 150px;*/
+	height: 150px;
+	padding: 0.5em; 
+	border: solid 1px gainsboro;
+	text-align: center;		
+}
+
+.draggable p:nth-of-type(1) {
+	border-bottom-style: dotted;
+	border-bottom-width: 1px;
+}
+
+.draggable p:nth-of-type(1)  > i{
+	font-size: 22px;
+	position: absolute;
+    top: 10px;
+    left: 8px;
+}
+
+.selected-table{
+    background-color: aliceblue;
+}
+
+@media (min-width: 768px) {
+	.col-md-3{
+		flex: 0 0 24%;
+		max-width: 24%; 
+	}	
+}	
+
