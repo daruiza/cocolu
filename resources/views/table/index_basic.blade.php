@@ -2,9 +2,24 @@
     <div class="container">
         <div class="row">
         	
-        	<div class="col-md-3">
-                <div class="card">
+        	<div class="col-md-3 col-lateral-table">
+                <div class="col-md-12">
+                <div class="card card-menu-table">
                     <div class="card-header">{{ __('messages.TableService') }}</div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                   Servicios por mesa seleccionada
+                                </div>
+                            </div>                                                  
+                        </div>                  
+                    </div>                            
+                </div>
+                </div>
+                <div class="col-md-12">
+                <div class="card card-menu-table">
+                    <div class="card-header">{{ __('messages.TableOptions') }}</div>
                     <div class="card-body">
                         <div class="container">
                             <div class="row">
@@ -14,6 +29,7 @@
                             </div>                                                  
                         </div>                  
                     </div>                            
+                </div>
                 </div>
             </div>   
 

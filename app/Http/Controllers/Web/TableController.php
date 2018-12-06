@@ -33,7 +33,7 @@ class TableController extends Controller
         $tables = Table::
             where('store_id',Auth::user()->store()->id)
             ->where('active',1)
-            ->orderBy('id','DESC')
+            ->orderBy('id','ASC')
             ->get();
         return View::make('table.index')->with('data', ['tables'=>$tables]);
     }
@@ -80,9 +80,10 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        return 'show';
+        $table = Table::find($request->input('id'));        
+        return view('table.show',compact('table'))->with('success', [[]])->with('data', []);        
     }
 
     /**
