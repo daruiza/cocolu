@@ -43,4 +43,5 @@ return [
     "Send"=>"Enviar",
     "passwordChange"=>"Cambiar Contraseña",
     "acountSummary"=>"Resumen de cuenta",
+    "TableSelectNone" => "Para ejecutar esta opción es necesario que selecciones una mesa"
 ];

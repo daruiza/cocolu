@@ -11,7 +11,7 @@
 	height: 150px;
 	padding: 0.5em; 
 	border: solid 1px gainsboro;
-	text-align: center;		
+	text-align: center;
 }
 
 .draggable p:nth-of-type(1) {

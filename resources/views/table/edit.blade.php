@@ -35,8 +35,10 @@
 	                    	<div class="container">
 		                    	<div class="row">
 			                    	<div class="col-md-12">
-			                    		{!! Form::model($table,['enctype' => 'multipart/form-data','id'=>'form-table','route'=>['table.store'],'method'=>'POST']) !!}
+			                    		{!! Form::model($table,['enctype' => 'multipart/form-data','id'=>'form-table','route'=>['table.update',$table->id],'method'=>'POST']) !!}
 
+			                    			@csrf
+		                    	 			{{ method_field('PATCH') }}
 			                    			{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
 			                    			@include('table.form')
 

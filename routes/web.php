@@ -40,4 +40,7 @@ Route::post('user/passwordrequest', [
 Route::get('table/{id}/drag', [
    'as' => 'table.drag', 'uses' => 'Web\TableController@drag'
 ]);
+Route::post('table/{id}/savedrag', [
+   'as' => 'table.savedrag', 'uses' => 'Web\TableController@saveDrag'
+]);
 

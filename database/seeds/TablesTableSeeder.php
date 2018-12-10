@@ -15,7 +15,11 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable Name Long',
 			'description'=>'Description',
 			'icon' => 'fas fa-beer',
-			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',		
+			'label'=>'{	"options":["addTable","editTable"],
+						"position":["top","right","bottom","left"],
+						"logo":"table.png",
+						"icon":"fas fa-list"
+						}',	
 			'store_id'=>1,			
 			)
 		);
@@ -24,7 +28,11 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
-			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
+			'label'=>'{	"options":["addTable","editTable"],
+						"position":["top","right","bottom","left"],
+						"logo":"table.png",
+						"icon":"fas fa-list"
+						}',	
 			'store_id'=>1,			
 			)
 		);		
@@ -33,7 +41,7 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable2',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
-			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
+			'label'=>'{	"options":["addTable","editTable"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',
 			'store_id'=>1,			
 			)
 		);
@@ -42,7 +50,7 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable3',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
-			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
+			'label'=>'{	"options":["addTable","editTable"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
 			'store_id'=>1,			
 			)
 		);
@@ -50,7 +58,7 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable4',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
-			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
+			'label'=>'{	"options":["addTable","editTable"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
 			'store_id'=>1,			
 			)
 		);
@@ -58,7 +66,7 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable5',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',		
-			'label'=>'{"options":["addTable","editTable"],"logo":"table.png","icon":"fas fa-list"}',			
+			'label'=>'{	"options":["addTable","editTable"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
 			'store_id'=>1,			
 			)
 		);						

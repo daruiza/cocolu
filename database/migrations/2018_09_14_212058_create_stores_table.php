@@ -22,7 +22,7 @@ class CreateStoresTable extends Migration
             $table->string('description',512)->nullable()->default(null);
             $table->string('logo', 256)->default('default.png');
             $table->string('currency', 32)->default('COP');
-            $table->string('label')->nullable()->default(null);
+            $table->string('label')->nullable()->default('{"menu":"page","icon":"fas fa-list","selectTable":"wheat"}');
             $table->boolean('active')->default(true);            
             $table->timestamps();
         });

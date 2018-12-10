@@ -13,14 +13,14 @@ class Table extends Model
         return $this->belongsTo(Store::class);
     }
 
-    public function storeTable($data){        
-        $this->name = $data['name'];
-        $this->description = $data['description'];
-        $this->icon = $data['icon'];
-        $this->label = $data['label'];
-        $this->order = $data['order'];
-        $this->active = $data['active'];
-        $this->store_id = $data['store_id'];
+    public function storeTable($data){
+        if(array_key_exists('name',$data))$this->name = $data['name'];
+        if(array_key_exists('description',$data))$this->description = $data['description'];
+        if(array_key_exists('icon',$data))$this->icon = $data['icon'];
+        if(array_key_exists('label',$data))$this->label = $data['label'];
+        if(array_key_exists('order',$data))$this->order = $data['order'];
+        if(array_key_exists('active',$data))$this->active = $data['active'];
+        if(array_key_exists('store_id',$data))$this->store_id = $data['store_id'];        
         $this->save();
     }
 

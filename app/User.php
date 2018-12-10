@@ -58,7 +58,11 @@ class User extends Authenticatable
     }
 
     public function validateUserStore($store_id){        
-        if(User::where('users.rel_store_id',$store_id)->where('users.rol_id',2)->get()->toArray()[0]['id'] == \Auth::user()->id) return true;
+        if(User::where('users.rel_store_id',$store_id)
+            //->where('users.rol_id',2)
+            ->get()
+            ->toArray()[0]['id'] == \Auth::user()->id
+        ) return true;
         return false;
     }
 

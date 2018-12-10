@@ -42,5 +42,5 @@ return [
     "Send"=>"Send",
     "passwordChange"=>"Password Change",
     "acountSummary"=>"Acount Summary",
-
+    "TableSelectNone" => "For this option you need select a table"
 ];

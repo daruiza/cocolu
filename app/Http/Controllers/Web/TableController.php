@@ -29,7 +29,7 @@ class TableController extends Controller
     public function index()
     {
         //dd(Table::find(1)->store()->get());
-        //$tables = Table::all()->where('active',1);        
+        //$tables = Table::all()->where('active',1);
         $tables = Table::
             where('store_id',Auth::user()->store()->id)
             ->where('active',1)
@@ -49,7 +49,7 @@ class TableController extends Controller
         $table = new Table();
 
         //validar session
-        if(!Auth::check()) return redirect('/');
+        //if(!Auth::check()) return redirect('/');
         //data es el listado de iconos disponibles
         //pero esto no es programación orientda a objetos
         //$data['icons'] = include 'icons_tabla.php';        
@@ -65,12 +65,15 @@ class TableController extends Controller
     public function store(Request $request)
     {
         $this->validator($request->all())->validate();       
-        Auth::user()->validateUserStore($request->input('store_id'));//validar store
         $table = new Table();
-        //$table->storeTable($request->input());
-        $table::create($request->input());        
-        
-        return view('table.create',compact('table'))->with('success', [['OK']])->with('data', []);
+        //validar store
+        if(Auth::user()->validateUserStore($request->input('store_id'))){
+            $table = new Table();
+            //$table->storeTable($request->input());
+            $table::create($request->input());
+            return view('table.create',compact('table'))->with('success', [['OK']])->with('data', []);    
+        }
+        return view('table.create',compact('table'))->with('danger', [['NOOK']])->with('data', []);
         //return Redirect::back()->with($request->input())->with('success', [['OK']]);
     }
 
@@ -92,9 +95,10 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Request $request,$id)
+    {        
+        $table = Table::find($request->input('id'));
+        return view('table.edit',compact('table'))->with('data', []);
     }
 
     /**
@@ -105,8 +109,19 @@ class TableController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {        
+        $this->validator($request->all())->validate();       
+        $table = new Table();
+        //validar store
+        if(Auth::user()->validateUserStore($request->input('store_id'))){
+            $table = Table::find($id);
+            $table->storeTable($request->input());
+            //$table::save();            
+            return view('table.edit',compact('table'))->with('success', [['OK']])->with('data', []);
+
+        }
+        return view('table.edit',compact('table'))->with('danger', [['NOOK']])->with('data', []);       
+        //return Redirect::back()->with($request->input())->with('success', [['OK']]);
     }
 
     /**
@@ -115,8 +130,9 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
+
         return 'destroy';
     }
 
