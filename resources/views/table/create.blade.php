@@ -18,7 +18,7 @@
 	                    	<div class="container">
 		                    	<div class="row">
 			                    	<div class="col-md-12">
-			                    		Descripcion de cuenta con respecto a las mesas y cosas asi				                    	                   	
+			                    		Descripcion de cuenta con respecto a las mesas y cosas asi
 			                    	</div>
 			                    </div>	                    			        		
 	                    	</div>	        		
@@ -38,6 +38,7 @@
 			                    		{!! Form::model($table,['enctype' => 'multipart/form-data','id'=>'form-table','route'=>['table.store'],'method'=>'POST']) !!}
 
 			                    			{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
+			                    			
 			                    			@include('table.form')
 
 			                    		{!! Form::close() !!}

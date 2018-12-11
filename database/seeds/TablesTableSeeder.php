@@ -28,11 +28,7 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
-			'label'=>'{	"options":["addTable","editTable"],
-						"position":["top","right","bottom","left"],
-						"logo":"table.png",
-						"icon":"fas fa-list"
-						}',	
+			'label'=>'{	"options":["addTable","editTable"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
 			'store_id'=>1,			
 			)
 		);		

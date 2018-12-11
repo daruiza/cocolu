@@ -45,6 +45,8 @@
 		function table_drag_submit(id){
 			$('#'+id)[0].submit();
 		}
+
+		$("#containment-wrapper").height($("#containment-wrapper").height()+85);
 		
 	</script>
 @endsection

@@ -52,7 +52,7 @@
 			    $(this).addClass("obstacle");
 			});
 
-			$("#containment-wrapper").height($("#containment-wrapper").height()+55);
+			$("#containment-wrapper").height($("#containment-wrapper").height()+85);
 		}
 
 		//table.selectTable('object-table','selected-table');

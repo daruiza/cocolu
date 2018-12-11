@@ -18,7 +18,9 @@ class CreateTablesTable extends Migration
             $table->string('name',128);
             $table->string('description',512)->nullable()->default(null);
             $table->string('icon', 32)->default(null);
-            $table->string('label')->nullable()->default(null);            
+            $table->string('label')
+                ->nullable()
+                ->default('{"options":["addTable","editTable"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}');            
             $table->string('order')->default(1);
             $table->boolean('active')->default(true);         
             $table->timestamps();

@@ -41,8 +41,7 @@
 		@endif	
 	</div>	                    			
 </div>
-
-
+<!--
 <div class="form-group row">
 	{!! Form::label('label',__('messages.label'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
@@ -56,6 +55,7 @@
 		@endif	
 	</div>	                    			
 </div>
+-->
 
 <div class="form-group row">
 	{!! form::label('active',__('messages.active'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
