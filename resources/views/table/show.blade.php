@@ -5,68 +5,6 @@
 @endsection
 
 @section('content')
-
- <div class="container">
-        <div class="row make-columns">
-            <div class="col-xs-6 col-md-6 col-lg-6">
-                <div class="card card-default">
-                    <div class="card-body">1 - This is my card with some content!
-                        <br><img src="//placehold.it/130x90"></div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-3 col-lg-3">
-                <div class="card card-default">
-                    <div class="card-body">2 - This is another card with even more text content!</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-3 col-lg-3">
-                <div class="card card-default">
-                    <div class="card-body">3 - This is a card with just some text, stuff to say and some more blah filler fill content with even more text content...
-                        <br> </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-4 col-lg-4">
-                <div class="card card-default">
-                    <div class="card-body">4 - This is my card with some blah content aliquam in cursus ut, ullamcorper in tort..</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-4 col-lg-4">
-                <div class="card card-default">
-                    <div class="card-body">5 - This is another card with even more content!</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-6 col-lg-6">
-                <div class="card card-default">
-                    <div class="card-body">6 - This is a card with and image
-                        <br><img src="//placehold.it/150x80"> </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-3 col-lg-3">
-                <div class="card card-default">
-                    <div class="card-body">7 - Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. Aliquam codeply mauris!</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-3 col-lg-3">
-                <div class="card card-default">
-                    <div class="card-body">8 - This is a card with and image
-                        <br><img src="//placehold.it/150x100"> </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-4 col-lg-4">
-                <div class="card card-default">
-                    <div class="card-body">9 - This is another card with even more text content! Nullam sapien massa, aliquam in cursus ut, ullamcorper in tortor. Aliquam codeply mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-4 col-lg-4">
-                <div class="card card-default">
-                    <div class="card-body">10 - Nullam sapien massa, aliquam in cursus ut, Yes. This is another card with even more text content!</div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
-
-@section('content2')
 <div class="container">
    <div class="flex-center position-ref full-height">
         <div class="col-md-12">
@@ -95,6 +33,10 @@
 	                    	</div>	        		
 	                    </div>	                    
 	                </div>
+
+                    <form id="createService" action="{{ route('service.create') }}" method="GET" style="display: none;">                                
+                    </form>
+
             	</div>           
             	<div class="col-md-8">
             		<div class="card">

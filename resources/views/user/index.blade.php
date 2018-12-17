@@ -24,8 +24,7 @@
 	                    		</ul>	
 	                    	</div>
 
-	                    	<form id="editProfile" action="{{ route('user.edit', \Auth::user()->id ) }}" method="GET" style="display: none;">
-                                
+	                    	<form id="editProfile" action="{{ route('user.edit', \Auth::user()->id ) }}" method="GET" style="display: none;">                                
                             </form>
 
                             <form id="editStore" action="{{ route('store.edit', \Auth::user()->id ) }}" method="GET" style="display: none;">                               

@@ -25,6 +25,7 @@ Route::resource('user', 'Web\UserController');
 Route::resource('module', 'Web\ModuleController');
 Route::resource('store', 'Web\StoreController');
 Route::resource('table', 'Web\TableController');
+Route::resource('service', 'Web\ServiceController');
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');
 

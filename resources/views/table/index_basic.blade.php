@@ -44,12 +44,15 @@
 		                    		
 			                    	@foreach($data['tables'] as $key => $value)
                                         {{--dd(json_decode($value->label)->position[0])--}}
-			                    		<div class="ui-widget-content draggable col-md-3 obstacle object-table" style="top: {{json_decode($value->label)->position[0]}};
-                                         right: {{json_decode($value->label)->position[1]}} ;
-                                         bottom: {{json_decode($value->label)->position[2]}};
-                                         left: {{json_decode($value->label)->position[3]}}; ">
+			                    		<div class="ui-widget-content draggable col-md-3 obstacle object-table" style="
+                                            top: {{json_decode($value->label)->position[0]}};
+                                            right: {{json_decode($value->label)->position[1]}} ;
+                                            bottom: {{json_decode($value->label)->position[2]}};
+                                            left: {{json_decode($value->label)->position[3]}}; ">
+
                                             {{ Form::hidden('table-id', $value->id) }}
 										  	<p><i class="{{$value->icon}}"> </i>{{$value->name}}</p>
+                                            
 										</div>
 			                    	@endforeach
 
