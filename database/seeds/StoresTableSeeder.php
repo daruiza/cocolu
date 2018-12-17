@@ -19,7 +19,7 @@ class StoresTableSeeder extends Seeder
 			'description'=>'default store',
 			'logo'=>'default.png',
 			'currency'=>'COP',
-			'label'=>'{"menu":"page","icon":"fas fa-list","selectTable":"red"}',
+			'label'=>'{"menu":"page","icon":"fas fa-list","selectTable":"lemonchiffon"}',
 			)
 		);		
     }

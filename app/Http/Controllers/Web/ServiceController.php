@@ -29,8 +29,9 @@ class ServiceController extends Controller
      *2. se necesita que la mesa sea de la tienda
      *
      */
-    public function create()
+    public function create(Request $request)
     {
+		var_dump($request->input());
         return 'creando servicio a mesa';
     }
 

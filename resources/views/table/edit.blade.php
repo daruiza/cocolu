@@ -34,7 +34,7 @@
 	                    <div class="card-body">
 	                    	<div class="container">
 		                    	<div class="row">
-			                    	<div class="col-md-12">
+			                    	<div class="col-md-12">									
 			                    		{!! Form::model($table,['enctype' => 'multipart/form-data','id'=>'form-table','route'=>['table.update',$table->id],'method'=>'POST']) !!}
 
 			                    			@csrf

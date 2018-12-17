@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template')
-    
+    <link href="{{ asset('css/custom/options.css') }}" rel="stylesheet">    
 @endsection
 
 @section('content')
@@ -15,22 +15,26 @@
             		<div class="card">
 	                    <div class="card-header">{{ __('messages.TableShow') }}</div>
 	                    <div class="card-body">
-	                    	<div class="container">
-		                    	<div class="row">			                    	
-			                    	<div class="col-md-12">
+	                    			                    	
+			                    	<li class="list-group-item ">
 			                    		{{$table->name}}
-			                    	</div>
-			                    	<div class="col-md-12">
+			                    	</li>
+			                    	<li class="list-group-item ">
 			                    		{{$table->description}}
-			                    	</div>
-			                    	<div class="col-md-12">
+			                    	</li>
+			                    	<li class="list-group-item ">
 			                    		{{$table->icon}}
-			                    	</div>
-			                    	<div class="col-md-12">
-			                    		{{$table->label}}
-			                    	</div>
-			                    </div>	                    			        		
-	                    	</div>	        		
+			                    	</li>		                    	
+
+									@foreach(json_decode($table->label)->options as $option)
+										<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
+	                    					{{ __('messages.'. $option) }} 	
+	                    				</li>
+									@endforeach
+									
+									<form id="serviceCreate" action="{{ route('service.create', $table->id ) }}" method="GET" style="display: none;">                                
+									</form>
+			                           		
 	                    </div>	                    
 	                </div>
 
