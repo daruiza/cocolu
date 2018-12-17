@@ -30,9 +30,10 @@
 										<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
 	                    					{{ __('messages.'. $option) }} 	
 	                    				</li>
-									@endforeach
-									
-									<form id="serviceCreate" action="{{ route('service.create', $table->id ) }}" method="GET" style="display: none;">                                
+									@endforeach									
+									<form id="serviceCreate" action="{{ route('service.create') }}" method="GET" style="display: none;">
+										<input type="hidden" name="table_id" value="{{ $table->id }}">
+										<input type="hidden" name="store_id" value="{{ $table->store_id }}">
 									</form>
 			                           		
 	                    </div>	                    
