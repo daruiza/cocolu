@@ -17,7 +17,8 @@ trait TableRequestTrait
             ->where('active',1)
             ->orderBy('id','ASC')
             ->get();
-        return View::make('table.index_drag')->with('data', ['tables'=>$tables]);
+        //return View::make('table.index_drag')->with('data', ['tables'=>$tables]);
+		return view('table.index_drag',compact('tables'))->with('data', []);
     }
 
     public function saveDrag(Request $request,$id)
@@ -48,13 +49,18 @@ trait TableRequestTrait
             ->orderBy('id','ASC')
             ->get();
 
-            return View::make('table.index_drag')->with('data', ['tables'=>$tables])->with('success', [['OK']]);
-        }
+            //return View::make('table.index')->with('data', ['tables'=>$tables])->with('success', [['OK']]);
+			return view('table.index',compact('tables'))->with('data', [])->with('success', [['OK']]);
+        }       
         
-        
-        return View::make('table.index_drag')->with('data', ['tables'=>$tables])->with('danger', [['NOOK']]);
+        //return View::make('table.index_drag')->with('data', ['tables'=>$tables])->with('danger', [['NOOK']]);		
+		return view('table.index_drag',compact('tables'))->with('data', []);
         
     }
+	
+	public function service(Request $request,$id){		
+		return $this->serviceController->create($request);		
+	}
     
 	
 }

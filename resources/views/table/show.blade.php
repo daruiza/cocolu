@@ -15,27 +15,22 @@
             		<div class="card">
 	                    <div class="card-header">{{ __('messages.TableShow') }}</div>
 	                    <div class="card-body">
-	                    			                    	
-			                    	<li class="list-group-item ">
-			                    		{{$table->name}}
-			                    	</li>
-			                    	<li class="list-group-item ">
-			                    		{{$table->description}}
-			                    	</li>
-			                    	<li class="list-group-item ">
-			                    		{{$table->icon}}
-			                    	</li>		                    	
-
-									@foreach(json_decode($table->label)->options as $option)
-										<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
-	                    					{{ __('messages.'. $option) }} 	
-	                    				</li>
-									@endforeach									
-									<form id="serviceCreate" action="{{ route('service.create') }}" method="GET" style="display: none;">
-										<input type="hidden" name="table_id" value="{{ $table->id }}">
-										<input type="hidden" name="store_id" value="{{ $table->store_id }}">
-									</form>
-			                           		
+							<ul class="list-group">	                    	
+								<li class="list-group-item ">
+									<div><i class="{{$table->icon}}">  </i> {{$table->name}}</div>
+									<div>{{$table->description}}</div>										
+								</li>
+								
+								@foreach(json_decode($table->label)->options as $option)
+									<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
+										{{ __('messages.'. $option) }} 	
+									</li>
+								@endforeach
+								
+								<form id="serviceCreate" action="{{ route('service.create',$table->id) }}" method="GET" style="display: none;">
+									<input type="hidden" name="id" value="{{ $table->id }}">									
+								</form>
+							</ul>      		
 	                    </div>	                    
 	                </div>
 

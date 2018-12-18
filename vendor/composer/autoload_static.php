@@ -330,6 +330,7 @@ class ComposerStaticInit4d1459ba26a4a09867ff20b5ebb040a4
 
     public static $classMap = array (
         'AcountsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AcountsTableSeeder.php',
+        'App\\Clousure' => __DIR__ . '/../..' . '/app/Clousure.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -343,6 +344,7 @@ class ComposerStaticInit4d1459ba26a4a09867ff20b5ebb040a4
         'App\\Http\\Controllers\\Web\\AcountController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/AcountController.php',
         'App\\Http\\Controllers\\Web\\ModuleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/ModuleController.php',
         'App\\Http\\Controllers\\Web\\RolController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/RolController.php',
+        'App\\Http\\Controllers\\Web\\ServiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/ServiceController.php',
         'App\\Http\\Controllers\\Web\\StoreController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/StoreController.php',
         'App\\Http\\Controllers\\Web\\TableController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/TableController.php',
         'App\\Http\\Controllers\\Web\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/UserController.php',
@@ -364,6 +366,7 @@ class ComposerStaticInit4d1459ba26a4a09867ff20b5ebb040a4
         'App\\Model\\Admin\\Rol' => __DIR__ . '/../..' . '/app/Model/Admin/Rol.php',
         'App\\Model\\Core\\City' => __DIR__ . '/../..' . '/app/Model/Core/City.php',
         'App\\Model\\Core\\Department' => __DIR__ . '/../..' . '/app/Model/Core/Department.php',
+        'App\\Model\\Core\\Service' => __DIR__ . '/../..' . '/app/Model/Core/Service.php',
         'App\\Model\\Core\\Store' => __DIR__ . '/../..' . '/app/Model/Core/Store.php',
         'App\\Model\\Core\\Table' => __DIR__ . '/../..' . '/app/Model/Core/Table.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -371,7 +374,6 @@ class ComposerStaticInit4d1459ba26a4a09867ff20b5ebb040a4
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
-        'App\\Service' => __DIR__ . '/../..' . '/app/Service.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
+use App\Http\Controllers\Web\ServiceController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -16,10 +18,12 @@ class TableController extends Controller
 {
 
     use TableRequestTrait;
+	protected $serviceController;
 
     public function __construct()
     {               
-        $this->middleware('auth');        
+        $this->middleware('auth');
+		$this->serviceController = new ServiceController();
     }
     /**
      * Display a listing of the resource.
@@ -34,8 +38,8 @@ class TableController extends Controller
             where('store_id',Auth::user()->store()->id)
             ->where('active',1)
             ->orderBy('id','ASC')
-            ->get();
-        return View::make('table.index')->with('data', ['tables'=>$tables]);
+            ->get();		        
+		return view('table.index',compact('tables'))->with('data', []);
     }
 
     /**

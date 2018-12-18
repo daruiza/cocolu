@@ -24,7 +24,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @include('layouts.options_page',['model'=>'Tables'])									
+                                    @include('layouts.options_page',['model'=>'Tables'])
                                 </div>
                             </div>                                                  
                         </div>                  
@@ -50,11 +50,9 @@
                                             left: {{json_decode($value->label)->position[3]}}; ">
 
                                             {{ Form::hidden('table-id', $value->id) }}
-										  	<p><i class="{{$value->icon}}"> </i>{{$value->name}}</p>											
+										  	<p><i class="{{$value->icon}}"> </i>{{$value->name}}</p>
                                             
 										</div>
-										
-										
 			                    	@endforeach
 
 		                    	</div>

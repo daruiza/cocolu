@@ -47,5 +47,6 @@ class Table extends Model
             'fas fa-cloud' =>__('form.SelectCloud'),
             'fas fa-couch' => __('form.SelectCouch'),
         ];
-    }
+    }	
+	
 }

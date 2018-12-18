@@ -26,6 +26,7 @@ Route::resource('module', 'Web\ModuleController');
 Route::resource('store', 'Web\StoreController');
 Route::resource('table', 'Web\TableController');
 Route::resource('service', 'Web\ServiceController');
+Route::resource('clouure', 'Web\ClousureController');
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');
 
@@ -43,5 +44,8 @@ Route::get('table/{id}/drag', [
 ]);
 Route::post('table/{id}/savedrag', [
    'as' => 'table.savedrag', 'uses' => 'Web\TableController@saveDrag'
+]);
+Route::get('table/{id}/service', [
+   'as' => 'table.service', 'uses' => 'Web\TableController@service'
 ]);
 

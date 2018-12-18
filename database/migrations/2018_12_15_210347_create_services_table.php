@@ -18,14 +18,16 @@ class CreateServicesTable extends Migration
             $table->string('name',128);
             $table->string('description',512)->nullable()->default(null);
             $table->date('date');
-            $table->boolean('kept')->default(true);
-            $table->boolean('open')->default(true);   
+            $table->boolean('kept')->default(false);//reserved
+            $table->boolean('open')->default(true);//one service open for table						
             $table->timestamps();
                         
             $table->integer('table_id')->unsigned();            
             $table->foreign('table_id')->references('id')->on('tables')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+			
+			$table->integer('rel_clousure_id')->unsigned(); //relaciĂ³n simbolica con algun clousure, el clousure contiene el detalle
         });
     }
 

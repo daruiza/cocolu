@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-	@include('table.index_basic')
+	@include('table.index_basic_drag')
 	<div class="flex-center position-ref full-height container">  
 	<div class="container">
         <div class="row">        	

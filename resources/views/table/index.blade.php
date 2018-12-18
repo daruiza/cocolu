@@ -45,6 +45,15 @@
 		function table_drag_submit(id){
 			$('#'+id)[0].submit();
 		}
+		
+		function table_service_submit(id){
+			if($("#"+id+" input[name=id]").val() !== ""){
+				$('#'+id)[0].submit();
+				return true;
+			}
+			alert("{{ __('messages.TableSelectNone') }}");
+			return false;
+		}
 
 		$("#containment-wrapper").height($("#containment-wrapper").height()+85);
 		

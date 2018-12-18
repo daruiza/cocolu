@@ -112,7 +112,14 @@ class OptionsTableSeeder extends Seeder
 			'label'=>'{"menu":"page","method":"get","icon":"fas fa-arrows-alt"}',
 			'module_id'=>6
 			)
-		);		
+		);
+		
+		\DB::table('options')->insert(array(
+			'name'=>'service',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-clipboard"}',
+			'module_id'=>6			
+			)
+		);	
 
     }
 }
