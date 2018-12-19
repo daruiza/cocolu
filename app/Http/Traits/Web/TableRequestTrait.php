@@ -61,6 +61,10 @@ trait TableRequestTrait
 	public function service(Request $request,$id){		
 		return $this->serviceController->create($request);		
 	}
+	
+	public function saveService(Request $request,$id){
+		return 'save service';
+	}
     
 	
 }

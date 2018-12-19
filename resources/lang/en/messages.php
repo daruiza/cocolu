@@ -2,6 +2,9 @@
 return [
 	"English"=> "English",
 	"Spanish"=> "Español",
+	"state" => "State",
+	"active" => "Active",
+	"inactive" => "Inactive",	
 	"E-Mail Address"=> "E-Mail Address",
     "E-Mail Address fail1"=> "Include a \"@ \" sign in the email address. The direction \"",
     "E-Mail Address fail2"=> "\" does not include the \"@ \" sign.",
@@ -33,6 +36,7 @@ return [
     "Currency"=> "Currency",     
     "Acount"=>"Acount",
     "Tables"=>"Tables",
+	"Table"=>"Table",
     "Products"=>"Products",
     "superAdmin"=> "Modules, Users, Roles, Permissions and Accounts Manager",
     "editProfile" =>"Edit profile",
@@ -42,5 +46,9 @@ return [
     "Send"=>"Send",
     "passwordChange"=>"Password Change",
     "acountSummary"=>"Acount Summary",
-    "TableSelectNone" => "For this option you need select a table"
+    "TableSelectNone" => "For this option you need select a table",
+	"indexTable"=>"Tables Index",
+	"TableService" => "Active Service",
+	"TableOptions" => "Options Table",
+	"OpenService" => "Open Service",
 ];

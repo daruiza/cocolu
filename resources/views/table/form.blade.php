@@ -58,15 +58,15 @@
 -->
 
 <div class="form-group row">
-	{!! form::label('active',__('messages.active'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+	{!! form::label('active',__('messages.state'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('active'))
-			{!! Form::select('active', ['Inactivo','Activo'],null,['class'=>'form-control']) !!}
+			{!! Form::select('active', [__('messages.inactive'),__('messages.active')],null,['class'=>'form-control']) !!}
 			<span class="invalid-feedback">
                 <strong>{{ $errors->first('active') }}</strong>
             </span>
 		@else				                    					
-			{!! Form::select('active', ['Inactivo','Activo'],null,['class'=>'form-control']) !!}
+			{!! Form::select('active', [__('messages.inactive'),__('messages.active')],null,['class'=>'form-control']) !!}
 		@endif	
 	</div>
 </div>

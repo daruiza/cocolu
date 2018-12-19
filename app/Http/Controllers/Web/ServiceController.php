@@ -62,19 +62,20 @@ class ServiceController extends Controller
 			return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_STORE_OWNER']]);
         }
 		//consult services open=true, and donot be register in table close
-		//only one service have state open=true, when close -> open=false
-		
+		//only one service have state open=true, when close -> open=false		
 		$services = Service::
 			where('table_id',$table->id)  
             ->where('open',1)            
             ->get();
 		if($services->count()){
-			//can not to create new service			
+			//can not to create new service
+			//now exist a service active
 			return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_SERVICE_CREATE']]);			
 		}		
 		
 		//return view for create new service
-		return view('table.index',compact('tables','table'))->with('data', ['servicenew'=>true,'table_id'=>$table->id])->with('success', [['SERVICE_NEW']]);		
+		//return view('table.index',compact('tables','table'))->with('data', ['servicemodal'=>true,'table_id'=>$table->id])->with('success', [['SERVICE_NEW']]);		
+		return view('table.index',compact('tables','table'))->with('data', ['servicemodal'=>true,'table_id'=>$table->id]);		
     }
 
     /**

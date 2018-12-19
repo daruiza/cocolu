@@ -2,6 +2,7 @@
 
 namespace App\Model\Core;
 
+use App\Model\Core\Service;
 use Illuminate\Database\Eloquent\Model;
 
 class Table extends Model
@@ -23,6 +24,10 @@ class Table extends Model
         if(array_key_exists('store_id',$data))$this->store_id = $data['store_id'];        
         $this->save();
     }
+	
+	public function tableServiceOpen(){				
+		return Service::where('table_id', $this->id)->get();		
+	}
 
     public function icons()
     {

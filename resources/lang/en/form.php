@@ -1,5 +1,7 @@
 <?php
 return [
+	"Send"=>"Send",
+	"Cancel"=>"Cancel",
 	"LabelIcon"=> "Icon",
 	"SelectUsers" => "Users  &#xf0c0;",
 	"SelectBeer"=> "Beer &#xf0fc;",
@@ -19,5 +21,7 @@ return [
 	"SelectOrder" => "Order &#xf50a;",
 	"SelectCloud" => "Cloud &#xf0c2;",
 	"SelectCouch" => "Couch &#xf4b8;",
-
+	"TableService" => "Service Details",
+	"createTable" => "Create New Table",
+	"TableServiceCreate" => "New Service Table",
 ];

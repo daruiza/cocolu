@@ -13,7 +13,7 @@
 
 	        	<div class="col-md-4 ">
             		<div class="card">
-	                    <div class="card-header">{{ __('messages.TableService') }}</div>
+	                    <div class="card-header">{{ __('form.TableService') }}</div>
 	                    <div class="card-body">
 	                    	<div class="container">
 		                    	<div class="row">
@@ -30,7 +30,7 @@
             	<div class="col-md-8">            		
             		@include('layouts.alert')
             		<div class="card">
-	                    <div class="card-header">{{ __('messages.indexTable') }}</div>
+	                    <div class="card-header">{{ __('form.createTable') }}</div>
 	                    <div class="card-body">
 	                    	<div class="container">
 		                    	<div class="row">

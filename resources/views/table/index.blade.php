@@ -4,7 +4,10 @@
 @endsection
 
 @section('content')
-	@include('table.index_basic')    
+	@include('table.index_basic')
+	@isset($data['servicemodal'])
+		@include('table.service_create')
+	@endisset
 @endsection
 
 @section('script')
@@ -55,9 +58,14 @@
 			return false;
 		}
 
-		$("#containment-wrapper").height($("#containment-wrapper").height()+85);
-		
+		$("#containment-wrapper").height($("#containment-wrapper").height()+85);		
 	</script>
+		
+	@isset($data['servicemodal'])	
+	<script type="text/javascript">		
+		$('#modal_service_create').modal('toggle');
+	</script>
+	@endisset
 @endsection
 
 @section('style')	

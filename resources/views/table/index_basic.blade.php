@@ -50,8 +50,10 @@
                                             left: {{json_decode($value->label)->position[3]}}; ">
 
                                             {{ Form::hidden('table-id', $value->id) }}
-										  	<p><i class="{{$value->icon}}"> </i>{{$value->name}}</p>											
-                                            
+										  	<p><i class="{{$value->icon}}"> </i>{{$value->name}}</p>																						
+											@if($value->tableServiceOpen()->count())
+												<p><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</p>
+											@endif
 										</div>
 										
 										

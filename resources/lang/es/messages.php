@@ -2,6 +2,9 @@
 return [   
     "English"=> "Inglés",
     "Spanish"=> "Spanish",
+	"state" => "Estado",
+	"active" => "Activo",
+	"inactive" => "Inactivo",
     "E-Mail Address"=> "Correo Electrónico",
     "E-Mail Address fail1"=> "Incluye un signo \"@\" en la dirección de correo electrónico. La dirección \"",
     "E-Mail Address fail2"=> "\" no incluye el signo \"@\".",
@@ -34,6 +37,7 @@ return [
     "Currency"=> "Moneda",     
     "Acount"=>"Cuenta",
     "Tables"=>"Mesas",
+	"Table"=>"Mesa",
     "Products"=>"Productos",
     "superAdmin"=> "Administrador de Modulos, Usuarios, Roles, Permisos y Cuentas",
     "editProfile" =>"Editar Perfil",
@@ -43,5 +47,9 @@ return [
     "Send"=>"Enviar",
     "passwordChange"=>"Cambiar Contraseña",
     "acountSummary"=>"Resumen de cuenta",
-    "TableSelectNone" => "Para ejecutar esta opción es necesario que selecciones una mesa"
+    "TableSelectNone" => "Para ejecutar esta opción es necesario que selecciones una mesa",
+	"indexTable"=>"Salon de Mesas",
+	"TableService" => "Servicio Activo",
+	"TableOptions" => "opciones de Mesa",
+	"OpenService" => "Servicio Abierto",
 ];
