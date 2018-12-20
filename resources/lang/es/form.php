@@ -22,7 +22,7 @@ return [
 	"SelectCloud" => "Nube  &#xf0c2;",
 	"SelectCouch" => "Sofa  &#xf4b8;",
 	"TableService" => "Información del servicio",
-	"indexTable" => "Crear Nueva Mesa",
+	"createTable" => "Crear Nueva Mesa",	
 	"TableServiceCreate" => "Nuevo Servicio",
 
 ];
