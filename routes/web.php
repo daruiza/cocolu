@@ -45,6 +45,9 @@ Route::get('table/{id}/drag', [
 Route::post('table/{id}/savedrag', [
    'as' => 'table.savedrag', 'uses' => 'Web\TableController@saveDrag'
 ]);
+Route::post('table/{id}/selectservice', [
+   'as' => 'table.selectservice', 'uses' => 'Web\TableController@selectService'
+]);
 Route::get('table/{id}/service', [
    'as' => 'table.service', 'uses' => 'Web\TableController@service'
 ]);

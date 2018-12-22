@@ -58,6 +58,10 @@ trait TableRequestTrait
         
     }
 	
+	public function selectService(Request $request){
+		return 'data';
+	}
+	
 	public function service(Request $request,$id){		
 		return $this->serviceController->create($request);		
 	}

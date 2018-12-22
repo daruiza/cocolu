@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 
+use DateTime;
+
 class ServiceController extends Controller
 {	
 	protected $tableController;
@@ -95,7 +97,13 @@ class ServiceController extends Controller
         if(!Auth::user()->validateUserStore($table->store_id)){         
             return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_STORE_OWNER']]);
         }
-        $service = new Service();        
+        $service = new Service();
+		//fecha y hora
+		$today = new DateTime();
+		$today = $today->format('Y-m-d H:i:s');		
+		$request->request->add(['date' => $today]);
+		//$request->request->add(['rel_clousure_id' => 0]);		
+		//dd($request->input());		
         $service::create($request->input());
         return view('table.index',compact('tables','table'))->with('data', [])->with('success', [['SERVICE_NEW_OK']]);
     }

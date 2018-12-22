@@ -8,6 +8,8 @@
 	@isset($data['servicemodal'])
 		@include('table.service_create')
 	@endisset
+	{!! Form::open(array('id'=>'slect-service-form','route' =>['table.selectservice',Auth::user()->store()->id],'method' =>'POST')) !!}		
+	{!! Form::close() !!}   
 @endsection
 
 @section('script')
@@ -75,6 +77,5 @@
 		.selected-table{
 		    background-color: {{ json_decode(Auth::user()->store()->label,true)['selectTable'] }};
 		}
-	</style>
-	
+	</style>	
 @endsection

@@ -18,7 +18,7 @@
            
           {!! Form::open(array('id'=>'form-table-service','route'=>['table.saveservice',$table->id],'method'=>'POST')) !!}
             {{ Form::hidden('table_id', $table->id) }}
-            {{ Form::hidden('date', date('c')) }}
+            {{ Form::hidden('rel_clousure_id', 0) }}
             <div class="form-group row">
               <div class="col-md-12">
                 {!! Form::label('name',__('messages.Name'),['class'=>'col-form-label text-md-right']) !!}

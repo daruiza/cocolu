@@ -13,8 +13,6 @@
 			    	<i class=""></i>
 			        {{ __('messages.BottonSave') }}
 			    </a>
-
-
 			    {!! Form::open(array('id'=>'table-drag-save-form','route' =>['table.savedrag',Auth::user()->store()->id],'method' =>'POST')) !!}
 			    	{!! Form::hidden('data','') !!}			    	
 			    {!! Form::close() !!}   
