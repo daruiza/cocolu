@@ -24,5 +24,6 @@ return [
 	"TableService" => "Información del servicio",
 	"createTable" => "Crear Nueva Mesa",	
 	"TableServiceCreate" => "Nuevo Servicio",
+	"createWaiter" => "Crear Mesero",
 
 ];

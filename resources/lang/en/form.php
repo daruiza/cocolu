@@ -24,4 +24,5 @@ return [
 	"TableService" => "Service Details",
 	"createTable" => "Create New Table",
 	"TableServiceCreate" => "New Service Table",
+	"createWaiter" => "Create Waiter",
 ];

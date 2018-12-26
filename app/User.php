@@ -80,14 +80,14 @@ class User extends Authenticatable
                 $fileName_image = rand(1,9999999).'.'.$extension; // renameing image
                 $data['image']->move($destinationPath, $fileName_image);                        
             }            
-            $this->avatar = $fileName_image;
-            
+            $this->avatar = $fileName_image;            
         }
         $this->save();         
 
         return $this;
     }
-
+	
+	//this method consult a store user
     public function store(){
         return Store::where('id', $this->rel_store_id)->firstOrFail();//consultamos la tienda
     }    

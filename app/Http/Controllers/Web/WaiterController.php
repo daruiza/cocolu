@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\User;
 use App\Model\Core\Waiter;
 
 use Illuminate\Http\Request;
@@ -47,8 +48,24 @@ class WaiterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {	
+		dd($request);
+		//this method create a acount		
+		$this->validatorUser($request->all())->validate();
+		
+		$request->request->add(['rol_id' => 3]);
+		$request->request->add(['rel_store_id' => $request->input('store_id')]);		
+		$request->request->add(['password' => \Hash::make($request->input('password'))]);						
+		$user = new User();
+		$user->create($request->all());
+		$user->repository($user->id);
+		
+		$request->request->add(['user_id' => $user->id]);				
+		$waiter = new Waiter()
+		$waiter->create($request->all());
+		
+		
+        return "store";
     }
 
     /**
@@ -94,5 +111,14 @@ class WaiterController extends Controller
     public function destroy(Waiter $waiter)
     {
         //
+    }
+	
+	protected function validatorUser(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:16',
+            'email' => 'required|string|email|max:128|unique:users',
+            'password' => 'required|string|min:4|confirmed',
+        ]);
     }
 }

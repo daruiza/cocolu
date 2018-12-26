@@ -18,7 +18,7 @@
 	                    		<ul class="list-group">	                    			
 	                    			@foreach( $data['options'] as $option )
 	                    				<li class="list-group-item li-option" onclick="event.preventDefault();
-                                                     document.getElementById('{{ $option }}').submit()";>
+											document.getElementById('{{ $option }}').submit()";>
 	                    					{{ __('messages.'. $option) }} 	
 	                    				</li>
 	                    			@endforeach
