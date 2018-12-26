@@ -9,6 +9,7 @@
 		@include('table.service_create')
 	@endisset
 	{!! Form::open(array('id'=>'slect-service-form','route' =>['table.selectservice',Auth::user()->store()->id],'method' =>'POST')) !!}		
+		{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
 	{!! Form::close() !!}   
 @endsection
 
@@ -75,7 +76,11 @@
 	<!--esto no se hace asi, css debe poder recivir variables-->
 	<style type="text/css">
 		.selected-table{
-		    background-color: {{ json_decode(Auth::user()->store()->label,true)['selectTable'] }};
+		    background-color: {{ json_decode(Auth::user()->store()->label,true)['selectTable'] }} !important;
 		}
+		.service-open-table{
+		    background-color: {{ json_decode(Auth::user()->store()->label,true)['serviceOpenTable'] }};;
+		}
+
 	</style>	
 @endsection

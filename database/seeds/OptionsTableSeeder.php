@@ -120,6 +120,37 @@ class OptionsTableSeeder extends Seeder
 			'module_id'=>6			
 			)
 		);	
-
+		
+		//Modulo Waiters opt 18
+		\DB::table('options')->insert(array(
+			'name'=>'index',			
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
+			'module_id'=>8		
+			)
+		);
+		\DB::table('options')->insert(array(
+			'name'=>'show',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
+			'module_id'=>8	
+			)
+		);
+		\DB::table('options')->insert(array(
+			'name'=>'create',			
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
+			'module_id'=>8	
+			)
+		);		
+		\DB::table('options')->insert(array(
+			'name'=>'edit',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
+			'module_id'=>8	
+			)
+		);		
+		\DB::table('options')->insert(array(
+			'name'=>'destroy',			
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
+			'module_id'=>8	
+			)
+		);
     }
 }

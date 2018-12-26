@@ -17,7 +17,7 @@ class CreateServicesTable extends Migration
             $table->increments('id');
             $table->string('name',128);
             $table->string('description',512)->nullable()->default(null);
-            $table->date('date');
+            $table->dateTime('date');
             $table->boolean('kept')->default(false);//reserved
             $table->boolean('open')->default(true);//one service open for table						
             $table->timestamps();
@@ -26,8 +26,9 @@ class CreateServicesTable extends Migration
             $table->foreign('table_id')->references('id')->on('tables')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-			
-			$table->integer('rel_clousure_id')->unsigned(); //relaciĂ³n simbolica con algun clousure, el clousure contiene el detalle
+            
+			$table->integer('rel_waiter_id')->unsigned(); //relacion simbolica con un mesero
+			$table->integer('rel_clousure_id')->unsigned(); //relacion simbolica con algun clousure, el clousure contiene el detalle
         });
     }
 

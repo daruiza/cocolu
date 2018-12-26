@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AcountsTableSeeder' => $baseDir . '/database/seeds/AcountsTableSeeder.php',
-    'App\\Clousure' => $baseDir . '/app/Clousure.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -19,6 +18,7 @@ return array(
     'App\\Http\\Controllers\\DepartmentController' => $baseDir . '/app/Http/Controllers/Web/DepartmentController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\Web\\AcountController' => $baseDir . '/app/Http/Controllers/Web/AcountController.php',
+    'App\\Http\\Controllers\\Web\\ClousureController' => $baseDir . '/app/Http/Controllers/Web/ClousureController.php',
     'App\\Http\\Controllers\\Web\\ModuleController' => $baseDir . '/app/Http/Controllers/Web/ModuleController.php',
     'App\\Http\\Controllers\\Web\\RolController' => $baseDir . '/app/Http/Controllers/Web/RolController.php',
     'App\\Http\\Controllers\\Web\\ServiceController' => $baseDir . '/app/Http/Controllers/Web/ServiceController.php',
@@ -42,6 +42,7 @@ return array(
     'App\\Model\\Admin\\Option' => $baseDir . '/app/Model/Admin/Option.php',
     'App\\Model\\Admin\\Rol' => $baseDir . '/app/Model/Admin/Rol.php',
     'App\\Model\\Core\\City' => $baseDir . '/app/Model/Core/City.php',
+    'App\\Model\\Core\\Clousure' => $baseDir . '/app/Model/Core/Clousure.php',
     'App\\Model\\Core\\Department' => $baseDir . '/app/Model/Core/Department.php',
     'App\\Model\\Core\\Service' => $baseDir . '/app/Model/Core/Service.php',
     'App\\Model\\Core\\Store' => $baseDir . '/app/Model/Core/Store.php',
@@ -52,6 +53,7 @@ return array(
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\Waiter' => $baseDir . '/app/Waiter.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonInterval' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
     'Carbon\\Exceptions\\InvalidDateException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',

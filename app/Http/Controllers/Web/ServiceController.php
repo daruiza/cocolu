@@ -102,9 +102,14 @@ class ServiceController extends Controller
 		$today = new DateTime();
 		$today = $today->format('Y-m-d H:i:s');		
 		$request->request->add(['date' => $today]);
+		$request->request->add(['rel_waiter_id' => 0]);	
 		//$request->request->add(['rel_clousure_id' => 0]);		
 		//dd($request->input());		
         $service::create($request->input());
+        
+        //verificate onli one service
+        /*****/
+        
         return view('table.index',compact('tables','table'))->with('data', [])->with('success', [['SERVICE_NEW_OK']]);
     }
 

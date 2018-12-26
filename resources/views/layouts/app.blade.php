@@ -14,6 +14,7 @@
     <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
 
     <!-- Fonts -->
+
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
@@ -22,9 +23,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
     -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">   
+    <!--<link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">-->
+    
     
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    
     <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--> 
+
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">    
 
     @yield('template')
@@ -71,7 +76,7 @@
                                     @if($permit['active'])
                                         <li class="nav-item dropdown">
                                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                {{ $key_permit }} <span class="caret"></span>
+                                                {{ __('options.'.$key_permit) }} <span class="caret"></span>
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                       
                                             @foreach ($permit['options'] as $key_option => $option)
@@ -82,7 +87,7 @@
                                                            onclick="event.preventDefault();
                                                                          document.getElementById('{{json_decode($permit['label'], true)['action'].'-'.$option['name'].'-form'}}').submit();">
                                                             <i class="{{ json_decode($option['label'], true)['icon'] }}"></i>
-                                                            {{  $option['name'] }}
+                                                            {{ __('options.'.$option['name']) }}
                                                         </a>
 
                                                         {!! Form::open(array('id'=>json_decode($permit['label'], true)['action'].'-'.$option['name'].'-form','route' => json_decode($permit['label'], true)['action'].'.'.$option['name'],'method' => json_decode($option['label'], true)['method'])) !!}

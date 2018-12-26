@@ -7,7 +7,7 @@
                         
                         <a class="dropdown-item" href="javascript: {{ json_decode($permit['label'], true)['action'].'_'.$option['name'] }}_submit('{{json_decode($permit['label'], true)['action'].'-'.$option['name']}}-form')">
                             <i class="{{ json_decode($option['label'], true)['icon'] }}"></i>
-                            {{  $option['name'] }}
+                            {{ __('options.'.$option['name']) }}
                         </a>
 
                         <!--

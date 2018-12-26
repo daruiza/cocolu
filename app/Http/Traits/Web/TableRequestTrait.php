@@ -58,8 +58,27 @@ trait TableRequestTrait
         
     }
 	
-	public function selectService(Request $request){
-		return 'data';
+	public function selectService(Request $request,$id){
+		//validate ouner store
+		
+		if(!Auth::user()->validateUserStore($id)){
+			return response()->json(['return'=>false,'data'=>null]);
+		}	
+		
+		//consult the table		
+		$table = Table::where('store_id',$id)
+			->where('id',$request->input('table_id'))
+			->where('active',1)                    
+			->get();
+		//consult service	
+			
+		//consult the ordesr
+		
+		//make the totals
+		
+		
+		
+		return response()->json(['return'=>false,'data'=>['request'=>$request->input(),'store_id'=>$id,'table'=>$table,'orders'=>'']]);		
 	}
 	
 	public function service(Request $request,$id){		

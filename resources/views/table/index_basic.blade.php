@@ -7,11 +7,12 @@
                 <div class="card card-menu-table">
                     <div class="card-header">{{ __('messages.TableService') }}</div>
                     <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                   Servicios por mesa seleccionada
-                                </div>
+                        <div class="container services-table">
+                            <div class="row">                                
+								<div class="col-md-12 table"></div>
+								<div class="col-md-12 bartender"></div>
+								<div class="col-md-12 orders"></div>
+								<div class="col-md-12 new-orders"></div>
                             </div>                                                  
                         </div>                  
                     </div>                            
@@ -43,17 +44,22 @@
 		                    	<div id="containment-wrapper" class="col-md-12">
 		                    		
 			                    	@foreach($tables as $key => $value)                                        
-			                    		<div class="ui-widget-content draggable col-md-3 obstacle object-table" style="
+			                    		<div class="ui-widget-content draggable col-md-3 obstacle object-table @if($value->tableServiceOpen()->count()) service-open-table @endif" style="
                                             top: {{json_decode($value->label)->position[0]}};
                                             right: {{json_decode($value->label)->position[1]}} ;
                                             bottom: {{json_decode($value->label)->position[2]}};
                                             left: {{json_decode($value->label)->position[3]}}; ">
 
-                                            {{ Form::hidden('table-id', $value->id) }}
+                                            {{ Form::hidden('table-id', $value->id) }}                                            
 										  	<p><i class="{{$value->icon}}"> </i>{{$value->name}}</p>																						
-											@if($value->tableServiceOpen()->count())
-												<p><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</p>
+											@if($value->tableServiceOpen()->count())														
+												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
+												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>
+												<div>{{$value->tableServiceOpen()->first()->date}}</div>
+												<div>Total</div>
+												<div>mesero</div>
 											@endif
+											
 										</div>
 										
 										

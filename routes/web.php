@@ -26,7 +26,9 @@ Route::resource('module', 'Web\ModuleController');
 Route::resource('store', 'Web\StoreController');
 Route::resource('table', 'Web\TableController');
 Route::resource('service', 'Web\ServiceController');
-Route::resource('clouure', 'Web\ClousureController');
+Route::resource('clousure', 'Web\ClousureController');
+Route::resource('waiter', 'Web\WaiterController');
+
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');
 
