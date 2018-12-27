@@ -50,7 +50,7 @@
 		                    	<div class="col-md-12 m-b-md table-container">
 		                    		
 			                    	@foreach($waiters as $key => $value)                                        
-			                    		<div class="row @if($key%2) @else row-impar @endif" >
+			                    		<div class="row object-waiter @if($key%2) @else row-impar @endif" >
 											<div class="col-md-3">{{$value->user()->get()->first()->name}}</div>
 											<div class="col-md-3">{{$value->user()->get()->first()->surname}}</div>
 											<div class="col-md-4">{{$value->user()->get()->first()->email}}</div>
@@ -71,7 +71,11 @@
 
 @endsection
 
-@section('script')	
+@section('script')
+    <script type="text/javascript" src="{{ asset('js/entity/table.js') }}"></script>
+    <script type="text/javascript">
+        waiter.selectObject('object-waiter','selected-object');
+    </script>   
 @endsection
 
 @section('style')	
@@ -80,5 +84,8 @@
 		.row-impar{
 		    background-color: {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }} !important;
 		}
+        .selected-object{
+            background-color: {{ json_decode(Auth::user()->store()->label,true)['selectTable'] }} !important;
+        }
 	</style>	
 @endsection
