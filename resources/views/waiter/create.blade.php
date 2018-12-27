@@ -11,8 +11,9 @@
             <div class="content">
                <div class="row">
 
-	        	<div class="col-md-4 ">
-            		<div class="card">
+	        	<div class="col-md-3 col-lateral-table">
+					<div class="col-md-12">
+            		<div class="card card-menu-table">
 	                    <div class="card-header">{{ __('form.TableService') }}</div>
 	                    <div class="card-body">
 	                    	<div class="container">
@@ -22,12 +23,12 @@
 			                    	</div>
 			                    </div>	                    			        		
 	                    	</div>	        		
-	                    </div>
-	                    
+	                    </div>	                    
 	                </div>
+					</div>
             	</div>
 
-            	<div class="col-md-8">					
+            	<div class="col-md-9">					
 					
             		@include('layouts.alert')
 					
@@ -100,19 +101,20 @@
 @endsection
 
 @section('style')
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<style>
-	select {
-	  font-family: 'FontAwesome';
-	}
-	.button-submit{
-		text-align: right;
-		padding-right: 20px;
-		margin-bottom: 20px;
-	}
-	.button-submit button{
-		width: 100%;
-		margin-top: 10%;
-	}
-</style>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
+	<style>
+		select {
+		  font-family: 'FontAwesome';
+		}
+		.button-submit{
+			text-align: right;
+			padding-right: 20px;
+			margin-bottom: 20px;
+		}
+		.button-submit button{
+			width: 100%;
+			margin-top: 10%;
+		}
+	</style>
 @endsection

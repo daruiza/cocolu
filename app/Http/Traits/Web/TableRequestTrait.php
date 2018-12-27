@@ -74,8 +74,7 @@ trait TableRequestTrait
 			
 		//consult the ordesr
 		
-		//make the totals
-		
+		//make the totals		
 		
 		
 		return response()->json(['return'=>false,'data'=>['request'=>$request->input(),'store_id'=>$id,'table'=>$table,'orders'=>'']]);		

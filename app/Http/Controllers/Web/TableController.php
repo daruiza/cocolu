@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Traits\Web\TableRequestTrait;
 
@@ -75,8 +76,10 @@ class TableController extends Controller
             $table = new Table();
             //$table->storeTable($request->input());
             $table::create($request->input());
-            return view('table.create',compact('table'))->with('success', [['OK']])->with('data', []);    
-        }
+			Session::flash('success', [['TableCreateOk']]);
+			return $this->index();
+            //return view('table.create',compact('table'))->with('success', [['OK']])->with('data', []);    
+        }		
         return view('table.create',compact('table'))->with('danger', [['NOOK']])->with('data', []);
         //return Redirect::back()->with($request->input())->with('success', [['OK']]);
     }
@@ -120,10 +123,13 @@ class TableController extends Controller
         if(Auth::user()->validateUserStore($request->input('store_id'))){
             $table = Table::find($id);
             $table->storeTable($request->input());
-            //$table::save();            
-            return view('table.edit',compact('table'))->with('success', [['OK']])->with('data', []);
+            //$table::save(); 
+			Session::flash('success', [['TableEditOk']]);
+			return $this->index();	
+            //return view('table.edit',compact('table'))->with('success', [['OK']])->with('data', []);
 
         }
+		
         return view('table.edit',compact('table'))->with('danger', [['NOOK']])->with('data', []);       
         //return Redirect::back()->with($request->input())->with('success', [['OK']]);
     }

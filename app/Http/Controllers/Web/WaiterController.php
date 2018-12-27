@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class WaiterController extends Controller
 {
@@ -26,8 +27,16 @@ class WaiterController extends Controller
     }
      
     public function index()
-    {
-        //
+    {		
+        $waiters = Waiter::
+			select('waiters.*')
+			->leftjoin('users','waiters.user_id','users.id')
+            ->where('users.rel_store_id',Auth::user()->store()->id)			
+            ->where('users.active',1)
+            ->orderBy('waiters.id','ASC')
+            ->get();
+		//dd($waiters->first()->user()->get()->first()->name);		
+		return view('waiter.index',compact('waiters'))->with('data', []);
     }
 
     /**
@@ -48,24 +57,25 @@ class WaiterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {	
-		dd($request);
+    {		
 		//this method create a acount		
 		$this->validatorUser($request->all())->validate();
 		
 		$request->request->add(['rol_id' => 3]);
 		$request->request->add(['rel_store_id' => $request->input('store_id')]);		
 		$request->request->add(['password' => \Hash::make($request->input('password'))]);						
+		
 		$user = new User();
-		$user->create($request->all());
-		$user->repository($user->id);
+		$user = $user->create($request->all());
+		$user->repositoryWaiter($user->id);
 		
-		$request->request->add(['user_id' => $user->id]);				
-		$waiter = new Waiter()
-		$waiter->create($request->all());
+		$request->request->add(['user_id' => $user->id]);						
+		$waiter = new Waiter();
+		$waiter->create($request->all());	
 		
-		
-        return "store";
+		//message
+		Session::flash('success', [['WaiterCreateOk']]);
+        return $this->index();
     }
 
     /**

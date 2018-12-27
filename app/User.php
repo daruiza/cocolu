@@ -35,9 +35,14 @@ class User extends Authenticatable
         return $this->belongsTo(Model\Admin\Rol::class);
     }
 
-     //un usuario posee una cuenta
+    //un usuario posee una cuenta
     public function acount(){
         return $this->belongsTo(Model\Admin\Acount::class);
+    }
+	
+	//a user may belongs a waiter
+    public function waiter(){
+        return $this->belongsTo(Model\Core\Waiter::class);
     }
     
     /*funciones propias*/
@@ -131,6 +136,23 @@ class User extends Authenticatable
 
         return true;
     }
+	
+	function repositoryWaiter($user_id){
+		//verificacion de existencia de directorio
+        if (is_dir('users/'.$user_id)){
+            return false;
+        }
+        if(!mkdir('users/'.$user_id.'/profile',0777,true)){
+            return false;
+        }
+        chmod('users/'.$user_id, 0777);
+        if (!copy('images/user/default.png', 'users/'.$user_id.'/profile/default.png')) {
+           return false;
+        }
+        chmod('users/'.$user_id.'/profile/default.png', 0777);
+		
+		return true;
+	}
 
     //asignacion de permisos en session
     public function permits(){
