@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use App\Http\Traits\Web\WaiterRequestTrait;
 
 class WaiterController extends Controller
 {
+
+    use WaiterRequestTrait;
     /**
      * Display a listing of the resource.
      *
@@ -68,6 +71,7 @@ class WaiterController extends Controller
 		$user = new User();
 		$user = $user->create($request->all());
 		$user->repositoryWaiter($user->id);
+        $user->updateUser($request->all()); 
 		
 		$request->request->add(['user_id' => $user->id]);						
 		$waiter = new Waiter();
@@ -129,6 +133,7 @@ class WaiterController extends Controller
             'name' => 'required|string|max:16',
             'email' => 'required|string|email|max:128|unique:users',
             'password' => 'required|string|min:4|confirmed',
+            'description' => 'min:0|max:512',
         ]);
     }
 }

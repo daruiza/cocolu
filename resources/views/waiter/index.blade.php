@@ -31,7 +31,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @include('layouts.options_page',['model'=>'Waiters'])									
+                                    @include('layouts.options_page',['model'=>'Waiters'])						
                                 </div>
                             </div>                                                  
                         </div>                  
@@ -72,9 +72,42 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{ asset('js/entity/table.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/entity/waiter.js') }}"></script>
     <script type="text/javascript">
         waiter.selectObject('object-waiter','selected-object');
+        function waiter_show_submit(id){
+            if($("#"+id+" input[name=id]").val() !== ""){
+                $('#'+id)[0].submit();
+                return true;
+            }
+            alert("{{ __('messages.TableSelectNone') }}");
+            return false;           
+        }
+
+        function waiter_edit_submit(id){
+            if($("#"+id+" input[name=id]").val() !== ""){
+                $('#'+id)[0].submit();
+                return true;
+            }
+            alert("{{ __('messages.TableSelectNone') }}");
+            return false;           
+        }
+
+        function waiter_destroy_submit(id){          
+            if(confirm("{{ __('messages.TableConfirmDestroy') }}")){
+                if($("#"+id+" input[name=id]").val() !== ""){
+                $('#'+id)[0].submit();
+                    return true;
+                }
+                alert("{{ __('messages.TableSelectNone') }}");
+                return false;
+            }
+            return false;
+        }
+
+        function waiter_changepassword_submit(id){
+            $('#'+id)[0].submit();
+        }
     </script>   
 @endsection
 
@@ -82,8 +115,18 @@
 	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
 	<style type="text/css">
 		.row-impar{
-		    background-color: {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }} !important;
+		    background-color: {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
 		}
+        .object-waiter{
+            border: 1px solid {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+        .object-waiter:hover{
+            cursor:pointer;
+        }
         .selected-object{
             background-color: {{ json_decode(Auth::user()->store()->label,true)['selectTable'] }} !important;
         }

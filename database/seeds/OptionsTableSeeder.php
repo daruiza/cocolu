@@ -152,5 +152,11 @@ class OptionsTableSeeder extends Seeder
 			'module_id'=>8	
 			)
 		);
+		\DB::table('options')->insert(array(
+			'name'=>'changepassword',			
+			'label'=>'{"menu":"page","method":"post","icon":"fas fa-times-circle"}',
+			'module_id'=>8	
+			)
+		);
     }
 }
