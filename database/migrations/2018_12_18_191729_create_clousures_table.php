@@ -15,6 +15,15 @@ class CreateClousuresTable extends Migration
     {
         Schema::create('clousures', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name',128);
+            $table->string('description',512)->nullable()->default(null);
+            $table->boolean('open')->default(true);//one clousere open for session
+
+            $table->integer('store_id')->unsigned();            
+            $table->foreign('store_id')->references('id')->on('stores')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            
             $table->timestamps();
         });
     }

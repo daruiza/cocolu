@@ -54,7 +54,7 @@
 											<div class="col-md-3">{{$value->user()->get()->first()->name}}</div>
 											<div class="col-md-3">{{$value->user()->get()->first()->surname}}</div>
 											<div class="col-md-4">{{$value->user()->get()->first()->email}}</div>
-											<div class="col-md-2">{{$value->user()->get()->first()->phone}}</div>											
+											<div class="col-md-2">{{$value->user()->get()->first()->phone}}</div>
 										</div>										
 			                    	@endforeach
 

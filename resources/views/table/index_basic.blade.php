@@ -56,8 +56,8 @@
 												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
 												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>
 												<div>{{$value->tableServiceOpen()->first()->date}}</div>
-												<div>Total</div>
-												<div>mesero</div>
+												<div>Total a Pagar</div>
+												<div>Ultimo Mesero</div>
 											@endif
 											
 										</div>

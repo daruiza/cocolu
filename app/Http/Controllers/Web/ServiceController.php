@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
 use App\Model\Core\Service;
+use App\Model\Core\Clousure;
 
 use App\Http\Controllers\Web\TableController;
 use Illuminate\Http\Request;
@@ -87,7 +88,7 @@ class ServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {           
         $table = Table::find($request->input('table_id'));
         $tables = Table::
             where('store_id',Auth::user()->store()->id)
@@ -102,9 +103,14 @@ class ServiceController extends Controller
 		$today = new DateTime();
 		$today = $today->format('Y-m-d H:i:s');		
 		$request->request->add(['date' => $today]);
-		$request->request->add(['rel_waiter_id' => 0]);	
-		//$request->request->add(['rel_clousure_id' => 0]);		
-		//dd($request->input());		
+		
+        $cousure = Clousure::
+            where('store_id',Auth::user()->store()->id)
+            ->where('open',1)
+            ->get();
+		$request->request->add(['rel_clousure_id' => $cousure->first()->id]);		
+		//dd($request->input());
+
         $service::create($request->input());
         
         //verificate onli one service

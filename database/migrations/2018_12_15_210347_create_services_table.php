@@ -15,7 +15,7 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',128);
+            $table->string('name',128)->nullable()->default(null);
             $table->string('description',512)->nullable()->default(null);
             $table->dateTime('date');
             $table->boolean('kept')->default(false);//reserved
@@ -27,7 +27,7 @@ class CreateServicesTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
             
-			$table->integer('rel_waiter_id')->unsigned(); //relacion simbolica con un mesero
+			//$table->integer('rel_waiter_id')->unsigned(); //relacion simbolica con un mesero
 			$table->integer('rel_clousure_id')->unsigned(); //relacion simbolica con algun clousure, el clousure contiene el detalle
         });
     }

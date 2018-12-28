@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Model\Core\Store;
+use App\Model\Core\Clousure;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -45,7 +46,11 @@ class User extends Authenticatable
         return $this->belongsTo(Model\Core\Waiter::class);
     }
     
-    /*funciones propias*/
+    /*
+    *
+    *funciones propias
+    *
+    */
     public function rol_options(){
         return json_decode(\Auth::user()->rol->label,true)['options'];        
     }
@@ -95,7 +100,18 @@ class User extends Authenticatable
 	//this method consult a store user
     public function store(){
         return Store::where('id', $this->rel_store_id)->firstOrFail();//consultamos la tienda
-    }    
+    } 
+
+    //crea el primer clouure para iniciar la labor
+    public function clousureInit($user_id){
+        //$user = User::where('id', $user_id);        
+        return Clousure::create([
+            'name' => 'Clousure Init',
+            'description' => 'Default Clousure Init',
+            'open' => true,
+            'store_id' => $this->rel_store_id,
+        ]);
+    }
 
     //crea el directorio del usuario, para el registro de tenderos
     public function repository($user_id){

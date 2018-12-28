@@ -14,6 +14,11 @@ class Table extends Model
         return $this->belongsTo(Store::class);
     }
 
+    //una tienda puede tener muchos servicios
+    public function services(){        
+        return $this->hasMany(Services::class);
+    }
+
     public function storeTable($data){
         if(array_key_exists('name',$data))$this->name = $data['name'];
         if(array_key_exists('description',$data))$this->description = $data['description'];
