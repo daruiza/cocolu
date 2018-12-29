@@ -57,7 +57,7 @@
 												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>
 												<div>{{$value->tableServiceOpen()->first()->date}}</div>
 												<div>Total a Pagar</div>
-												<div>Ultimo Mesero</div>
+												<div>Último Mesero</div>
 											@endif
 											
 										</div>

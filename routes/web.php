@@ -24,10 +24,12 @@ Route::resource('rol', 'Web\RolController');
 Route::resource('user', 'Web\UserController');
 Route::resource('module', 'Web\ModuleController');
 Route::resource('store', 'Web\StoreController');
+Route::resource('product', 'Web\ProductController');
 Route::resource('table', 'Web\TableController');
 Route::resource('service', 'Web\ServiceController');
 Route::resource('clousure', 'Web\ClousureController');
 Route::resource('waiter', 'Web\WaiterController');
+Route::resource('procuct', 'Web\ProductController');
 
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');

@@ -158,5 +158,45 @@ class OptionsTableSeeder extends Seeder
 			'module_id'=>8	
 			)
 		);
+
+		//Modulo Products opt 24
+		\DB::table('options')->insert(array(
+			'name'=>'index',			
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
+			'module_id'=>9	
+			)
+		);
+		\DB::table('options')->insert(array(
+			'name'=>'show',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
+			'module_id'=>9	
+			)
+		);
+		\DB::table('options')->insert(array(
+			'name'=>'create',			
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
+			'module_id'=>9
+			)
+		);		
+		\DB::table('options')->insert(array(
+			'name'=>'edit',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
+			'module_id'=>9
+			)
+		);		
+		\DB::table('options')->insert(array(
+			'name'=>'destroy',			
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
+			'module_id'=>9	
+			)
+		);
+		\DB::table('options')->insert(array(
+			'name'=>'changepassword',			
+			'label'=>'{"menu":"page","method":"post","icon":"fas fa-times-circle"}',
+			'module_id'=>9
+			)
+		);
+
+		//Modulo opt 30
     }
 }

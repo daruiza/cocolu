@@ -13,6 +13,12 @@ class Store extends Model
         //no usa el namespace
         return $this->hasMany(Table::class);
     }
+
+    //una tienda puede tener muchos productos
+    public function products(){
+        //no usa el namespace
+        return $this->hasMany(Product::class);
+    }
     
     //a table may be a many cousures
     public function clousures(){
