@@ -14,12 +14,12 @@
 	        	<div class="col-md-3 col-lateral-table">
 					<div class="col-md-12">
             		<div class="card card-menu-table">
-	                    <div class="card-header">{{ __('form.TableService') }}</div>
+	                    <div class="card-header">{{ __('form.ProductService') }}</div>
 	                    <div class="card-body">
 	                    	<div class="container">
 		                    	<div class="row">
 			                    	<div class="col-md-12">
-			                    		Descripcion de cuenta de mesero apunto de crear
+			                    		Descripcion de cuenta de product apunto de crear
 			                    	</div>
 			                    </div>	                    			        		
 	                    	</div>	        		
@@ -33,7 +33,7 @@
             		@include('layouts.alert')
 					
             		<div class="card">
-	                    <div class="card-header">{{ __('form.createWaiter') }}</div>
+	                    <div class="card-header">{{ __('form.createProduct') }}</div>
 	                    <div class="card-body">
 							
 							<div class="content">
@@ -41,9 +41,11 @@
 									<div class="col-md-8">
 										
 										<div class="col-md-12">
-											{!! Form::model($waiter,['enctype' => 'multipart/form-data','id'=>'form-waiter','route'=>['waiter.store'],'method'=>'POST']) !!}
+											{!! Form::model($product,['enctype' => 'multipart/form-data','id'=>'form-product','route'=>['product.store'],'method'=>'POST']) !!}
+
 												{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
-												@include('waiter.form')
+												@include('product.form')
+
 											{!! Form::close() !!}
 										</div>
 											
@@ -53,7 +55,7 @@
 										
 										<div class="col-md-12">
 											<div class="col-md-12 img-container">
-												{{ Html::image('users/'.\Auth::user()->id.'/profile/'.\Auth::user()->avatar,'Imagen no disponible',array('id'=>'img_user_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;','onclick'=>'$("#img_user").trigger("click")'))}}
+												{{ Html::image('users/'.\Auth::user()->id.'/profile/'.\Auth::user()->avatar,'Imagen no disponible',array('id'=>'img_user_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;','onclick'=>'$("#img_product1").trigger("click")'))}}
 												@if ($errors->has('image'))		                        	
 													<span class="invalid-feedback" style="display: block;">
 														<strong>{{ $errors->first('image') }}</strong>
@@ -61,7 +63,7 @@
 												@endif
 											</div>
 											<div class="col-md-12 button-submit">
-												<button type="submit" class="btn btn-primary" form="form-waiter">
+												<button type="submit" class="btn btn-primary" form="form-product">
 													{{ __('messages.Send') }}
 												</button>
 											</div>
@@ -83,7 +85,7 @@
 
 @section('script')
 	<script type="text/javascript"> 
-		$('#img_user').change(function(e) {
+		$('#img_product1').change(function(e) {
 	    	var file = e.target.files[0],
 		    imageType = /image.*/;
 		    
@@ -100,8 +102,7 @@
 	</script>
 @endsection
 
-@section('style')
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+@section('style')	
 	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
 	<style>
 		select {

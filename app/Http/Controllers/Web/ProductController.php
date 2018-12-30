@@ -15,7 +15,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::            
+            where('active',1)
+            ->orderBy('id','ASC')
+            ->get();                
+        return view('product.index',compact('products'))->with('data', []);
     }
 
     /**
@@ -25,7 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $product = new Product();
+        return view('product.create',compact('product'))->with('data', []);
     }
 
     /**
@@ -36,7 +41,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**

@@ -2,6 +2,7 @@
 return [
 	"Tables"=>"Mesas",	
 	"Waiters"=>"Meseros",
+	"Products"=>"Productos",	
 	"index"=>"Listar",
 	"create"=>"Crear",	
 	"show"=>"Mostrar",	

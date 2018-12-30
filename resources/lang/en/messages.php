@@ -38,6 +38,7 @@ return [
     "Tables"=>"Tables",
 	"Table"=>"Table",
     "Products"=>"Products",
+    "Order"=>"Order",
     "superAdmin"=> "Modules, Users, Roles, Permissions and Accounts Manager",
     "editProfile" =>"Edit profile",
     "editStore"=>"Edit Store",

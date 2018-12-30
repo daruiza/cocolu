@@ -189,14 +189,8 @@ class OptionsTableSeeder extends Seeder
 			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>9	
 			)
-		);
-		\DB::table('options')->insert(array(
-			'name'=>'changepassword',			
-			'label'=>'{"menu":"page","method":"post","icon":"fas fa-times-circle"}',
-			'module_id'=>9
-			)
-		);
+		);		
 
-		//Modulo opt 30
+		//Modulo opt 29
     }
 }

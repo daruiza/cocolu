@@ -39,6 +39,7 @@ return [
     "Tables"=>"Mesas",
 	"Table"=>"Mesa",
     "Products"=>"Productos",
+    "Order"=>"Orden",
     "superAdmin"=> "Administrador de Modulos, Usuarios, Roles, Permisos y Cuentas",
     "editProfile" =>"Editar Perfil",
     "editStore"=>"Editar Tienda",

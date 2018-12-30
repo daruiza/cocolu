@@ -1,20 +1,4 @@
 <div class="form-group row">
-	{!! Form::label('icon',__('form.LabelIcon'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
-	<div class="col-md-8">
-		@if($errors->has('icon'))
-			{!! Form::select('icon', $table->icons(),null,['class'=>'form-control is-invalid']) !!}
-			<span class="invalid-feedback">
-                <strong>
-                	{{ $errors->first('icon') }}
-                </strong>
-            </span>
-		@else
-			{!! Form::select('icon', $table->icons(),null,['class'=>'form-control']) !!}				                    					
-		@endif	
-	</div>	                    			
-</div>
-
-<div class="form-group row">
 	{!! Form::label('name',__('messages.Name'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('name'))
@@ -41,6 +25,22 @@
 		@endif	
 	</div>	                    			
 </div>
+
+
+<div class="form-group row">
+	{!! Form::label('order',__('messages.Order'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+	<div class="col-md-8">
+		@if($errors->has('order'))
+			{!! Form::number('order',null, ['class'=>'form-control is-invalid']) !!}
+			<span class="invalid-feedback">
+                <strong>{{ $errors->first('order') }}</strong>
+            </span>
+		@else
+			{!! Form::number('order',null, ['class'=>'form-control']) !!}
+		@endif	
+	</div>
+</div>
+
 <!--
 <div class="form-group row">
 	{!! Form::label('label',__('messages.label'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
@@ -72,10 +72,11 @@
 </div>
 
 
-<div class="form-group row mb-0">
-    <div class="col-md-8 offset-md-4">
-        <button type="submit" class="btn btn-primary">
-            {{ __('messages.Send') }}
-        </button>	                                
-    </div>
-</div>
+<input id="img_product1"  style="display: none;" name="image" type="file">
+
+<!--
+<input id="img_user"  style="display: none;" name="image" type="file">
+<input id="img_product1"  style="display: none;" name="image" type="file">
+<input id="img_product2"  style="display: none;" name="image" type="file">
+<input id="img_product3"  style="display: none;" name="image" type="file">
+-->

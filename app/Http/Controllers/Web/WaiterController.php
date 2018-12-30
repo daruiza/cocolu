@@ -60,7 +60,7 @@ class WaiterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {		
+    {        		
 		//this method create a acount		
 		$this->validatorUser($request->all())->validate();
 		
