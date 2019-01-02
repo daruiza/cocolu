@@ -2,7 +2,8 @@
 return [
 	"Tables"=>"Mesas",	
 	"Waiters"=>"Meseros",
-	"Products"=>"Productos",	
+	"Products"=>"Productos",
+	"Categories"=>"Categorias",	
 	"index"=>"Listar",
 	"create"=>"Crear",	
 	"show"=>"Mostrar",	

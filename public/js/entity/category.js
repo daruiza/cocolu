@@ -1,10 +1,10 @@
-function product() {	
+function category() {	
 }
 	
-product.prototype.onjquery = function() {	
+category.prototype.onjquery = function() {	
 };
 
-product.prototype.selectObject = function(objectClass,selectClass) {
+category.prototype.selectObject = function(objectClass,selectClass) {
     $('.'+objectClass).click(function() {
         if($(this).hasClass(selectClass)){
             $('.'+objectClass).removeClass(selectClass);        
@@ -19,4 +19,4 @@ product.prototype.selectObject = function(objectClass,selectClass) {
     });	
 };
 
-var product = new product();
+var category = new category();

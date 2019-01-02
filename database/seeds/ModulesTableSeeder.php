@@ -65,6 +65,12 @@ class ModulesTableSeeder extends Seeder
 			'label'=>'{"action":"product"}'
 			)
 		);
+		\DB::table('modules')->insert(array(
+			'name'=>'Categories',
+			'description'=>'ModuleCategories',
+			'label'=>'{"action":"category"}'
+			)
+		);
 		
     }
 }

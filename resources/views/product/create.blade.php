@@ -55,12 +55,14 @@
 										
 										<div class="col-md-12">
 											<div class="col-md-12 img-container">
-												{{ Html::image('users/'.\Auth::user()->id.'/profile/'.\Auth::user()->avatar,'Imagen no disponible',array('id'=>'img_user_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;','onclick'=>'$("#img_product1").trigger("click")'))}}
-												@if ($errors->has('image'))		                        	
+												{{ Html::image('users/'.\Auth::user()->id.'/products/default.png','Imagen no disponible',array('id'=>'img_prod_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;','onclick'=>'$("#img_product1").trigger("click")'))}}
+												
+												@if($errors->has('image1'))                        	
 													<span class="invalid-feedback" style="display: block;">
-														<strong>{{ $errors->first('image') }}</strong>
+														<strong>{{ $errors->first('image1') }}</strong>
 													</span>
 												@endif
+
 											</div>
 											<div class="col-md-12 button-submit">
 												<button type="submit" class="btn btn-primary" form="form-product">
@@ -84,6 +86,7 @@
 @endsection
 
 @section('script')
+	<script type="text/javascript" src="{{ asset('js/chosen.jquery.min.js') }}"></script>	
 	<script type="text/javascript"> 
 		$('#img_product1').change(function(e) {
 	    	var file = e.target.files[0],
@@ -95,15 +98,22 @@
 		    var reader = new FileReader();
 		    reader.onload = function(e) {
 		    	var result=e.target.result;
-		    	$('#img_user_img').attr("src",result);
+		    	$('#img_prod_img').attr("src",result);
 		    }
 		    reader.readAsDataURL(file);
 	    });
+
+	    $('.chosen-select').chosen();
+		$('.chosen-container').width('100%');
+		$("#category_id").chosen().change(function(event) {
+			$('#category_ids').val($('#category_id').chosen().val());		    
+		});
 	</script>
 @endsection
 
 @section('style')	
 	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
+	<link href="{{ asset('css/chosen.min.css') }}" rel="stylesheet"> 
 	<style>
 		select {
 		  font-family: 'FontAwesome';
@@ -116,6 +126,10 @@
 		.button-submit button{
 			width: 100%;
 			margin-top: 10%;
+		}
+		.chosen-container .chosen-container-multi{
+			border: 1px solid #ccc !important;
+			border-radius: 4px !important;
 		}
 	</style>
 @endsection

@@ -16,7 +16,6 @@ use App\Http\Traits\Web\WaiterRequestTrait;
 
 class WaiterController extends Controller
 {
-
     use WaiterRequestTrait;
     /**
      * Display a listing of the resource.
@@ -60,13 +59,22 @@ class WaiterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        		
+    {    
+
+        //validate store        
+        if(!Auth::user()->validateUserStore($request->input('store_id'))){            
+            Session::flash('danger', [['WaiterCreateNOOk']]);
+            return $this->index();
+            //return view('waiter.create',compact('waiter'))->with('danger', [['WaiterCreateNOOk']])->with('data', []);    
+        }
+
 		//this method create a acount		
 		$this->validatorUser($request->all())->validate();
+        if(!empty($request->file('image')))$this->validatorImage(['image'=>$request->file('image')])->validate();
 		
 		$request->request->add(['rol_id' => 3]);
 		$request->request->add(['rel_store_id' => $request->input('store_id')]);		
-		$request->request->add(['password' => \Hash::make($request->input('password'))]);						
+		$request->request->add(['password' => \Hash::make($request->input('password'))]);					
 		
 		$user = new User();
 		$user = $user->create($request->all());
@@ -134,6 +142,17 @@ class WaiterController extends Controller
             'email' => 'required|string|email|max:128|unique:users',
             'password' => 'required|string|min:4|confirmed',
             'description' => 'min:0|max:512',
+        ]);
+    }
+
+    protected function validatorImage(array $data)
+    {        
+        return Validator::make($data, [
+            'image'=>'
+                required|
+                mimes:jpeg,bmp,png|
+                dimensions:max_width=700,max_width=700|
+                dimensions:min_width=250,min_width=250',            
         ]);
     }
 }

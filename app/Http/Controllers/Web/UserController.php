@@ -144,7 +144,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {        
         $this->validator($request->all())->validate();
-        if(!empty($request->file('image')))$this->validatorImage(['image'=>$request->file('image')])->validate();       
+        if(!empty($request->file('image')))$this->validatorImage(['image'=>$request->file('image')])->validate();
                 
         $user = new User();
         $user = User::find($id);

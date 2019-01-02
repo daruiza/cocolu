@@ -58,12 +58,12 @@
 	{!! Form::label('description',__('messages.Description'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('description'))
-			{!! Form::textarea('description',null, ['class'=>'form-control is-invalid']) !!}
+			{!! Form::textarea('description',null, ['class'=>'form-control is-invalid','rows'=>'3']) !!}
 			<span class="invalid-feedback">
                 <strong>{{ $errors->first('description') }}</strong>
             </span>
 		@else
-			{!! Form::textarea('description',null, ['class'=>'form-control']) !!}
+			{!! Form::textarea('description',null, ['class'=>'form-control','rows'=>'3']) !!}
 		@endif	
 	</div>	                    			
 </div>
