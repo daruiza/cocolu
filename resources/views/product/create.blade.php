@@ -131,5 +131,19 @@
 			border: 1px solid #ccc !important;
 			border-radius: 4px !important;
 		}
+
+		.chosen-container-multi .chosen-choices{
+			background-color: #fff;
+		    background-clip: padding-box;
+		    border: 1px solid #ced4da;
+		    border-radius: .25rem;
+		    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		    height: calc(2.25rem + 2px);
+		    padding: .375rem .75rem;
+		    font-size: 1rem;
+		    line-height: 1.5;
+		    color: #495057;
+		    background-image: none;
+		}
 	</style>
 @endsection

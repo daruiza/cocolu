@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['id','name','description','image1','image2','image3','order','label','active','store_id'];
+    protected $fillable = ['id','name','price','buy_price','volume','critical_volume','description','image1','image2','image3','order','label','active','store_id'];
 
     //a pruduct belongs a store    
     public function store(){
