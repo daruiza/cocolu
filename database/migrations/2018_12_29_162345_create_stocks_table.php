@@ -20,7 +20,7 @@ class CreateStocksTable extends Migration
             $table->integer('buy_price');
             $table->dateTime('date');
             $table->timestamps();
-             $table->integer('product_id')->unsigned()->default(2);            
+            $table->integer('product_id')->unsigned()->default(1);            
             $table->foreign('product_id')->references('id')->on('products')
             ->onDelete('cascade')
             ->onUpdate('cascade');

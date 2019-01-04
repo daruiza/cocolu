@@ -27,6 +27,62 @@
 </div>
 
 <div class="form-group row">
+	{!! Form::label('price',__('messages.Price'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+	<div class="col-md-8">
+		@if($errors->has('price'))
+			{!! Form::number('price',null, ['class'=>'form-control is-invalid']) !!}
+			<span class="invalid-feedback">
+                <strong>{{ $errors->first('price') }}</strong>
+            </span>
+		@else
+			{!! Form::number('price',null, ['class'=>'form-control']) !!}
+		@endif	
+	</div>
+</div>
+
+<div class="form-group row">
+	{!! Form::label('buy_price',__('messages.Buy_Price'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+	<div class="col-md-8">
+		@if($errors->has('buy_price'))
+			{!! Form::number('buy_price',null, ['class'=>'form-control is-invalid']) !!}
+			<span class="invalid-feedback">
+                <strong>{{ $errors->first('buy_price') }}</strong>
+            </span>
+		@else
+			{!! Form::number('buy_price',null, ['class'=>'form-control']) !!}
+		@endif	
+	</div>
+</div>
+
+<div class="form-group row">
+	{!! Form::label('volume',__('messages.Volume'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+	<div class="col-md-8">
+		@if($errors->has('volume'))
+			{!! Form::number('volume',null, ['class'=>'form-control is-invalid']) !!}
+			<span class="invalid-feedback">
+                <strong>{{ $errors->first('volume') }}</strong>
+            </span>
+		@else
+			{!! Form::number('volume',null, ['class'=>'form-control']) !!}
+		@endif	
+	</div>
+</div>
+
+<div class="form-group row">
+	{!! Form::label('critical_volume',__('messages.CriticalVolume'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+	<div class="col-md-8">
+		@if($errors->has('critical_volume'))
+			{!! Form::number('critical_volume',null, ['class'=>'form-control is-invalid']) !!}
+			<span class="invalid-feedback">
+                <strong>{{ $errors->first('critical_volume') }}</strong>
+            </span>
+		@else
+			{!! Form::number('critical_volume',null, ['class'=>'form-control']) !!}
+		@endif	
+	</div>
+</div>
+
+<div class="form-group row">
 	{!! Form::label('order',__('messages.Order'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('order'))

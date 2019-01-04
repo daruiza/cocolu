@@ -16,7 +16,7 @@ use DateTime;
 
 class ServiceController extends Controller
 {	
-	protected $tableController;
+	//protected $tableController;
 
     public function __construct()
     {               
@@ -95,6 +95,7 @@ class ServiceController extends Controller
             ->where('active',1)
             ->orderBy('id','ASC')
             ->get();
+
         if(!Auth::user()->validateUserStore($table->store_id)){         
             return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_STORE_OWNER']]);
         }
@@ -108,8 +109,13 @@ class ServiceController extends Controller
             where('store_id',Auth::user()->store()->id)
             ->where('open',1)
             ->get();
+        //validate only one Clousure        
+        if($cousure->count() <> 1){         
+            return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_ONLYONE_CLOUSURE']]);
+        }
+
 		$request->request->add(['rel_clousure_id' => $cousure->first()->id]);		
-		//dd($request->input());
+		//dd($request->input());       
 
         $service::create($request->input());
         

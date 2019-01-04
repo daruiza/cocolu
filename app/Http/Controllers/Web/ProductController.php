@@ -4,19 +4,23 @@ namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Product;
 use App\Model\Core\Category;
+use App\Model\Core\Stock;
 use App\Model\Core\CategoryProduct;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
+use DateTime;
+
 class ProductController extends Controller
 {
     
     public function __construct()
     {               
-        $this->middleware('auth');        
+        $this->middleware('auth');    
     }
     /**
      * Display a listing of the resource.
@@ -28,7 +32,7 @@ class ProductController extends Controller
         $products = Product::            
             where('active',1)
             ->orderBy('id','ASC')
-            ->get();                
+            ->get();            
         return view('product.index',compact('products'))->with('data', []);
     }
 
@@ -56,44 +60,48 @@ class ProductController extends Controller
         $this->validator($request->all())->validate();
         //validar store
         if(Auth::user()->validateUserStore($request->input('store_id'))){
-
             
-            if(!empty($request->file('image1'))){                
+            if(!empty($request->file('image1'))){
 
-                //dd($request);
                 $this->validatorImage(['image1'=>$request->file('image1')])->validate();
 
-                if( $request->file('image1')->isValid() ){
-                        
-                        $destinationPath = 'users/'.Auth::user()->id.'/products';
-                        $extension = $request->file('image1')->getClientOriginalExtension(); // getting image extension
-                        $fileName_image = rand(1,9999999).'.'.$extension; // renameing image
-                        $request->file('image1')->move($destinationPath, $fileName_image);
-                        chmod('users/'.Auth::user()->id.'/products/'.$fileName_image, 0777);                        
-                    }
+                if($request->file('image1')->isValid()){
 
+                    $destinationPath = 'users/'.Auth::user()->id.'/products';
+                    $extension = $request->file('image1')->getClientOriginalExtension(); // getting image extension
+                    $fileName_image = rand(1,9999999).'.'.$extension; // renameing image
+                    $request->file('image1')->move($destinationPath, $fileName_image);
+                    chmod('users/'.Auth::user()->id.'/products/'.$fileName_image, 0777);
+                }
             }
 
+            $request->request->add(['image1' => $fileName_image]);
 
-
-            $product = new Product();            
+            $product = new Product();
             $product = $product::create($request->input());
 
             $category_product = new CategoryProduct();
             //relationship to category
-            foreach (explode(',',$request->input('category_ids')) as $key => $value) {                
+            foreach (explode(',',$request->input('category_ids')) as $key => $value) {
                 $category_product->category_id = $value;
-                $category_product->product_id = $product->id;                
-                $category_product->save();             
+                $category_product->product_id = $product->id;
+                $category_product->save();
             }
 
-            Session::flash('success', [['ProductCreateOk']]);
-            return $this->index();
+            //relation to stock
+            $stock = new Stock();
+            $request->request->add(['product_id' => $product->id]);
+            $today = new DateTime();
+            $today = $today->format('Y-m-d H:i:s');     
+            $request->request->add(['date' => $today]);            
+            $stock = $stock::create($request->input());
 
-        }  
+            Session::flash('success', [['ProductCreateOk']]);
+            return redirect('product');
+        }
+
         Session::flash('danger', [['ProductCreateNOOk']]);
-        return $this->index();     
-        
+        return redirect('product');
     }
 
     /**
@@ -149,7 +157,7 @@ class ProductController extends Controller
                 string|
                 max:32',
             'description' => '
-                max:64',            
+                max:64',       
             'order' => '                
                 numeric|                
                 digits_between:1,1024',

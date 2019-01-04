@@ -77,7 +77,7 @@ class TableController extends Controller
             //$table->storeTable($request->input());
             $table::create($request->input());
 			Session::flash('success', [['TableCreateOk']]);
-			return $this->index();
+			return redirect('table');
             //return view('table.create',compact('table'))->with('success', [['OK']])->with('data', []);    
         }		
         return view('table.create',compact('table'))->with('danger', [['NOOK']])->with('data', []);
@@ -125,7 +125,7 @@ class TableController extends Controller
             $table->storeTable($request->input());
             //$table::save(); 
 			Session::flash('success', [['TableEditOk']]);
-			return $this->index();	
+			return redirect('table');	
             //return view('table.edit',compact('table'))->with('success', [['OK']])->with('data', []);
 
         }

@@ -64,7 +64,7 @@ class WaiterController extends Controller
         //validate store        
         if(!Auth::user()->validateUserStore($request->input('store_id'))){            
             Session::flash('danger', [['WaiterCreateNOOk']]);
-            return $this->index();
+            return redirect('waiter');
             //return view('waiter.create',compact('waiter'))->with('danger', [['WaiterCreateNOOk']])->with('data', []);    
         }
 
@@ -87,7 +87,7 @@ class WaiterController extends Controller
 		
 		//message
 		Session::flash('success', [['WaiterCreateOk']]);
-        return $this->index();
+        return redirect('waiter');
     }
 
     /**
