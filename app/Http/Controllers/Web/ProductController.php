@@ -91,6 +91,7 @@ class ProductController extends Controller
             //relation to stock
             $stock = new Stock();
             $request->request->add(['product_id' => $product->id]);
+            $request->request->add(['shift' => 1]);//entrada            
             $today = new DateTime();
             $today = $today->format('Y-m-d H:i:s');     
             $request->request->add(['date' => $today]);            
