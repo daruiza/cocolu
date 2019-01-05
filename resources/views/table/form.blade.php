@@ -9,7 +9,7 @@
                 </strong>
             </span>
 		@else
-			{!! Form::select('icon', $table->icons(),null,['class'=>'form-control']) !!}				                    					
+			{!! Form::select('icon', $table->icons(),null,['class'=>'form-control']) !!}
 		@endif	
 	</div>	                    			
 </div>
