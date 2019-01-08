@@ -29,6 +29,11 @@ class Product extends Model
         foreach ($this->categories()->get() as $key => $value) {
             $string  = $string.$value->name." - ";
         }
-        return $string;
+        return substr($string,0,-3);
+    }
+
+    public function critical_volume(){
+        if($this->volume <= $this->critical_volume) return true;
+        return false;
     }
 }

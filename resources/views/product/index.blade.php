@@ -52,12 +52,16 @@
 		                    	<div class="col-md-12 m-b-md table-container">
 		                    		
 			                    	@foreach($products as $key => $value)                                        
-			                    		<div class="row object-product @if($key%2) @else row-impar @endif" >
+			                    		<div class="row object-product 
+                                            @if($key%2) @else row-impar @endif 
+                                            @if($value->critical_volume()) critical_volume @endif" 
+                                            >
                                             {{ Form::hidden('product-id', $value->id) }}
-											<div class="col-md-4">{{$value->name}}</div>
+											<div class="col-md-3">{{$value->name}}</div>
                                             <div class="col-md-2">{{$value->price}}</div>
                                             <div class="col-md-2">{{$value->buy_price}}</div> 
-                                            <div class="col-md-4">{{$value->categories_toString()}}</div>
+                                            <div class="col-md-2">{{$value->volume}}</div> 
+                                            <div class="col-md-3">{{$value->categories_toString()}}</div>
 										</div>										
 			                    	@endforeach
 
