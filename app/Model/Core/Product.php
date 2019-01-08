@@ -23,4 +23,12 @@ class Product extends Model
         //reutiliza el namespace
         return $this->belongsToMany(Category::class);
     }
+
+    public function categories_toString(){
+        $string = "";
+        foreach ($this->categories()->get() as $key => $value) {
+            $string  = $string.$value->name." - ";
+        }
+        return $string;
+    }
 }

@@ -59,12 +59,8 @@
 												<div>Total a Pagar</div>
 												<div>Último Mesero</div>
 											@endif
-											
 										</div>
-										
-										
 			                    	@endforeach
-
 		                    	</div>
 		                    </div>	                    			        		
                     	</div>

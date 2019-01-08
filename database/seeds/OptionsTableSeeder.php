@@ -189,9 +189,15 @@ class OptionsTableSeeder extends Seeder
 			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>9	
 			)
-		);		
+		);
+		\DB::table('options')->insert(array(
+			'name'=>'editstock',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-boxes"}',
+			'module_id'=>9	
+			)
+		);
 
-		//Modulo Category opt 29
+		//Modulo Category opt 30
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
 			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
@@ -221,8 +227,8 @@ class OptionsTableSeeder extends Seeder
 			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>10
 			)
-		);	
+		);		
 
-		//Modulo opt 34	
+		//Modulo opt 35
     }
 }

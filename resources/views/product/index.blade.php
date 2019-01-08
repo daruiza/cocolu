@@ -53,7 +53,11 @@
 		                    		
 			                    	@foreach($products as $key => $value)                                        
 			                    		<div class="row object-product @if($key%2) @else row-impar @endif" >
-											<div class="col-md-3">{{$value->name}}</div>
+                                            {{ Form::hidden('product-id', $value->id) }}
+											<div class="col-md-4">{{$value->name}}</div>
+                                            <div class="col-md-2">{{$value->price}}</div>
+                                            <div class="col-md-2">{{$value->buy_price}}</div> 
+                                            <div class="col-md-4">{{$value->categories_toString()}}</div>
 										</div>										
 			                    	@endforeach
 
@@ -74,6 +78,7 @@
     <script type="text/javascript" src="{{ asset('js/entity/product.js') }}"></script>
     <script type="text/javascript">
         product.selectObject('object-product','selected-object');
+        //product.selectTable('object-product','selected-object');
         function product_show_submit(id){
             if($("#"+id+" input[name=id]").val() !== ""){
                 $('#'+id)[0].submit();
@@ -102,6 +107,15 @@
                 return false;
             }
             return false;
+        }
+
+        function product_editstock_submit(id){          
+            if($("#"+id+" input[name=id]").val() !== ""){
+                $('#'+id)[0].submit();
+                return true;
+            }
+            alert("{{ __('messages.ProductSelectNone') }}");
+            return false; 
         }
         
     </script>   

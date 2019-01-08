@@ -5,9 +5,11 @@
 
 @section('content')
 	@include('table.index_basic')
+
 	@isset($data['servicemodal'])
 		@include('table.service_create')
 	@endisset
+	
 	{!! Form::open(array('id'=>'slect-service-form','route' =>['table.selectservice',Auth::user()->store()->id],'method' =>'POST')) !!}		
 		{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
 	{!! Form::close() !!}   

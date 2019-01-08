@@ -62,3 +62,6 @@ Route::post('table/{id}/saveservice', [
 Route::post('waiter/changepassword', [
    'as' => 'waiter.changepassword', 'uses' => 'Web\WaiterController@showResetForm'
 ]);
+Route::get('product/{id}/editstock', [
+   'as' => 'product.editstock', 'uses' => 'Web\ProductController@editStock'
+]);

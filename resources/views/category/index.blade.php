@@ -52,7 +52,8 @@
 		                    	<div class="col-md-12 m-b-md table-container">
 		                    		
 			                    	@foreach($categories as $key => $value)                                        
-			                    		<div class="row object-product @if($key%2) @else row-impar @endif" >
+			                    		<div class="row object-category @if($key%2) @else row-impar @endif" >
+                                            {{ Form::hidden('product-id', $value->id) }}
 											<div class="col-md-3">{{$value->name}}</div>
 										</div>										
 			                    	@endforeach

@@ -13,10 +13,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
+use App\Http\Traits\Web\ProductRequestTrait;
+
 use DateTime;
 
 class ProductController extends Controller
 {
+
+    use ProductRequestTrait;
     
     public function __construct()
     {               
@@ -32,7 +36,7 @@ class ProductController extends Controller
         $products = Product::            
             where('active',1)
             ->orderBy('id','ASC')
-            ->get();            
+            ->get();
         return view('product.index',compact('products'))->with('data', []);
     }
 
@@ -72,10 +76,10 @@ class ProductController extends Controller
                     $fileName_image = rand(1,9999999).'.'.$extension; // renameing image
                     $request->file('image1')->move($destinationPath, $fileName_image);
                     chmod('users/'.Auth::user()->id.'/products/'.$fileName_image, 0777);
+
+                    $request->request->add(['image1' => $fileName_image]);
                 }
             }
-
-            $request->request->add(['image1' => $fileName_image]);
 
             $product = new Product();
             $product = $product::create($request->input());
@@ -111,9 +115,9 @@ class ProductController extends Controller
      * @param  \App\Model\Core\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Request $request,$id)
     {
-        //
+        return 'mostrar';
     }
 
     /**
@@ -124,7 +128,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return 'editar';
     }
 
     /**

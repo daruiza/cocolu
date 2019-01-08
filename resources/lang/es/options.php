@@ -10,5 +10,6 @@ return [
 	"edit"=>"Editar",	
 	"destroy"=>"Eliminar",
 	"drag"=>"Acomodar",
-	"service"=>"Servicio",	
+	"service"=>"Servicio",
+	"editstock"=>"Editar Inventario",	
 ];
