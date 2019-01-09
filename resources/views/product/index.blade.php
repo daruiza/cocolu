@@ -50,17 +50,27 @@
                     	<div class="container">
 	                    	<div class="row">
 		                    	<div class="col-md-12 m-b-md table-container">
-		                    		
+		                    		<div class="row">
+                                        <div class="col-md-3">{{ __('messages.Name') }}</div>
+                                        <div class="col-md-2">{{ __('messages.Price') }}</div>
+                                        <div class="col-md-2">{{ __('messages.Buy_Price') }}</div>
+                                        <div class="col-md-2">{{ __('messages.Volume') }}</div>
+                                        <div class="col-md-3">{{ __('messages.Categories') }}</div>
+                                    </div>   
 			                    	@foreach($products as $key => $value)                                        
 			                    		<div class="row object-product 
-                                            @if($key%2) @else row-impar @endif 
-                                            @if($value->critical_volume()) critical_volume @endif" 
-                                            >
+                                            @if($key%2) @else row-impar @endif">
                                             {{ Form::hidden('product-id', $value->id) }}
 											<div class="col-md-3">{{$value->name}}</div>
                                             <div class="col-md-2">{{$value->price}}</div>
                                             <div class="col-md-2">{{$value->buy_price}}</div> 
-                                            <div class="col-md-2">{{$value->volume}}</div> 
+                                            <div class="col-md-2 
+                                            @if($value->critical_volume_calc()) critical_volume  @endif"
+                                            @if($value->critical_volume_calc()) 
+                                                data-toggle="tooltip" 
+                                                title="{{__('messages.CriticalVolume').' '.$value->critical_volume}}!"
+                                            @endif >{{$value->volume}}
+                                            </div> 
                                             <div class="col-md-3">{{$value->categories_toString()}}</div>
 										</div>										
 			                    	@endforeach
@@ -128,9 +138,15 @@
 @section('style')	
 	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
 	<style type="text/css">
+
+        .table-container{
+            text-align: center;
+        }
+
 		.row-impar{
 		    background-color: {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
 		}
+
         .object-product{
             border: 1px solid {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
             padding-top: 2px;
@@ -138,11 +154,19 @@
             margin-top: 2px;
             margin-bottom: 2px;
         }
+
         .object-product:hover{
             cursor:pointer;
         }
+
         .selected-object{
             background-color: {{ json_decode(Auth::user()->store()->label,true)['selectTable'] }} !important;
         }
+
+        .critical_volume{
+            border: 2px solid red;
+            background-color: #e47b7b;
+        }
+
 	</style>	
 @endsection

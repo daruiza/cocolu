@@ -32,7 +32,7 @@ class Product extends Model
         return substr($string,0,-3);
     }
 
-    public function critical_volume(){
+    public function critical_volume_calc(){
         if($this->volume <= $this->critical_volume) return true;
         return false;
     }

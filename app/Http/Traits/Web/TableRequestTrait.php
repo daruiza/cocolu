@@ -59,8 +59,7 @@ trait TableRequestTrait
     }
 	
 	public function selectService(Request $request,$id){
-		//validate ouner store
-		
+		//validate ouner store		
 		if(!Auth::user()->validateUserStore($id)){
 			return response()->json(['return'=>false,'data'=>null]);
 		}	
