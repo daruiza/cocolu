@@ -160,10 +160,6 @@
 	                    </div>	                    
 	                </div>
         		</div>
-
-        		
-
-
         	</div>
         </div>
     </div>
@@ -195,7 +191,7 @@
 	    $("#department").change(function() {
 			var datos = new Array();
 			datos['id'] =$( "#department option:selected" ).val();			   
-			ajaxobject.peticionajax($('#form_consult_city').attr('action'),datos,"store.consultaRespuestaCity");			
+			ajaxobject.peticionajax($('#form_consult_city').attr('action'),datos,"store.consultaRespuestaCity");
 		});
 
 	</script>
