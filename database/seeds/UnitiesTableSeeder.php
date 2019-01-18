@@ -12,12 +12,39 @@ class UnitiesTableSeeder extends Seeder
     public function run()
     {
         \DB::table('unities')->insert(array(			
-			'name'=>'ANTIOQUIA'			
+			'name'=>'unidad',
+            'contract'=>'un',			
 			)
 		);
+        \DB::table('unities')->insert(array(            
+            'name'=>'kilo',         
+            'contract'=>'kl',
+            )
+        );
+        \DB::table('unities')->insert(array(            
+            'name'=>'libra' ,        
+            'contract'=>'lb',
+            )
+        );
+        \DB::table('unities')->insert(array(            
+            'name'=>'gramo' ,        
+            'contract'=>'gr',
+            )
+        );
+        \DB::table('unities')->insert(array(            
+            'name'=>'litro'  ,       
+            'contract'=>'lr',
+            )
+        );
 		\DB::table('unities')->insert(array(			
-			'name'=>'HUILA'			
+			'name'=>'litro',		
+            'contract'=>'lr',
 			)
 		);
+        \DB::table('unities')->insert(array(            
+            'name'=>'mililitro',         
+            'contract'=>'ml',
+            )
+        );
     }
 }

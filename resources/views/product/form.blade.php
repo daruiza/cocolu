@@ -113,6 +113,20 @@
 	</div>	                    			
 </div>
 
+<div class="form-group row">
+	{!! form::label('unity_id',__('messages.unity'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+	<div class="col-md-8">
+		@if($errors->has('unity_id'))
+			{!! Form::select('unity_id',$unity->unities(),null,['class'=>'form-control']) !!}
+			<span class="invalid-feedback">
+                <strong>{{ $errors->first('unity_id') }}</strong>
+            </span>
+		@else				                    					
+			{!! Form::select('unity_id',$unity->unities(),null,['class'=>'form-control']) !!}
+		@endif	
+	</div>
+</div>
+
 <!--
 <div class="form-group row">
 	{!! Form::label('label',__('messages.label'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}

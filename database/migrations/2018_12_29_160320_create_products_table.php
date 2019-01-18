@@ -29,6 +29,7 @@ class CreateProductsTable extends Migration
             $table->boolean('active')->default(true);
             $table->timestamps();
             $table->integer('unity_id')->unsigned()->default(1);            
+            $table->foreign('unity_id')->references('id')->on('unities');            
             $table->integer('store_id')->unsigned()->default(2);        
             $table->foreign('store_id')->references('id')->on('stores')
             ->onDelete('cascade')

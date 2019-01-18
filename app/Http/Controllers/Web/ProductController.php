@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Model\Core\Product;
 use App\Model\Core\Category;
 use App\Model\Core\Stock;
+use App\Model\Core\Unity;
 use App\Model\Core\CategoryProduct;
 
 use Illuminate\Http\Request;
@@ -36,7 +37,8 @@ class ProductController extends Controller
         $products = Product::            
             where('active',1)
             ->orderBy('id','ASC')
-            ->get();
+            ->get();        
+        //dd($products[1]->ingredients());    
         return view('product.index',compact('products'))->with('data', []);
     }
 
@@ -49,7 +51,8 @@ class ProductController extends Controller
     {
         $product = new Product();
         $category = new Category();
-        return view('product.create',compact('product','category'))->with('data', []);
+        $unity = new Unity();
+        return view('product.create',compact('product','category','unity'))->with('data', []);
     }
 
     /**

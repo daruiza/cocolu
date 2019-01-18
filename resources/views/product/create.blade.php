@@ -46,6 +46,19 @@
 												{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
 												@include('product.form')
 
+												<div class="col-md-12 inputs_ingredients"> </div>
+												
+												<div class="col-md-12">
+													<div class="row">
+													<div class="col-md-7"></div>	
+													<div class="col-md-5 col-md-offset-11" data-toggle="tooltip" data-original-title="{{__('form.AddIngredients')}}">
+														<a href="javascript:product.add_ingredient()" class="site_title" style="text-decoration: none">
+															{{__('form.AddIngredients')}} <i class="fas fa-plus"></i>
+														</a>
+														</div>
+													</div>
+												</div>
+
 											{!! Form::close() !!}
 										</div>
 											
@@ -108,6 +121,7 @@
 		$("#category_id").chosen().change(function(event) {
 			$('#category_ids').val($('#category_id').chosen().val());		    
 		});
+		$('[data-toggle="tooltip"]').tooltip();
 	</script>
 @endsection
 

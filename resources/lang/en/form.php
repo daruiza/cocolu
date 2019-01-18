@@ -25,4 +25,5 @@ return [
 	"createTable" => "Create New Table",
 	"TableServiceCreate" => "New Service Table",
 	"createWaiter" => "Create Waiter",
+	"AddIngredients" => "Add Ingredient",
 ];

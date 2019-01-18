@@ -15,8 +15,13 @@ class CreateProductProductTable extends Migration
     {
         Schema::create('product_product', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('product_id')->unsigned();
-            $table->integer('ingredient_id')->unsigned();
+            $table->integer('product_id')->unsigned()->default(1);
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->integer('ingredient_id')->unsigned()->default(1);
+            $table->foreign('ingredient_id')->references('id')->on('products')->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->integer('volume')->default(0);
             $table->timestamps();
         });
     }

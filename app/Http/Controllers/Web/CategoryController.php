@@ -26,7 +26,7 @@ class CategoryController extends Controller
         $categories = Category::            
             where('active',1)
             ->orderBy('id','ASC')
-            ->get();
+            ->get();            
         return view('category.index',compact('categories'))->with('data', []);
     }
 
@@ -51,8 +51,10 @@ class CategoryController extends Controller
     {    	
         $this->validator($request->all())->validate();
         //validar store
-        if(Auth::user()->validateUserStore($request->input('store_id'))){
-                        
+        if(Auth::user()->validateUserStore($request->input('store_id'))){            
+            if(is_null($request->input['order'])){
+                $request->request->add(['order' => Category::select('order')->max('order')+1]);            
+            }
             $category = new Category();            
             $category::create($request->input());
             Session::flash('success', [['CategoryCreateOk']]);
