@@ -50,10 +50,10 @@
 												
 												<div class="col-md-12">
 													<div class="row">
-													<div class="col-md-7"></div>	
-													<div class="col-md-5 col-md-offset-11" data-toggle="tooltip" data-original-title="{{__('form.AddIngredients')}}">
+													<div class="col-md-6"></div>	
+													<div class="col-md-6 col-md-offset-11" data-toggle="tooltip" data-original-title="{{__('form.AddIngredients')}}" style="text-align: right;">
 														<a href="javascript:product.add_ingredient()" class="site_title" style="text-decoration: none">
-															{{__('form.AddIngredients')}} <i class="fas fa-plus"></i>
+															{{__('form.AddComponents')}} <i class="fas fa-plus"></i>
 														</a>
 														</div>
 													</div>

@@ -26,5 +26,5 @@ return [
 	"TableServiceCreate" => "Nuevo Servicio",
 	"createWaiter" => "Crear Mesero",
 	"AddIngredients" => "Agregar Ingrediente",
-
+	"AddComponents" => "Agregar Componentes",
 ];

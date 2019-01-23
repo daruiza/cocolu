@@ -18,7 +18,7 @@ class Product extends Model
         return $this->belongsTo(Unity::class);
     }
 
-    //a product may have meny stocks
+    //a product may have many stocks
     public function stocks(){
         //no usa el namespace
         return $this->hasMany(Stock::class);
