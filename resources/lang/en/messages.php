@@ -52,4 +52,12 @@ return [
 	"TableService" => "Active Service",
 	"TableOptions" => "Options Table",
 	"OpenService" => "Open Service",
+    "Basic" => "Basic",
+    "Components" => "Components",
+    "Price" => "Price",
+    "Buy_Price" => "Buy Price",
+    "Volume" => "Volume",
+    "CriticalVolume" => "Critical Volume",
+    "unity" => "Unity",
+
 ];

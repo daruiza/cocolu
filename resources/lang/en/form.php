@@ -27,5 +27,6 @@ return [
 	"createWaiter" => "Create Waiter",
 	"AddIngredients" => "Add Ingredient",
 	"AddComponents" => "Add Components",
-
+	"Category" => "Category",
+	
 ];

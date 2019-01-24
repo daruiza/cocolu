@@ -47,6 +47,15 @@ class Product extends Model
             ->get();            
     }
 
+    static function productsArray(){
+        $products = Array();
+        $products_array = Product::where('active',1)->orderBy('name','ASC')->get();        
+        foreach ($products_array as $key => $value) {
+            $products[$value->id] = $value->name.' - ('.$value->unity->name.')';
+        }
+        return $products;
+    }
+
     public function categories_toString(){
         $string = "";
         foreach ($this->categories()->get() as $key => $value) {

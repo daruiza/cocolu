@@ -27,4 +27,5 @@ return [
 	"createWaiter" => "Crear Mesero",
 	"AddIngredients" => "Agregar Ingrediente",
 	"AddComponents" => "Agregar Componentes",
+	"Category" => "Categoria",
 ];

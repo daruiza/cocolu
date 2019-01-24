@@ -21,6 +21,5 @@ class Unity extends Model
 	        $unities[$value['id']] = $value['name'];
 	    }
 	    return $unities;
-
 	}
 }

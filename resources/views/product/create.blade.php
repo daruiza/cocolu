@@ -42,25 +42,43 @@
 										
 										<div class="col-md-12">
 											{!! Form::model($product,['enctype' => 'multipart/form-data','id'=>'form-product','route'=>['product.store'],'method'=>'POST']) !!}
-
 												{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
-												@include('product.form')
-
-												<div class="col-md-12 inputs_ingredients"> </div>
-												
-												<div class="col-md-12">
-													<div class="row">
-													<div class="col-md-6"></div>	
-													<div class="col-md-6 col-md-offset-11" data-toggle="tooltip" data-original-title="{{__('form.AddIngredients')}}" style="text-align: right;">
-														<a href="javascript:product.add_ingredient()" class="site_title" style="text-decoration: none">
-															{{__('form.AddComponents')}} <i class="fas fa-plus"></i>
+												<ul class="nav nav-tabs" id="myTab" role="tablist">
+													<li class="nav-item">
+    													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+													    {{ __('messages.Basic') }}
 														</a>
+													</li>
+													<li class="nav-item">
+												    	<a class="nav-link" id="component-tab" data-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="false">{{ __('messages.Components') }}</a>
+													</li>
+												</ul>
+												<div class="tab-content" id="myTabContent">
+													<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+														@include('product.form')
+													</div>
+													<div class="tab-pane fade show" id="components" role="tabpanel" aria-labelledby="component-tab">
+														<div class="inputs_ingredients"></div>
+														<div class="col-md-12">
+															<div class="row">
+															<div class="col-md-6"></div>	
+															<div class="col-md-6 col-md-offset-11" data-toggle="tooltip" data-original-title="{{__('form.AddIngredients')}}" style="text-align: right;">
+																<a href="javascript:product.addIngredient()" class="site_title" style="text-decoration: none">
+																	{{__('form.AddComponents')}} <i class="fas fa-plus"></i>
+																</a>
+																</div>
+															</div>
 														</div>
 													</div>
 												</div>
+												
+												
 
+												
 											{!! Form::close() !!}
 										</div>
+
+										{!! Form::select('products',$product->productsArray(),null,['id'=>'products','class'=>'form-control','style'=>'display:none']) !!}
 											
 									</div>
 							
@@ -100,6 +118,7 @@
 
 @section('script')
 	<script type="text/javascript" src="{{ asset('js/chosen.jquery.min.js') }}"></script>	
+	<script type="text/javascript" src="{{ asset('js/entity/product.js') }}"></script>
 	<script type="text/javascript"> 
 		$('#img_product1').change(function(e) {
 	    	var file = e.target.files[0],
@@ -158,6 +177,13 @@
 		    line-height: 1.5;
 		    color: #495057;
 		    background-image: none;
+		}
+		.content-add-ingredient{
+			padding: 10px;
+    		border: 1px solid #ced4da;
+		}
+		.tab-content{
+			margin-top: 10px;
 		}
 	</style>
 @endsection

@@ -53,4 +53,11 @@ return [
 	"TableService" => "Servicio Activo",
 	"TableOptions" => "opciones de Mesa",
 	"OpenService" => "Servicio Abierto",
+    "Basic" => "Básico",
+    "Components" => "Componentes",
+    "Price" => "Precio",
+    "Buy_Price" => "Precio de Compra",
+    "Volume" => "Volumen",
+    "CriticalVolume" => "Volumen Critico",
+    "unity" => "Unidad",
 ];

@@ -97,7 +97,7 @@
 </div>
 
 <div class="form-group row">
-	{!! Form::label('category_id',__('form.LabelCategory'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+	{!! Form::label('category_id',__('form.Category'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('category_id'))
 			{!! Form::select('category_id', $category->categories(),null,['class'=>'form-control is-invalid chosen-select','multiple'=>'multiple','id'=>'category_id']) !!}

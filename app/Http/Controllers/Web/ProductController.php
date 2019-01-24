@@ -25,7 +25,7 @@ class ProductController extends Controller
     
     public function __construct()
     {               
-        $this->middleware('auth');    
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -37,7 +37,7 @@ class ProductController extends Controller
         $products = Product::            
             where('active',1)
             ->orderBy('id','ASC')
-            ->get();        
+            ->get();  
         //dd($products[1]->ingredients());    
         return view('product.index',compact('products'))->with('data', []);
     }
@@ -48,7 +48,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {         
         $product = new Product();
         $category = new Category();
         $unity = new Unity();
@@ -62,8 +62,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {           
-
+    {       
         $this->validator($request->all())->validate();
         //validar store
         if(Auth::user()->validateUserStore($request->input('store_id'))){
@@ -100,9 +99,22 @@ class ProductController extends Controller
             $request->request->add(['product_id' => $product->id]);
             $request->request->add(['shift' => 1]);//entrada            
             $today = new DateTime();
-            $today = $today->format('Y-m-d H:i:s');     
-            $request->request->add(['date' => $today]);            
+            $today = $today->format('Y-m-d H:i:s'); 
+            $request->request->add(['date' => $today]);     
             $stock = $stock::create($request->input());
+
+            //product_ingredient
+            foreach($request->input() as $key=>$value){
+                if(strpos($key,'item_') !== false){
+                    $vector=explode('_',$key);
+                    $n=count($vector);
+                    $id_item = end($vector);
+                    $array[$id_item][$vector[$n-2]] = strtoupper($value);
+                }
+            }
+
+             
+
 
             Session::flash('success', [['ProductCreateOk']]);
             return redirect('product');
