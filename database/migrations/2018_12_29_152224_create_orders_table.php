@@ -19,7 +19,11 @@ class CreateOrdersTable extends Migration
             $table->dateTime('date');
             $table->boolean('active')->default(true);            
             $table->integer('waiter_id')->unsigned();     
-            $table->foreign('waiter_id')->references('id')->on('waiter');
+            $table->foreign('waiter_id')->references('id')->on('waiters');
+            $table->integer('service_id')->unsigned();            
+            $table->foreign('service_id')->references('id')->on('services')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }

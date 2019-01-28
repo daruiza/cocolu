@@ -105,6 +105,7 @@ class ProductController extends Controller
             $stock = $stock::create($request->input());
 
             //product_ingredient
+            $array = array();
             foreach($request->input() as $key=>$value){
                 if(strpos($key,'item_') !== false){
                     $vector=explode('_',$key);
