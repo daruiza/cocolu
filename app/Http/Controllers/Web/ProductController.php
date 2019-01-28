@@ -8,6 +8,7 @@ use App\Model\Core\Stock;
 use App\Model\Core\Unity;
 use App\Model\Core\CategoryProduct;
 
+use DB; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -62,7 +63,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {       
+    {
         $this->validator($request->all())->validate();
         //validar store
         if(Auth::user()->validateUserStore($request->input('store_id'))){
@@ -113,7 +114,15 @@ class ProductController extends Controller
                 }
             }
 
-             
+            foreach ($array as $key => $value) {
+                DB::table('product_product')->insert(
+                    [
+                        'product_id' => $product->id,
+                        'ingredient_id' => $value['product'],
+                        'volume' => $value['volume']
+                    ]
+                );
+            }
 
 
             Session::flash('success', [['ProductCreateOk']]);

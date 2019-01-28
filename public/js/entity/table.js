@@ -33,6 +33,7 @@ table.prototype.selectTable = function(objectClass,selectClass) {
 
 table.prototype.selectServiceResponse = function(result) {
 	$('.services-table .table').html(result.data.table[0].name);
+	$('.services-table .new-orders').html();
 }
 
 var table = new table();

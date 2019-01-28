@@ -15,6 +15,11 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('description',512)->nullable()->default(null);
+            $table->dateTime('date');
+            $table->boolean('active')->default(true);            
+            $table->integer('waiter_id')->unsigned();     
+            $table->foreign('waiter_id')->references('id')->on('waiter');
             $table->timestamps();
         });
     }

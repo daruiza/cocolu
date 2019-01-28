@@ -65,7 +65,11 @@ class Product extends Model
     }
 
     public function critical_volume_calc(){
-        if($this->volume <= $this->critical_volume) return true;
+        if($this->critical_volume){
+            if($this->volume <= $this->critical_volume) return true;
+            return false;
+        }        
         return false;
+        
     }
 }

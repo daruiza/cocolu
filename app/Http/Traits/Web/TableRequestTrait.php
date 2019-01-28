@@ -76,7 +76,7 @@ trait TableRequestTrait
 		//make the totals		
 		
 		
-		return response()->json(['return'=>false,'data'=>['request'=>$request->input(),'store_id'=>$id,'table'=>$table,'orders'=>'']]);		
+		return response()->json(['return'=>true,'data'=>['request'=>$request->input(),'store_id'=>$id,'table'=>$table,'orders'=>'']]);		
 	}
 	
 	public function service(Request $request,$id){		

@@ -70,6 +70,7 @@ class ServiceController extends Controller
 			where('table_id',$table->id)  
             ->where('open',1)            
             ->get();
+            
 		if($services->count()){
 			//can not to create new service
 			//now exist a service active
