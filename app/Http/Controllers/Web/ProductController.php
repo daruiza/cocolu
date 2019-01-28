@@ -64,6 +64,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        //validaciom orden null
+        if(is_null($request->input['order'])){
+            $request->request->add(['order' => Product::select('order')->max('order')+1]);            
+        }
+
         $this->validator($request->all())->validate();
         //validar store
         if(Auth::user()->validateUserStore($request->input('store_id'))){
@@ -84,15 +89,21 @@ class ProductController extends Controller
                 }
             }
 
-            $product = new Product();
+            $product = new Product();            
             $product = $product::create($request->input());
 
-            $category_product = new CategoryProduct();
+            //$category_product = new CategoryProduct();
             //relationship to category
             foreach (explode(',',$request->input('category_ids')) as $key => $value) {
-                $category_product->category_id = $value;
-                $category_product->product_id = $product->id;
-                $category_product->save();
+                //$category_product->category_id = $value;
+                //$category_product->product_id = $product->id;
+                //$category_product->save();
+                DB::table('category_product')->insert(
+                    [
+                        'category_id' => $value,
+                        'product_id' => $product->id
+                    ]
+                );
             }
 
             //relation to stock

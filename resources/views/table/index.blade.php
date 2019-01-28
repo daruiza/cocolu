@@ -18,7 +18,7 @@
 @section('script')
 	<script type="text/javascript" src="{{ asset('js/entity/table.js') }}"></script>
 	<script type="text/javascript">
-		table.selectTable('object-table','selected-table');
+		table.onjquery();
 		//validar las opciones
 		function table_show_submit(id){
 			if($("#"+id+" input[name=id]").val() !== ""){
@@ -63,7 +63,7 @@
 			return false;
 		}
 
-		$("#containment-wrapper").height($("#containment-wrapper").height()+85);		
+		$("#containment-wrapper").height($("#containment-wrapper").height()+125);		
 	</script>
 		
 	@isset($data['servicemodal'])	
@@ -82,6 +82,17 @@
 		}
 		.service-open-table{
 		    background-color: {{ json_decode(Auth::user()->store()->label,true)['serviceOpenTable'] }};;
+		}
+		.object-table{
+		    height: 100%;
+		}
+		.unselectable {
+		    -webkit-touch-callout: none;
+		    -webkit-user-select: none;
+		    -khtml-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
 		}
 
 	</style>	

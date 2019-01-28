@@ -2,6 +2,7 @@ function table() {
 }
 	
 table.prototype.onjquery = function() {	
+	table.selectTable('object-table','selected-table');	
 };
 
 table.prototype.selectTable = function(objectClass,selectClass) {

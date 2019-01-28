@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
+use App\Model\Core\Order;
 use App\Http\Controllers\Web\ServiceController;
 
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class TableController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {        
         //dd(Table::find(1)->store()->get());
         //$tables = Table::all()->where('active',1);
         $tables = Table::

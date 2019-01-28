@@ -43,22 +43,25 @@
 	                    	<div class="row">
 		                    	<div id="containment-wrapper" class="col-md-12">
 		                    		
-			                    	@foreach($tables as $key => $value)                                        
-			                    		<div class="ui-widget-content draggable col-md-3 obstacle object-table @if($value->tableServiceOpen()->count()) service-open-table @endif" style="
+			                    	@foreach($tables as $key => $value)                                     
+			                    		<div class="ui-widget-content draggable col-md-3 obstacle unselectable  @if($value->tableServiceOpen()->count()) service-open-table @endif" style="
                                             top: {{json_decode($value->label)->position[0]}};
                                             right: {{json_decode($value->label)->position[1]}} ;
                                             bottom: {{json_decode($value->label)->position[2]}};
                                             left: {{json_decode($value->label)->position[3]}}; ">
 
-                                            {{ Form::hidden('table-id', $value->id) }}                                            
-										  	<p><i class="{{$value->icon}}"> </i>{{$value->name}}</p>																						
-											@if($value->tableServiceOpen()->count())														
-												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
-												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>
-												<div>{{$value->tableServiceOpen()->first()->date}}</div>
-												<div>Total a Pagar</div>
-												<div>Último Mesero</div>
-											@endif
+                                            
+                                            <div class="object-table">
+                                                {{ Form::hidden('table-id', $value->id) }}
+    										  	<p><i class="{{$value->icon}}"> </i>{{$value->name}}</p>																						
+    											@if($value->tableServiceOpen()->count())														
+    												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
+    												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>
+    												<div>{{$value->tableServiceOpen()->first()->date}}</div>
+    												<div>Total a Pagar</div>
+    												<div>Último Mesero</div>
+    											@endif
+                                            </div>
 										</div>
 			                    	@endforeach
 		                    	</div>

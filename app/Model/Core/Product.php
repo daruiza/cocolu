@@ -29,6 +29,11 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function orders(){
+        //reutiliza el namespace
+        return $this->belongsToMany(Order::class);
+    }
+
     public function products(){
         //reutiliza el namespace
         //return $this->belongsToMany(Product::class,'product_id','id');
