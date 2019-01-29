@@ -60,4 +60,5 @@ return [
     "Volume" => "Volumen",
     "CriticalVolume" => "Volumen Critico",
     "unity" => "Unidad",
+    "NewOrder" => "Nueva Orden",
 ];

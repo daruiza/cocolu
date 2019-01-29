@@ -59,9 +59,17 @@
     												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>
     												<div>{{$value->tableServiceOpen()->first()->date}}</div>
     												<div>Total a Pagar</div>
-    												<div>Último Mesero</div>
+    												<div>Último Mesero</div>                                                    
     											@endif
                                             </div>
+                                            @if($value->tableServiceOpen()->count())
+                                            <div class="order_select_conteiner">
+                                                <a class="dropdown-item" href="">
+                                                    <i class="fas fa-clipboard"></i>
+                                                    {{ __('messages.NewOrder') }}
+                                                </a>
+                                            </div>
+                                            @endif
 										</div>
 			                    	@endforeach
 		                    	</div>

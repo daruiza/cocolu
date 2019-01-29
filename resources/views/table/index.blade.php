@@ -9,8 +9,12 @@
 	@isset($data['servicemodal'])
 		@include('table.service_create')
 	@endisset
-	
-	{!! Form::open(array('id'=>'slect-service-form','route' =>['table.selectservice',Auth::user()->store()->id],'method' =>'POST')) !!}		
+
+	@isset($data['ordermodal'])
+		@include('table.order_create')
+	@endisset	
+
+	{!! Form::open(array('id'=>'slect-service-form','route' =>['table.selectservice',Auth::user()->store()->id],'method' =>'POST')) !!}	
 		{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
 	{!! Form::close() !!}   
 @endsection
@@ -93,6 +97,11 @@
 		    -moz-user-select: none;
 		    -ms-user-select: none;
 		    user-select: none;
+		}
+
+		.order_select_conteiner{
+			position: absolute;
+    		bottom: 10px;
 		}
 
 	</style>	

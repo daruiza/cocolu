@@ -59,5 +59,5 @@ return [
     "Volume" => "Volume",
     "CriticalVolume" => "Critical Volume",
     "unity" => "Unity",
-
+    "NewOrder" => "New Order",
 ];
