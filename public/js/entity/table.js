@@ -7,12 +7,15 @@ table.prototype.onjquery = function() {
 
 table.prototype.selectTable = function(objectClass,selectClass) {
     $('.'+objectClass).click(function() {
+    	//clear service menu
+		$('.services-table .table').html('');
+		$('.services-table .new-orders').html('');
+
         if($(this).hasClass(selectClass)){
             $('.'+objectClass).removeClass(selectClass);        
             $( "input[name='id']" ).val('');                
             
-			//clear service menu
-			$('.services-table .table').html('');
+			
             
             
         }else{
@@ -34,7 +37,13 @@ table.prototype.selectTable = function(objectClass,selectClass) {
 
 table.prototype.selectServiceResponse = function(result) {
 	$('.services-table .table').html(result.data.table[0].name);
-	$('.services-table .new-orders').html();
+
+
+	//Orden solo si hay servicio
+	if(result.data.service.length){
+		$('.services-table .new-orders').html('<a class="dropdown-item" href="javascript: order_create_submit(\'table'+result.data.table[0].id+'\')"><i class="fas fa-clipboard"></i><span>'+$('.span-order').html()+'</span> </br><span>'+result.data.table[0].name+'</span></a>');	
+	}
+	
 }
 
 var table = new table();

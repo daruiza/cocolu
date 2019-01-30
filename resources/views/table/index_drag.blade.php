@@ -50,7 +50,7 @@
 			    $(this).addClass("obstacle");
 			});
 
-			$("#containment-wrapper").height($("#containment-wrapper").height()+85);
+			$("#containment-wrapper").height($("#containment-wrapper").height()+125);
 		}
 
 		//table.selectTable('object-table','selected-table');

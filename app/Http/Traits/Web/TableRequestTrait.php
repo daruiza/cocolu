@@ -3,6 +3,7 @@
 namespace App\Http\Traits\Web;
 
 use App\Model\Core\Table;
+use App\Model\Core\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -69,14 +70,18 @@ trait TableRequestTrait
 			->where('id',$request->input('table_id'))
 			->where('active',1)                    
 			->get();
-		//consult service	
+
+		//consult service, en caso de tener
+        $service = Service::where('table_id',$request->input('table_id'))            
+            ->where('open',1)
+            ->get();        
 			
 		//consult the ordesr
 		
 		//make the totals		
 		
 		
-		return response()->json(['return'=>true,'data'=>['request'=>$request->input(),'store_id'=>$id,'table'=>$table,'orders'=>'']]);		
+		return response()->json(['return'=>true,'data'=>['request'=>$request->input(),'store_id'=>$id,'service'=>$service,'table'=>$table,'orders'=>'']]);		
 	}
 	
 	public function service(Request $request,$id){		

@@ -31,6 +31,7 @@ Route::resource('service', 'Web\ServiceController');
 Route::resource('clousure', 'Web\ClousureController');
 Route::resource('waiter', 'Web\WaiterController');
 Route::resource('procuct', 'Web\ProductController');
+Route::resource('order', 'Web\OrderController');
 
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');

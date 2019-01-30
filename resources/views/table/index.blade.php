@@ -67,6 +67,15 @@
 			return false;
 		}
 
+		function order_create_submit(id){
+			if($("#"+id+" input[name=table-id]").val() !== ""){
+				$('#'+id)[0].submit();
+				return true;
+			}
+			alert("{{ __('messages.OrderSelectNone') }}");
+			return false;			
+		}
+
 		$("#containment-wrapper").height($("#containment-wrapper").height()+125);		
 	</script>
 		
@@ -81,7 +90,11 @@
 	<link href="{{ asset('css/custom/table_index.css') }}" rel="stylesheet">    
 	<!--esto no se hace asi, css debe poder recivir variables-->
 	<style type="text/css">
+		.services-table{
+			text-align: center;
+		}
 		.selected-table{
+			
 		    background-color: {{ json_decode(Auth::user()->store()->label,true)['selectTable'] }} !important;
 		}
 		.service-open-table{

@@ -64,10 +64,14 @@
                                             </div>
                                             @if($value->tableServiceOpen()->count())
                                             <div class="order_select_conteiner">
-                                                <a class="dropdown-item" href="">
+                                                <a class="dropdown-item" href="javascript: order_create_submit('table{{$value->id}}')">
                                                     <i class="fas fa-clipboard"></i>
-                                                    {{ __('messages.NewOrder') }}
+                                                    <span class="span-order">{{ __('messages.NewOrder') }}</span>
                                                 </a>
+                                                {!! Form::open(array('id'=>'table'.$value->id,'route'=>'order.create','method' =>'GET')) !!}
+                                                    {{ Form::hidden('store-id',Auth::user()->store()->id) }}
+                                                    {{ Form::hidden('table-id', $value->id) }}                          
+                                                {!! Form::close() !!}
                                             </div>
                                             @endif
 										</div>
