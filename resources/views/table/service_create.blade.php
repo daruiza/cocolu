@@ -20,7 +20,7 @@
             {{ Form::hidden('table_id', $table->id) }}            
             <div class="form-group row">
               <div class="col-md-12">
-                {!! Form::label('name',__('messages.Name'),['class'=>'col-form-label text-md-right']) !!}
+                {!! Form::label('name',__('messages.Name'),['class'=>'col-form-label text-md-right'],'autofocus','autofocus') !!}
                 {!! Form::text('name',null, ['class'=>'form-control']) !!}
               </div>
             </div>

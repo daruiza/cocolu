@@ -90,12 +90,22 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {           
+        
+
         $table = Table::find($request->input('table_id'));
         $tables = Table::
             where('store_id',Auth::user()->store()->id)
             ->where('active',1)
             ->orderBy('id','ASC')
             ->get();
+
+        $services = Service::
+            where('table_id',$request->input('table_id'))  
+            ->where('open',1)            
+            ->get();
+        if($services->count()){
+           return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_MULTI_SERVERS']]); 
+        }    
 
         if(!Auth::user()->validateUserStore($table->store_id)){         
             return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_STORE_OWNER']]);

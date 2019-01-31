@@ -153,7 +153,8 @@ class ProductController extends Controller
      */
     public function show(Request $request,$id)
     {
-        return 'mostrar';
+        $product = Product::find($request->input('id'));        
+        return view('product.show',compact('product'))->with('success', [[]])->with('data', []);
     }
 
     /**
@@ -162,9 +163,9 @@ class ProductController extends Controller
      * @param  \App\Model\Core\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Request $request,$id)
     {
-        return 'editar';
+        dd($request->input());
     }
 
     /**
