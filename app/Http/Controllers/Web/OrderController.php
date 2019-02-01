@@ -25,7 +25,26 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
+
+        $table = Table::find($request->input('table-id'));
+        $tables = Table::
+            where('store_id',Auth::user()->store()->id)
+            ->where('active',1)
+            ->orderBy('id','ASC')
+            ->get();
+        if(!Auth::user()->validateUserStore($table->store_id)){
+            //return tableController->index();
+            //return view('table.index',compact('table'))->with('danger', [['NO_STORE_OWNER']])->with('data', []);
+            //return Redirect::back()->with($request->input())->with('danger', [['NO_STORE_OWNER']])->with('data', []);
+            return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_STORE_OWNER']]);
+        }
+
+
         dd($request->input());
+        
+        
+
+        //return view('table.index',compact('tables','table'))->with('data', ['servicemodal'=>true,'table_id'=>$table->id]);
     }
 
     /**
