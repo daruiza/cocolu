@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Model\Core\Table;
 use App\Model\Core\Order;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -25,20 +29,24 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-
         $table = Table::find($request->input('table-id'));
-        $tables = Table::
+        /*$tables = Table::
             where('store_id',Auth::user()->store()->id)
             ->where('active',1)
             ->orderBy('id','ASC')
             ->get();
+           */ 
         if(!Auth::user()->validateUserStore($table->store_id)){
             //return tableController->index();
             //return view('table.index',compact('table'))->with('danger', [['NO_STORE_OWNER']])->with('data', []);
-            //return Redirect::back()->with($request->input())->with('danger', [['NO_STORE_OWNER']])->with('data', []);
-            return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_STORE_OWNER']]);
+            //return Redirect::back()->with($request->input())->with('danger', [['NO_STORE_OWNER']])->with('data', []);            
+            //return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_STORE_OWNER']]);
+            Session::flash('danger', [['NO_STORE_OWNER']]);
+            return redirect('table');
         }
 
+        Session::flash('success', [['ORDER_OK']]);
+        return redirect('table');
 
         dd($request->input());
         
