@@ -33,7 +33,7 @@ class WaiterController extends Controller
         $waiters = Waiter::
 			select('waiters.*')
 			->leftjoin('users','waiters.user_id','users.id')
-            ->where('users.rel_store_id',Auth::user()->store()->id)			
+            ->where('users.rel_store_id', Auth::user()->store()->id)			
             ->where('users.active',1)
             ->orderBy('waiters.id','ASC')
             ->get();

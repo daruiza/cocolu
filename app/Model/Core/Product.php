@@ -3,6 +3,7 @@
 namespace App\Model\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
@@ -39,6 +40,7 @@ class Product extends Model
         //return $this->belongsToMany(Product::class,'product_id','id');
         return \DB::table('product_product')           
             ->where('ingredient_id',$this->id)
+            ->where('store_id',$this->id)
             ->orderBy('id','ASC')
             ->get();
     }
@@ -52,14 +54,39 @@ class Product extends Model
             ->get();            
     }
 
+    static function getProducts(){
+        return Product::where('store_id',Auth::user()->store()->id)
+            ->where('active',1)
+            ->orderBy('name','ASC');
+    }
+
     static function productsArray(){
         $products = Array();
-        $products_array = Product::where('active',1)->orderBy('name','ASC')->get();        
+        $products_array = Product::getProducts()->get();        
         foreach ($products_array as $key => $value) {
             $products[$value->id] = $value->name.' - ('.$value->unity->name.')';
         }
         return $products;
     }
+
+    static function productstByStore(){
+        
+        return Product::getProducts()
+            ->rightJoin('category_product','products.id','product_id')
+            ->get();
+        
+        /*
+        return  Product::where('store_id',Auth::user()->store()->id)
+            ->join('category_product','products.id','category_product.product_id')
+            ->where('active',1)
+            ->orderBy('name','ASC')
+            ->get();
+        */    
+         
+          
+    }
+
+    
 
     public function categories_toString(){
         $string = "";
@@ -74,7 +101,6 @@ class Product extends Model
             if($this->volume <= $this->critical_volume) return true;
             return false;
         }        
-        return false;
-        
+        return false;        
     }
 }

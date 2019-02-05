@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
 use App\Model\Core\Order;
+use App\Model\Core\Waiter;
+use App\Model\Core\Product;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,6 +14,11 @@ use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
+
+    public function __construct()
+    {               
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,16 +52,15 @@ class OrderController extends Controller
         //return redirect('table')->route('newPr')->withErrors(compact('state'));
         //return redirect('table')->with(compact('ordermodal'));
         //return redirect('table')->with('data', ['ordermodal'=>true,'table_id'=>$table->id]);
-        $tables = Table::
-            where('store_id',Auth::user()->store()->id)
+        $tables = Table::where('store_id',Auth::user()->store()->id)
             ->where('active',1)
             ->orderBy('id','ASC')
             ->get();
-            
-        //mandamos la lista de meseros
-        //los productos y sus catagorias
 
-        return view('table.index',compact('tables','table'))->with('data', ['ordermodal'=>true,'table_id'=>$table->id]);
+        $waiters = Waiter::waitersByStore();            
+        $products = Product::productstByStore();
+        dd($products);
+        return view('table.index',compact('tables','table','waiters'))->with('data', ['ordermodal'=>true,'table_id'=>$table->id]);
        
     }
 

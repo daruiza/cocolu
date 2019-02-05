@@ -37,6 +37,7 @@ class ProductController extends Controller
     {
         $products = Product::            
             where('active',1)
+            ->where('store_id',Auth::user()->store()->id)
             ->orderBy('id','ASC')
             ->get();  
         //dd($products[1]->ingredients());    

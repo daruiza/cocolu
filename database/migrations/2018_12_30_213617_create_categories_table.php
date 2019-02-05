@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->boolean('active')->default(true);
             $table->timestamps();
             $table->integer('category_id')->unsigned()->default(0);
+            $table->integer('rel_store_id')->unsigned(); //relación simbolica con alguna store, el tipo de cuenta determina la store
         });
     }
 
