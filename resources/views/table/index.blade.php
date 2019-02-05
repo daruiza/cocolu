@@ -14,8 +14,9 @@
 		@include('table.order_create')
 	@endisset	
 
-	{!! Form::open(array('id'=>'slect-service-form','route' =>['table.selectservice',Auth::user()->store()->id],'method' =>'POST')) !!}	
+	{!! Form::open(array('id'=>'slect-service-form','route' =>['table.selectservice',Auth::user()->store()->id],'method' =>'POST')) !!}
 		{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
+		
 	{!! Form::close() !!}   
 @endsection
 
@@ -82,6 +83,11 @@
 	@isset($data['servicemodal'])	
 	<script type="text/javascript">		
 		$('#modal_service_create').modal('toggle');
+	</script>
+	@endisset
+	@isset($data['ordermodal'])	
+	<script type="text/javascript">
+		$('#modal_order_create').modal('toggle');
 	</script>
 	@endisset
 @endsection

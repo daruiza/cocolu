@@ -30,12 +30,7 @@ class OrderController extends Controller
     public function create(Request $request)
     {
         $table = Table::find($request->input('table-id'));
-        /*$tables = Table::
-            where('store_id',Auth::user()->store()->id)
-            ->where('active',1)
-            ->orderBy('id','ASC')
-            ->get();
-           */ 
+         
         if(!Auth::user()->validateUserStore($table->store_id)){
             //return tableController->index();
             //return view('table.index',compact('table'))->with('danger', [['NO_STORE_OWNER']])->with('data', []);
@@ -45,14 +40,19 @@ class OrderController extends Controller
             return redirect('table');
         }
 
-        Session::flash('success', [['ORDER_OK']]);
-        return redirect('table');
+        //$ordermodal = true;
+        //return redirect('table');
+        //return redirect('table')->route('newPr')->withErrors(compact('state'));
+        //return redirect('table')->with(compact('ordermodal'));
+        //return redirect('table')->with('data', ['ordermodal'=>true,'table_id'=>$table->id]);
+        $tables = Table::
+            where('store_id',Auth::user()->store()->id)
+            ->where('active',1)
+            ->orderBy('id','ASC')
+            ->get();
 
-        dd($request->input());
-        
-        
-
-        //return view('table.index',compact('tables','table'))->with('data', ['servicemodal'=>true,'table_id'=>$table->id]);
+        return view('table.index',compact('tables','table'))->with('data', ['ordermodal'=>true,'table_id'=>$table->id]);
+       
     }
 
     /**

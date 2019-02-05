@@ -23,15 +23,7 @@
                 {!! Form::label('name',__('messages.Name'),['class'=>'col-form-label text-md-right']) !!}
                 {!! Form::text('name',null, ['class'=>'form-control']) !!}
               </div>
-            </div>
-            <!--
-            <div class="form-group row">
-              <div class="col-md-12">
-              {!! Form::label('description',__('messages.Description'),['class'=>'col-form-label text-md-right']) !!}
-              {!! Form::text('description',null, ['class'=>'form-control']) !!}
-              </div>
-            </div>
-            -->
+            </div>            
           {!! Form::close() !!}
            
 
