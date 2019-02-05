@@ -2,11 +2,9 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title">
-          {{ __('form.TableOrderCreate') }} 
-          <div>
+        <h6 class="modal-title">          
             <i class="{{$table->icon}}"> </i> {{$table->name}} 
-          </div>
+            {{ __('messages.NewOrder') }}        
           </h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -14,19 +12,31 @@
       </div>
 
       <div class="modal-body"> 
-        <div class="container">
-           
-          {!! Form::open(array('id'=>'form-table-service','route'=>['table.saveservice',$table->id],'method'=>'POST')) !!}
-            {{ Form::hidden('table_id', $table->id) }}            
-            <div class="form-group row">
-              <div class="col-md-12">
-                {!! Form::label('name',__('messages.Name'),['class'=>'col-form-label text-md-right']) !!}
-                {!! Form::text('name',null, ['class'=>'form-control']) !!}
-              </div>
-            </div>            
-          {!! Form::close() !!}
-           
+        
+        <div class="container">          
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="card">
 
+                <div class="card-header">{{ __('messages.OrderMenu') }}</div>
+                  <div class="card-body">
+
+                  </div>                
+
+              </div>
+            </div>
+            <div class="col-sm-9">
+              <div class="card">
+
+                <div class="card-header">{{ __('messages.OrderProducts') }}</div>
+                  <div class="card-body">
+                    
+                  </div>                
+
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>

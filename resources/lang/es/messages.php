@@ -57,8 +57,8 @@ return [
     "Components" => "Componentes",
     "Price" => "Precio",
     "Buy_Price" => "Precio de Compra",
-    "Volume" => "Volumen",
-    "CriticalVolume" => "Volumen Critico",
+    "Volume" => "Cantidad",
+    "CriticalVolume" => "Cantidad Critico",
     "unity" => "Unidad",
     "NewOrder" => "Nueva Orden",
 ];

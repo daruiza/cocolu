@@ -122,6 +122,24 @@
 			position: absolute;
     		bottom: 10px;
 		}
+		
 
-	</style>	
+	</style>
+	@isset($data['ordermodal'])	
+	<style type="text/css">
+		/*solo para al modal-order*/
+		#modal_order_create .modal-body{
+			padding: 0.3rem; 
+		}
+		#modal_order_create .row .col-sm-3,
+		#modal_order_create .row .col-sm-9{
+			padding-right: 2px;
+    		padding-left: 2px;
+		}
+
+		#modal_order_create .card-header{
+			padding: 0.25rem 0.25rem;
+		}
+	</style>
+	@endisset	
 @endsection

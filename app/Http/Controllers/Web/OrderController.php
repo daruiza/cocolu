@@ -50,6 +50,9 @@ class OrderController extends Controller
             ->where('active',1)
             ->orderBy('id','ASC')
             ->get();
+            
+        //mandamos la lista de meseros
+        //los productos y sus catagorias
 
         return view('table.index',compact('tables','table'))->with('data', ['ordermodal'=>true,'table_id'=>$table->id]);
        
