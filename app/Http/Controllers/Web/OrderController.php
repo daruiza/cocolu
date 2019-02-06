@@ -58,9 +58,9 @@ class OrderController extends Controller
             ->get();
 
         $waiters = Waiter::waitersByStore();            
-        $products = Product::productstByStore();
-        dd($products);
-        return view('table.index',compact('tables','table','waiters'))->with('data', ['ordermodal'=>true,'table_id'=>$table->id]);
+        $products = Product::productstByStore();        
+        
+        return view('table.index',compact('tables','table','waiters','products'))->with('data', ['ordermodal'=>true,'table_id'=>$table->id]);
        
     }
 

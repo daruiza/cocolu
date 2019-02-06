@@ -31,6 +31,34 @@
                 <div class="card-header">{{ __('messages.OrderProducts') }}</div>
                   <div class="card-body">
                     
+                    <!--
+                    <ul class="nav nav-pills justify-content-center">
+                      <li class="nav-item">
+                        <a class="nav-link active" href="#">Active</a>
+                      </li>
+
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                      </li>
+
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                      </li>
+
+                      <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                      </li>
+                    </ul>
+                    -->
+                    <ul class="nav nav-pills justify-content-center">
+                    @foreach($products as $product)
+
+
+                      @php ($category = $product->category)
+                    @endforeach
+                    </ul>
+
+
                   </div>                
 
               </div>

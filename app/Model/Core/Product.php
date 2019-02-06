@@ -56,8 +56,8 @@ class Product extends Model
 
     static function getProducts(){
         return Product::where('store_id',Auth::user()->store()->id)
-            ->where('active',1)
-            ->orderBy('name','ASC');
+            ->where('products.active',1)
+            ->orderBy('products.name','ASC');
     }
 
     static function productsArray(){
@@ -73,17 +73,11 @@ class Product extends Model
         
         return Product::getProducts()
             ->rightJoin('category_product','products.id','product_id')
+            ->leftJoin('categories','category_product.category_id','categories.id')
+            ->select('products.*','categories.name as category')
+            ->where('categories.active',1)
+            ->orderBy('categories.order','ASC')
             ->get();
-        
-        /*
-        return  Product::where('store_id',Auth::user()->store()->id)
-            ->join('category_product','products.id','category_product.product_id')
-            ->where('active',1)
-            ->orderBy('name','ASC')
-            ->get();
-        */    
-         
-          
     }
 
     
