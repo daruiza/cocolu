@@ -47,10 +47,10 @@
                                 <div class="row">
                               @foreach($products as $key => $product)
                                 @if($product->category == $category)
-                                  {{dd($product)}}
+                                  
                                   <div class="col-md-3 ">
-                                    <div class="product-conteiner">
-                                      {{$product->name}}  
+                                    <div class="product-conteiner"  style = "background-image: url({{url('users/'.\Auth::user()->id.'/products/'.$product->image1)}});">
+                                      <div class="product-name">{{$product->name}}</div>
                                     </div>                                        
                                   </div>
                                 @endif

@@ -142,17 +142,35 @@
 			padding: 0.25rem 0.25rem;
 		}
 
-		.product-conteiner{			
-    		border: solid 1px gainsboro;
-    		text-align: center;
-    		max-height: 140px;
-		}
 		.tab-content{
 			padding-top: 0.5em;
 		}
 		.tab-content .row .col-md-3{
 			padding: 0.25rem 0.25rem;
 		}
+
+		.product-conteiner{			
+    		border: solid 1px gainsboro;
+    		text-align: center;
+    		height: 130px;
+    		max-height: 140px;
+    		background-position: center;
+		    background-repeat: no-repeat;
+		    background-size: cover;
+		    transition: transform 1.2s;
+		}
+
+		.product-conteiner:hover{
+			cursor: pointer;
+			-ms-transform: scale(1.2); /* IE 9 */
+			-webkit-transform: scale(1.2); /* Safari 3-8 */
+			transform: scale(1.2); 
+		}
+
+		.product-conteiner .product-name{
+			font-size: 18px;
+			font-weight: 500;	
+		}		
 	</style>
 	@endisset	
 @endsection
