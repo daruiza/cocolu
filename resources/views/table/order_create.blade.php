@@ -20,8 +20,7 @@
 
                 <div class="card-header">{{ __('messages.OrderMenu') }}</div>
                   <div class="card-body">
-
-                  </div>                
+                  </div>
 
               </div>
             </div>
@@ -29,35 +28,38 @@
               <div class="card">
 
                 <div class="card-header">{{ __('messages.OrderProducts') }}</div>
-                  <div class="card-body">
+                  <div class="card-body">                   
                     
                     <!--
                     <ul class="nav nav-pills justify-content-center">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
-                      </li>
-
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                      </li>
-
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                      </li>
-
-                      <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                      </li>
-                    </ul>
                     -->
-                    <ul class="nav nav-pills justify-content-center">
-                    @foreach($products as $product)
-
-
-                      @php ($category = $product->category)
+                    <ul class="nav nav-tabs justify-content-center">
+                    @foreach($categories as $key => $category)
+                      <li class="nav-item">
+                        <a class="nav-link @if(!$key) active @endif" id="{{$category}}-tab" data-toggle="tab" role="tab" aria-controls="{{$category}}" aria-selected="false" href="#{{$category}}_conteiner">{{$category}}</a>
+                      </li>                      
                     @endforeach
                     </ul>
-
+                    <div class="tab-content">
+                      @foreach($categories as $key => $category)
+                            <div class="tab-pane fade show @if(!$key) active @endif" id="{{$category}}_conteiner" role="tabpanel" aria-labelledby="{{$category}}-tab">
+                              <div class="col-md-12">
+                                <div class="row">
+                              @foreach($products as $key => $product)
+                                @if($product->category == $category)
+                                  {{dd($product)}}
+                                  <div class="col-md-3 ">
+                                    <div class="product-conteiner">
+                                      {{$product->name}}  
+                                    </div>                                        
+                                  </div>
+                                @endif
+                              @endforeach
+                              </div>
+                              </div>
+                            </div>                    
+                      @endforeach
+                    </div>
 
                   </div>                
 

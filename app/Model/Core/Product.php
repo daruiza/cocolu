@@ -56,13 +56,13 @@ class Product extends Model
 
     static function getProducts(){
         return Product::where('store_id',Auth::user()->store()->id)
-            ->where('products.active',1)
-            ->orderBy('products.name','ASC');
+            ->where('products.active',1);
+            
     }
 
     static function productsArray(){
         $products = Array();
-        $products_array = Product::getProducts()->get();        
+        $products_array = Product::getProducts()->orderBy('products.name','ASC')->get();        
         foreach ($products_array as $key => $value) {
             $products[$value->id] = $value->name.' - ('.$value->unity->name.')';
         }
@@ -72,11 +72,13 @@ class Product extends Model
     static function productstByStore(){
         
         return Product::getProducts()
+            ->select('products.*','categories.name as category','categories.order as order_category')
             ->rightJoin('category_product','products.id','product_id')
-            ->leftJoin('categories','category_product.category_id','categories.id')
-            ->select('products.*','categories.name as category')
+            ->leftJoin('categories','category_product.category_id','categories.id')            
             ->where('categories.active',1)
+            ->where('categories.category_id',"<>",0)
             ->orderBy('categories.order','ASC')
+            ->orderBy('products.order','ASC')
             ->get();
     }
 

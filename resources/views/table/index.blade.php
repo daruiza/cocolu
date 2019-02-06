@@ -137,7 +137,20 @@
     		padding-left: 2px;
 		}
 
-		#modal_order_create .card-header{
+		#modal_order_create .card-header,
+		#modal_order_create .card-body{
+			padding: 0.25rem 0.25rem;
+		}
+
+		.product-conteiner{			
+    		border: solid 1px gainsboro;
+    		text-align: center;
+    		max-height: 140px;
+		}
+		.tab-content{
+			padding-top: 0.5em;
+		}
+		.tab-content .row .col-md-3{
 			padding: 0.25rem 0.25rem;
 		}
 	</style>
