@@ -157,20 +157,49 @@
     		background-position: center;
 		    background-repeat: no-repeat;
 		    background-size: cover;
-		    transition: transform 1.2s;
+		    background-color: white; 		    
+		    /*
+		    -webkit-transition-property: background-color width, height;
+			 -webkit-transition-duration: 1s; 
+			 transition-property: background-color width, height;
+			 transition-duration: 1s;
+			 */
+			 background-size: 80% 80%;
+		    transition: background-size 1s ease-in;
+		    -moz-transition: background-size 1s ease-in;
+		    -web-kit-transition: background-size 1s ease-in;
 		}
 
 		.product-conteiner:hover{
 			cursor: pointer;
-			-ms-transform: scale(1.2); /* IE 9 */
-			-webkit-transform: scale(1.2); /* Safari 3-8 */
-			transform: scale(1.2); 
+			/*			
+			-ms-transform: scale(1.05); 
+			-webkit-transform: scale(1.2);
+			transform: scale(1.05);						
+			background-size: scale(1.2);
+			background-color: #f7f7f7;
+			*/
+			background-size: 100% 100%;
 		}
 
 		.product-conteiner .product-name{
 			font-size: 18px;
-			font-weight: 500;	
-		}		
+			font-weight: 400;
+		}	
+
+		.product-conteiner  > div{
+			background-color: #f7f7f7c7;
+		}
+		
+		.product-conteiner .product-volume{
+			position: absolute;
+    		bottom: 0px;
+			margin: 0.25rem;
+			left: 0;
+		    right: 0;
+		    margin-left: auto;
+		    margin-right: auto;
+		}
 	</style>
 	@endisset	
 @endsection

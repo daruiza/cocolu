@@ -51,6 +51,8 @@
                                   <div class="col-md-3 ">
                                     <div class="product-conteiner"  style = "background-image: url({{url('users/'.\Auth::user()->id.'/products/'.$product->image1)}});">
                                       <div class="product-name">{{$product->name}}</div>
+                                      <div class="">{{\Auth::user()->store()->currency}} {{$product->price}}</div>
+                                      <div class="product-volume">{{ __('messages.Volume') }}:{{$product->volume}}</div>
                                     </div>                                        
                                   </div>
                                 @endif
