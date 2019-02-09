@@ -46,4 +46,12 @@ table.prototype.selectServiceResponse = function(result) {
 	
 }
 
+table.prototype.returnAddProduct = function(result) {
+	if(result.data){
+		alert('hay');
+	}else{
+		alert('no hay nada');
+	}
+}
+
 var table = new table();

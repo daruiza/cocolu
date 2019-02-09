@@ -21,6 +21,23 @@ trait ProductRequestTrait
 		Session::flash('danger', [['ProductEditStockNOOk']]);
         return redirect('product');
 
-	}	
+	}
+
+	public function addProduct(Request $request,$id){
+		//retur pruduct an his components
+		
+		$product = Product::find($request->input('id'));
+		//componentes - buscar todos
+		//$componentes = Product::find($request->input('id'))->where();
+		
+		if(Auth::user()->validateUserStore($product->store_id)){			
+			return response()->json(['respuesta'=>true,'request'=>[$request->input(),$id],'data'=>[$product]]);
+		}
+		
+		
+
+		return response()->json(['respuesta'=>true,'data'=>null]);
+
+	}
 	
 }

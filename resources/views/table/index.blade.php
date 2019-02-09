@@ -15,9 +15,13 @@
 	@endisset	
 
 	{!! Form::open(array('id'=>'slect-service-form','route' =>['table.selectservice',Auth::user()->store()->id],'method' =>'POST')) !!}
-		{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
-		
+		{!!Form::hidden('store_id', Auth::user()->store()->id)!!}		
 	{!! Form::close() !!}   
+
+	{!! Form::open(array('id'=>'form_add_product','route' =>['product.addproduct',Auth::user()->store()->id],'method' =>'POST')) !!}
+		{!!Form::hidden('store_id', Auth::user()->store()->id)!!}		
+	{!! Form::close() !!}   
+
 @endsection
 
 @section('script')
@@ -88,6 +92,15 @@
 	@isset($data['ordermodal'])	
 	<script type="text/javascript">
 		$('#modal_order_create').modal('toggle');
+
+		$('.option_add_product').on('click', function (e) {
+			var datos = new Array();
+			datos['id'] = this.id.split('_')[0];
+			datos['store'] = this.id.split('_')[1];
+			datos['name'] = this.id.split('_')[2];
+			ajaxobject.peticionajax($('#form_add_product').attr('action'),datos,"table.returnAddProduct");				
+		});
+
 	</script>
 	@endisset
 @endsection
@@ -199,6 +212,16 @@
 		    right: 0;
 		    margin-left: auto;
 		    margin-right: auto;
+		}
+
+		.noselect {
+		  -webkit-touch-callout: none; /* iOS Safari */
+		    -webkit-user-select: none; /* Safari */
+		     -khtml-user-select: none; /* Konqueror HTML */
+		       -moz-user-select: none; /* Firefox */
+		        -ms-user-select: none; /* Internet Explorer/Edge */
+		            user-select: none; /* Non-prefixed version, currently
+		                                  supported by Chrome and Opera */
 		}
 	</style>
 	@endisset	
