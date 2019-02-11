@@ -132,7 +132,8 @@ class ProductController extends Controller
                     [
                         'product_id' => $product->id,
                         'ingredient_id' => $value['product'],
-                        'volume' => $value['volume']
+                        'volume' => $value['volume'],
+                        'group' => $value['group']
                     ]
                 );
             }

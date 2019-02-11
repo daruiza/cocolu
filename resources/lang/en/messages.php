@@ -57,6 +57,7 @@ return [
     "Price" => "Price",
     "Buy_Price" => "Buy Price",
     "Volume" => "Volume",
+    "Group" => "Group",
     "CriticalVolume" => "Critical Volume",
     "unity" => "Unity",
     "NewOrder" => "New Order",

@@ -58,6 +58,7 @@ return [
     "Price" => "Precio",
     "Buy_Price" => "Precio de Compra",
     "Volume" => "Cantidad",
+    "Group" => "Grupo",
     "CriticalVolume" => "Cantidad Critico",
     "unity" => "Unidad",
     "NewOrder" => "Nueva Orden",

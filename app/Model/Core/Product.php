@@ -48,7 +48,17 @@ class Product extends Model
     public function ingredients(){
         //reutiliza el namespace
         //return $this->hasMany(Product::class,'ingredient_id','id');
-        return \DB::table('product_product')           
+        return \DB::table('product_product')        
+            ->where('product_id',$this->id)
+            ->orderBy('id','ASC')
+            ->get();            
+    }
+
+    public function ingredientsAsProduct(){
+        //reutiliza el namespace
+        //return $this->hasMany(Product::class,'ingredient_id','id');
+        return \DB::table('products')
+            ->leftJoin('product_product')      
             ->where('product_id',$this->id)
             ->orderBy('id','ASC')
             ->get();            
@@ -56,8 +66,7 @@ class Product extends Model
 
     static function getProducts(){
         return Product::where('store_id',Auth::user()->store()->id)
-            ->where('products.active',1);
-            
+            ->where('products.active',1);            
     }
 
     static function productsArray(){
