@@ -81,7 +81,17 @@
 			return false;			
 		}
 
-		$("#containment-wrapper").height($("#containment-wrapper").height()+125);		
+		$("#containment-wrapper").height($("#containment-wrapper").height()+125);
+		
+		/*Multiple Modal*/
+		$(document).on('show.bs.modal', '.modal', function (event) {
+            var zIndex = 1040 + (10 * $('.modal:visible').length);
+            $(this).css('z-index', zIndex);
+            setTimeout(function() {
+                $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+            }, 0);
+        });
+        
 	</script>
 		
 	@isset($data['servicemodal'])	
@@ -89,6 +99,7 @@
 		$('#modal_service_create').modal('toggle');
 	</script>
 	@endisset
+
 	@isset($data['ordermodal'])	
 	<script type="text/javascript">
 		$('#modal_order_create').modal('toggle');
@@ -138,6 +149,7 @@
 		
 
 	</style>
+
 	@isset($data['ordermodal'])	
 	<style type="text/css">
 		/*solo para al modal-order*/
@@ -224,5 +236,6 @@
 		                                  supported by Chrome and Opera */
 		}
 	</style>
-	@endisset	
+	@endisset
+
 @endsection

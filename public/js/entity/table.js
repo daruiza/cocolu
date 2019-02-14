@@ -47,11 +47,15 @@ table.prototype.selectServiceResponse = function(result) {
 }
 
 table.prototype.returnAddProduct = function(result) {
+	
 	if(result.data){
-		alert('hay');
+		$('#modal_order_conponents').modal('toggle');
 	}else{
-		alert('no hay nada');
+		alert('addProduct');
 	}
+	
+
+	
 }
 
 var table = new table();

@@ -24,8 +24,7 @@ trait ProductRequestTrait
 	}
 
 	public function addProduct(Request $request,$id){
-		//retur pruduct an his components
-		
+		//retur pruduct an his components		
 		$product = Product::find($request->input('id'));
 		//componentes - buscar todos		
 		$ingredients = $product->ingredients()->toArray();  
@@ -47,8 +46,7 @@ trait ProductRequestTrait
                             ->first()
                             ->ingredients() as $val){
                             
-                            $ingredients[]=$val;                                               
-                            
+                            $ingredients[]=$val;
                         }                                        
                     }
                 }else{
