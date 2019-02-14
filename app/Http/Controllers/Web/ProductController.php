@@ -35,6 +35,43 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $product = Product::find(14);        
+        dd($product->ingredients());
+        $ingredients = Product::where('id',14)->first()->ingredients()->toArray();                       
+        
+        foreach ($ingredients as $key => &$value) {
+            //if ingredient us a group
+            if(!is_array($value)){
+               if(empty(Product::where('id',$value->ingredient_id)
+                    ->first()
+                    ->ingredients()
+                    ->first()
+                    ->group)){
+
+                    //if ingredient has ingredientes, add its to final array
+                    if(Product::where('id',$value->ingredient_id)->first()->ingredients()->count()){
+                        //pop actal ingrediente
+                        unset($ingredients[$key]);                    
+                        foreach (Product::where('id',$value->ingredient_id)
+                            ->first()
+                            ->ingredients() as $val){
+                            
+                            $ingredients[]=$val;                                               
+                            
+                        }                                        
+                    }
+                }else{
+                    unset($ingredients[$key]);                    
+                    $ingredients[] = Product::where('id',$value->ingredient_id)->first()->ingredients()->toArray();
+                } 
+            }
+            
+        }
+        
+
+        dd($ingredients);
+
+
         $products = Product::            
             where('active',1)
             ->where('store_id',Auth::user()->store()->id)

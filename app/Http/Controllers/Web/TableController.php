@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
-use App\Model\Core\Order;
 use App\Http\Controllers\Web\ServiceController;
 
 use Illuminate\Http\Request;
@@ -40,7 +39,7 @@ class TableController extends Controller
             where('store_id',Auth::user()->store()->id)
             ->where('active',1)
             ->orderBy('id','ASC')
-            ->get();		        
+            ->get();
 		return view('table.index',compact('tables'))->with('data', []);
     }
 

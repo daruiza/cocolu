@@ -27,14 +27,41 @@ trait ProductRequestTrait
 		//retur pruduct an his components
 		
 		$product = Product::find($request->input('id'));
-		//componentes - buscar todos
-		$components = $product->ingredients();
+		//componentes - buscar todos		
+		$ingredients = $product->ingredients()->toArray();  
+
+		foreach ($ingredients as $key => &$value) {
+            //if ingredient us a group
+            if(!is_array($value)){
+               if(empty(Product::where('id',$value->ingredient_id)
+                    ->first()
+                    ->ingredients()
+                    ->first()
+                    ->group)){
+
+                    //if ingredient has ingredientes, add its to final array
+                    if(Product::where('id',$value->ingredient_id)->first()->ingredients()->count()){
+                        //pop actal ingrediente
+                        unset($ingredients[$key]);                    
+                        foreach (Product::where('id',$value->ingredient_id)
+                            ->first()
+                            ->ingredients() as $val){
+                            
+                            $ingredients[]=$val;                                               
+                            
+                        }                                        
+                    }
+                }else{
+                    unset($ingredients[$key]);                    
+                    $ingredients[] = Product::where('id',$value->ingredient_id)->first()->ingredients()->toArray();
+                } 
+            }
+            
+        }
 		
 		if(Auth::user()->validateUserStore($product->store_id)){			
-			return response()->json(['respuesta'=>true,'request'=>[$request->input(),$id],'data'=>[$product]]);
+			return response()->json(['respuesta'=>true,'request'=>[$request->input(),$id],'data'=>[$product,$ingredients]]);
 		}
-		
-		
 
 		return response()->json(['respuesta'=>true,'data'=>null]);
 
