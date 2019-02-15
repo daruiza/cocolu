@@ -57,7 +57,7 @@ class OrderController extends Controller
             ->orderBy('id','ASC')
             ->get();
 
-        $waiters = Waiter::waitersByStore();            
+        $waiters = Waiter::waitersByStoreSelect();                                 
         $products = Product::productstByStore();             
         $categories = array();
         foreach ($products as $value) {

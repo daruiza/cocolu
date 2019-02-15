@@ -62,4 +62,5 @@ return [
     "CriticalVolume" => "Cantidad Critico",
     "unity" => "Unidad",
     "NewOrder" => "Nueva Orden",
+    "Suggestion" => "Sugerencia",
 ];

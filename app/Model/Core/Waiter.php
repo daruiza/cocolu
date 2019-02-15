@@ -21,6 +21,23 @@ class Waiter extends Model
             ->orderBy('users.id','ASC')
             ->get(); 
     }
+
+    static function waitersByStoreSelect(){
+        
+        $waiters = array();
+        $elo_waiters =  Waiter::select('waiters.id','users.name','users.surname')
+            ->leftjoin('users','user_id','users.id')
+            ->where('users.rel_store_id',Auth::user()->store()->id)
+            ->where('active',1)
+            ->orderBy('users.id','ASC')
+            ->get()
+            ->toArray();
+
+        foreach ($elo_waiters as $key => $value) {            
+            $waiters[$value['id']] = $value['name'].' '.$value['surname'];
+        }   
+        return $waiters;
+    }
 }
 
 

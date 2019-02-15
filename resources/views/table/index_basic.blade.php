@@ -85,3 +85,5 @@
     	</div>
     </div>
 </div>
+
+{!! Form::hidden('input_placeholder_suggestion', __('messages.Suggestion') ) !!}

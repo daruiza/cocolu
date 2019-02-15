@@ -61,4 +61,5 @@ return [
     "CriticalVolume" => "Critical Volume",
     "unity" => "Unity",
     "NewOrder" => "New Order",
+    "Suggestion" => "Suggestion",
 ];

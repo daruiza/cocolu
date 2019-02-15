@@ -29,6 +29,7 @@ trait ProductRequestTrait
 		//componentes - buscar todos		
 		$ingredients = $product->ingredients()->toArray();  
 
+		//gstion de ingredientes
 		foreach ($ingredients as $key => &$value) {
             //if ingredient us a group
             if(!is_array($value)){

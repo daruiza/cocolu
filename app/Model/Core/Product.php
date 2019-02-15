@@ -48,7 +48,10 @@ class Product extends Model
     public function ingredients(){
         //reutiliza el namespace
         //return $this->hasMany(Product::class,'ingredient_id','id');
-        return \DB::table('product_product')        
+        return \DB::table('product_product') 
+            ->select('product_product.*','products.name as product','unities.name as unity')       
+            ->leftJoin('products','products.id','product_product.ingredient_id')
+            ->leftJoin('unities','unities.id','products.unity_id')
             ->where('product_id',$this->id)
             ->orderBy('id','ASC')
             ->get();            

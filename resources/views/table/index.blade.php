@@ -235,6 +235,38 @@
 		            user-select: none; /* Non-prefixed version, currently
 		                                  supported by Chrome and Opera */
 		}
+
+		#modal_order_conponents .modal-body{
+			padding: 0.4rem;
+		}
+
+		#modal_order_conponents .card-body .container .row{
+			padding: .375rem .75rem;
+		    font-size: 1rem;
+		    line-height: 1.5;
+		    color: #495057;
+		    background-color: #fff;
+		    background-clip: padding-box;
+		    border: 1px solid #ced4da;
+		    border-radius: .25rem;
+		    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		}
+
+		#modal_order_conponents .container,
+		#modal_order_conponents .card-body .container .row,
+		#modal_order_conponents .card-body .container .row > div{
+			padding-right: 5px;
+    		padding-left: 5px;
+		}
+
+		#modal_order_conponents .card-body .container .row > div{
+			display: flex;
+    		align-items: center;
+		}
+
+		#modal_order_conponents .card-body .control-checkbox{
+			height: calc(1.5rem + 2px);
+		}
 	</style>
 	@endisset
 

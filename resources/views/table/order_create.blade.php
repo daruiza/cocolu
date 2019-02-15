@@ -20,6 +20,9 @@
 
                 <div class="card-header">{{ __('messages.OrderMenu') }}</div>
                   <div class="card-body">
+                    <div class="waiters">
+                      {{Form::select('waiters', $waiters,null,['class' => 'form-control'])}} 
+                    </div>
                   </div>
 
               </div>
@@ -86,15 +89,31 @@
       
       <div class="modal-header">
         <h6 class="modal-title">          
-            <i class="{{$table->icon}}"> </i> {{$table->name}} 
-            {{ __('messages.Components') }}        
+            
+            <span><i class="fas fa-list-alt"></i> {{ __('messages.Components') }}</span>        
+            <span class="product-name"></span>
           </h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
-      <div class="modal-body"> 
+      <div class="modal-body">
+        <div class="container">          
+          <div class="row">
+            <div class="col-sm-12"> 
+              <div class="card">
+                  <div class="card-body">
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" form="">{{ __('form.Send') }}</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
       </div>
 
     </div>
