@@ -54,8 +54,14 @@ table.prototype.returnAddProduct = function(result) {
 
 	    var input = document.createElement("input");	    
 	    input.setAttribute("type", "hidden");
-	    input.setAttribute("name", "id");
+	    input.setAttribute("name", "id_"+result.data[0].id);
 	    input.setAttribute("value", result.data[0].id);	    	    
+	    node.appendChild(input);
+
+
+	    var input = document.createElement("input");	    
+	    input.setAttribute("class", "form-control");
+	    input.setAttribute("name", "volume_"+result.data[0].id);	    
 	    node.appendChild(input);
 
 	    //ingredientes compuestos
