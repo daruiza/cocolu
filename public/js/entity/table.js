@@ -47,7 +47,8 @@ table.prototype.returnAddProduct = function(result) {
 	if(result.data[1].length == undefined){		
 		$('#modal_order_conponents .product-name').html(result.data[0].name);
 		var modal = $('#modal_order_conponents .card-body')[0];
-		modal.innerHTML = '';
+		var n = 0;//numero de ingredientes
+		modal.innerHTML = '';//limpiamos el modal
 
 		var node = document.createElement("div");
 	    node.setAttribute("class", "container form-group");
@@ -58,11 +59,27 @@ table.prototype.returnAddProduct = function(result) {
 	    input.setAttribute("value", result.data[0].id);	    	    
 	    node.appendChild(input);
 
+	    var subnode = document.createElement("div");
+		subnode.setAttribute("class", "row");
 
+		var div = document.createElement("div");
+		div.setAttribute("class", "col-sm-4");
+		div.setAttribute("style", "justify-content: center;");
+		var span = document.createElement("span");
+	    span.setAttribute("class", "");			    			    
+	    span.innerHTML = $( "input[name='input_volume']" ).val();
+	    div.appendChild(span);		    
+	    subnode.appendChild(div);
+
+	    var div = document.createElement("div");
+		div.setAttribute("class", "col-sm-8");
 	    var input = document.createElement("input");	    
 	    input.setAttribute("class", "form-control");
-	    input.setAttribute("name", "volume_"+result.data[0].id);	    
-	    node.appendChild(input);
+	    input.setAttribute("name", "volume_"+result.data[0].id);
+	    div.appendChild(input);
+	    subnode.appendChild(div);
+
+	    node.appendChild(subnode);
 
 	    //ingredientes compuestos
 	    for(obj in result.data[1]) {
@@ -84,7 +101,7 @@ table.prototype.returnAddProduct = function(result) {
     			div.setAttribute("class", "col-sm-8");
 			    var select = document.createElement("select");
     			select.setAttribute("class", "form-control");
-    			select.setAttribute("name", "ingredient_select_"+result.data[0].id);
+    			select.setAttribute("name", "ingredient_"+result.data[0].id+"_"+result.data[1][obj][0].product_id);
 
 			    for(grp in result.data[1][obj]) {			    	
 			        var opt1 = document.createElement('option');   
@@ -111,7 +128,7 @@ table.prototype.returnAddProduct = function(result) {
 			    input.setAttribute("class", "form-control control-checkbox");
 			    input.setAttribute("type", "checkbox");			    
 			    input.checked = true;
-			    input.setAttribute("name", "ingredient");
+			    input.setAttribute("name", "ingredient_"+result.data[0].id+"_"+result.data[1][obj].ingredient_id);
 			    input.setAttribute("value", result.data[1][obj].ingredient_id);
 			    div.appendChild(input);		    
 			    subnode.appendChild(div);
