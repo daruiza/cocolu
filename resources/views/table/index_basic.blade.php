@@ -85,6 +85,3 @@
     	</div>
     </div>
 </div>
-
-{!! Form::hidden('input_placeholder_suggestion', __('messages.Suggestion') ) !!}
-{!! Form::hidden('input_volume', __('messages.Volume') ) !!}

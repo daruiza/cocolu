@@ -112,11 +112,13 @@
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" form="">{{ __('form.Send') }}</button>
+        <button type="submit" class="btn btn-primary btn-send" form="" >{{ __('form.Send') }}</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
       </div>
-
     </div>
 
   </div>
 </div>
+
+{!! Form::hidden('input_placeholder_suggestion', __('messages.Suggestion') ) !!}
+{!! Form::hidden('input_volume', __('messages.Volume') ) !!}

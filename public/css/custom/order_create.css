@@ -1,0 +1,115 @@
+/*solo para al modal-order*/
+#modal_order_create .modal-body{
+	padding: 0.3rem; 
+}
+#modal_order_create .row .col-sm-3,
+#modal_order_create .row .col-sm-9{
+	padding-right: 2px;
+	padding-left: 2px;
+}
+
+#modal_order_create .card-header,
+#modal_order_create .card-body{
+	padding: 0.25rem 0.25rem;
+}
+
+.tab-content{
+	padding-top: 0.5em;
+}
+.tab-content .row .col-md-3{
+	padding: 0.25rem 0.25rem;
+}
+
+.product-conteiner{			
+	border: solid 1px gainsboro;
+	text-align: center;
+	height: 130px;
+	max-height: 140px;
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white; 		    
+    /*
+    -webkit-transition-property: background-color width, height;
+	 -webkit-transition-duration: 1s; 
+	 transition-property: background-color width, height;
+	 transition-duration: 1s;
+	 */
+	 background-size: 80% 80%;
+    transition: background-size 1s ease-in;
+    -moz-transition: background-size 1s ease-in;
+    -web-kit-transition: background-size 1s ease-in;
+}
+
+.product-conteiner:hover{
+	cursor: pointer;
+	/*			
+	-ms-transform: scale(1.05); 
+	-webkit-transform: scale(1.2);
+	transform: scale(1.05);						
+	background-size: scale(1.2);
+	background-color: #f7f7f7;
+	*/
+	background-size: 100% 100%;
+}
+
+.product-conteiner .product-name{
+	font-size: 18px;
+	font-weight: 400;
+}	
+
+.product-conteiner  > div{
+	background-color: #f7f7f7c7;
+}
+
+.product-conteiner .product-volume{
+	position: absolute;
+	bottom: 0px;
+	margin: 0.25rem;
+	left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+#modal_order_conponents .modal-body{
+	padding: 0.4rem;
+}
+
+#modal_order_conponents .card-body .container .row{
+	padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#modal_order_conponents .container,
+#modal_order_conponents .card-body .container .row,
+#modal_order_conponents .card-body .container .row > div{
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+#modal_order_conponents .card-body .container .row > div{
+	display: flex;
+	align-items: center;
+}
+
+#modal_order_conponents .card-body .control-checkbox{
+	height: calc(1.5rem + 2px);
+}
