@@ -44,7 +44,7 @@ table.prototype.selectServiceResponse = function(result) {
 
 table.prototype.returnAddProduct = function(result) {
 	
-	if(result.data[1].length == undefined){		
+	if(result.data[1].toString() != "" || result.data[1].length > 0){		
 		$('#modal_order_conponents .product-name').html(result.data[0].name);
 		var modal = $('#modal_order_conponents .card-body')[0];
 		var n = 0;//numero de ingredientes

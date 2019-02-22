@@ -26,37 +26,52 @@ trait ProductRequestTrait
 	public function addProduct(Request $request,$id){
 		//retur pruduct an his components		
 		$product = Product::find($request->input('id'));
-		//componentes - buscar todos		
-		$ingredients = $product->ingredients()->toArray();  
-
-		//gstion de ingredientes
-		foreach ($ingredients as $key => &$value) {
-            //if ingredient us a group
+        //componentes - buscar todos        
+        $components = $product->ingredients()->toArray();  
+        
+        //gstion de ingredientes
+        foreach ($components as $key => &$value) {
+            
             if(!is_array($value)){
+                //el ingrediente del ingrediente no es una agrupacion, es un ingrdiente normal
                if(empty(Product::where('id',$value->ingredient_id)
                     ->first()
                     ->ingredients()
                     ->first()
                     ->group)){
 
-                    //if ingredient has ingredientes, add its to final array
+                    //if ingredient has ingredients, add its to final array
                     if(Product::where('id',$value->ingredient_id)->first()->ingredients()->count()){
                         //pop actal ingrediente
-                        unset($ingredients[$key]);                    
+                        unset($components[$key]);                    
+                        
                         foreach (Product::where('id',$value->ingredient_id)
                             ->first()
                             ->ingredients() as $val){
                             
-                            $ingredients[]=$val;
-                        }                                        
+                            $components[]=$val;
+                        }                                                               
                     }
+
+                    //si el ingrediente tiene una agrupacion
+                    if(!empty($value->group)){
+                        unset($components[$key]);
+                        $components[$value->group][] = $value;
+                    }
+
                 }else{
-                    unset($ingredients[$key]);                    
-                    $ingredients[] = Product::where('id',$value->ingredient_id)->first()->ingredients()->toArray();
-                } 
+                    //el ingrediente es una agrupación                    
+                    unset($components[$key]);                    
+                    $components[] = Product::where('id',$value->ingredient_id)->first()->ingredients()->toArray();
+                }
             }
             
         }
+
+        $ingredients = array();
+        foreach ($components as $key => &$value) {
+            $ingredients[] = $value;
+        }       
 		
 		if(Auth::user()->validateUserStore($product->store_id)){			
 			return response()->json(['respuesta'=>true,'request'=>[$request->input(),$id],'data'=>[$product,$ingredients]]);
