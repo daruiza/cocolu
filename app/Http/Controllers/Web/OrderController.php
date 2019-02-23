@@ -63,6 +63,7 @@ class OrderController extends Controller
         foreach ($products as $value) {
             if(!in_array($value->category,$categories))$categories[]=$value->category;
         }
+        
         return view('table.index',compact('tables','table','waiters','products','categories'))->with('data', ['ordermodal'=>true,'table_id'=>$table->id]);
        
     }

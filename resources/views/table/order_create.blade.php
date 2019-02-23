@@ -39,13 +39,13 @@
                     <ul class="nav nav-tabs justify-content-center">
                     @foreach($categories as $key => $category)
                       <li class="nav-item">
-                        <a class="nav-link @if(!$key) active @endif" id="{{$category}}-tab" data-toggle="tab" role="tab" aria-controls="{{$category}}" aria-selected="false" href="#{{$category}}_conteiner">{{$category}}</a>
+                        <a class="nav-link @if(!$key) active @endif" id="{{$category}}-tab" data-toggle="tab" role="tab" aria-controls="{{$category}}" aria-selected="false" href="#{{str_replace(' ','_',$category)}}_conteiner">{{$category}}</a>
                       </li>                      
                     @endforeach
                     </ul>
                     <div class="tab-content">
                       @foreach($categories as $key => $category)
-                            <div class="tab-pane fade show @if(!$key) active @endif" id="{{$category}}_conteiner" role="tabpanel" aria-labelledby="{{$category}}-tab">
+                            <div class="tab-pane fade show @if(!$key) active @endif" id="{{str_replace(' ','_',$category)}}_conteiner" role="tabpanel" aria-labelledby="{{$category}}-tab">
                               <div class="col-md-12">
                                 <div class="row">
                               @foreach($products as $key => $product)

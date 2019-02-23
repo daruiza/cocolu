@@ -34,7 +34,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {        
+    {
         $products = Product::            
             where('active',1)
             ->where('store_id',Auth::user()->store()->id)
