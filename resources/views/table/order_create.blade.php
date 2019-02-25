@@ -20,6 +20,9 @@
 
                 <div class="card-header">{{ __('messages.OrderMenu') }}</div>
                   <div class="card-body">
+                    <div class="orders">
+                      
+                    </div>
                     <div class="waiters">
                       {{Form::select('waiters', $waiters,null,['class' => 'form-control'])}} 
                     </div>

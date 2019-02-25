@@ -1,7 +1,7 @@
 function table() {	
 }
 	
-table.prototype.onjquery = function() {	
+table.prototype.onjquery = function() {		
 	table.selectTable('object-table','selected-table');	
 };
 
@@ -44,43 +44,45 @@ table.prototype.selectServiceResponse = function(result) {
 
 table.prototype.returnAddProduct = function(result) {
 	
-	if(result.data[1].toString() != "" || result.data[1].length > 0){			
-		$('#modal_order_conponents .product-name').html(result.data[0].name);
-		var modal = $('#modal_order_conponents .card-body')[0];
-		var n = 0;//numero de ingredientes
-		modal.innerHTML = '';//limpiamos el modal
 
-		var node = document.createElement("div");
-	    node.setAttribute("class", "container form-group");
+	$('#modal_order_conponents .product-name').html(result.data[0].name);
+	var modal = $('#modal_order_conponents .card-body')[0];
+	var n = 0;//numero de ingredientes
+	modal.innerHTML = '';//limpiamos el modal
 
-	    var input = document.createElement("input");	    
-	    input.setAttribute("type", "hidden");
-	    input.setAttribute("name", "id_"+result.data[0].id);
-	    input.setAttribute("value", result.data[0].id);	    	    
-	    node.appendChild(input);
+	var node = document.createElement("div");
+    node.setAttribute("class", "container form-group");
 
-	    var subnode = document.createElement("div");
-		subnode.setAttribute("class", "row");
+    var input = document.createElement("input");	    
+    input.setAttribute("type", "hidden");
+    input.setAttribute("id", "id_ingredient");
+    input.setAttribute("name", "id_"+result.data[0].id);
+    input.setAttribute("value", result.data[0].id);   	    
+    node.appendChild(input);
 
-		var div = document.createElement("div");
-		div.setAttribute("class", "col-sm-4");
-		div.setAttribute("style", "justify-content: center;");
-		var span = document.createElement("span");
-	    span.setAttribute("class", "");			    			    
-	    span.innerHTML = $( "input[name='input_volume']" ).val();
-	    div.appendChild(span);		    
-	    subnode.appendChild(div);
+    var subnode = document.createElement("div");
+	subnode.setAttribute("class", "row");
 
-	    var div = document.createElement("div");
-		div.setAttribute("class", "col-sm-8");
-	    var input = document.createElement("input");	    
-	    input.setAttribute("class", "form-control");
-	    input.setAttribute("name", "volume_"+result.data[0].id);
-	    div.appendChild(input);
-	    subnode.appendChild(div);
+	var div = document.createElement("div");
+	div.setAttribute("class", "col-sm-4");
+	div.setAttribute("style", "justify-content: center;");
+	var span = document.createElement("span");
+    span.setAttribute("class", "");			    			    
+    span.innerHTML = $( "input[name='input_volume']" ).val();
+    div.appendChild(span);		    
+    subnode.appendChild(div);
 
-	    node.appendChild(subnode);
+    var div = document.createElement("div");
+	div.setAttribute("class", "col-sm-8");
+    var input = document.createElement("input");	    
+    input.setAttribute("class", "form-control");
+    input.setAttribute("name", "volume_"+result.data[0].id);
+    div.appendChild(input);
+    subnode.appendChild(div);
 
+    node.appendChild(subnode);
+
+	if(result.data[1].toString() != "" || result.data[1].length > 0){
 	    //ingredientes compuestos
 	    for(obj in result.data[1]) {
 	    	if(Array.isArray(result.data[1][obj])){
@@ -154,12 +156,12 @@ table.prototype.returnAddProduct = function(result) {
 	    		//console.log(result.data[1][obj]);
 	    	}
 		}
+		
+	}
 
-		modal.appendChild(node);
-		$('#modal_order_conponents').modal('toggle');
-	}else{
-		alert('addProduct');		
-	}	
+	modal.appendChild(node);		
+
+	$('#modal_order_conponents').modal('toggle');
 }
 
 var table = new table();

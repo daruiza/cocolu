@@ -7,3 +7,14 @@ $('.option_add_product').on('click', function (e) {
 	datos['name'] = this.id.split('_')[2];
 	ajaxobject.peticionajax($('#form_add_product').attr('action'),datos,"table.returnAddProduct");				
 });
+
+$("#modal_order_conponents .btn-send").on('click', function (e) {
+
+	//guardamos la orden en array de orders
+
+
+	//pintamos las ordenes
+
+	
+	$('#modal_order_conponents').modal('toggle');
+});
