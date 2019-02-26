@@ -78,7 +78,7 @@
 											{!! Form::close() !!}
 										</div>
 
-										{!! Form::select('products',$product->productsArray(),null,['id'=>'products','class'=>'form-control','style'=>'display:none']) !!}
+										{!! Form::select('products',$product->productsArrayCategoryDefault(),null,['id'=>'products','class'=>'form-control','style'=>'display:none']) !!}
 											
 									</div>
 							
