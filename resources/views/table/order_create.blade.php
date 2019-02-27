@@ -123,5 +123,6 @@
   </div>
 </div>
 
+{!! Form::hidden('table_id', $table->id ) !!}
 {!! Form::hidden('input_placeholder_suggestion', __('messages.Suggestion') ) !!}
 {!! Form::hidden('input_volume', __('messages.Volume') ) !!}

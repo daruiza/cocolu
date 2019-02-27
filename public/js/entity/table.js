@@ -155,9 +155,11 @@ table.prototype.returnAddProduct = function(result) {
     			node.appendChild(subnode);
 	    		//console.log(result.data[1][obj]);
 	    	}
-		}
-		
+		}		
 	}
+
+	//add to array order_details whitout repeat
+	order_detail.products.push(result.data);
 
 	modal.appendChild(node);		
 

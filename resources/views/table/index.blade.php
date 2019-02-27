@@ -25,7 +25,7 @@
 @endsection
 
 @section('script')
-	<script type="text/javascript" src="{{ asset('js/entity/table.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/entity/table.js') }}"></script>		
 	<script type="text/javascript">
 		table.onjquery();
 		//validar las opciones
@@ -101,7 +101,8 @@
 	@endisset
 
 	@isset($data['ordermodal'])
-		<script type="text/javascript" src="{{ asset('js/traits/order_create.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/traits/order_detail.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/traits/order_create.js') }}"></script>		
 	@endisset
 
 @endsection
