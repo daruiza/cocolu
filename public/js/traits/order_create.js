@@ -25,9 +25,8 @@ $("#modal_order_conponents .btn-send").on('click', function (e) {
 
 	//limpiamos el array
 	for(obj in order_detail.products) {
-		if(order_detail.products[obj][0].volume_sale == undefined || order_detail.products[obj][0].volume_sale == 0){
-			order_detail.products[obj].pop();
-			order_detail.products[obj].pop();
+		if(order_detail.products[obj][0].volume_sale == undefined || order_detail.products[obj][0].volume_sale == 0){			
+			order_detail.products.splice(obj, 1);
 		}
 	}
 
