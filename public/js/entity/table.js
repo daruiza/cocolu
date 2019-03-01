@@ -88,7 +88,7 @@ table.prototype.returnAddProduct = function(result) {
 	    	if(Array.isArray(result.data[1][obj])){
 
 	    		var subnode = document.createElement("div");
-    			subnode.setAttribute("class", "row");    			
+    			subnode.setAttribute("class", "row multi_ingredient");    			
 
     			var div = document.createElement("div");
     			div.setAttribute("class", "col-sm-4");
@@ -122,7 +122,7 @@ table.prototype.returnAddProduct = function(result) {
 	    	if(!Array.isArray(result.data[1][obj])){
 
 	    		var subnode = document.createElement("div");
-    			subnode.setAttribute("class", "row");
+    			subnode.setAttribute("class", "row ingredient");
 
     			var div = document.createElement("div");
     			div.setAttribute("class", "col-sm-1");

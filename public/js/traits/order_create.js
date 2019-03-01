@@ -17,7 +17,7 @@ $("#modal_order_conponents .btn-send").on('click', function (e) {
 	//actualizamos el product  en el orden array	
 	for(obj in order_detail.products) {
 		//search active product 
-		if(order_detail.products[obj][0].id == $("#modal_order_conponents #id_ingredient").val() ){
+		if(order_detail.products[obj][0].id == $("#modal_order_conponents #id_ingredient").val() && order_detail.products[obj][0].volume_sale == undefined ){
 			order_detail.products[obj][0].volume_sale = $("input[name='volume_"+$("#modal_order_conponents #id_ingredient").val()+"']").val();
 			//ingredients
 		}
