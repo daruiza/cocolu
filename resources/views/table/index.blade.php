@@ -111,6 +111,13 @@
 	<link href="{{ asset('css/custom/table_index.css') }}" rel="stylesheet">    
 	<!--esto no se hace asi, css debe poder recivir variables-->
 	<style type="text/css">
+
+		#modal_order_create .row{
+			border: 1px solid {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
+		}
+		.row-impar{
+		    background-color: {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
+		}
 		.services-table{
 			text-align: center;
 		}
@@ -132,13 +139,10 @@
 		    -ms-user-select: none;
 		    user-select: none;
 		}
-
 		.order_select_conteiner{
 			position: absolute;
     		bottom: 10px;
 		}
-		
-
 	</style>
 
 	@isset($data['ordermodal'])	

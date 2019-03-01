@@ -104,6 +104,7 @@ table.prototype.returnAddProduct = function(result) {
 			    var select = document.createElement("select");
     			select.setAttribute("class", "form-control");
     			select.setAttribute("name", "ingredient_"+result.data[0].id+"_"+result.data[1][obj][0].product_id);
+    			select.setAttribute("id", "ingredient_"+result.data[0].id+"_"+result.data[1][obj][0].product_id);
 
 			    for(grp in result.data[1][obj]) {			    	
 			        var opt1 = document.createElement('option');   
