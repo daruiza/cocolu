@@ -14,6 +14,10 @@
     margin-bottom: 2px;
 }
 
+#modal_order_create .product_obj{	
+	cursor: pointer;
+}
+
 #modal_order_create .card-header,
 #modal_order_create .card-body{
 	padding: 0.25rem 0.25rem;

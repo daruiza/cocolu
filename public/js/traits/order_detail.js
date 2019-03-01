@@ -19,10 +19,11 @@ order_detail.prototype.orders_paint = function(container) {
 
     	var subnode = document.createElement("div");    	
 		if(obj%2){
-			subnode.setAttribute("class", "row");
+			subnode.setAttribute("class", "row product_obj");
 		}else{
-			subnode.setAttribute("class", "row row-impar");
+			subnode.setAttribute("class", "row product_obj row-impar");
 		}
+		subnode.setAttribute("id", "order_product_"+obj);
 
 		var div = document.createElement("div");
 		div.setAttribute("class", "col-sm-3");		
@@ -77,6 +78,10 @@ order_detail.prototype.orders_paint = function(container) {
     node.appendChild(subnode);	
 
     container.appendChild(node);
+    
+    $( ".product_obj" ).on( "click", function() {
+	  alert(this.id);
+	});
 };
 
 
