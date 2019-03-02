@@ -80,7 +80,31 @@ order_detail.prototype.orders_paint = function(container) {
     container.appendChild(node);
     
     $( ".product_obj" ).on( "click", function() {
-	  alert(this.id);
+	  //alert(this.id);
+	  //seteado de informacion al modal
+	  var modal = $('#modal_detail .card-body')[0];	  
+	  modal.innerHTML = '';//limpiamos el modal
+	  var index = this.id.split("_")[2];
+	  $('#modal_detail .detail-name').html(order_detail.products[index][0].name);
+
+	  var node = document.createElement("div");
+	  node.setAttribute("class", "container form-group");
+
+	  var input = document.createElement("input");	    
+	  input.setAttribute("type", "hidden");
+	  input.setAttribute("id", "id_ingredient");
+	  input.setAttribute("name", "id_"+order_detail.products[index][0].id);
+	  input.setAttribute("value", order_detail.products[index][0].id);   	    
+	  node.appendChild(input);
+
+	  var input = document.createElement("input");	    
+	  input.setAttribute("type", "hidden");
+	  input.setAttribute("id", "index_ingredient");
+	  input.setAttribute("name", "index_"+index);
+	  input.setAttribute("value", index);   	    
+	  node.appendChild(input);
+	  
+	  $('#modal_detail').modal('toggle');
 	});
 };
 

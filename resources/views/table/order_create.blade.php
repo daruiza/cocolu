@@ -123,6 +123,44 @@
   </div>
 </div>
 
+<div id="modal_detail" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h6 class="modal-title">
+          <span><i class="fas fa-list-alt"></i> {{ __('messages.EditDetail') }}</span>        
+          <span class="detail-name"></span>
+        </h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+        <div class="container">          
+          <div class="row">
+            <div class="col-sm-12"> 
+              <div class="card">
+                  <div class="card-body">
+                    
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-send" form="" >{{ __('form.Send') }}</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 {!! Form::hidden('table_id', $table->id ) !!}
 {!! Form::hidden('input_placeholder_suggestion', __('messages.Suggestion') ) !!}
 {!! Form::hidden('input_volume', __('messages.Volume') ) !!}
