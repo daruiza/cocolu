@@ -164,3 +164,5 @@
 {!! Form::hidden('table_id', $table->id ) !!}
 {!! Form::hidden('input_placeholder_suggestion', __('messages.Suggestion') ) !!}
 {!! Form::hidden('input_volume', __('messages.Volume') ) !!}
+{!! Form::hidden('input_price', __('messages.Price') ) !!}
+{!! Form::hidden('input_total', __('messages.Total') ) !!}

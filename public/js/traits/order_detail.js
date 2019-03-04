@@ -78,7 +78,8 @@ order_detail.prototype.orders_paint = function(container) {
     node.appendChild(subnode);	
 
     container.appendChild(node);
-    
+	
+	//es mejor crearlo aqui que se tienen todas las variables
     $( ".product_obj" ).on( "click", function() {
 	  //alert(this.id);
 	  //seteado de informacion al modal
@@ -88,7 +89,7 @@ order_detail.prototype.orders_paint = function(container) {
 	  $('#modal_detail .detail-name').html(order_detail.products[index][0].name);
 
 	  var node = document.createElement("div");
-	  node.setAttribute("class", "container form-group");
+	  node.setAttribute("class", "container");
 
 	  var input = document.createElement("input");	    
 	  input.setAttribute("type", "hidden");
@@ -103,6 +104,51 @@ order_detail.prototype.orders_paint = function(container) {
 	  input.setAttribute("name", "index_"+index);
 	  input.setAttribute("value", index);   	    
 	  node.appendChild(input);
+
+	  var subnode = document.createElement("div");
+	  subnode.setAttribute("class", "row");
+
+	  var div = document.createElement("div");
+	  div.setAttribute("class", "col-sm-3");		
+	  div.setAttribute("style", ""); 
+	  var span = document.createElement("span");
+	  span.setAttribute("class", "");
+	  span.innerHTML = order_detail.products[index][0].name;
+	  div.appendChild(span);		    
+	  subnode.appendChild(div);
+
+	  var div = document.createElement("div");
+	  div.setAttribute("class", "col-sm-3");		
+	  div.setAttribute("style", ""); 
+	  var span = document.createElement("span");
+	  span.setAttribute("class", "");
+	  span.innerHTML = $( "input[name='input_price']" ).val()+': $'+order_detail.products[index][0].price;
+	  div.appendChild(span);		    
+	  subnode.appendChild(div);
+
+	  var div = document.createElement("div");
+	  div.setAttribute("class", "col-sm-3");		
+	  div.setAttribute("style", ""); 
+	  var span = document.createElement("span");
+	  span.setAttribute("class", "");
+	  span.innerHTML = $( "input[name='input_volume']" ).val()+':'+order_detail.products[index][0].volume_sale;
+	  div.appendChild(span);		    
+	  subnode.appendChild(div);
+
+	  var div = document.createElement("div");
+	  div.setAttribute("class", "col-sm-3");		
+	  div.setAttribute("style", ""); 
+	  var span = document.createElement("span");
+	  span.setAttribute("class", "");
+	  span.innerHTML = $( "input[name='input_volume']" ).val()+':'+order_detail.products[index][0].volume_sale;
+	  div.appendChild(span);		    
+	  subnode.appendChild(div);
+
+	  
+	  
+
+	  node.appendChild(subnode);
+	  modal.appendChild(node);
 	  
 	  $('#modal_detail').modal('toggle');
 	});

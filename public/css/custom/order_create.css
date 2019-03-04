@@ -124,10 +124,20 @@
 	height: calc(1.5rem + 2px);
 }
 
-.orders .container {
+.orders .container,
+#modal_detail .container,
+#modal_detail .card-body  .row > div{
 	padding: 0px;
 }
 
-.orders .row{
+.orders .row,
+#modal_detail .card-body  .row > div,
+#modal_detail .container,
+#modal_detail .card-body  .row{
 	margin: 0px;
+}
+
+#modal_detail .card-body,
+#modal_detail .modal-body{
+	padding: 0.50rem;
 }

@@ -143,6 +143,7 @@
 			position: absolute;
     		bottom: 10px;
 		}
+		
 	</style>
 
 	@isset($data['ordermodal'])	
