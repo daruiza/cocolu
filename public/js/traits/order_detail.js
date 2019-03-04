@@ -140,11 +140,9 @@ order_detail.prototype.orders_paint = function(container) {
 	  div.setAttribute("style", ""); 
 	  var span = document.createElement("span");
 	  span.setAttribute("class", "");
-	  span.innerHTML = $( "input[name='input_volume']" ).val()+':'+order_detail.products[index][0].volume_sale;
+	  span.innerHTML = ''+':'+(order_detail.products[index][0].volume_sale*order_detail.products[index][0].price);
 	  div.appendChild(span);		    
 	  subnode.appendChild(div);
-
-	  
 	  
 
 	  node.appendChild(subnode);

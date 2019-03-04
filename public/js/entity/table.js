@@ -42,9 +42,8 @@ table.prototype.selectServiceResponse = function(result) {
 	
 }
 
-table.prototype.returnAddProduct = function(result) {
+table.prototype.returnAddProduct = function(result) {	
 	
-
 	$('#modal_order_conponents .product-name').html(result.data[0].name);
 	var modal = $('#modal_order_conponents .card-body')[0];
 	var n = 0;//numero de ingredientes

@@ -12,13 +12,14 @@ $('.option_add_product').on('click', function (e) {
 	ajaxobject.peticionajax($('#form_add_product').attr('action'),datos,"table.returnAddProduct");				
 });
 
-$("#modal_order_conponents .btn-send").on('click', function (e) {
+$("#modal_order_conponents .btn-send").on('click', function (e) {	
 
 	//actualizamos el product  en el orden array	
 	for(obj in order_detail.products) {
 		//search active product 
 		if(order_detail.products[obj][0].id == $("#modal_order_conponents #id_ingredient").val() && 
 			order_detail.products[obj][0].volume_sale == undefined ){
+			
 			order_detail.products[obj][0].volume_sale = parseInt($("input[name='volume_"+$("#modal_order_conponents #id_ingredient").val()+"']").val());
 			
 			//ingredients
@@ -41,7 +42,7 @@ $("#modal_order_conponents .btn-send").on('click', function (e) {
 
 	//limpiamos el array
 	for(obj in order_detail.products) {
-		if(order_detail.products[obj][0].volume_sale == undefined || order_detail.products[obj][0].volume_sale == 0){			
+		if(order_detail.products[obj][0].volume_sale == undefined || order_detail.products[obj][0].volume_sale == 0 || isNaN(order_detail.products[obj][0].volume_sale)){			
 			order_detail.products.splice(obj, 1);
 		}
 	}
