@@ -26,7 +26,8 @@ $("#modal_order_conponents .btn-send").on('click', function (e) {
 			for(obj_ingredient in order_detail.products[obj][1]){
 				//no compuesto
 				if(!Array.isArray(order_detail.products[obj][1][obj_ingredient])){
-					input = $("input[value='"+order_detail.products[obj][1][obj_ingredient].ingredient_id)[0];	
+					//input = $("input[value='"+order_detail.products[obj][1][obj_ingredient].ingredient_id)[0];	
+					input = $("input[name='ingredient_"+order_detail.products[obj][0].id+"_"+order_detail.products[obj][1][obj_ingredient].ingredient_id)[0];	
 					suggestion = $("input[name='ingredient_suggestion_"+order_detail.products[obj][1][obj_ingredient].ingredient_id)[0].value;	
 					order_detail.products[obj][1][obj_ingredient].value_checked = input.checked;
 					order_detail.products[obj][1][obj_ingredient].value_suggestion = suggestion;
@@ -50,5 +51,5 @@ $("#modal_order_conponents .btn-send").on('click', function (e) {
 	//llamado a pintador de las ordenes
 	order_detail.orders_paint($("#modal_order_create .orders")[0]);
 	
-	$('#modal_order_conponents').modal('toggle');
+	//$('#modal_order_conponents').modal('toggle');
 });

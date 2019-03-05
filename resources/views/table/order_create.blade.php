@@ -20,12 +20,17 @@
 
                 <div class="card-header">{{ __('messages.OrderMenu') }}</div>
                   <div class="card-body">
-                    <div class="orders">
+                    {!! Form::open(array('id'=>'form-table-order','route'=>['table.saveorder',$table->id],'method'=>'POST')) !!}
+
+                      {{ Form::hidden('table_id', $table->id) }}           
+                      <div class="orders">
+                        
+                      </div>
+                      <div class="waiters">
+                        {{Form::select('waiters', $waiters,null,['class' => 'form-control'])}} 
+                      </div>
                       
-                    </div>
-                    <div class="waiters">
-                      {{Form::select('waiters', $waiters,null,['class' => 'form-control'])}} 
-                    </div>
+                    {!! Form::close() !!}
                   </div>
 
               </div>
@@ -79,7 +84,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" form="form-table-service">{{ __('form.Send') }}</button>
+        <button type="submit" class="btn btn-primary" form="form-table-order">{{ __('form.Send') }}</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
       </div>
     </div>
@@ -115,7 +120,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-send" form="" >{{ __('form.Send') }}</button>
+        <button type="submit" class="btn btn-primary btn-send" form="" data-dismiss="modal" >{{ __('form.Send') }}</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
       </div>
     </div>
@@ -153,8 +158,8 @@
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-send" form="" >{{ __('form.Send') }}</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
+        <button type="submit" class="btn btn-primary btn-edit" form="" data-dismiss="modal" >{{ __('form.Edit') }}</button>
+        <button type="button" class="btn btn-secondary btn-delete" data-dismiss="modal">{{ __('form.Delete') }}</button>
       </div>
 
     </div>
@@ -166,3 +171,4 @@
 {!! Form::hidden('input_volume', __('messages.Volume') ) !!}
 {!! Form::hidden('input_price', __('messages.Price') ) !!}
 {!! Form::hidden('input_total', __('messages.Total') ) !!}
+{!! Form::hidden('error_ingredient_edit', __('messages.errorIngredientEdit') ) !!}

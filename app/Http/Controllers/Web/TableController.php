@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
 use App\Http\Controllers\Web\ServiceController;
+use App\Http\Controllers\Web\orderController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ class TableController extends Controller
     {               
         $this->middleware('auth');
 		$this->serviceController = new ServiceController();
+        $this->orderController = new OrderController();
     }
     /**
      * Display a listing of the resource.

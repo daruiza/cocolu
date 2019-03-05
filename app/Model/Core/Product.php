@@ -49,7 +49,7 @@ class Product extends Model
         //reutiliza el namespace
         //return $this->hasMany(Product::class,'ingredient_id','id');
         return \DB::table('product_product') 
-            ->select('product_product.*','products.name as product','unities.name as unity')       
+            ->select('product_product.id','product_product.ingredient_id','product_product.product_id','product_product.volume','product_product.group','products.name as product','unities.name as unity')       
             ->leftJoin('products','products.id','product_product.ingredient_id')
             ->leftJoin('unities','unities.id','products.unity_id')
             ->where('product_id',$this->id)

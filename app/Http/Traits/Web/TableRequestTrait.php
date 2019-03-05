@@ -91,6 +91,10 @@ trait TableRequestTrait
 	public function saveService(Request $request,$id){        
 		return $this->serviceController->store($request);
 	}
+
+    public function saveOrder(Request $request,$id){        
+        return $this->orderController->store($request);
+    }
     
 	
 }

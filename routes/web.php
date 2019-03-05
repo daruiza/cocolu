@@ -69,3 +69,6 @@ Route::get('product/{id}/editstock', [
 Route::post('product/{id}/addproduct', [
    'as' => 'product.addproduct', 'uses' => 'Web\ProductController@addProduct'
 ]);
+Route::post('table/{id}/saveorder', [
+   'as' => 'table.saveorder', 'uses' => 'Web\TableController@saveOrder'
+]);
