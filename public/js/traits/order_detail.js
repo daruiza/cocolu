@@ -26,7 +26,7 @@ order_detail.prototype.orders_paint = function(container) {
 		subnode.setAttribute("id", "order_product_"+obj);
 
 		var div = document.createElement("div");
-		div.setAttribute("class", "col-sm-3");		
+		div.setAttribute("class", "col-sm-2");		
 		div.setAttribute("style", "text-align: center;"); 
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
@@ -35,12 +35,28 @@ order_detail.prototype.orders_paint = function(container) {
 	    subnode.appendChild(div);
 		
 		var div = document.createElement("div");
-		div.setAttribute("class", "col-sm-9");		
+		div.setAttribute("class", "col-sm-10");		
 		div.setAttribute("style", "text-align: center;"); 
 		var span = document.createElement("span");
 	    span.setAttribute("class", "");	    
 	    span.innerHTML = order_detail.products[obj][0].name;
-	    div.appendChild(span);		    
+	    div.appendChild(span);
+
+	    //en caso de existir un ingrediente cmpuesto
+	    for(index in order_detail.products[obj][1]){
+	    	if(Array.isArray(order_detail.products[obj][1][index])){				
+	    		for(i in order_detail.products[obj][1][index]){
+	    			if(order_detail.products[obj][1][index][i].value_selected){
+	    				var span = document.createElement("span");
+					    span.setAttribute("class", "");	    
+					    span.innerHTML = ' '+order_detail.products[obj][1][index][i].product;
+					    div.appendChild(span);			    
+	    			}
+	    		}
+				
+	    	}
+	    }
+
 	    subnode.appendChild(div);
 
 	    var div = document.createElement("div");
@@ -190,6 +206,8 @@ order_detail.prototype.orders_paint = function(container) {
 	  });
 
 	  $( "#modal_detail .btn-delete" ).on( "click", function() {
+	  	var index = parseInt($('#modal_detail #index_ingredient').val());
+	  	var id = parseInt($('#modal_detail #id_ingredient').val());
 	  	order_detail.products.splice(index, 1);
 	  	//llamado a pintador de las ordenes
 		order_detail.orders_paint($("#modal_order_create .orders")[0]);
