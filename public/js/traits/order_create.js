@@ -20,24 +20,28 @@ $("#modal_order_conponents .btn-send").on('click', function (e) {
 		if(order_detail.products[obj][0].id == $("#modal_order_conponents #id_ingredient").val() && 
 			order_detail.products[obj][0].volume_sale == undefined ){
 			
-			order_detail.products[obj][0].volume_sale = parseInt($("input[name='volume_"+$("#modal_order_conponents #id_ingredient").val()+"']").val());
-			
-			//ingredients
-			for(obj_ingredient in order_detail.products[obj][1]){
-				//no compuesto
-				if(!Array.isArray(order_detail.products[obj][1][obj_ingredient])){
-					//input = $("input[value='"+order_detail.products[obj][1][obj_ingredient].ingredient_id)[0];	
-					input = $("input[name='ingredient_"+order_detail.products[obj][0].id+"_"+order_detail.products[obj][1][obj_ingredient].ingredient_id)[0];	
-					suggestion = $("input[name='ingredient_suggestion_"+order_detail.products[obj][1][obj_ingredient].ingredient_id)[0].value;	
-					order_detail.products[obj][1][obj_ingredient].value_checked = input.checked;
-					order_detail.products[obj][1][obj_ingredient].value_suggestion = suggestion;
-				}else{
-					var select = $("#ingredient_"+order_detail.products[obj][0].id+"_"+order_detail.products[obj][1][obj_ingredient][0].product_id);
-					for(obj_array in order_detail.products[obj][1][obj_ingredient]){
-						order_detail.products[obj][1][obj_ingredient][obj_array].value_selected = select[0].options[obj_array].selected;						
+			if($("input[name='volume_"+$("#modal_order_conponents #id_ingredient").val()+"']").val() != ""){
+
+				order_detail.products[obj][0].volume_sale = parseInt($("input[name='volume_"+$("#modal_order_conponents #id_ingredient").val()+"']").val());			
+				//ingredients
+				for(obj_ingredient in order_detail.products[obj][1]){
+					//no compuesto
+					if(!Array.isArray(order_detail.products[obj][1][obj_ingredient])){
+						//input = $("input[value='"+order_detail.products[obj][1][obj_ingredient].ingredient_id)[0];	
+						input = $("input[name='ingredient_"+order_detail.products[obj][0].id+"_"+order_detail.products[obj][1][obj_ingredient].ingredient_id)[0];	
+						suggestion = $("input[name='ingredient_suggestion_"+order_detail.products[obj][1][obj_ingredient].ingredient_id)[0].value;	
+						order_detail.products[obj][1][obj_ingredient].value_checked = input.checked;
+						order_detail.products[obj][1][obj_ingredient].value_suggestion = suggestion;
+					}else{
+						var select = $("#ingredient_"+order_detail.products[obj][0].id+"_"+order_detail.products[obj][1][obj_ingredient][0].product_id);
+						for(obj_array in order_detail.products[obj][1][obj_ingredient]){
+							order_detail.products[obj][1][obj_ingredient][obj_array].value_selected = select[0].options[obj_array].selected;						
+						}
 					}
 				}
+
 			}
+			
 		}
 	}
 
