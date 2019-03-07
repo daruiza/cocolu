@@ -42,7 +42,7 @@ order_detail.prototype.orders_paint = function(container) {
 	    span.innerHTML = order_detail.products[obj][0].name;
 	    div.appendChild(span);
 
-	    //en caso de existir un ingrediente cmpuesto
+	    //en caso de existir un ingrediente compuesto
 	    for(index in order_detail.products[obj][1]){
 	    	if(Array.isArray(order_detail.products[obj][1][index])){				
 	    		for(i in order_detail.products[obj][1][index]){
@@ -72,6 +72,48 @@ order_detail.prototype.orders_paint = function(container) {
 	    node.appendChild(subnode);
 
 	    sum = sum + total;
+
+
+	    //Luego pintamos los campos ocultos para el form al servidor
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "prod_"+order_detail.products[obj][0].id);
+	    input.setAttribute("value", order_detail.products[obj][0].volume_sale);   	    
+	    node.appendChild(input);
+	    //agregamos los ingredientes
+	    for(index in order_detail.products[obj][1]){
+	    	//primero los que no estan compuestos
+	    	if(!Array.isArray(order_detail.products[obj][1][index])){
+	    		var input = document.createElement("input");
+			    input.setAttribute("type", "hidden");	    
+			    input.setAttribute("name", "ingr_"+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index].ingredient_id);
+			    input.setAttribute("value", order_detail.products[obj][1][index].value_checked);   	    
+			    node.appendChild(input);
+
+			    var input = document.createElement("input");
+			    input.setAttribute("type", "hidden");	    
+			    input.setAttribute("name", "sugg_"+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index].ingredient_id);
+			    input.setAttribute("value", order_detail.products[obj][1][index].value_suggestion);   	    
+			    node.appendChild(input);
+
+	    	}else{
+	    		for(i in order_detail.products[obj][1][index]){
+	    			if(order_detail.products[obj][1][index][i].value_selected){
+	    				var span = document.createElement("span");
+					    span.setAttribute("class", "");	    
+					    span.innerHTML = ' '+order_detail.products[obj][1][index][i].product;
+					    div.appendChild(span);			    
+	    			}
+
+	    			var input = document.createElement("input");
+				    input.setAttribute("type", "hidden");	    
+				    input.setAttribute("name", "grou_"+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index][i].ingredient_id+'_'+order_detail.products[obj][1][index][i].group);
+				    input.setAttribute("value", order_detail.products[obj][1][index][i].value_selected);   	    
+				    node.appendChild(input);
+	    		}
+	    	}
+	    	
+	    }
 	}
 
 	container.appendChild(node);
@@ -92,7 +134,6 @@ order_detail.prototype.orders_paint = function(container) {
     subnode.appendChild(div);
 
     node.appendChild(subnode);	
-
     container.appendChild(node);
 	
 	//es mejor crearlo aqui que se tienen todas las variables

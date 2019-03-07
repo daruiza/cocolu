@@ -46,9 +46,11 @@ $("#modal_order_conponents .btn-send").on('click', function (e) {
 	}
 
 	//limpiamos el array
-	for(obj in order_detail.products) {
+	for (obj = 0; obj < order_detail.products.length; obj++) { 
+	//for(obj in order_detail.products) {
 		if(order_detail.products[obj][0].volume_sale == undefined || order_detail.products[obj][0].volume_sale == 0 || isNaN(order_detail.products[obj][0].volume_sale)){			
 			order_detail.products.splice(obj, 1);
+			obj=obj-1;			
 		}
 	}
 
