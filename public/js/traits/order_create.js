@@ -12,8 +12,7 @@ $('.option_add_product').on('click', function (e) {
 	ajaxobject.peticionajax($('#form_add_product').attr('action'),datos,"table.returnAddProduct");				
 });
 
-$("#modal_order_conponents .btn-send").on('click', function (e) {	
-
+$("#modal_order_conponents .btn-send").on('click', function (e) {
 	//actualizamos el product  en el orden array	
 	for(obj in order_detail.products) {
 		//search active product 
@@ -55,7 +54,16 @@ $("#modal_order_conponents .btn-send").on('click', function (e) {
 	}
 
 	//llamado a pintador de las ordenes
-	order_detail.orders_paint($("#modal_order_create .orders")[0]);
-	
+	order_detail.orders_paint($("#modal_order_create .orders")[0]);	
 	//$('#modal_order_conponents').modal('toggle');
+
+});
+
+$("#modal_order_conponents .btn-close").on('click', function (e) {
+	//limpiamos el array, ante un close
+	for(obj in order_detail.products) {
+		if(order_detail.products[obj][0].volume_sale == undefined || order_detail.products[obj][0].volume_sale == 0 || isNaN(order_detail.products[obj][0].volume_sale)){			
+			order_detail.products.splice(obj, 1);					
+		}
+	}
 });

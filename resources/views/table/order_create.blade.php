@@ -101,7 +101,7 @@
             <span><i class="fas fa-list-alt"></i> {{ __('messages.Components') }}</span>        
             <span class="product-name"></span>
           </h6>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close btn-close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -121,7 +121,7 @@
 
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary btn-send" form="" data-dismiss="modal" >{{ __('form.Send') }}</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
+        <button type="button" class="btn btn-secondary btn-close"  data-dismiss="modal">{{ __('form.Cancel') }}</button>
       </div>
     </div>
 

@@ -77,7 +77,7 @@ order_detail.prototype.orders_paint = function(container) {
 	    //Luego pintamos los campos ocultos para el form al servidor
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
-	    input.setAttribute("name", "prod_"+order_detail.products[obj][0].id);
+	    input.setAttribute("name", "prod_"+obj+'_'+order_detail.products[obj][0].id);
 	    input.setAttribute("value", order_detail.products[obj][0].volume_sale);   	    
 	    node.appendChild(input);
 	    //agregamos los ingredientes
@@ -86,30 +86,26 @@ order_detail.prototype.orders_paint = function(container) {
 	    	if(!Array.isArray(order_detail.products[obj][1][index])){
 	    		var input = document.createElement("input");
 			    input.setAttribute("type", "hidden");	    
-			    input.setAttribute("name", "ingr_"+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index].ingredient_id);
+			    input.setAttribute("name", "ingr_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index].ingredient_id);
 			    input.setAttribute("value", order_detail.products[obj][1][index].value_checked);   	    
 			    node.appendChild(input);
 
 			    var input = document.createElement("input");
 			    input.setAttribute("type", "hidden");	    
-			    input.setAttribute("name", "sugg_"+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index].ingredient_id);
+			    input.setAttribute("name", "sugg_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index].ingredient_id);
 			    input.setAttribute("value", order_detail.products[obj][1][index].value_suggestion);   	    
 			    node.appendChild(input);
 
 	    	}else{
+
 	    		for(i in order_detail.products[obj][1][index]){
 	    			if(order_detail.products[obj][1][index][i].value_selected){
-	    				var span = document.createElement("span");
-					    span.setAttribute("class", "");	    
-					    span.innerHTML = ' '+order_detail.products[obj][1][index][i].product;
-					    div.appendChild(span);			    
+	    				var input = document.createElement("input");
+					    input.setAttribute("type", "hidden");	    
+					    input.setAttribute("name", "grou_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index][i].ingredient_id+'_'+order_detail.products[obj][1][index][i].group);
+					    input.setAttribute("value", order_detail.products[obj][1][index][i].value_selected);   	    
+					    node.appendChild(input);		    
 	    			}
-
-	    			var input = document.createElement("input");
-				    input.setAttribute("type", "hidden");	    
-				    input.setAttribute("name", "grou_"+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index][i].ingredient_id+'_'+order_detail.products[obj][1][index][i].group);
-				    input.setAttribute("value", order_detail.products[obj][1][index][i].value_selected);   	    
-				    node.appendChild(input);
 	    		}
 	    	}
 	    	
@@ -118,6 +114,7 @@ order_detail.prototype.orders_paint = function(container) {
 
 	container.appendChild(node);
 
+	//el total acomulado
 	var node = document.createElement("div");
     node.setAttribute("class", "container form-group");
 
