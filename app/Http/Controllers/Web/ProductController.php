@@ -66,7 +66,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //validaciom orden null
-        if(is_null($request->input['order'])){
+        if(!empty($request->input['order'])){
             $request->request->add(['order' => Product::select('order')->max('order')+1]);            
         }
 

@@ -31,7 +31,9 @@ class Table extends Model
     }
 	
 	public function tableServiceOpen(){				
-		return Service::where('table_id', $this->id)->get();		
+		return Service::where('table_id', $this->id)
+        ->where('open',1)
+        ->get();		
 	}
 
     public function icons()

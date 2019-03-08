@@ -37,7 +37,8 @@ class OrderController extends Controller
     public function create(Request $request)
     {
         $table = Table::find($request->input('table-id'));
-         
+        $service = $table->tableServiceOpen();
+
         if(!Auth::user()->validateUserStore($table->store_id)){
             //return tableController->index();
             //return view('table.index',compact('table'))->with('danger', [['NO_STORE_OWNER']])->with('data', []);
@@ -59,7 +60,8 @@ class OrderController extends Controller
 
         $waiters = Waiter::waitersByStoreSelect();                                 
         $products = Product::productstByStore();             
-        $categories = array();
+        $categories = array();                        
+
         foreach ($products as $value) {
             if(!in_array($value->category,$categories))$categories[]=$value->category;
         }
@@ -76,7 +78,25 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
+        //validamos
+        $table = Table::find($request->input('table-id'));
+        if(!Auth::user()->validateUserStore($table->store_id)){
+            Session::flash('danger', [['NO_STORE_OWNER']]);
+            return redirect('table');
+        }
+        
+        $order_serial = Order::select('serial')
+            ->where('service_id',$service->first()->id)
+            ->max('serial');
+
+        if(empty($order_serial)){
+            $order_serial = 1;
+        }else{
+            $order_serial++;
+        }
+        
+
         dd($request);
         return 'guardado de orenes';
     }
