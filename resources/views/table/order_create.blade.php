@@ -22,12 +22,12 @@
                   <div class="card-body">
                     {!! Form::open(array('id'=>'form-table-order','route'=>['table.saveorder',$table->id],'method'=>'POST')) !!}
 
-                      {{ Form::hidden('table_id', $table->id) }}           
+                      {{ Form::hidden('table-id', $table->id) }}           
                       <div class="orders">
                         
                       </div>
                       <div class="waiters">
-                        {{Form::select('waiters', $waiters,null,['class' => 'form-control'])}} 
+                        {{Form::select('waiter_id', $waiters,null,['class' => 'form-control'])}} 
                       </div>
                       
                     {!! Form::close() !!}
@@ -166,7 +166,7 @@
   </div>
 </div>
 
-{!! Form::hidden('table_id', $table->id ) !!}
+
 {!! Form::hidden('input_placeholder_suggestion', __('messages.Suggestion') ) !!}
 {!! Form::hidden('input_volume', __('messages.Volume') ) !!}
 {!! Form::hidden('input_price', __('messages.Price') ) !!}

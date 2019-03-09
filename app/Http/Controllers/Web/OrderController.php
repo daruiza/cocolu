@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
 use App\Model\Core\Order;
+use App\Model\Core\Stock;
 use App\Model\Core\Waiter;
 use App\Model\Core\Product;
 
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+
+use DateTime;
 
 class OrderController extends Controller
 {
@@ -37,7 +40,7 @@ class OrderController extends Controller
     public function create(Request $request)
     {
         $table = Table::find($request->input('table-id'));
-        $service = $table->tableServiceOpen();
+        //$service = $table->tableServiceOpen();
 
         if(!Auth::user()->validateUserStore($table->store_id)){
             //return tableController->index();
@@ -79,25 +82,137 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {        
-        //validamos
+        //validamos        
         $table = Table::find($request->input('table-id'));
+        $service = $table->tableServiceOpen()->first();
+
         if(!Auth::user()->validateUserStore($table->store_id)){
             Session::flash('danger', [['NO_STORE_OWNER']]);
             return redirect('table');
         }
         
-        $order_serial = Order::select('serial')
-            ->where('service_id',$service->first()->id)
-            ->max('serial');
+        //preparación de datos        
+        //productos
+        //constitucion
+        //ingr_0_12_10_13
+        /*
+        0. consecutivo
+        1. Id de producto
+        2. Id Ingrediente
+        3. Id de relacion en prod_prod 
 
-        if(empty($order_serial)){
-            $order_serial = 1;
-        }else{
-            $order_serial++;
+        */
+
+        $products = array();
+        $i = -1;
+        //dd($request->input());
+        foreach ($request->input() as $key => $value) {
+            $array = explode('_',$key);                
+            if(count($array) > 1){
+                if(is_numeric($array[1])){
+                    //product id
+                    if($array[0] == 'prod'){
+                        $products[$array[2]]['produt_id'] = $array[3];
+                        $products[$array[2]]['volume'] = $value ;
+                    }
+                    if($array[0] == 'ingr'){
+                        $products[$array[2]]['ingredients'][$array[3]]['ingredient_id'] = $array[3];
+                        $products[$array[2]]['ingredients'][$array[3]]['volume'] = $value;
+                        $products[$array[2]]['ingredients'][$array[3]]['rel_id'] = $array[4];
+                    }
+                    if($array[0] == 'sugg'){
+                        $products[$array[2]]['ingredients'][$array[3]]['suggestion'] = $value;
+                    }
+                    if($array[0] == 'grou'){
+                        $products[$array[2]]['groups'][$array[3]]['ingredient_id'] = $array[3];
+                        $products[$array[2]]['groups'][$array[3]]['rel_id'] = $array[4];
+                        $products[$array[2]]['groups'][$array[3]]['volume'] = $value;
+                    }
+                }                
+            }
         }
         
+        //1. crear la orden de pedido
+        $order = new Order();
+        //fecha y hora
+        $today = new DateTime();
+        $today = $today->format('Y-m-d H:i:s');     
+        $request->request->add(['date' => $today]);
+        $request->request->add(['description' => json_encode($products)]);        
+        $request->request->add(['service_id' => $service->id]);
+        $request->request->add(['serial' => $order->nextSerial($service)]);
+        $order::create($request->input());
+             
+        //2. descontar de inventario, 2 procesos (movimiento y descuento)
+        //hay que buscar la relación del producto y el ingrediente
+        foreach ($products as $value) {            
+            //primero descontamos en stock
+            $stock = new Stock();
+            $stock->storeStockProduct(array(
+                'produt_id' =>  $value['produt_id'],
+                'volume' =>  $value['volume'],
+                'shift' =>  0, 
+                'date' =>  $today
+            ));
 
-        dd($request);
+            if(array_key_exists('ingredients',$value)){
+                //descuento por ingrediente * cantidad pedida
+                foreach ($value['ingredients'] as  $sub_value) {                   
+                    $stock = new Stock();                     
+                    $stock->storeStockIngredient(array(                
+                        'ingredient_id'=>$sub_value['ingredient_id'],
+                        'rel_id'=>$sub_value['rel_id'],
+                        'volume_product' =>  $value['volume'],
+                        'suggestion'=>$sub_value['suggestion'],                        
+                        'shift' =>  0, 
+                        'date' =>  $today
+                    ));
+                }
+            }
+            if(array_key_exists('groups',$value)){
+                //el descuento del grupo esta dado en su agrupacion
+                foreach ($value['groups'] as  $sub_value) {
+                    $stock = new Stock();                  
+                    $stock->storeStockIngredient(array(                
+                        'ingredient_id'=>$sub_value['ingredient_id'],
+                        'rel_id'=>$sub_value['rel_id'],
+                        'volume_product' =>  $value['volume'],                      
+                        'shift' =>  0, 
+                        'date' =>  $today                        
+                    ));
+                }
+            }
+
+            //segundo descontamos en producto
+            $product = Product::find($value['produt_id']);
+            $product->editProductStock(array(                
+                'volume' =>  $value['volume']                
+            ));
+            if(array_key_exists('ingredients',$value)){
+                //descuento por ingrediente * cantidad pedida
+                foreach ($value['ingredients'] as  $sub_value) {
+                   $sub_product = Product::find($sub_value['ingredient_id']);
+                   $sub_product->editProductStockIngredient(array(                
+                        'rel_id' =>  $sub_value['rel_id'],
+                        'volume_product' =>  $value['volume'],                       
+                    ));
+                }
+            }
+            if(array_key_exists('groups',$value)){
+                //el descuento del grupo esta dado en su agrupacion
+                foreach ($value['groups'] as  $sub_value) {
+                   $sub_product = Product::find($sub_value['ingredient_id']);
+                   $sub_product->editProductStockIngredient(array(                
+                        'rel_id' =>  $sub_value['rel_id'],
+                        'volume_product' =>  $value['volume'],                      
+                    ));
+                }
+            }
+        }
+        //2.1 tener en cuenta todos sus ingredientes en caso de tener y guardar ese suceso
+        //notificar
+        //retornar
+        dd($products);
         return 'guardado de orenes';
     }
 

@@ -89,9 +89,7 @@ class ServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {           
-        
-
+    {
         $table = Table::find($request->input('table_id'));
         $tables = Table::
             where('store_id',Auth::user()->store()->id)

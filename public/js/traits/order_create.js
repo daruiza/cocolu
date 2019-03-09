@@ -1,7 +1,7 @@
 $('#modal_order_create').modal('toggle');
 
 //init order_detail
-order_detail.table_id = $( "input[name='table_id']" ).val();
+order_detail.table_id = $( "input[name='table-id']" ).val();
 order_detail.products = new Array();
 
 $('.option_add_product').on('click', function (e) {

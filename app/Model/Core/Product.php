@@ -40,7 +40,7 @@ class Product extends Model
         //return $this->belongsToMany(Product::class,'product_id','id');
         return \DB::table('product_product')           
             ->where('ingredient_id',$this->id)
-            ->where('store_id',$this->id)
+            ->where('store_id',$this->store_id)
             ->orderBy('id','ASC')
             ->get();
     }
@@ -123,4 +123,24 @@ class Product extends Model
         }        
         return false;        
     }
+
+    public function editProductStock($data){
+        if($this->volume){
+            if(array_key_exists('volume',$data))$this->volume = $this->volume - $data['volume'];    
+            $this->save();
+        }        
+    }
+
+    public function editProductStockIngredient($data){
+        //consultamos el volumen
+        $relation = \DB::table('product_product')           
+            ->where('id',$data['rel_id'])
+            ->get()
+            ->first();
+        if($this->volume){
+            $this->volume = $this->volume - $relation->volume * $data['volume_product'];    
+            $this->save();
+        }       
+    }
+    
 }

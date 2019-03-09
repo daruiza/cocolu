@@ -77,7 +77,7 @@ order_detail.prototype.orders_paint = function(container) {
 	    //Luego pintamos los campos ocultos para el form al servidor
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
-	    input.setAttribute("name", "prod_"+obj+'_'+order_detail.products[obj][0].id);
+	    input.setAttribute("name", "prod_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][0].id);
 	    input.setAttribute("value", order_detail.products[obj][0].volume_sale);   	    
 	    node.appendChild(input);
 	    //agregamos los ingredientes
@@ -86,13 +86,13 @@ order_detail.prototype.orders_paint = function(container) {
 	    	if(!Array.isArray(order_detail.products[obj][1][index])){
 	    		var input = document.createElement("input");
 			    input.setAttribute("type", "hidden");	    
-			    input.setAttribute("name", "ingr_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index].ingredient_id);
+			    input.setAttribute("name", "ingr_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index].ingredient_id+'_'+order_detail.products[obj][1][index].id);
 			    input.setAttribute("value", order_detail.products[obj][1][index].value_checked);   	    
 			    node.appendChild(input);
 
 			    var input = document.createElement("input");
 			    input.setAttribute("type", "hidden");	    
-			    input.setAttribute("name", "sugg_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index].ingredient_id);
+			    input.setAttribute("name", "sugg_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index].ingredient_id+'_'+order_detail.products[obj][1][index].id);
 			    input.setAttribute("value", order_detail.products[obj][1][index].value_suggestion);   	    
 			    node.appendChild(input);
 
@@ -102,7 +102,7 @@ order_detail.prototype.orders_paint = function(container) {
 	    			if(order_detail.products[obj][1][index][i].value_selected){
 	    				var input = document.createElement("input");
 					    input.setAttribute("type", "hidden");	    
-					    input.setAttribute("name", "grou_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index][i].ingredient_id+'_'+order_detail.products[obj][1][index][i].group);
+					    input.setAttribute("name", "grou_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][1][index][i].ingredient_id+'_'+order_detail.products[obj][1][index][i].id);
 					    input.setAttribute("value", order_detail.products[obj][1][index][i].value_selected);   	    
 					    node.appendChild(input);		    
 	    			}
