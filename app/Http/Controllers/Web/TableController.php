@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
 use App\Http\Controllers\Web\ServiceController;
-use App\Http\Controllers\Web\orderController;
+use App\Http\Controllers\Web\OrderController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

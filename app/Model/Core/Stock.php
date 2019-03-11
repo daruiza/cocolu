@@ -33,8 +33,10 @@ class Stock extends Model
         if(array_key_exists('shift',$data))$this->shift = $data['shift'];
         if(array_key_exists('suggestion',$data))$this->description = $data['suggestion'];
         if(array_key_exists('date',$data))$this->date = $data['date'];
-        if(array_key_exists('product_id',$data))$this->product_id = $data['ingredient_id'];        
+        if(array_key_exists('product_id',$data))$this->product_id = $data['ingredient_id'];
 
-        $this->save();
+        $this->volume = $relation->volume;
+
+        $this->save();        
     }
 }

@@ -121,12 +121,11 @@
 		.services-table{
 			text-align: center;
 		}
-		.selected-table{
-			
+		.selected-table{			
 		    background-color: {{ json_decode(Auth::user()->store()->label,true)['selectTable'] }} !important;
 		}
 		.service-open-table{
-		    background-color: {{ json_decode(Auth::user()->store()->label,true)['serviceOpenTable'] }};;
+		    background-color: {{ json_decode(Auth::user()->store()->label,true)['serviceOpenTable'] }};
 		}
 		.object-table{
 		    height: 100%;
@@ -142,6 +141,11 @@
 		.order_select_conteiner{
 			position: absolute;
     		bottom: 10px;
+    		margin-left: 10px;
+		}
+
+		.service-open-table.service-status-one{	
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
 		}
 		
 	</style>

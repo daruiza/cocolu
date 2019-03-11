@@ -26,9 +26,11 @@
     left: 8px;
 }
 
+/*
 .selected-table{
     background-color: aliceblue;
 }
+*/
 
 @media (min-width: 768px) {
 	.col-md-3{

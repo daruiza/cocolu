@@ -3,6 +3,7 @@
 namespace App\Model\Core;
 
 use App\Model\Core\Service;
+use App\Model\Core\Order;
 use Illuminate\Database\Eloquent\Model;
 
 class Table extends Model
@@ -35,6 +36,18 @@ class Table extends Model
         ->where('open',1)
         ->get();		
 	}
+
+    public function tableOrderStatusOneOpen(){             
+        $service = $this->tableServiceOpen()->first();
+        if(!empty($service)){
+            return Order::where('service_id', $service->id)
+            ->where('status',1)
+            ->get();            
+        }
+        return Order::where('service_id', 0)
+        ->where('status',1)
+        ->get();  
+    }
 
     public function icons()
     {

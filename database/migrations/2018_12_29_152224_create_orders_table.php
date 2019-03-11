@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('serial')->unsigned();     
             $table->string('description',2048)->nullable()->default(null);
             $table->dateTime('date');
+            $table->integer('status')->unsigned()->default(1);          
             $table->boolean('active')->default(true);            
             $table->integer('waiter_id')->unsigned();     
             $table->foreign('waiter_id')->references('id')->on('waiters');
