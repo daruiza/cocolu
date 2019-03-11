@@ -56,7 +56,11 @@
                                             <div class="object-table">
                                                 
                                                 {{ Form::hidden('table-id', $value->id) }}
-    										  	<p><i class="{{$value->icon}}"> </i>{{$value->name}}</p>																						
+    										  	<p>
+                                                    <i class="{{$value->icon}}"> </i>
+                                                    {{$value->name}}        
+                                                </p>
+                                                <a href="#"> <span class="badge">2</span></a> 								
     											@if($value->tableServiceOpen()->count())														
     												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
     												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>

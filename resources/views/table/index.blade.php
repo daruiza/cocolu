@@ -126,23 +126,7 @@
 		}
 		.service-open-table{
 		    background-color: {{ json_decode(Auth::user()->store()->label,true)['serviceOpenTable'] }};
-		}
-		.object-table{
-		    height: 100%;
-		}
-		.unselectable {
-		    -webkit-touch-callout: none;
-		    -webkit-user-select: none;
-		    -khtml-user-select: none;
-		    -moz-user-select: none;
-		    -ms-user-select: none;
-		    user-select: none;
-		}
-		.order_select_conteiner{
-			position: absolute;
-    		bottom: 10px;
-    		margin-left: 10px;
-		}
+		}		
 
 		.service-open-table.service-status-one{	
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
