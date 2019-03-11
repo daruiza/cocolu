@@ -9,6 +9,7 @@ table.prototype.selectTable = function(objectClass,selectClass) {
     $('.'+objectClass).click(function() {
     	//clear service menu
 		$('.services-table .table').html('');
+		$('.services-table .orders').html('');
 		$('.services-table .new-orders').html('');
 
         if($(this).hasClass(selectClass)){
@@ -35,9 +36,54 @@ table.prototype.selectTable = function(objectClass,selectClass) {
 table.prototype.selectServiceResponse = function(result) {
 	$('.services-table .table').html(result.data.table[0].name);
 
+	var orders = $('.services-table .orders')[0];	  
+	orders.innerHTML = '';//limpiamos el modal
+
+	var node = document.createElement("div");
+    node.setAttribute("class", "container form-group");
+    for(obj in result.data.orders) {
+    	var subnode = document.createElement("div");
+		if(result.data.orders[obj].status == 1){
+			subnode.setAttribute("class", "row order-obj status-one");
+		}
+
+		subnode.setAttribute("id", "order-"+result.data.orders[obj].id);
+
+		var div = document.createElement("div");
+		div.setAttribute("class", "col-sm-12");		
+		div.setAttribute("style", "text-align: center;"); 
+		var span = document.createElement("span");		
+	    span.setAttribute("class", "");			    			    
+	    span.innerHTML = result.data.orders[obj].date;
+	    div.appendChild(span);		    
+	    subnode.appendChild(div);
+		
+		var div = document.createElement("div");
+		div.setAttribute("class", "col-sm-6");		
+		div.setAttribute("style", "text-align: center;"); 
+		var span = document.createElement("span");		
+	    span.setAttribute("class", "");			    			    
+	    span.innerHTML = 'Serial_ '+result.data.orders[obj].serial;
+	    div.appendChild(span);		    
+	    subnode.appendChild(div);
+	    
+		var div = document.createElement("div");
+		div.setAttribute("class", "col-sm-6");		
+		div.setAttribute("style", "text-align: center;"); 
+		var span = document.createElement("span");		
+	    span.setAttribute("class", "");			    			    
+	    span.innerHTML = 'Status_ '+result.data.orders[obj].status;
+	    div.appendChild(span);		    
+	    subnode.appendChild(div);
+
+	    
+
+	    node.appendChild(subnode);
+    }
+	orders.appendChild(node);
 	//Orden solo si hay servicio
 	if(result.data.service.length){
-		$('.services-table .new-orders').html('<a class="dropdown-item" href="javascript: order_create_submit(\'table'+result.data.table[0].id+'\')"><i class="fas fa-clipboard"></i><span>'+$('.span-order').html()+'</span> </br><span>'+result.data.table[0].name+'</span></a>');	
+		$('.services-table .new-orders').html('<a class="dropdown-item" href="javascript: order_create_submit(\'table'+result.data.table[0].id+'\')"><i class="fas fa-clipboard"></i><span>'+$('.span-order').html()+'</span></a>');	
 	}
 	
 }

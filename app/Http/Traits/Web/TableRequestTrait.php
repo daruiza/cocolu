@@ -4,6 +4,7 @@ namespace App\Http\Traits\Web;
 
 use App\Model\Core\Table;
 use App\Model\Core\Service;
+use App\Model\Core\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -76,12 +77,22 @@ trait TableRequestTrait
             ->where('open',1)
             ->get();        
 			
-		//consult the ordesr
+		//consult the orders
+            
+        $orders = Order::select('orders.*','users.name as waiter')
+            ->leftJoin('waiters','waiters.id','orders.waiter_id')
+            ->leftJoin('users','users.id','waiters.user_id')
+            ->where('service_id',$service->first()->id)            
+            ->where('status',1)//orden tomada
+            ->orWhere('status',2)//orden lista para entregar
+            ->orWhere('status',3)//orden paga
+            //->orWhere('status',4)//orden cerrada
+            ->get();
 		
 		//make the totals		
 		
 		
-		return response()->json(['return'=>true,'data'=>['request'=>$request->input(),'store_id'=>$id,'service'=>$service,'table'=>$table,'orders'=>'']]);		
+		return response()->json(['return'=>true,'data'=>['request'=>$request->input(),'store_id'=>$id,'service'=>$service,'table'=>$table,'orders'=>$orders]]);		
 	}
 	
 	public function service(Request $request,$id){		

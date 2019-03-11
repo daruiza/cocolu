@@ -7,7 +7,7 @@ use App\Model\Core\Service;
 
 class Order extends Model
 {
-	protected $fillable = ['id','serial','description','date','status','active','waiter_id','service_id'];	
+	protected $fillable = ['id','serial','description','date','active','status_id','waiter_id','service_id'];	
     
     public function products(){
         //reutiliza el namespace

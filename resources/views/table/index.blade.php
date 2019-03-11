@@ -131,6 +131,10 @@
 		.service-open-table.service-status-one{	
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
 		}
+
+		.badge{	
+			color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
+		}
 		
 	</style>
 

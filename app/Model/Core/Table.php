@@ -5,6 +5,7 @@ namespace App\Model\Core;
 use App\Model\Core\Service;
 use App\Model\Core\Order;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Table extends Model
 {
@@ -44,9 +45,12 @@ class Table extends Model
             ->where('status',1)
             ->get();            
         }
+        /*
         return Order::where('service_id', 0)
         ->where('status',1)
         ->get();  
+        */
+        return collect();
     }
 
     public function icons()

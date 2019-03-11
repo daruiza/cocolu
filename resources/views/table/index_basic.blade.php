@@ -9,8 +9,7 @@
                     <div class="card-body">
                         <div class="container services-table">
                             <div class="row">                                
-								<div class="col-md-12 table"></div>
-								<div class="col-md-12 bartender"></div>
+								<div class="col-md-12 table"></div>								
 								<div class="col-md-12 orders"></div>
 								<div class="col-md-12 new-orders"></div>
                             </div>                                                  
@@ -25,7 +24,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @include('layouts.options_page',['model'=>'Tables'])									
+                                    @include('layouts.options_page',['model'=>'Tables'])
                                 </div>
                             </div>                                                  
                         </div>                  
@@ -60,7 +59,16 @@
                                                     <i class="{{$value->icon}}"> </i>
                                                     {{$value->name}}        
                                                 </p>
-                                                <a href="#"> <span class="badge">2</span></a> 								
+
+                                                <!-- si la mesa tiene ordenes es etado one-->
+                                                @if($value->tableOrderStatusOneOpen()->count())
+                                                    <a class="a-brange" href="#">
+                                                        <span class="badge">
+                                                            {{$value->tableOrderStatusOneOpen()->count()}}
+                                                        </span>
+                                                    </a>
+                                                @endif
+                                                				
     											@if($value->tableServiceOpen()->count())														
     												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
     												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>
