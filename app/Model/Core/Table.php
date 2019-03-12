@@ -42,7 +42,7 @@ class Table extends Model
         $service = $this->tableServiceOpen()->first();
         if(!empty($service)){
             return Order::where('service_id', $service->id)
-            ->where('status',1)
+            ->where('status_id',1)
             ->get();            
         }
         /*

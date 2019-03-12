@@ -8,6 +8,7 @@ use App\Model\Core\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Collection;
 
 trait TableRequestTrait
 {
@@ -78,16 +79,19 @@ trait TableRequestTrait
             ->get();        
 			
 		//consult the orders
-            
-        $orders = Order::select('orders.*','users.name as waiter')
-            ->leftJoin('waiters','waiters.id','orders.waiter_id')
-            ->leftJoin('users','users.id','waiters.user_id')
-            ->where('service_id',$service->first()->id)            
-            ->where('status',1)//orden tomada
-            ->orWhere('status',2)//orden lista para entregar
-            ->orWhere('status',3)//orden paga
-            //->orWhere('status',4)//orden cerrada
-            ->get();
+        $orders = collect();    
+        if($service->count()){
+            $orders = Order::select('orders.*','users.name as waiter')
+                ->leftJoin('waiters','waiters.id','orders.waiter_id')
+                ->leftJoin('users','users.id','waiters.user_id')
+                ->where('service_id',$service->first()->id)            
+                ->where('status_id',1)//orden tomada
+                ->orWhere('status_id',2)//orden lista para entregar
+                ->orWhere('status_id',3)//orden paga
+                //->orWhere('status',4)//orden cerrada
+                ->get();    
+        }    
+        
 		
 		//make the totals		
 		
