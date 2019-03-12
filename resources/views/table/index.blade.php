@@ -6,6 +6,8 @@
 @section('content')
 	@include('table.index_basic')
 
+
+
 	@isset($data['servicemodal'])
 		@include('table.service_create')
 	@endisset
@@ -81,7 +83,8 @@
 			return false;			
 		}
 
-		$("#containment-wrapper").height($("#containment-wrapper").height()+125);
+		$("#containment-wrapper").height($("#containment-wrapper").height()+
+			{!! json_decode(Auth::user()->store()->label,true)['TableHeight'] !!});
 		
 		/*Multiple Modal*/
 		$(document).on('show.bs.modal', '.modal', function (event) {
