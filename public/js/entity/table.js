@@ -40,10 +40,10 @@ table.prototype.selectServiceResponse = function(result) {
 	orders.innerHTML = '';//limpiamos el modal
 
 	var node = document.createElement("div");
-    node.setAttribute("class", "container form-group");
+    node.setAttribute("class", "form-group");
     for(obj in result.data.orders) {
     	var subnode = document.createElement("div");
-		if(result.data.orders[obj].status == 1){
+		if(result.data.orders[obj].status_id == 1){
 			subnode.setAttribute("class", "row order-obj status-one");
 		}
 
@@ -59,24 +59,22 @@ table.prototype.selectServiceResponse = function(result) {
 	    subnode.appendChild(div);
 		
 		var div = document.createElement("div");
-		div.setAttribute("class", "col-sm-6");		
+		div.setAttribute("class", "col-sm-5");		
 		div.setAttribute("style", "text-align: center;"); 
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
-	    span.innerHTML = 'Serial_ '+result.data.orders[obj].serial;
+	    span.innerHTML = 'Serial: '+result.data.orders[obj].serial;
 	    div.appendChild(span);		    
 	    subnode.appendChild(div);
 	    
 		var div = document.createElement("div");
-		div.setAttribute("class", "col-sm-6");		
+		div.setAttribute("class", "col-sm-7");		
 		div.setAttribute("style", "text-align: center;"); 
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
-	    span.innerHTML = 'Status_ '+result.data.orders[obj].status;
+	    span.innerHTML = result.data.orders[obj].status;
 	    div.appendChild(span);		    
 	    subnode.appendChild(div);
-
-	    
 
 	    node.appendChild(subnode);
     }
@@ -85,8 +83,12 @@ table.prototype.selectServiceResponse = function(result) {
 	if(result.data.service.length){
 		$('.services-table .new-orders').html('<a class="dropdown-item" href="javascript: order_create_submit(\'table'+result.data.table[0].id+'\')"><i class="fas fa-clipboard"></i><span>'+$('.span-order').html()+'</span></a>');	
 	}
+
+	$('.order-obj').on( "click", function() {
+		alert('this');
+	});
 	
-}
+};
 
 table.prototype.returnAddProduct = function(result) {	
 	
@@ -210,6 +212,6 @@ table.prototype.returnAddProduct = function(result) {
 	modal.appendChild(node);		
 
 	$('#modal_order_conponents').modal('toggle');
-}
+};
 
 var table = new table();

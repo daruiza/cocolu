@@ -81,9 +81,10 @@ trait TableRequestTrait
 		//consult the orders
         $orders = collect();    
         if($service->count()){
-            $orders = Order::select('orders.*','users.name as waiter')
+            $orders = Order::select('orders.*','users.name as waiter','order_status.name as status')
                 ->leftJoin('waiters','waiters.id','orders.waiter_id')
                 ->leftJoin('users','users.id','waiters.user_id')
+                ->leftJoin('order_status','order_status.id','orders.status_id')
                 ->where('service_id',$service->first()->id)            
                 ->where('status_id',1)//orden tomada
                 ->orWhere('status_id',2)//orden lista para entregar

@@ -138,6 +138,11 @@
 		.badge{	
 			color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
 		}
+
+		.status-one{
+			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
+		}
 		
 	</style>
 

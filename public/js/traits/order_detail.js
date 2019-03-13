@@ -133,7 +133,7 @@ order_detail.prototype.orders_paint = function(container) {
     node.appendChild(subnode);	
     container.appendChild(node);
 	
-	//es mejor crearlo aqui que se tienen todas las variables
+	//no se logro ubicar en otro lugar, product_obj aún no esta creado
     $( ".product_obj" ).on( "click", function() {
 	  //alert(this.id);
 	  //seteado de informacion al modal

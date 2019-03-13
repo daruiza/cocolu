@@ -11,6 +11,17 @@
     background-color: aliceblue;
 }
 */
+.services-table .order-obj,
+.services-table .order-obj > div{
+    margin-right: 0px;
+    margin-left: 0px;
+    padding: 0px;        
+}
+
+.order-obj{
+	margin-bottom: 1rem;
+}
+
 
 .object-table{
     height: 100%;
