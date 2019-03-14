@@ -2,6 +2,7 @@
 return [
 	"Send"=>"Send",
 	"Cancel"=>"Cancel",
+	"Close"=>"Close",
 	"LabelIcon"=> "Icon",
 	"SelectUsers" => "Users  &#xf0c0;",
 	"SelectBeer"=> "Beer &#xf0fc;",

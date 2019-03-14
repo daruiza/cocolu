@@ -41,14 +41,32 @@ table.prototype.selectServiceResponse = function(result) {
 
 	var node = document.createElement("div");
     node.setAttribute("class", "form-group");
+
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");	    
+    input.setAttribute("name", "order_store_id");
+    input.setAttribute("value", result.data.request.store_id);   	    
+    node.appendChild(input);
+
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");	    
+    input.setAttribute("name", "order_table_id");
+    input.setAttribute("value", result.data.request.table_id);   	    
+    node.appendChild(input);
+
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");	    
+    input.setAttribute("name", "order_service_id");
+    input.setAttribute("value", result.data.service[0].id);   	    
+    node.appendChild(input);
+
     for(obj in result.data.orders) {
     	var subnode = document.createElement("div");
 		if(result.data.orders[obj].status_id == 1){
 			subnode.setAttribute("class", "row order-obj status-one");
 		}
 
-		subnode.setAttribute("id", "order-"+result.data.orders[obj].id);
-
+		subnode.setAttribute("id", "order-"+result.data.orders[obj].id);		
 		var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
 	    input.setAttribute("name", "order_id");
@@ -68,7 +86,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    subnode.appendChild(input);
 
 		var div = document.createElement("div");
-		div.setAttribute("class", "col-sm-12");		
+		div.setAttribute("class", "col-sm-12 date");		
 		div.setAttribute("style", "text-align: center;"); 
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
@@ -77,7 +95,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    subnode.appendChild(div);
 		
 		var div = document.createElement("div");
-		div.setAttribute("class", "col-sm-5");		
+		div.setAttribute("class", "col-sm-5 serial");		
 		div.setAttribute("style", "text-align: center;"); 
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
@@ -86,7 +104,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    subnode.appendChild(div);
 	    
 		var div = document.createElement("div");
-		div.setAttribute("class", "col-sm-7");		
+		div.setAttribute("class", "col-sm-7 status");		
 		div.setAttribute("style", "text-align: center;"); 
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
@@ -104,6 +122,49 @@ table.prototype.selectServiceResponse = function(result) {
 
 	$('.order-obj').on( "click", function() {
 		//result.data.orders[0].date
+		$('#modal_order_view .modal-title-subtext').html($('#'+this.id+" .serial")[0].children[0].innerHTML+" ["+$('#'+this.id+" .date")[0].children[0].innerHTML+"]");
+
+		var modal = $('#modal_order_view .container')[0];	  
+		modal.innerHTML = '';//limpiamos el modal
+
+		var node = document.createElement("div");
+    	node.setAttribute("class", "form-group");
+
+		var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "store_id");
+	    input.setAttribute("value", $( "input[name='order_store_id']" ).val());   	    
+	    node.appendChild(input);
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "table_id");
+	    input.setAttribute("value", $( "input[name='order_table_id']" ).val()); 	    
+	    node.appendChild(input);
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "service_id");
+	    input.setAttribute("value", $( "input[name='order_service_id']" ).val());
+	    node.appendChild(input);
+
+
+	    var subnode = document.createElement("div");    
+	    subnode.setAttribute("class", "row");
+
+	    var div = document.createElement("div");
+		div.setAttribute("class", "col-sm-4");		
+		div.setAttribute("style", "text-align: center;"); 
+		var span = document.createElement("span");		
+	    span.setAttribute("class", "");			    			    
+	    span.innerHTML = $( "input[name='mesage_state']" ).val()+' '+$('#'+this.id+" .status")[0].children[0].innerHTML;
+	    div.appendChild(span);		    
+	    subnode.appendChild(div);
+
+	    node.appendChild(subnode);
+
+
+	    modal.appendChild(node);
 		$('#modal_order_view').modal('toggle');
 	});
 	
@@ -112,7 +173,7 @@ table.prototype.selectServiceResponse = function(result) {
 table.prototype.returnAddProduct = function(result) {	
 	
 	$('#modal_order_conponents .product-name').html(result.data[0].name);
-	var modal = $('#modal_order_conponents .card-body')[0];
+	var modal = $('#modal_order_conponents .container')[0];
 	var n = 0;//numero de ingredientes
 	modal.innerHTML = '';//limpiamos el modal
 

@@ -3,9 +3,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h6 class="modal-title">
-          {{ __('form.TableOrderView') }} 
+          {{ __('messages.TableOrderView') }} 
           <div>
-            <i class=""> </i> <span class="modal-title"></span>
+            <i class="fas fa-clipboard"></i> <span class="modal-title-subtext"></span>
           </div>
       	</h6>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -14,23 +14,23 @@
       </div>
 
       <div class="modal-body"> 
-        <div class="container">
-          {!! Form::open(array('id'=>'form-order-edit','route'=>['order.update',0],'method'=>'POST')) !!}
-          	@csrf
- 			{{ method_field('PATCH') }}          	
-            {{ Form::hidden('table_id', 0) }}         
-            <div class="form-group row">
-              <div class="col-md-12">
-                
-              </div>
-            </div>            
-          {!! Form::close() !!}
-        </div>
+        
+        {!! Form::open(array('id'=>'form-order-edit','route'=>['order.update',0],'method'=>'POST')) !!}
+            
+            @csrf
+			      {{ method_field('PATCH') }}          	            
+            <div class="container">
+              
+            </div>
+                   
+        {!! Form::close() !!}
+      
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" form="form-order-edit">{{ __('form.Send') }}</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
+        <button type="submit" class="btn btn-primary btn-send" form="form-order-edit">{{ __('form.Send') }}</button>
+        <button type="button" class="btn btn-danger btn-cancel" data-dismiss="modal">{{ __('form.Cancel') }}</button>
+        <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">{{ __('form.Close') }}</button>
       </div>
       
     </div>

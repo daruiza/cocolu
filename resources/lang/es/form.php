@@ -2,6 +2,7 @@
 return [
 	"Send"=>"Enviar",
 	"Cancel"=>"Cancelar",
+	"Close"=>"Cerrar",
 	"LabelIcon"=> "Icono",
 	"SelectUsers" => "Clientes  &#xf0c0;",
 	"SelectBeer"=> "Baso de cervesa &#xf0fc;",

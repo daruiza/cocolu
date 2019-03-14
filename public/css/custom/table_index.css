@@ -78,6 +78,10 @@
     left: 8px;
 }
 
+#modal_order_view .modal-body,
+#modal_order_view .row > div{
+	padding: 0.25rem;
+}
 
 @media (min-width: 768px) {
 	.col-md-3{

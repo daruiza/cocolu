@@ -64,4 +64,5 @@ return [
     "NewOrder" => "Nueva Orden",
     "Suggestion" => "Sugerencia",
     "errorIngredientEdit" => "Huy esto es un error grave, se aconseja iniciar sesión nuevamente",
+    "TableOrderView" => "Actualizar La Orden",
 ];

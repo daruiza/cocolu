@@ -63,4 +63,5 @@ return [
     "NewOrder" => "New Order",
     "Suggestion" => "Suggestion",
     "errorIngredientEdit" => "Huy this is a serious error, it is advised to log in again",
+    "TableOrderView" => "Update Order",
 ];

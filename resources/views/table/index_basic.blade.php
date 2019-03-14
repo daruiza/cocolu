@@ -100,3 +100,6 @@
     	</div>
     </div>
 </div>
+
+{!! Form::hidden('mesage_state', __('messages.state') ) !!}
+{!! Form::hidden('mesage_OrderNew', __('messages.OrderNew') ) !!}
