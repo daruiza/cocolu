@@ -49,6 +49,24 @@ table.prototype.selectServiceResponse = function(result) {
 
 		subnode.setAttribute("id", "order-"+result.data.orders[obj].id);
 
+		var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "order_id");
+	    input.setAttribute("value", result.data.orders[obj].id);   	    
+	    subnode.appendChild(input);
+
+		var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "description");
+	    input.setAttribute("value", result.data.orders[obj].description);   	    
+	    subnode.appendChild(input);
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "waiter");
+	    input.setAttribute("value", result.data.orders[obj].waiter);   	    
+	    subnode.appendChild(input);
+
 		var div = document.createElement("div");
 		div.setAttribute("class", "col-sm-12");		
 		div.setAttribute("style", "text-align: center;"); 
@@ -85,7 +103,8 @@ table.prototype.selectServiceResponse = function(result) {
 	}
 
 	$('.order-obj').on( "click", function() {
-		alert('this');
+		//result.data.orders[0].date
+		$('#modal_order_view').modal('toggle');
 	});
 	
 };

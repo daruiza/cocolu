@@ -76,7 +76,7 @@ trait TableRequestTrait
 		//consult service, en caso de tener
         $service = Service::where('table_id',$request->input('table_id'))            
             ->where('open',1)
-            ->get();        
+            ->get();
 			
 		//consult the orders
         $orders = collect();    

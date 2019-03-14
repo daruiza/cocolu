@@ -5,8 +5,7 @@
 
 @section('content')
 	@include('table.index_basic')
-
-
+	@include('table.order_view')
 
 	@isset($data['servicemodal'])
 		@include('table.service_create')

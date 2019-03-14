@@ -116,6 +116,14 @@ class OrderController extends Controller
                         $products[$array[1]]['produt_id'] = $array[3];
                         $products[$array[1]]['volume'] = $value ;
                     }
+                    if($array[0] == 'add1'){
+                        $products[$array[1]]['volume_store'] = $array[3];
+                        $products[$array[1]]['price'] = $value ;
+                    }
+                    if($array[0] == 'add2'){
+                        $products[$array[1]]['name'] = $array[3];
+                        $products[$array[1]]['image'] = $value ;
+                    }
                     if($array[0] == 'ingr'){
                         $products[$array[1]]['ingredients'][$array[3]]['ingredient_id'] = $array[3];
                         $products[$array[1]]['ingredients'][$array[3]]['value'] = $value;
@@ -139,9 +147,7 @@ class OrderController extends Controller
         $today = new DateTime();
         $today = $today->format('Y-m-d H:i:s');     
         $request->request->add(['date' => $today]);
-        if(strlen(json_encode($products))<2048){
-            $request->request->add(['description' => json_encode($products)]);    
-        }                
+        $request->request->add(['description' => json_encode($products)]);                
         $request->request->add(['service_id' => $service->id]);
         $request->request->add(['serial' => $order->nextSerial($service)]);
         $obj_order=$order::create($request->input());
@@ -257,9 +263,9 @@ class OrderController extends Controller
      * @param  \App\Model\Core\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit(Request $request, $id)
     {
-        //
+        dd($request->input());
     }
 
     /**
@@ -269,9 +275,9 @@ class OrderController extends Controller
      * @param  \App\Model\Core\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, $id)
     {
-        //
+        dd($request->input());
     }
 
     /**

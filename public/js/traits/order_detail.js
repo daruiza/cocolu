@@ -73,13 +73,25 @@ order_detail.prototype.orders_paint = function(container) {
 
 	    sum = sum + total;
 
-
 	    //Luego pintamos los campos ocultos para el form al servidor
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
 	    input.setAttribute("name", "prod_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][0].id);
 	    input.setAttribute("value", order_detail.products[obj][0].volume_sale);   	    
 	    node.appendChild(input);
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "add1_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][0].volume);
+	    input.setAttribute("value", order_detail.products[obj][0].price);   	    
+	    node.appendChild(input);
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "add2_"+obj+'_'+order_detail.products[obj][0].id+'_'+order_detail.products[obj][0].name.replace(/ /g, ""));
+	    input.setAttribute("value", order_detail.products[obj][0].image1);   	    
+	    node.appendChild(input);
+
 	    //agregamos los ingredientes
 	    for(index in order_detail.products[obj][1]){
 	    	//primero los que no estan compuestos

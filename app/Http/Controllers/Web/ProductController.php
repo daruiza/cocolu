@@ -123,7 +123,7 @@ class ProductController extends Controller
                     $vector=explode('_',$key);
                     $n=count($vector);
                     $id_item = end($vector);
-                    $array[$id_item][$vector[$n-2]] = strtoupper($value);
+                    $array[$id_item][$vector[$n-2]] = ucfirst($value);
                 }
             }
 
