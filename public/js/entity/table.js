@@ -108,7 +108,7 @@ table.prototype.selectServiceResponse = function(result) {
 		div.setAttribute("style", "text-align: center;"); 
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
-	    span.innerHTML = result.data.orders[obj].status;
+	    span.innerHTML = $( "input[name='mesage_"+result.data.orders[obj].status+"']" ).val();
 	    div.appendChild(span);		    
 	    subnode.appendChild(div);
 
@@ -153,7 +153,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    subnode.setAttribute("class", "row");
 
 	    var div = document.createElement("div");
-		div.setAttribute("class", "col-sm-4");		
+		div.setAttribute("class", "col-sm-12");		
 		div.setAttribute("style", "text-align: center;"); 
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
