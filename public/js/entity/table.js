@@ -36,7 +36,7 @@ table.prototype.selectTable = function(objectClass,selectClass) {
 table.prototype.selectServiceResponse = function(result) {
 	$('.services-table .table').html(result.data.table[0].name);
 
-	var orders = $('.services-table .orders')[0];	  
+	var orders = $('.services-table .orders_menu')[0];	  
 	orders.innerHTML = '';//limpiamos el modal
 
 	var node = document.createElement("div");
@@ -75,13 +75,13 @@ table.prototype.selectServiceResponse = function(result) {
 
 		var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
-	    input.setAttribute("name", "description");
+	    input.setAttribute("name", "order_description");
 	    input.setAttribute("value", result.data.orders[obj].description);   	    
 	    subnode.appendChild(input);
 
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
-	    input.setAttribute("name", "waiter");
+	    input.setAttribute("name", "order_waiter");
 	    input.setAttribute("value", result.data.orders[obj].waiter);   	    
 	    subnode.appendChild(input);
 
@@ -115,7 +115,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    node.appendChild(subnode);
     }
 	orders.appendChild(node);
-	//Orden solo si hay servicio
+	//Orden Boton nueva orden solo si hay servicio
 	if(result.data.service.length){
 		$('.services-table .new-orders').html('<a class="dropdown-item" href="javascript: order_create_submit(\'table'+result.data.table[0].id+'\')"><i class="fas fa-clipboard"></i><span>'+$('.span-order').html()+'</span></a>');	
 	}
@@ -148,7 +148,6 @@ table.prototype.selectServiceResponse = function(result) {
 	    input.setAttribute("value", $( "input[name='order_service_id']" ).val());
 	    node.appendChild(input);
 
-
 	    var subnode = document.createElement("div");    
 	    subnode.setAttribute("class", "row");
 
@@ -160,6 +159,108 @@ table.prototype.selectServiceResponse = function(result) {
 	    span.innerHTML = $( "input[name='mesage_state']" ).val()+' '+$('#'+this.id+" .status")[0].children[0].innerHTML;
 	    div.appendChild(span);		    
 	    subnode.appendChild(div);
+
+	    var div = document.createElement("div");
+		div.setAttribute("class", "col-sm-12");		
+		div.setAttribute("style", "text-align: center;"); 
+		var span = document.createElement("span");		
+	    span.setAttribute("class", "");			    			    
+	    span.innerHTML = $( "input[name='mesage_producs']" ).val();
+	    div.appendChild(span);		    
+	    subnode.appendChild(div);
+
+	    var products = JSON.parse($('#'+this.id+" input[name='order_description']").val())
+	    for(obj in products){
+
+	    	var subsubnode = document.createElement("div");    	
+			if(obj%2){
+				subsubnode.setAttribute("class", "col-sm-12 product_obj");
+			}else{
+				subsubnode.setAttribute("class", "col-sm-12 product_obj row-impar");
+			}
+			subsubnode.setAttribute("id", "order_product_"+obj);
+
+			var input = document.createElement("input");
+		    input.setAttribute("type", "hidden");	    
+		    input.setAttribute("name", "product_id");
+		    input.setAttribute("value", products[obj].id);
+		    subsubnode.appendChild(input);
+
+	    	var div = document.createElement("div");
+			div.setAttribute("class", "col-sm-12");
+			div.setAttribute("style", "text-align: center;");
+
+			var span = document.createElement("span");		
+		    span.setAttribute("class", "");			    			    
+		    span.innerHTML = products[obj].name;
+		    div.appendChild(span);		    
+		    subsubnode.appendChild(div);
+
+		    var span = document.createElement("span");		
+		    span.setAttribute("class", "");			    			    
+		    span.innerHTML = ' - '+products[obj].volume_store;
+		    div.appendChild(span);		    
+		    subsubnode.appendChild(div);
+
+		    var div = document.createElement("div");
+			div.setAttribute("class", "col-sm-12");
+			div.setAttribute("style", "text-align: center;");
+
+			var span = document.createElement("span");		
+		    span.setAttribute("class", "");			    			    
+		    span.innerHTML = 'x '+products[obj].volume;
+		    div.appendChild(span);		    
+		    subsubnode.appendChild(div);
+
+		    var span = document.createElement("span");		
+		    span.setAttribute("class", "");			    			    
+		    span.innerHTML = ' - $'+products[obj].price;
+		    div.appendChild(span);		    
+		    subsubnode.appendChild(div);
+
+		    var span = document.createElement("span");		
+		    span.setAttribute("class", "");			    			    
+		    span.innerHTML = ' - Total: '+parseInt(products[obj].price) * parseInt(products[obj].volume);
+		    div.appendChild(span);		    
+		    subsubnode.appendChild(div);
+
+
+
+		    if(products[obj].ingredients != undefined){
+		    	for(ing in products[obj].ingredients){
+		    		
+		    		var div = document.createElement("div");
+					div.setAttribute("class", "col-sm-12");		
+					div.setAttribute("style", "text-align: center;"); 
+					var span = document.createElement("span");		
+				    span.setAttribute("class", "");			    			    
+				    span.innerHTML = $( "input[name='mesage_ingredients']" ).val();
+				    div.appendChild(span);		    
+				    subsubnode.appendChild(div);
+
+				    /*
+				    var div = document.createElement("div");
+					div.setAttribute("class", "col-sm-12");
+					div.setAttribute("style", "text-align: center;");
+
+					var span = document.createElement("span");		
+				    span.setAttribute("class", "");			    			    
+				    span.innerHTML = products[obj].name;
+				    div.appendChild(span);		    
+				    subsubnode.appendChild(div);
+
+				    var span = document.createElement("span");		
+				    span.setAttribute("class", "");			    			    
+				    span.innerHTML = ' - '+products[obj].volume_store;
+				    div.appendChild(span);		    
+				    subsubnode.appendChild(div);
+				    */
+		    	}
+		    }
+
+		    subnode.appendChild(subsubnode);
+
+	    }
 
 	    node.appendChild(subnode);
 
@@ -188,7 +289,7 @@ table.prototype.returnAddProduct = function(result) {
     node.appendChild(input);
 
     var subnode = document.createElement("div");
-	subnode.setAttribute("class", "row");
+	subnode.setAttribute("class", "row form-group ");
 
 	var div = document.createElement("div");
 	div.setAttribute("class", "col-sm-4");
@@ -215,7 +316,7 @@ table.prototype.returnAddProduct = function(result) {
 	    	if(Array.isArray(result.data[1][obj])){
 
 	    		var subnode = document.createElement("div");
-    			subnode.setAttribute("class", "row multi_ingredient");    			
+    			subnode.setAttribute("class", "row multi_ingredient form-group ");    			
 
     			var div = document.createElement("div");
     			div.setAttribute("class", "col-sm-4");
@@ -250,13 +351,14 @@ table.prototype.returnAddProduct = function(result) {
 	    	if(!Array.isArray(result.data[1][obj])){
 
 	    		var subnode = document.createElement("div");
-    			subnode.setAttribute("class", "row ingredient");
+    			subnode.setAttribute("class", "row ingredient form-group");
 
     			var div = document.createElement("div");
-    			div.setAttribute("class", "col-sm-1");
+    			div.setAttribute("class", "col-sm-2");
     			var input = document.createElement("input");
 			    input.setAttribute("class", "form-control control-checkbox");
-			    input.setAttribute("type", "checkbox");			    
+			    input.setAttribute("type", "checkbox");
+			    input.setAttribute("id", "ingredient_"+result.data[0].id+"_"+result.data[1][obj].ingredient_id);	    
 			    input.checked = true;
 			    input.setAttribute("name", "ingredient_"+result.data[0].id+"_"+result.data[1][obj].ingredient_id);
 			    input.setAttribute("value", result.data[1][obj].ingredient_id);
@@ -265,14 +367,15 @@ table.prototype.returnAddProduct = function(result) {
 
 			    var div = document.createElement("div");
     			div.setAttribute("class", "col-sm-5");
+    			div.setAttribute("for", "ingredient_"+result.data[0].id+"_"+result.data[1][obj].ingredient_id);			    
     			var span = document.createElement("span");
-			    span.setAttribute("class", "");			    
+			    span.setAttribute("class", " ");			    
 			    span.innerHTML = result.data[1][obj].product+' - '+result.data[1][obj].volume+' '+result.data[1][obj].unity;
 			    div.appendChild(span);		    
 			    subnode.appendChild(div);
 
 			    var div = document.createElement("div");
-    			div.setAttribute("class", "col-sm-6");
+    			div.setAttribute("class", "col-sm-5");
     			var input = document.createElement("input");
 			    input.setAttribute("class", "form-control");
     			input.setAttribute("name", "ingredient_suggestion_"+result.data[1][obj].ingredient_id);

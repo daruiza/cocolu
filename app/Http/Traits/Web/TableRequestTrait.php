@@ -61,6 +61,7 @@ trait TableRequestTrait
         
     }
 	
+    //al dar click sobre una mesa
 	public function selectService(Request $request,$id){
 		//validate ouner store		
 		if(!Auth::user()->validateUserStore($id)){

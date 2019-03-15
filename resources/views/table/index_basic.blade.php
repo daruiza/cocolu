@@ -10,7 +10,7 @@
                         <div class="container services-table">
                             <div class="row">                                
 								<div class="col-md-12 table"></div>								
-								<div class="col-md-12 orders"></div>
+								<div class="col-md-12 orders_menu"></div>
 								<div class="col-md-12 new-orders"></div>
                             </div>                                                  
                         </div>                  
@@ -103,3 +103,5 @@
 
 {!! Form::hidden('mesage_state', __('messages.state') ) !!}
 {!! Form::hidden('mesage_OrderNew', __('messages.OrderNew') ) !!}
+{!! Form::hidden('mesage_producs', __('messages.Products') ) !!}
+

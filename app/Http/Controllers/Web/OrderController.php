@@ -100,8 +100,7 @@ class OrderController extends Controller
         1. consecutivo
         2. Id de producto
         3. Id Ingrediente
-        4. Id de relacion en prod_prod 
-
+        4. Id de relacion en prod_prod
         */
 
         $products = array();
@@ -116,11 +115,11 @@ class OrderController extends Controller
                         $products[$array[1]]['produt_id'] = $array[3];
                         $products[$array[1]]['volume'] = $value ;
                     }
-                    if($array[0] == 'add1'){
+                    if($array[0] == 'pric'){
                         $products[$array[1]]['volume_store'] = $array[3];
                         $products[$array[1]]['price'] = $value ;
                     }
-                    if($array[0] == 'add2'){
+                    if($array[0] == 'prom'){
                         $products[$array[1]]['name'] = $array[3];
                         $products[$array[1]]['image'] = $value ;
                     }
@@ -132,15 +131,37 @@ class OrderController extends Controller
                     if($array[0] == 'sugg'){
                         $products[$array[1]]['ingredients'][$array[3]]['suggestion'] = $value;
                     }
+                    if($array[0] == 'ingm'){
+                        $products[$array[1]]['ingredients'][$array[3]]['name'] = $array[4];
+                        $products[$array[1]]['ingredients'][$array[3]]['unity'] = $value;
+                    }
+                    if($array[0] == 'ingv'){
+                        $products[$array[1]]['ingredients'][$array[3]]['volume'] = $array[4];
+                        $products[$array[1]]['ingredients'][$array[3]]['volume_product'] = $value;
+                    }
                     if($array[0] == 'grou'){
                         $products[$array[1]]['groups'][$array[3]]['ingredient_id'] = $array[3];
                         $products[$array[1]]['groups'][$array[3]]['rel_id'] = $array[4];
                         $products[$array[1]]['groups'][$array[3]]['value'] = $value;
                     }
+                    if($array[0] == 'grom'){
+                        $products[$array[1]]['groups'][$array[3]]['name'] = $array[4];
+                        $products[$array[1]]['groups'][$array[3]]['unity'] = $value;
+                    }
+                    if($array[0] == 'grov'){
+                        $products[$array[1]]['groups'][$array[3]]['volume'] = $array[4];
+                        $products[$array[1]]['groups'][$array[3]]['volume_product'] = $value;
+                    }
                 }                
             }
         }
         //dd($products);
+        if(!count($products)){
+            Session::flash('danger', [['NO_ORDER_SAVE']]);
+            return redirect('table');    
+        }
+        
+
         //1. crear la orden de pedido
         $order = new Order();
         //fecha y hora
