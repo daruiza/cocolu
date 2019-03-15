@@ -9,7 +9,7 @@ table.prototype.selectTable = function(objectClass,selectClass) {
     $('.'+objectClass).click(function() {
     	//clear service menu
 		$('.services-table .table').html('');
-		$('.services-table .orders').html('');
+		$('.services-table .orders_menu').html('');
 		$('.services-table .new-orders').html('');
 
         if($(this).hasClass(selectClass)){
@@ -165,7 +165,7 @@ table.prototype.selectServiceResponse = function(result) {
 		div.setAttribute("style", "text-align: center;"); 
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
-	    span.innerHTML = $( "input[name='mesage_producs']" ).val();
+	    span.innerHTML ="<b>"+$( "input[name='mesage_producs']" ).val().toUpperCase()+"</b>";
 	    div.appendChild(span);		    
 	    subnode.appendChild(div);
 
@@ -189,72 +189,126 @@ table.prototype.selectServiceResponse = function(result) {
 	    	var div = document.createElement("div");
 			div.setAttribute("class", "col-sm-12");
 			div.setAttribute("style", "text-align: center;");
-
+			/*
 			var span = document.createElement("span");		
 		    span.setAttribute("class", "");			    			    
-		    span.innerHTML = products[obj].name;
+		    span.innerHTML = '['+parseInt(products[obj].volume_store).toLocaleString()+']';
 		    div.appendChild(span);		    
 		    subsubnode.appendChild(div);
+		    */
+			
+			var span = document.createElement("span");		
+		    span.setAttribute("class", "");			    			    
+		    span.innerHTML = '  '+products[obj].name;
+		    div.appendChild(span);		    
 
 		    var span = document.createElement("span");		
 		    span.setAttribute("class", "");			    			    
-		    span.innerHTML = ' - '+products[obj].volume_store;
+		    span.innerHTML = ' <b>X'+parseInt(products[obj].volume).toLocaleString()+'</b>';
 		    div.appendChild(span);		    
-		    subsubnode.appendChild(div);
+		    
+		    subsubnode.appendChild(div);		    
 
 		    var div = document.createElement("div");
 			div.setAttribute("class", "col-sm-12");
-			div.setAttribute("style", "text-align: center;");
-
-			var span = document.createElement("span");		
-		    span.setAttribute("class", "");			    			    
-		    span.innerHTML = 'x '+products[obj].volume;
-		    div.appendChild(span);		    
-		    subsubnode.appendChild(div);
+			div.setAttribute("style", "text-align: center;");	
 
 		    var span = document.createElement("span");		
 		    span.setAttribute("class", "");			    			    
-		    span.innerHTML = ' - $'+products[obj].price;
+		    span.innerHTML = '$'+parseInt(products[obj].price).toLocaleString();
 		    div.appendChild(span);		    
-		    subsubnode.appendChild(div);
+		    //subsubnode.appendChild(div);
 
 		    var span = document.createElement("span");		
 		    span.setAttribute("class", "");			    			    
-		    span.innerHTML = ' - Total: '+parseInt(products[obj].price) * parseInt(products[obj].volume);
+		    span.innerHTML = ' - Total: $'+(parseInt(products[obj].price) * parseInt(products[obj].volume)).toLocaleString();
 		    div.appendChild(span);		    
 		    subsubnode.appendChild(div);
 
-
-
-		    if(products[obj].ingredients != undefined){
-		    	for(ing in products[obj].ingredients){
-		    		
+		    if(products[obj].groups != undefined){
+		    	var div = document.createElement("div");
+				div.setAttribute("class", "col-sm-12");		
+				div.setAttribute("style", "text-align: center;"); 
+				var span = document.createElement("span");		
+			    span.setAttribute("class", "");			    			    
+			    span.innerHTML = $( "input[name='mesage_groups']" ).val().toUpperCase();
+			    div.appendChild(span);		    
+			    subsubnode.appendChild(div);
+		    	for(grp in products[obj].groups){
 		    		var div = document.createElement("div");
-					div.setAttribute("class", "col-sm-12");		
-					div.setAttribute("style", "text-align: center;"); 
-					var span = document.createElement("span");		
-				    span.setAttribute("class", "");			    			    
-				    span.innerHTML = $( "input[name='mesage_ingredients']" ).val();
-				    div.appendChild(span);		    
-				    subsubnode.appendChild(div);
-
-				    /*
-				    var div = document.createElement("div");
 					div.setAttribute("class", "col-sm-12");
 					div.setAttribute("style", "text-align: center;");
+					var span = document.createElement("span");
 
-					var span = document.createElement("span");		
 				    span.setAttribute("class", "");			    			    
-				    span.innerHTML = products[obj].name;
-				    div.appendChild(span);		    
-				    subsubnode.appendChild(div);
+				    span.innerHTML = ' '+products[obj].groups[grp].name;
+				    div.appendChild(span);		    				    
 
 				    var span = document.createElement("span");		
 				    span.setAttribute("class", "");			    			    
-				    span.innerHTML = ' - '+products[obj].volume_store;
-				    div.appendChild(span);		    
-				    subsubnode.appendChild(div);
-				    */
+				    span.innerHTML = '  <b>X'+products[obj].groups[grp].volume_product+'</b>';
+				    div.appendChild(span);
+
+				    var span = document.createElement("span");		
+				    span.setAttribute("class", "");			    			    
+				    span.innerHTML = ' ['+products[obj].groups[grp].unity+']';
+				    div.appendChild(span);
+
+				    subsubnode.appendChild(div);	
+		    	}
+		    }
+
+		    if(products[obj].ingredients != undefined){
+
+		    	var div = document.createElement("div");
+				div.setAttribute("class", "col-sm-12");		
+				div.setAttribute("style", "text-align: center;"); 
+				var span = document.createElement("span");		
+			    span.setAttribute("class", "");			    			    
+			    span.innerHTML = $( "input[name='mesage_ingredients']" ).val().toUpperCase();
+			    div.appendChild(span);		    
+			    subsubnode.appendChild(div);
+
+		    	for(ing in products[obj].ingredients){
+
+				    if(products[obj].ingredients[ing].value == "true"){
+				    	var div = document.createElement("div");
+						div.setAttribute("class", "col-sm-12");
+						div.setAttribute("style", "text-align: center;");
+
+						/*
+						var span = document.createElement("span");		
+					    span.setAttribute("class", "");			    			    
+					    span.innerHTML = '['+products[obj].ingredients[ing].volume+"]";
+					    div.appendChild(span);		    
+					    
+					    */
+						
+						var span = document.createElement("span");		
+					    span.setAttribute("class", "");			    			    
+					    span.innerHTML = ' '+products[obj].ingredients[ing].name;
+					    div.appendChild(span);		    				    
+
+					    var span = document.createElement("span");		
+					    span.setAttribute("class", "");			    			    
+					    span.innerHTML = '  <b>X'+products[obj].ingredients[ing].volume_product+'</b>';
+					    div.appendChild(span);	
+
+					    var span = document.createElement("span");		
+					    span.setAttribute("class", "");			    			    
+					    span.innerHTML = ' ['+products[obj].ingredients[ing].unity+']';
+					    div.appendChild(span);		    				    
+
+					    if(products[obj].ingredients[ing].suggestion != null){
+					    	var span = document.createElement("span");		
+						    span.setAttribute("class", "");			    			    
+						    span.innerHTML = ' - '+products[obj].ingredients[ing].suggestion;
+						    div.appendChild(span);		    				    
+					    }
+
+					    subsubnode.appendChild(div);
+				    }
+				    
 		    	}
 		    }
 

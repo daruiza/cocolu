@@ -66,4 +66,6 @@ return [
     "errorIngredientEdit" => "Huy esto es un error grave, se aconseja iniciar sesión nuevamente",
     "TableOrderView" => "Actualizar La Orden",
     "OrderNew" => "Nueva Orden",
+    "Ingredients" => "Ingredientes",
+    "Groups" => "Grupos",
 ];

@@ -64,5 +64,8 @@ return [
     "Suggestion" => "Suggestion",
     "errorIngredientEdit" => "Huy this is a serious error, it is advised to log in again",
     "TableOrderView" => "Update Order",
-    "OrderNew" => "New Order"
+    "OrderNew" => "New Order",
+    "Ingredients" => "Ingredients",
+    "Groups" => "Groups",
+    
 ];

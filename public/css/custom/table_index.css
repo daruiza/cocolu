@@ -83,6 +83,10 @@
 	padding: 0.25rem;
 }
 
+#modal_order_view .product_obj{
+	border-top: 1px solid;
+}
+
 @media (min-width: 768px) {
 	.col-md-3{
 		flex: 0 0 24%;

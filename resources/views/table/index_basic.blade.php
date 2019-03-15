@@ -104,4 +104,7 @@
 {!! Form::hidden('mesage_state', __('messages.state') ) !!}
 {!! Form::hidden('mesage_OrderNew', __('messages.OrderNew') ) !!}
 {!! Form::hidden('mesage_producs', __('messages.Products') ) !!}
+{!! Form::hidden('mesage_ingredients', __('messages.Ingredients') ) !!}
+{!! Form::hidden('mesage_groups', __('messages.Groups') ) !!}
+
 
