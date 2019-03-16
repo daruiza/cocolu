@@ -62,6 +62,7 @@ return [
     "CriticalVolume" => "Cantidad Critico",
     "unity" => "Unidad",
     "NewOrder" => "Nueva Orden",
+    "OrderOK" => "Servicio OK",
     "Suggestion" => "Sugerencia",
     "errorIngredientEdit" => "Huy esto es un error grave, se aconseja iniciar sesión nuevamente",
     "TableOrderView" => "Actualizar La Orden",

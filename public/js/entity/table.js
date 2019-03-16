@@ -62,10 +62,9 @@ table.prototype.selectServiceResponse = function(result) {
 
     for(obj in result.data.orders) {
     	var subnode = document.createElement("div");
-		if(result.data.orders[obj].status_id == 1){
-			subnode.setAttribute("class", "row order-obj status-one");
-		}
-
+		
+		subnode.setAttribute("class", "row order-obj status-"+result.data.orders[obj].status+" ");
+		
 		subnode.setAttribute("id", "order-"+result.data.orders[obj].id);		
 		var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
@@ -151,7 +150,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
 	    input.setAttribute("name", "order_id");
-	    input.setAttribute("value", $( "input[name='order_id']" ).val());
+	    input.setAttribute("value", $('#'+this.id+" input[name='order_id']" ).val());
 	    node.appendChild(input);
 
 	    var input = document.createElement("input");

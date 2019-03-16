@@ -130,7 +130,7 @@
 		    background-color: {{ json_decode(Auth::user()->store()->label,true)['serviceOpenTable'] }};
 		}		
 
-		.service-open-table.service-status-one{	
+		.service-open-table.status-OrderNew{	
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
 		}
 
@@ -138,9 +138,14 @@
 			color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
 		}
 
-		.status-one{
-			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
+		.status-OrderNew{
+			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }};
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
+		}
+
+		.status-OrderOK{
+			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }};	
 		}
 		
 	</style>

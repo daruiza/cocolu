@@ -86,11 +86,13 @@ trait TableRequestTrait
                 ->leftJoin('waiters','waiters.id','orders.waiter_id')
                 ->leftJoin('users','users.id','waiters.user_id')
                 ->leftJoin('order_status','order_status.id','orders.status_id')
-                ->where('service_id',$service->first()->id)            
-                ->where('status_id',1)//orden tomada
-                ->orWhere('status_id',2)//orden lista para entregar
-                ->orWhere('status_id',3)//orden paga
-                //->orWhere('status',4)//orden cerrada
+                ->where('service_id',$service->first()->id)
+                ->where(function($query){
+                     $query->where('status_id',1)//orden tomada
+                     ->orWhere('status_id',2)//orden lista para entregar
+                     ->orWhere('status_id',3);//orden paga
+                    //->orWhere('status',4)//orden cerrada
+                 })
                 ->get();    
         }    
         

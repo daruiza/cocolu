@@ -297,7 +297,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {           
         //validamos        
         $table = Table::find($request->input('table_id'));
         $service = $table->tableServiceOpen()->first();

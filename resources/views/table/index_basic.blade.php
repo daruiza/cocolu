@@ -45,7 +45,7 @@
 			                    	@foreach($tables as $key => $value)                                     
 			                    		<div class="ui-widget-content draggable col-md-3 obstacle unselectable 
                                         @if($value->tableServiceOpen()->count()) service-open-table @endif 
-                                        @if($value->tableOrderStatusOneOpen()->count()) service-status-one @endif" style="
+                                        @if($value->tableOrderStatusOneOpen()->count()) status-OrderNew @endif" style="
                                             top: {{json_decode($value->label)->position[0]}};
                                             right: {{json_decode($value->label)->position[1]}} ;
                                             bottom: {{json_decode($value->label)->position[2]}};
@@ -103,8 +103,7 @@
 
 {!! Form::hidden('mesage_state', __('messages.state') ) !!}
 {!! Form::hidden('mesage_OrderNew', __('messages.OrderNew') ) !!}
+{!! Form::hidden('mesage_OrderOK', __('messages.OrderOK') ) !!}
 {!! Form::hidden('mesage_producs', __('messages.Products') ) !!}
 {!! Form::hidden('mesage_ingredients', __('messages.Ingredients') ) !!}
 {!! Form::hidden('mesage_groups', __('messages.Groups') ) !!}
-
-
