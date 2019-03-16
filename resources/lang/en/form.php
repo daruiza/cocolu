@@ -29,5 +29,6 @@ return [
 	"AddIngredients" => "Add Ingredient",
 	"AddComponents" => "Add Components",
 	"Category" => "Category",
+	"Serve" => "Serve"
 	
 ];

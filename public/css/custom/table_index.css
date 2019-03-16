@@ -22,7 +22,6 @@
 	margin-bottom: 1rem;
 }
 
-
 .object-table{
     height: 100%;
 }
@@ -83,7 +82,8 @@
 	padding: 0.25rem;
 }
 
-#modal_order_view .product_obj{
+#modal_order_view .product_obj,
+#modal_order_view .last-div-total{
 	border-top: 1px solid;
 }
 

@@ -67,5 +67,6 @@ return [
     "OrderNew" => "New Order",
     "Ingredients" => "Ingredients",
     "Groups" => "Groups",
+    "Serve" => "Serve"
     
 ];

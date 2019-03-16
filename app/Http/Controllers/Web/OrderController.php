@@ -286,7 +286,7 @@ class OrderController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        dd($request->input());
+        dd($request->input());        
     }
 
     /**
@@ -298,7 +298,22 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->input());
+        //validamos        
+        $table = Table::find($request->input('table_id'));
+        $service = $table->tableServiceOpen()->first();
+
+        if(!Auth::user()->validateUserStore($table->store_id)){
+            Session::flash('danger', [['NO_STORE_OWNER']]);
+            return redirect('table');
+        }
+
+        //actualizamos el estado de la orden
+        $order = Order::find($request->input('order_id'));
+        $order->status_id = $request->input('next_status');
+        $order->save();
+
+        Session::flash('success', [['EditOrderTableOK']]);
+        return redirect('table');        
     }
 
     /**

@@ -15,24 +15,21 @@
 
       <div class="modal-body"> 
         
-        {!! Form::open(array('id'=>'form-order-edit','route'=>['order.update',0],'method'=>'POST')) !!}
-            
-            @csrf
-		    {{ method_field('PATCH') }}          	            
-            <div class="container">
-              
-            </div>
-                   
+        {!! Form::open(array('id'=>'form-order-edit','route'=>['order.update',0],'method'=>'POST')) !!}            
+          @csrf
+		      {{ method_field('PATCH') }}          	            
+          <div class="container">            
+          </div>
         {!! Form::close() !!}
       
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-send" form="form-order-edit">{{ __('form.Send') }}</button>
+        <button type="submit" class="btn btn-primary btn-send" form="form-order-edit">{{ __('form.Serve') }}</button>
         <button type="button" class="btn btn-danger btn-cancel" data-dismiss="modal">{{ __('form.Cancel') }}</button>
         <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">{{ __('form.Close') }}</button>
       </div>
-      
+        
     </div>
   </div>
 </div>

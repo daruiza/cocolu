@@ -148,6 +148,20 @@ table.prototype.selectServiceResponse = function(result) {
 	    input.setAttribute("value", $( "input[name='order_service_id']" ).val());
 	    node.appendChild(input);
 
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "order_id");
+	    input.setAttribute("value", $( "input[name='order_id']" ).val());
+	    node.appendChild(input);
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "next_status");
+	    input.setAttribute("value", 2);
+	    node.appendChild(input);
+
+	    
+
 	    var subnode = document.createElement("div");    
 	    subnode.setAttribute("class", "row");
 
@@ -169,6 +183,8 @@ table.prototype.selectServiceResponse = function(result) {
 	    div.appendChild(span);		    
 	    subnode.appendChild(div);
 
+	    var sum = 0;
+
 	    var products = JSON.parse($('#'+this.id+" input[name='order_description']").val())
 	    for(obj in products){
 
@@ -178,25 +194,12 @@ table.prototype.selectServiceResponse = function(result) {
 			}else{
 				subsubnode.setAttribute("class", "col-sm-12 product_obj row-impar");
 			}
-			subsubnode.setAttribute("id", "order_product_"+obj);
-
-			var input = document.createElement("input");
-		    input.setAttribute("type", "hidden");	    
-		    input.setAttribute("name", "product_id");
-		    input.setAttribute("value", products[obj].id);
-		    subsubnode.appendChild(input);
+			subsubnode.setAttribute("id", "order_product_"+obj);			
 
 	    	var div = document.createElement("div");
 			div.setAttribute("class", "col-sm-12");
 			div.setAttribute("style", "text-align: center;");
-			/*
-			var span = document.createElement("span");		
-		    span.setAttribute("class", "");			    			    
-		    span.innerHTML = '['+parseInt(products[obj].volume_store).toLocaleString()+']';
-		    div.appendChild(span);		    
-		    subsubnode.appendChild(div);
-		    */
-			
+						
 			var span = document.createElement("span");		
 		    span.setAttribute("class", "");			    			    
 		    span.innerHTML = '  '+products[obj].name;
@@ -225,7 +228,10 @@ table.prototype.selectServiceResponse = function(result) {
 		    div.appendChild(span);		    
 		    subsubnode.appendChild(div);
 
+		    sum = sum + (parseInt(products[obj].price) * parseInt(products[obj].volume));
+
 		    if(products[obj].groups != undefined){
+		    	/*
 		    	var div = document.createElement("div");
 				div.setAttribute("class", "col-sm-12");		
 				div.setAttribute("style", "text-align: center;"); 
@@ -234,6 +240,7 @@ table.prototype.selectServiceResponse = function(result) {
 			    span.innerHTML = $( "input[name='mesage_groups']" ).val().toUpperCase();
 			    div.appendChild(span);		    
 			    subsubnode.appendChild(div);
+			    */
 		    	for(grp in products[obj].groups){
 		    		var div = document.createElement("div");
 					div.setAttribute("class", "col-sm-12");
@@ -259,7 +266,7 @@ table.prototype.selectServiceResponse = function(result) {
 		    }
 
 		    if(products[obj].ingredients != undefined){
-
+		    	/*
 		    	var div = document.createElement("div");
 				div.setAttribute("class", "col-sm-12");		
 				div.setAttribute("style", "text-align: center;"); 
@@ -268,6 +275,7 @@ table.prototype.selectServiceResponse = function(result) {
 			    span.innerHTML = $( "input[name='mesage_ingredients']" ).val().toUpperCase();
 			    div.appendChild(span);		    
 			    subsubnode.appendChild(div);
+			    */
 
 		    	for(ing in products[obj].ingredients){
 
@@ -275,14 +283,6 @@ table.prototype.selectServiceResponse = function(result) {
 				    	var div = document.createElement("div");
 						div.setAttribute("class", "col-sm-12");
 						div.setAttribute("style", "text-align: center;");
-
-						/*
-						var span = document.createElement("span");		
-					    span.setAttribute("class", "");			    			    
-					    span.innerHTML = '['+products[obj].ingredients[ing].volume+"]";
-					    div.appendChild(span);		    
-					    
-					    */
 						
 						var span = document.createElement("span");		
 					    span.setAttribute("class", "");			    			    
@@ -305,16 +305,24 @@ table.prototype.selectServiceResponse = function(result) {
 						    span.innerHTML = ' - '+products[obj].ingredients[ing].suggestion;
 						    div.appendChild(span);		    				    
 					    }
-
 					    subsubnode.appendChild(div);
 				    }
-				    
 		    	}
-		    }
-
+		    }		    
 		    subnode.appendChild(subsubnode);
-
 	    }
+
+	    var subsubnode = document.createElement("div");
+		subsubnode.setAttribute("class", "col-sm-12 last-div-total");		
+	    var div = document.createElement("div");
+		div.setAttribute("class", "col-sm-12");		
+		div.setAttribute("style", "text-align: center;"); 
+		var span = document.createElement("span");		
+	    span.setAttribute("class", "");			    			    
+	    span.innerHTML = "Total: $"+sum.toLocaleString();
+	    div.appendChild(span);		    
+	    subsubnode.appendChild(div);
+	    subnode.appendChild(subsubnode);
 
 	    node.appendChild(subnode);
 
