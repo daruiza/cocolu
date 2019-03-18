@@ -21,12 +21,18 @@
           <div class="container">            
           </div>
         {!! Form::close() !!}
+
+        {!! Form::open(array('id'=>'form-order-destroy','route'=>['order.destroy',0],'method'=>'POST')) !!}
+          {{ method_field('DELETE') }}
+          <div class="container-destroy">            
+          </div>
+        {!! Form::close() !!}
       
       </div>
 
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary btn-send" form="form-order-edit">{{ __('form.Serve') }}</button>
-        <button type="button" class="btn btn-danger btn-cancel" data-dismiss="modal">{{ __('form.Cancel') }}</button>
+        <button type="submit" class="btn btn-danger btn-cancel" form="form-order-destroy">{{ __('form.Cancel') }}</button>
         <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">{{ __('form.Close') }}</button>
       </div>
         

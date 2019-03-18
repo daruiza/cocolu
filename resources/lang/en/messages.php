@@ -45,6 +45,7 @@ return [
     "Reset Password" => "Reset Password",
     "Send Password Reset Link" => "Send Password Reset Link",
     "Send"=>"Send",
+    "Pay"=>"Pay",
     "passwordChange"=>"Password Change",
     "acountSummary"=>"Acount Summary",
     "TableSelectNone" => "For this option you need select a table",
@@ -66,6 +67,7 @@ return [
     "TableOrderView" => "Update Order",
     "OrderNew" => "New Order",
     "OrderOK" => "Service Ok",
+    "OrderPay" => "Paid order",    
     "Ingredients" => "Ingredients",
     "Groups" => "Groups",
     "Serve" => "Serve"

@@ -14,10 +14,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Traits\Web\OrderRequestTrait;
+
 use DateTime;
 
 class OrderController extends Controller
 {
+
+    use OrderRequestTrait;
 
     public function __construct()
     {               
@@ -297,9 +301,10 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {           
-        //validamos        
-        $table = Table::find($request->input('table_id'));
+    {    
+        //dd($request->input());       
+        //validamos            
+        $table = Table::find($request->input('table_id'));        
         $service = $table->tableServiceOpen()->first();
 
         if(!Auth::user()->validateUserStore($table->store_id)){
@@ -322,8 +327,9 @@ class OrderController extends Controller
      * @param  \App\Model\Core\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+
+    public function destroy(Request $request,$id)
     {
-        //
+        dd($request->input());   
     }
 }

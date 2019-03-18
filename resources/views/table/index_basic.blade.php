@@ -51,7 +51,6 @@
                                             bottom: {{json_decode($value->label)->position[2]}};
                                             left: {{json_decode($value->label)->position[3]}}; ">
 
-                                            
                                             <div class="object-table">
                                                 
                                                 {{ Form::hidden('table-id', $value->id) }}
@@ -73,8 +72,7 @@
     												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
     												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>
     												<div>{{$value->tableServiceOpen()->first()->date}}</div>
-    												<div>Total a Pagar</div>
-    												<div>Último Mesero</div>                                                    
+    												<div>Total a Pagar</div>                         
     											@endif
                                             </div>
                                             @if($value->tableServiceOpen()->count())
@@ -104,6 +102,9 @@
 {!! Form::hidden('mesage_state', __('messages.state') ) !!}
 {!! Form::hidden('mesage_OrderNew', __('messages.OrderNew') ) !!}
 {!! Form::hidden('mesage_OrderOK', __('messages.OrderOK') ) !!}
+{!! Form::hidden('mesage_OrderPay', __('messages.OrderPay') ) !!}
 {!! Form::hidden('mesage_producs', __('messages.Products') ) !!}
 {!! Form::hidden('mesage_ingredients', __('messages.Ingredients') ) !!}
 {!! Form::hidden('mesage_groups', __('messages.Groups') ) !!}
+{!! Form::hidden('mesage_send', __('messages.Send') ) !!}
+{!! Form::hidden('mesage_pay', __('messages.Pay') ) !!}

@@ -79,13 +79,16 @@ trait TableRequestTrait
             ->where('open',1)
             ->get();
 			
-		//consult the orders
+		//consult the orders, con mesero, estado y productos
         $orders = collect();    
         if($service->count()){
-            $orders = Order::select('orders.*','users.name as waiter','order_status.name as status')
+            $orders = Order::select('orders.*','users.name as waiter','order_status.name as status'
+                ,\DB::raw('SUM(products.price*order_product.volume) as order_price'))
                 ->leftJoin('waiters','waiters.id','orders.waiter_id')
-                ->leftJoin('users','users.id','waiters.user_id')
+                ->leftJoin('users','users.id','waiters.user_id')                
                 ->leftJoin('order_status','order_status.id','orders.status_id')
+                ->leftJoin('order_product','order_product.order_id','orders.id')
+                ->leftJoin('products','products.id','order_product.product_id')
                 ->where('service_id',$service->first()->id)
                 ->where(function($query){
                      $query->where('status_id',1)//orden tomada
@@ -93,12 +96,9 @@ trait TableRequestTrait
                      ->orWhere('status_id',3);//orden paga
                     //->orWhere('status',4)//orden cerrada
                  })
+                ->groupBy('orders.id')
                 ->get();    
-        }    
-        
-		
-		//make the totals		
-		
+        }		
 		
 		return response()->json(['return'=>true,'data'=>['request'=>$request->input(),'store_id'=>$id,'service'=>$service,'table'=>$table,'orders'=>$orders]]);		
 	}
