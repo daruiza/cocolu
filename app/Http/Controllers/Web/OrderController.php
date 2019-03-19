@@ -330,6 +330,16 @@ class OrderController extends Controller
 
     public function destroy(Request $request,$id)
     {
+        //se cancela la orden
+        $order = Order::find($request->input('order_id'));
+        $description = json_decode($order->description,true);
+        dd($description);
+        //creamos una nueva entrada en stock 
+
+        //actualizamos los producto y los ingredientes tipo productos
+
+        //borramos la orden o la cambiamos de estado
+
         dd($request->input());   
     }
 }
