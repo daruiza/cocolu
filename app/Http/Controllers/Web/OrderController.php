@@ -67,7 +67,7 @@ class OrderController extends Controller
             ->get();
 
         $waiters = Waiter::waitersByStoreSelect();                                 
-        $products = Product::productstByStore();             
+        $products = Product::productstByStore();
         $categories = array();                        
 
         foreach ($products as $value) {
@@ -331,12 +331,53 @@ class OrderController extends Controller
     public function destroy(Request $request,$id)
     {
         //se cancela la orden
-        $order = Order::find($request->input('order_id'));
+        $order = Order::find($request->input('order_id'));        
         $description = json_decode($order->description,true);
-        dd($description);
-        //creamos una nueva entrada en stock 
 
-        //actualizamos los producto y los ingredientes tipo productos
+        //consultamos la cantidad que se compro por producto dentro de la orden        
+        foreach($description as $order_description){
+
+            $product = Product::find($order_description['produt_id']);
+            $order_poduct = OrderProduct::
+                where('order_id',$order->id)
+                ->where('product_id',$product->id)
+                ->get()->first();           
+
+            if($product->buy_price){
+                //al no tener un precio de compra es un producto creado                
+                $product->editProductStockUp(array(                
+                    'volume' =>  $order_poduct->volume
+                ));                
+            }
+
+            if(array_key_exists('ingredients', $order_description)){
+                foreach($order_description['ingredients'] as $sub_value){                   
+                    //validar el valor de selection
+                    $sub_product = Product::find($sub_value['ingredient_id']);
+                    $sub_product->editProductStockIngredientUp(array(                
+                        'rel_id' =>  $sub_value['rel_id'],
+                        'volume_product' =>  $order_poduct->volume,                       
+                    ));                    
+                }
+            }
+
+            if(array_key_exists('groups', $order_description)){
+                foreach($order_description['groups'] as $sub_value){
+                    $sub_product = Product::find($sub_value['ingredient_id']);
+                    $sub_product->editProductStockIngredientUp(array(                
+                        'rel_id' =>  $sub_value['rel_id'],
+                        'volume_product' =>  $order_poduct->volume,                       
+                    ));                     
+                }  
+            }
+
+            //creamos una nueva entrada en stock 
+
+        }
+        
+        
+
+        
 
         //borramos la orden o la cambiamos de estado
 

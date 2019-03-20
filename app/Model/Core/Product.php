@@ -131,6 +131,13 @@ class Product extends Model
         }        
     }
 
+    public function editProductStockUp($data){
+        if($this->buy_price){
+            if(array_key_exists('volume',$data))$this->volume = $this->volume + $data['volume'];    
+            $this->save();
+        }        
+    }
+
     public function editProductStockIngredient($data){
         //consultamos el volumen
         $relation = \DB::table('product_product')           
@@ -139,6 +146,18 @@ class Product extends Model
             ->first();
         if($this->volume){
             $this->volume = $this->volume - $relation->volume * $data['volume_product'];    
+            $this->save();
+        }       
+    }
+
+    public function editProductStockIngredientUp($data){
+        //consultamos el volumen
+        $relation = \DB::table('product_product')           
+            ->where('id',$data['rel_id'])
+            ->get()
+            ->first();
+        if($this->volume){
+            $this->volume = $this->volume + $relation->volume * $data['volume_product'];    
             $this->save();
         }       
     }
