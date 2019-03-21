@@ -23,5 +23,10 @@ class OrderStatusTableSeeder extends Seeder
 			'name'=>'OrderPay'						
 			)
 		);
+		\DB::table('order_status')->insert(array(
+			'name'=>'OrderCancel'						
+			)
+		);
+
     }
 }

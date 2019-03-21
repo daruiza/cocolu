@@ -92,6 +92,12 @@ order_detail.prototype.orders_paint = function(container) {
 	    input.setAttribute("value", order_detail.products[obj][0].image1);   	    
 	    node.appendChild(input);
 
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "prob_"+obj+'_'+order_detail.products[obj][0].id+'_buyprice');
+	    input.setAttribute("value", order_detail.products[obj][0].buy_price);   	    
+	    node.appendChild(input);
+
 	    //agregamos los ingredientes
 	    for(index in order_detail.products[obj][1]){
 	    	//primero los que no estan compuestos

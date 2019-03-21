@@ -119,6 +119,10 @@ class OrderController extends Controller
                         $products[$array[1]]['produt_id'] = $array[3];
                         $products[$array[1]]['volume'] = $value ;
                     }
+                    if($array[0] == 'prob'){
+                        //$products[$array[1]]['produt_id'] = $array[3];
+                        $products[$array[1]]['buy_price'] = $value ;
+                    }
                     if($array[0] == 'pric'){
                         $products[$array[1]]['volume_store'] = $array[3];
                         $products[$array[1]]['price'] = $value ;
@@ -159,7 +163,7 @@ class OrderController extends Controller
                 }                
             }
         }
-        //dd($products);
+
         if(!count($products)){
             Session::flash('danger', [['NO_ORDER_SAVE']]);
             return redirect('table');    
@@ -182,14 +186,16 @@ class OrderController extends Controller
         //hay que buscar la relación del producto y el ingrediente
         
         foreach ($products as  $key => $value) {           
-            //primero descontamos en stock
-            $stock = new Stock();
-            $stock->storeStockProduct(array(
-                'produt_id' =>  $value['produt_id'],
-                'volume' =>  $value['volume'],
-                'shift' =>  0, 
-                'date' =>  $today
-            ));
+            //primero descontamos en stock            
+            if($value['buy_price']){
+                $stock = new Stock();            
+                $stock->storeStockProduct(array(
+                    'product_id' =>  $value['produt_id'],
+                    'volume' =>  $value['volume'],
+                    'shift' =>  0, 
+                    'date' =>  $today
+                ));
+            }
 
             if(array_key_exists('ingredients',$value)){
                 //descuento por ingrediente * cantidad pedida
@@ -301,8 +307,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {    
-        //dd($request->input());       
+    {        
         //validamos            
         $table = Table::find($request->input('table_id'));        
         $service = $table->tableServiceOpen()->first();
@@ -334,6 +339,9 @@ class OrderController extends Controller
         $order = Order::find($request->input('order_id'));        
         $description = json_decode($order->description,true);
 
+        $today = new DateTime();
+        $today = $today->format('Y-m-d H:i:s');
+
         //consultamos la cantidad que se compro por producto dentro de la orden        
         foreach($description as $order_description){
 
@@ -347,40 +355,70 @@ class OrderController extends Controller
                 //al no tener un precio de compra es un producto creado                
                 $product->editProductStockUp(array(                
                     'volume' =>  $order_poduct->volume
-                ));                
+                ));
+                //editar stock
+                $stock = new Stock();            
+                $stock->storeStockProduct(array(
+                    'product_id' =>  $product->id,
+                    'volume' =>  $order_poduct->volume,
+                    'description' => 'OrderCanceled',
+                    'shift' =>  1, 
+                    'date' =>  $today
+                ));              
             }
 
             if(array_key_exists('ingredients', $order_description)){
                 foreach($order_description['ingredients'] as $sub_value){                   
                     //validar el valor de selection
-                    $sub_product = Product::find($sub_value['ingredient_id']);
-                    $sub_product->editProductStockIngredientUp(array(                
-                        'rel_id' =>  $sub_value['rel_id'],
-                        'volume_product' =>  $order_poduct->volume,                       
-                    ));                    
+                    if($sub_value['value'] == "true"){
+                        $sub_product = Product::find($sub_value['ingredient_id']);
+                        $sub_product->editProductStockIngredientUp(array(                
+                            'rel_id' =>  $sub_value['rel_id'],
+                            'volume_product' =>  $order_poduct->volume,                       
+                        ));
+
+                        $stock = new Stock();                  
+                        $stock->storeStockIngredient(array(                
+                            'ingredient_id'=>$sub_value['ingredient_id'],
+                            'rel_id'=>$sub_value['rel_id'],
+                            'volume_product' =>  $order_poduct->volume,
+                            'suggestion'=>$sub_value['suggestion'],                        
+                            'shift' =>  1, 
+                            'date' =>  $today
+                        ));
+                    }                  
                 }
             }
 
             if(array_key_exists('groups', $order_description)){
                 foreach($order_description['groups'] as $sub_value){
-                    $sub_product = Product::find($sub_value['ingredient_id']);
-                    $sub_product->editProductStockIngredientUp(array(                
-                        'rel_id' =>  $sub_value['rel_id'],
-                        'volume_product' =>  $order_poduct->volume,                       
-                    ));                     
+                    if($sub_value['value'] == "true"){
+                        $sub_product = Product::find($sub_value['ingredient_id']);
+                        $sub_product->editProductStockIngredientUp(array(                
+                            'rel_id' =>  $sub_value['rel_id'],
+                            'volume_product' =>  $order_poduct->volume,                       
+                        ));
+                        
+                        $stock = new Stock();                  
+                        $stock->storeStockIngredient(array(                
+                            'ingredient_id'=>$sub_value['ingredient_id'],
+                            'rel_id'=>$sub_value['rel_id'],
+                            'volume_product' => $order_poduct->volume,                      
+                            'shift' =>  1, 
+                            'date' =>  $today                        
+                        ));
+                    }             
                 }  
             }
-
             //creamos una nueva entrada en stock 
-
         }
-        
-        
 
+        $order = Order::find($request->input('order_id'));
+        $order->status_id = env('APP_CALCEL_ORDER_STATUS', 4);
+        $order->save();
+
+        Session::flash('success', [['deleteOrderTableOK']]);
+        return redirect('table');        
         
-
-        //borramos la orden o la cambiamos de estado
-
-        dd($request->input());   
     }
 }

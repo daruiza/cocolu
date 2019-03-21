@@ -14,11 +14,12 @@ class Stock extends Model
     }
 
     public function storeStockProduct($data){
+
         if(array_key_exists('volume',$data))$this->volume = $data['volume'];
         if(array_key_exists('shift',$data))$this->shift = $data['shift'];
         if(array_key_exists('description',$data))$this->description = $data['description'];
         if(array_key_exists('date',$data))$this->date = $data['date'];
-        if(array_key_exists('product_id',$data))$this->product_id = $data['product_id'];        
+        if(array_key_exists('product_id',$data))$this->product_id = $data['product_id'];
         $this->save();
     }
 
@@ -32,10 +33,11 @@ class Stock extends Model
         $this->volume = $relation->volume*$data['volume_product'];
         if(array_key_exists('shift',$data))$this->shift = $data['shift'];
         if(array_key_exists('suggestion',$data))$this->description = $data['suggestion'];
+        if(array_key_exists('description',$data))$this->description = $data['description'];
         if(array_key_exists('date',$data))$this->date = $data['date'];
-        if(array_key_exists('product_id',$data))$this->product_id = $data['ingredient_id'];
+        if(array_key_exists('ingredient_id',$data))$this->product_id = $data['ingredient_id'];
 
-        $this->volume = $relation->volume;
+        //$this->volume = $relation->volume;
 
         $this->save();        
     }

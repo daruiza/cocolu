@@ -26,7 +26,7 @@ trait ProductRequestTrait
 	public function addProduct(Request $request,$id){
 		//retur pruduct an his components		
 		//$product = Product::find($request->input('id'));
-        $product = Product::select('id','name','price','volume','description','image1','order','label','unity_id','store_id')
+        $product = Product::select('id','name','price','volume','description','image1','order','label','unity_id','store_id','buy_price')
         ->where('id',$request->input('id'))
         ->first();
         //componentes - buscar todos        

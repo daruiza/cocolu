@@ -172,6 +172,12 @@ table.prototype.selectServiceResponse = function(result) {
 	    input.setAttribute("name", "store_id");
 	    input.setAttribute("value", $("input[name='order_store_id']" ).val());   	    
 	    node.appendChild(input);
+	    
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "store_id");
+	    input.setAttribute("value", $("input[name='order_store_id']" ).val());   	    
 	    node_destroy.appendChild(input);
 
 	    var input = document.createElement("input");
@@ -179,6 +185,11 @@ table.prototype.selectServiceResponse = function(result) {
 	    input.setAttribute("name", "table_id");
 	    input.setAttribute("value", $( "input[name='order_table_id']" ).val()); 	    
 	    node.appendChild(input);
+	    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "table_id");
+	    input.setAttribute("value", $( "input[name='order_table_id']" ).val()); 	    
 	    node_destroy.appendChild(input);
 
 	    var input = document.createElement("input");
@@ -186,6 +197,11 @@ table.prototype.selectServiceResponse = function(result) {
 	    input.setAttribute("name", "service_id");
 	    input.setAttribute("value", $( "input[name='order_service_id']" ).val());
 	    node.appendChild(input);
+	    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "service_id");
+	    input.setAttribute("value", $( "input[name='order_service_id']" ).val());
 	    node_destroy.appendChild(input);
 
 	    var input = document.createElement("input");
@@ -193,6 +209,11 @@ table.prototype.selectServiceResponse = function(result) {
 	    input.setAttribute("name", "order_id");
 	    input.setAttribute("value", $('#'+this.id+" input[name='order_id']" ).val());
 	    node.appendChild(input);
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "order_id");
+	    input.setAttribute("value", $('#'+this.id+" input[name='order_id']" ).val());
 	    node_destroy.appendChild(input);
 
 	    var input = document.createElement("input");
@@ -200,6 +221,11 @@ table.prototype.selectServiceResponse = function(result) {
 	    input.setAttribute("name", "next_status");
 	    input.setAttribute("value", parseInt($( '#'+this.id+" input[name='order_status']" ).val())+1);
 	    node.appendChild(input);
+	    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "next_status");
+	    input.setAttribute("value", parseInt($( '#'+this.id+" input[name='order_status']" ).val())+1);
 	    node_destroy.appendChild(input);
 
 	    $('#modal_order_view .container-destroy')[0].appendChild(node_destroy);//agregamos al form destroy
