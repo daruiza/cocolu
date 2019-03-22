@@ -42,24 +42,6 @@ table.prototype.selectServiceResponse = function(result) {
 	var node = document.createElement("div");
     node.setAttribute("class", "form-group");
 
-    var input = document.createElement("input");
-    input.setAttribute("type", "hidden");	    
-    input.setAttribute("name", "order_store_id");
-    input.setAttribute("value", result.data.request.store_id);   	    
-    node.appendChild(input);
-
-    var input = document.createElement("input");
-    input.setAttribute("type", "hidden");	    
-    input.setAttribute("name", "order_table_id");
-    input.setAttribute("value", result.data.request.table_id);   	    
-    node.appendChild(input);
-
-    var input = document.createElement("input");
-    input.setAttribute("type", "hidden");	    
-    input.setAttribute("name", "order_service_id");
-    input.setAttribute("value", result.data.service[0].id);   	    
-    node.appendChild(input);
-
     var sum_service = 0;
 
     for(obj in result.data.orders) {
@@ -67,7 +49,25 @@ table.prototype.selectServiceResponse = function(result) {
 		
 		subnode.setAttribute("class", "row order-obj status-"+result.data.orders[obj].status+" ");
 		
-		subnode.setAttribute("id", "order-"+result.data.orders[obj].id);		
+		subnode.setAttribute("id", "order-"+result.data.orders[obj].id);
+
+		var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "order_store_id"+"-order-"+result.data.orders[obj].id);
+	    input.setAttribute("value", result.data.request.store_id);   	    
+	    subnode.appendChild(input);
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "order_table_id"+"-order-"+result.data.orders[obj].id);
+	    input.setAttribute("value", result.data.request.table_id);   	    
+	    subnode.appendChild(input);
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");	    
+	    input.setAttribute("name", "order_service_id"+"-order-"+result.data.orders[obj].id);
+	    input.setAttribute("value", result.data.service[0].id);   	    
+	    subnode.appendChild(input);		
 		
 		var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
@@ -92,6 +92,15 @@ table.prototype.selectServiceResponse = function(result) {
 	    input.setAttribute("name", "order_status");
 	    input.setAttribute("value", result.data.orders[obj].status_id);   	    
 	    subnode.appendChild(input);
+
+	    var div = document.createElement("div");
+		div.setAttribute("class", "col-sm-12");		
+		div.setAttribute("style", "text-align: center;"); 
+		var span = document.createElement("span");		
+	    span.setAttribute("class", "");			    			    
+	    span.innerHTML = result.data.table[0].name;
+	    div.appendChild(span);		    
+	    subnode.appendChild(div);
 
 	    var div = document.createElement("div");
 		div.setAttribute("class", "col-sm-7 status");		
@@ -170,38 +179,38 @@ table.prototype.selectServiceResponse = function(result) {
 		var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
 	    input.setAttribute("name", "store_id");
-	    input.setAttribute("value", $("input[name='order_store_id']" ).val());   	    
+	    input.setAttribute("value", $("input[name='order_store_id-"+this.id+"']" ).val());   	    
 	    node.appendChild(input);
 	    
 
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
 	    input.setAttribute("name", "store_id");
-	    input.setAttribute("value", $("input[name='order_store_id']" ).val());   	    
+	    input.setAttribute("value", $("input[name='order_store_id-"+this.id+"']" ).val());   	    
 	    node_destroy.appendChild(input);
 
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
 	    input.setAttribute("name", "table_id");
-	    input.setAttribute("value", $( "input[name='order_table_id']" ).val()); 	    
+	    input.setAttribute("value", $( "input[name='order_table_id-"+this.id+"']" ).val()); 	    
 	    node.appendChild(input);
 	    
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
 	    input.setAttribute("name", "table_id");
-	    input.setAttribute("value", $( "input[name='order_table_id']" ).val()); 	    
+	    input.setAttribute("value", $( "input[name='order_table_id-"+this.id+"']" ).val()); 	    
 	    node_destroy.appendChild(input);
 
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
 	    input.setAttribute("name", "service_id");
-	    input.setAttribute("value", $( "input[name='order_service_id']" ).val());
+	    input.setAttribute("value", $( "input[name='order_service_id-"+this.id+"']" ).val());
 	    node.appendChild(input);
 	    
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
 	    input.setAttribute("name", "service_id");
-	    input.setAttribute("value", $( "input[name='order_service_id']" ).val());
+	    input.setAttribute("value", $( "input[name='order_service_id-"+this.id+"']" ).val());
 	    node_destroy.appendChild(input);
 
 	    var input = document.createElement("input");

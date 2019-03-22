@@ -45,10 +45,9 @@ class TableController extends Controller
             ->get();
 
         //listamos las ordenes endientes por atender de esta clousure        
-        $orders = Order::ordersStatusOne(Auth::user()->store()->id);
-        dd($orders->first()->service()->get()->first()->clousure()->get());
+        $orders = Order::ordersStatusOne(Auth::user()->store()->id);        
 
-		return view('table.index',compact('tables'))->with('data', []);
+		return view('table.index',compact('tables','orders'))->with('data', []);
     }
 
     /**

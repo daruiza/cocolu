@@ -6,6 +6,7 @@ function order_detail() {
 order_detail.prototype.onjquery = function() {	
 };
 
+//para pintar la orden dentro del modal de creacion de orden
 order_detail.prototype.orders_paint = function(container) {
 	/*container es la ubicación donde pintar la orden*/
 

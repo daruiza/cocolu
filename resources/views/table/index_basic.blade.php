@@ -10,7 +10,31 @@
                         <div class="container services-table">
                             <div class="row">                                
 								<div class="col-md-12 table"></div>								
-								<div class="col-md-12 orders_menu"></div>
+								<div class="col-md-12 orders_menu">
+                                    @isset($orders)
+                                    @empty(!$orders)                        
+                                        <div class="form-group">
+                                            @foreach($orders as $key => $value)
+
+                                                <div class="row order-obj status-{{$value->status()->first()->name}}" id="order-{{$value->id}}">
+                                            
+                                                {!! Form::hidden('order_store_id-order-'.$value->id, $value->service()->first()->table()->first()->store_id) !!}
+
+                                                {!! Form::hidden('order_table_id-order-'.$value->id, $value->service()->first()->table()->first()->id) !!}
+
+                                                {!! Form::hidden('order_service_id-order-'.$value->id, $value->service()->first()->id) !!}
+
+                                                {!! Form::hidden('order_id', $value->id) !!}
+
+                                                @php($sum_service=0)
+
+                                                </div>
+
+                                            @endforeach
+                                        </div>
+                                    @endempty
+                                    @endisset
+                                </div>
 								<div class="col-md-12 new-orders"></div>
                             </div>                                                  
                         </div>                  
