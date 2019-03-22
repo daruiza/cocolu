@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
+use App\Model\Core\Order;
 use App\Http\Controllers\Web\ServiceController;
 use App\Http\Controllers\Web\OrderController;
 
@@ -42,6 +43,11 @@ class TableController extends Controller
             ->where('active',1)
             ->orderBy('id','ASC')
             ->get();
+
+        //listamos las ordenes endientes por atender de esta clousure        
+        $orders = Order::ordersStatusOne(Auth::user()->store()->id);
+        dd($orders->first()->service()->get()->first()->clousure()->get());
+
 		return view('table.index',compact('tables'))->with('data', []);
     }
 

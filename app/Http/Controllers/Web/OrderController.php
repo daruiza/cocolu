@@ -47,20 +47,11 @@ class OrderController extends Controller
         $table = Table::find($request->input('table-id'));
         //$service = $table->tableServiceOpen();
 
-        if(!Auth::user()->validateUserStore($table->store_id)){
-            //return tableController->index();
-            //return view('table.index',compact('table'))->with('danger', [['NO_STORE_OWNER']])->with('data', []);
-            //return Redirect::back()->with($request->input())->with('danger', [['NO_STORE_OWNER']])->with('data', []);            
-            //return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_STORE_OWNER']]);
+        if(!Auth::user()->validateUserStore($table->store_id)){            
             Session::flash('danger', [['NO_STORE_OWNER']]);
             return redirect('table');
         }
-
-        //$ordermodal = true;
-        //return redirect('table');
-        //return redirect('table')->route('newPr')->withErrors(compact('state'));
-        //return redirect('table')->with(compact('ordermodal'));
-        //return redirect('table')->with('data', ['ordermodal'=>true,'table_id'=>$table->id]);
+        
         $tables = Table::where('store_id',Auth::user()->store()->id)
             ->where('active',1)
             ->orderBy('id','ASC')
