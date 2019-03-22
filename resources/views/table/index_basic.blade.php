@@ -13,25 +13,7 @@
 								<div class="col-md-12 orders_menu">
                                     @isset($orders)
                                     @empty(!$orders)                        
-                                        <div class="form-group">
-                                            @foreach($orders as $key => $value)
-
-                                                <div class="row order-obj status-{{$value->status()->first()->name}}" id="order-{{$value->id}}">
-                                            
-                                                {!! Form::hidden('order_store_id-order-'.$value->id, $value->service()->first()->table()->first()->store_id) !!}
-
-                                                {!! Form::hidden('order_table_id-order-'.$value->id, $value->service()->first()->table()->first()->id) !!}
-
-                                                {!! Form::hidden('order_service_id-order-'.$value->id, $value->service()->first()->id) !!}
-
-                                                {!! Form::hidden('order_id', $value->id) !!}
-
-                                                @php($sum_service=0)
-
-                                                </div>
-
-                                            @endforeach
-                                        </div>
+                                        @include('table.order_paint')
                                     @endempty
                                     @endisset
                                 </div>
@@ -92,12 +74,13 @@
                                                     </a>
                                                 @endif
                                                 				
-    											@if($value->tableServiceOpen()->count())														
+    											@if($value->tableServiceOpen()->count())
     												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
     												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>
     												<div>{{$value->tableServiceOpen()->first()->date}}</div>
     												<div>Total a Pagar</div>                         
     											@endif
+
                                             </div>
                                             @if($value->tableServiceOpen()->count())
                                             <div class="order_select_conteiner">

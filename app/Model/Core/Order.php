@@ -54,4 +54,16 @@ class Order extends Model
         ->get();     
         return $orders;    
     }
+
+    public function orderPrice(){
+        $order = Order::
+        select(\DB::raw('SUM(products.price*order_product.volume) as order_price'))
+            ->leftJoin('order_product','order_product.order_id','orders.id')
+            ->leftJoin('products','products.id','order_product.product_id')
+            ->where('orders.id',$this->id)                
+            ->groupBy('orders.id')
+            ->get();
+                    
+        return $order->first()->order_price;
+    }
 }
