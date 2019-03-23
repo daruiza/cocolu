@@ -70,6 +70,7 @@ return [
     "OrderPay" => "Paid order",    
     "Ingredients" => "Ingredients",
     "Groups" => "Groups",
-    "Serve" => "Serve"
+    "Serve" => "Serve",
+    "Without" => "Without"
     
 ];

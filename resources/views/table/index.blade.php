@@ -29,9 +29,11 @@
 @endsection
 
 @section('script')
-	<script type="text/javascript" src="{{ asset('js/entity/table.js') }}"></script>		
+	<script type="text/javascript" src="{{ asset('js/entity/table.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/entity/order.js') }}"></script>				
 	<script type="text/javascript">
 		table.onjquery();
+		order.onjquery();//para pintar el modal de una orden
 		//validar las opciones
 		function table_show_submit(id){
 			if($("#"+id+" input[name=id]").val() !== ""){
@@ -98,8 +100,6 @@
         });
         
 	</script>
-
-	<script type="text/javascript" src="{{ asset('js/traits/order_show.js') }}"></script>		
 		
 	@isset($data['servicemodal'])	
 	<script type="text/javascript">		

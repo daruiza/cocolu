@@ -1,5 +1,5 @@
 <div id="modal_order_view" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h6 class="modal-title">
