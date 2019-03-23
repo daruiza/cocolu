@@ -1,7 +1,9 @@
 <div class="form-group">
+    @php($sum_service=0)
+
     @foreach($orders as $key => $value)
 
-        <div class="row order-obj status-{{$value->status()->first()->name}}" id="order-{{$value->id}}">
+        <div class="row order-obj status-{{$value->status()->first()->name}} menu-status-{{$value->status()->first()->name}}" id="order-{{$value->id}}">
         
         {!! Form::hidden('order_store_id-order-'.$value->id, $value->service()->first()->table()->first()->store_id) !!}
 
@@ -15,9 +17,7 @@
 
         {!! Form::hidden('order_waiter', $value->waiter()->first()->user()->first()->name) !!}
 
-        {!! Form::hidden('order_status', $value->status_id) !!}
-
-        @php($sum_service=0)
+        {!! Form::hidden('order_status', $value->status_id) !!}        
 
             <div class="col-sm-12" style="text-align: center;">
                 <span>
@@ -31,7 +31,7 @@
                 </span>
             </div>
 
-            <div class="col-sm-5 status" style="text-align: center;">
+            <div class="col-sm-5 serial" style="text-align: center;">
             	<span>
                     Serial: {{$value->serial}}
                 </span>
@@ -39,14 +39,14 @@
 
             <div class="col-sm-12" style="text-align: center;">
             	<span>
-            	SubTotal: ${{number_format($value->orderPrice())}}
-            	 </span>
+            	   SubTotal: ${{number_format($value->orderPrice())}}
+            	</span>
             </div>
 
-            <div class="col-sm-12" style="text-align: center;">
-            	 <span>
-            	{{$value->date}}
-            	 </span>
+            <div class="col-sm-12 date" style="text-align: center;">
+            	<span>
+            	   {{$value->date}}
+            	</span>
             </div>
 
             @if($value->status_id == 1 || $value->status_id == 1)

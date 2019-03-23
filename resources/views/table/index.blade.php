@@ -15,6 +15,9 @@
 		@include('table.order_create')
 	@endisset	
 
+	{!! Form::open(array('id'=>'form-table-home','route' =>['table.index'],'method' =>'GET')) !!}
+	{!! Form::close() !!}
+
 	{!! Form::open(array('id'=>'slect-service-form','route' =>['table.selectservice',Auth::user()->store()->id],'method' =>'POST')) !!}
 		{!!Form::hidden('store_id', Auth::user()->store()->id)!!}		
 	{!! Form::close() !!}   
@@ -95,6 +98,8 @@
         });
         
 	</script>
+
+	<script type="text/javascript" src="{{ asset('js/traits/order_show.js') }}"></script>		
 		
 	@isset($data['servicemodal'])	
 	<script type="text/javascript">		
@@ -138,10 +143,14 @@
 			color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
 		}
 
-		.status-OrderNew{
-			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }};
+		.status-OrderNew{			
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
 		}
+
+		.menu-status-OrderNew{
+			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }};
+		}
+
 
 		.status-OrderOK{
 			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};

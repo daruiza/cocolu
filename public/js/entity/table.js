@@ -12,9 +12,11 @@ table.prototype.selectTable = function(objectClass,selectClass) {
 		$('.services-table .orders_menu').html('');
 		$('.services-table .new-orders').html('');
 
-        if($(this).hasClass(selectClass)){
+        if($(this).hasClass(selectClass)){            
             $('.'+objectClass).removeClass(selectClass);        
             $( "input[name='id']" ).val('');
+            //go to home
+            window.location=$('#form-table-home').attr('action');
             
         }else{
             $('.'+objectClass).removeClass(selectClass);        
@@ -47,7 +49,7 @@ table.prototype.selectServiceResponse = function(result) {
     for(obj in result.data.orders) {
     	var subnode = document.createElement("div");
 		
-		subnode.setAttribute("class", "row order-obj status-"+result.data.orders[obj].status+" ");
+		subnode.setAttribute("class", "row order-obj status-"+result.data.orders[obj].status+" menu-status-"+result.data.orders[obj].status+" ");
 		
 		subnode.setAttribute("id", "order-"+result.data.orders[obj].id);
 
