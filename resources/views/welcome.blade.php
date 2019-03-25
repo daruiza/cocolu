@@ -6,7 +6,7 @@
 
 @section('content')
 
-@auth<!-- no fondo -->
+@auth
 @else
     <div class="video-container">
         <video loop="loop" id="video_background" autoplay preload muted>

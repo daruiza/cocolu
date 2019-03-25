@@ -91,10 +91,10 @@ trait TableRequestTrait
                 ->leftJoin('products','products.id','order_product.product_id')
                 ->where('service_id',$service->first()->id)
                 ->where(function($query){
-                     $query->where('status_id',1)//orden tomada
-                     ->orWhere('status_id',2)//orden lista para entregar
-                     ->orWhere('status_id',3);//orden paga
-                    //->orWhere('status',4)//orden cerrada
+                    $query->where('status_id',1)//orden tomada
+                    ->orWhere('status_id',2)//orden lista para entregar
+                    ->orWhere('status_id',3)//orden paga
+                    ->orWhere('status_id',4);//orden cerrada
                  })
                 ->groupBy('orders.id')
                 ->get();    
