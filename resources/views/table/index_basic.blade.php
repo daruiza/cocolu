@@ -110,6 +110,7 @@
 {!! Form::hidden('mesage_OrderNew', __('messages.OrderNew') ) !!}
 {!! Form::hidden('mesage_OrderOK', __('messages.OrderOK') ) !!}
 {!! Form::hidden('mesage_OrderPay', __('messages.OrderPay') ) !!}
+{!! Form::hidden('mesage_OrderCancel', __('messages.OrderCancel') ) !!}
 {!! Form::hidden('mesage_producs', __('messages.Products') ) !!}
 {!! Form::hidden('mesage_ingredients', __('messages.Ingredients') ) !!}
 {!! Form::hidden('mesage_groups', __('messages.Groups') ) !!}

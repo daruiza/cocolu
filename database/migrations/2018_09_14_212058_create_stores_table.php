@@ -22,7 +22,7 @@ class CreateStoresTable extends Migration
             $table->string('description',512)->nullable()->default(null);
             $table->string('logo', 256)->default('default.png');
             $table->string('currency', 32)->default('COP');
-            $table->string('label')->nullable()->default('{"menu":"page","TableHeight":"125","icon":"fas fa-list","selectTable":"lemonchiffon","serviceOpenTable":"sandybrown","colorRow":"gainsboro","OrderStatusOne":"aliceblue","OrderOK":"cadetblue","OrderPay":"slategrey"}');
+            $table->string('label')->nullable()->default('{"menu":"page","TableHeight":"125","icon":"fas fa-list","selectTable":"lemonchiffon","serviceOpenTable":"sandybrown","colorRow":"gainsboro","OrderStatusOne":"aliceblue","OrderOK":"cadetblue","OrderPay":"cornflowerblue","OrderCancel":"slategrey"}');
             $table->boolean('active')->default(true);            
             $table->timestamps();
         });

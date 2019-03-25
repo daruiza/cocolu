@@ -384,15 +384,32 @@ table.prototype.selectServiceResponse = function(result) {
 	    node.appendChild(subnode);
 	    modal.appendChild(node);
 
-	    //cambiamos los botones deacuerdo al estado
-	    
+	    //cambiamos los botones deacuerdo al estado	    
+	    //Orden Nueva
 	    if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 1){
 	    	$('#modal_order_view .btn-send').html($( "input[name='mesage_send']" ).val().toUpperCase())
+	    	$('#modal_order_view .btn-send').css('display','block');
 	    	$('#modal_order_view .btn-cancel').css('display','block');
 	    }
+
+	    //Orden Ok Entregada
 	    if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 2){
 	    	$('#modal_order_view .btn-send').html($( "input[name='mesage_pay']" ).val().toUpperCase())
-	    	$('#modal_order_view .btn-cancel').css('display','none');
+	    	$('#modal_order_view .btn-send').css('display','block');
+	    	$('#modal_order_view .btn-cancel').css('display','block');//aun se puede cancelar
+	    }
+
+	    //Orden Pagada
+	    if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 3){
+	    	$('#modal_order_view .btn-send').css('display','none');
+	    	$('#modal_order_view .btn-cancel').css('display','none');//ya no se puede cancelar
+
+	    }
+
+	    //orden cancelada
+	    if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 3){
+	    	$('#modal_order_view .btn-send').css('display','none');
+			$('#modal_order_view .btn-cancel').css('display','none');//ya no se puede cancelar	    	
 	    }
 	    
 

@@ -151,11 +151,15 @@
 			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }};
 		}
 
-
 		.status-OrderOK{
 			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }};	
 		}
+		
+		.status-OrderCancel{			
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderCancel'] }};
+			color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};	
+		}		
 
 		.status-OrderPay{			
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderPay'] }};
