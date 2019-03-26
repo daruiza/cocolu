@@ -72,6 +72,7 @@ return [
     "Ingredients" => "Ingredients",
     "Groups" => "Groups",
     "Serve" => "Serve",
-    "Without" => "Without"
+    "Recover" => "Recover",
+    "Without" => "Without",
     
 ];

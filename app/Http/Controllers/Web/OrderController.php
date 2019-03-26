@@ -308,13 +308,33 @@ class OrderController extends Controller
             return redirect('table');
         }
 
+        //Se pretende recuperar la orden
+        if($request->input('next_status') == 5){
+            $order = Order::find($request->input('order_id'));
+            $description = json_decode($order->description,true);
+            $today = new DateTime();
+            $today = $today->format('Y-m-d H:i:s');
+            $this->editStockAndInventary($order,$description,false,0,$today);
+            //1. descuento de invetario
+            //2. Descuento en stock
+            //3. cambio de estado         
+
+            $order->status_id = 1;
+            $order->save();
+
+            Session::flash('success', [['RecoverOrderTableOK']]);
+            return redirect('table');
+            
+        }
+
         //actualizamos el estado de la orden
         $order = Order::find($request->input('order_id'));
         $order->status_id = $request->input('next_status');
         $order->save();
 
         Session::flash('success', [['EditOrderTableOK']]);
-        return redirect('table');        
+        return redirect('table');
+        
     }
 
     /**
@@ -333,7 +353,10 @@ class OrderController extends Controller
         $today = new DateTime();
         $today = $today->format('Y-m-d H:i:s');
 
-        //consultamos la cantidad que se compro por producto dentro de la orden        
+
+        $this->editStockAndInventary($order,$description,true,1,$today);
+        //consultamos la cantidad que se compro por producto dentro de la orden
+        /*     
         foreach($description as $order_description){
 
             $product = Product::find($order_description['produt_id']);
@@ -344,9 +367,9 @@ class OrderController extends Controller
 
             if($product->buy_price){
                 //al no tener un precio de compra es un producto creado                
-                $product->editProductStockUp(array(                
+                $product->editProductStock(array(                
                     'volume' =>  $order_poduct->volume
-                ));
+                ),true);
                 //editar stock
                 $stock = new Stock();            
                 $stock->storeStockProduct(array(
@@ -363,10 +386,10 @@ class OrderController extends Controller
                     //validar el valor de selection
                     if($sub_value['value'] == "true"){
                         $sub_product = Product::find($sub_value['ingredient_id']);
-                        $sub_product->editProductStockIngredientUp(array(                
+                        $sub_product->editProductStockIngredient(array(                
                             'rel_id' =>  $sub_value['rel_id'],
                             'volume_product' =>  $order_poduct->volume,                       
-                        ));
+                        ),true);
 
                         $stock = new Stock();                  
                         $stock->storeStockIngredient(array(                
@@ -385,10 +408,10 @@ class OrderController extends Controller
                 foreach($order_description['groups'] as $sub_value){
                     if($sub_value['value'] == "true"){
                         $sub_product = Product::find($sub_value['ingredient_id']);
-                        $sub_product->editProductStockIngredientUp(array(                
+                        $sub_product->editProductStockIngredient(array(                
                             'rel_id' =>  $sub_value['rel_id'],
                             'volume_product' =>  $order_poduct->volume,                       
-                        ));
+                        ),true);
                         
                         $stock = new Stock();                  
                         $stock->storeStockIngredient(array(                
@@ -403,6 +426,7 @@ class OrderController extends Controller
             }
             //creamos una nueva entrada en stock 
         }
+        */
 
         $order = Order::find($request->input('order_id'));
         $order->status_id = env('APP_CALCEL_ORDER_STATUS', 4);

@@ -164,6 +164,8 @@ table.prototype.selectServiceResponse = function(result) {
 		$('.services-table .new-orders').html('<a class="dropdown-item" href="javascript: order_create_submit(\'table'+result.data.table[0].id+'\')"><i class="fas fa-clipboard"></i><span>'+$('.span-order').html()+'</span></a>');	
 	}
 
+	order.showOrderModal();	
+	/*
 	$('.order-obj').on( "click", function() {
 		//result.data.orders[0].date
 		$('#modal_order_view .modal-title-subtext').html($('#'+this.id+" .serial")[0].children[0].innerHTML+" ["+$('#'+this.id+" .date")[0].children[0].innerHTML+"]");
@@ -407,7 +409,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    }
 
 	    //orden cancelada
-	    if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 3){
+	    if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 4){
 	    	$('#modal_order_view .btn-send').css('display','none');
 			$('#modal_order_view .btn-cancel').css('display','none');//ya no se puede cancelar	    	
 	    }
@@ -415,6 +417,7 @@ table.prototype.selectServiceResponse = function(result) {
 
 		$('#modal_order_view').modal('toggle');
 	});
+	*/
 	
 };
 

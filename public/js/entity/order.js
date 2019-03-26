@@ -263,14 +263,31 @@ order.prototype.showOrderModal = function() {
 	    modal.appendChild(node);
 
 	    //cambiamos los botones deacuerdo al estado
-	    
+
 	    if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 1){
-	    	$('#modal_order_view .btn-send').html($( "input[name='mesage_send']" ).val().toUpperCase())
+	    	$('#modal_order_view .btn-send').html($( "input[name='mesage_serve']" ).val())
+	    	$('#modal_order_view .btn-send').css('display','block');
 	    	$('#modal_order_view .btn-cancel').css('display','block');
 	    }
+	    //Orden Ok Entregada
 	    if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 2){
-	    	$('#modal_order_view .btn-send').html($( "input[name='mesage_pay']" ).val().toUpperCase())
-	    	$('#modal_order_view .btn-cancel').css('display','none');
+	    	$('#modal_order_view .btn-send').html($( "input[name='mesage_pay']" ).val())
+	    	$('#modal_order_view .btn-send').css('display','block');
+	    	$('#modal_order_view .btn-cancel').css('display','block');//aun se puede cancelar
+	    }
+
+	    //Orden Pagada
+	    if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 3){
+	    	$('#modal_order_view .btn-send').css('display','none');
+	    	$('#modal_order_view .btn-cancel').css('display','none');//ya no se puede cancelar
+
+	    }
+
+	    //orden cancelada
+	    if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 4){
+	    	$('#modal_order_view .btn-send').html($( "input[name='mesage_recover']" ).val())
+	    	$('#modal_order_view .btn-send').css('display','block');
+			$('#modal_order_view .btn-cancel').css('display','none');//ya no se puede cancelar	    	
 	    }
 	    
 

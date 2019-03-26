@@ -72,6 +72,7 @@ return [
     "OrderNew" => "Nueva Orden",
     "Ingredients" => "Ingredientes",
     "Groups" => "Grupos",
+    "Recover" => "Recuperar",
     "Without" => "Sin"
     
 ];

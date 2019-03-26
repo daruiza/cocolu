@@ -124,11 +124,22 @@ class Product extends Model
         return false;        
     }
 
-    public function editProductStock($data){
-        if($this->volume){
-            if(array_key_exists('volume',$data))$this->volume = $this->volume - $data['volume'];    
-            $this->save();
-        }        
+    public function editProductStock($data,$opt=false){
+        
+        if(!$opt){
+            //decrementar
+            if($this->volume){
+                if(array_key_exists('volume',$data))$this->volume = $this->volume - $data['volume'];    
+                $this->save();
+            }
+        }else{
+            //incrementar
+            if($this->buy_price){
+                if(array_key_exists('volume',$data))$this->volume = $this->volume + $data['volume'];    
+                $this->save();
+            }
+        }
+                
     }
 
     public function editProductStockUp($data){
@@ -138,16 +149,32 @@ class Product extends Model
         }        
     }
 
-    public function editProductStockIngredient($data){
-        //consultamos el volumen
-        $relation = \DB::table('product_product')           
-            ->where('id',$data['rel_id'])
-            ->get()
-            ->first();
-        if($this->volume){
-            $this->volume = $this->volume - $relation->volume * $data['volume_product'];    
-            $this->save();
-        }       
+    public function editProductStockIngredient($data,$opt=false){
+        
+        if(!$opt){
+            //decrementar
+            //consultamos el volumen
+            $relation = \DB::table('product_product')           
+                ->where('id',$data['rel_id'])
+                ->get()
+                ->first();
+            if($this->volume){
+                $this->volume = $this->volume - $relation->volume * $data['volume_product'];    
+                $this->save();
+            }
+        }else{
+            //incrementar
+            //consultamos el volumen
+            $relation = \DB::table('product_product')           
+                ->where('id',$data['rel_id'])
+                ->get()
+                ->first();
+            if($this->volume){
+                $this->volume = $this->volume + $relation->volume * $data['volume_product'];    
+                $this->save();
+            }       
+        }
+               
     }
 
     public function editProductStockIngredientUp($data){
