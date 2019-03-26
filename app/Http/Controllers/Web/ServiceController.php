@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Table;
 use App\Model\Core\Service;
+use App\Model\Core\Order;
 use App\Model\Core\Clousure;
 
 use App\Http\Controllers\Web\TableController;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 use DateTime;
 
@@ -51,35 +53,47 @@ class ServiceController extends Controller
 		//$request bring table id
 		//1 validate owner table
 		//validar store
-		$table = Table::find($request->input('id'));
-		$tables = Table::
+		$table = Table::find($request->input('id'));		
+			
+        //$table = Table::find($request->input('table-id'));
+        //$service = $table->tableServiceOpen();
+
+        if(!Auth::user()->validateUserStore($table->store_id)){            
+            Session::flash('danger', [['NO_STORE_OWNER']]);
+            return redirect('table');
+        }
+
+        $tables = Table::
             where('store_id',Auth::user()->store()->id)
             ->where('active',1)
             ->orderBy('id','ASC')
             ->get();
-			
-        if(!Auth::user()->validateUserStore($table->store_id)){			          
-			//return tableController->index();
-            //return view('table.index',compact('table'))->with('danger', [['NO_STORE_OWNER']])->with('data', []);
-			//return Redirect::back()->with($request->input())->with('danger', [['NO_STORE_OWNER']])->with('data', []);
-			return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_STORE_OWNER']]);
-        }
-		//consult services open=true, and donot be register in table close
-		//only one service have state open=true, when close -> open=false		
-		$services = Service::
-			where('table_id',$table->id)  
+
+        $orders = Order::ordersStatusOne(Auth::user()->store()->id);
+        
+        $services = Service::
+            where('table_id',$table->id)  
             ->where('open',1)            
             ->get();
             
-		if($services->count()){
-			//can not to create new service
-			//now exist a service active
-			return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_SERVICE_CREATE']]);			
-		}		
-		
-		//return view for create new service
-		//return view('table.index',compact('tables','table'))->with('data', ['servicemodal'=>true,'table_id'=>$table->id])->with('success', [['SERVICE_NEW']]);		
-		return view('table.index',compact('tables','table'))->with('data', ['servicemodal'=>true,'table_id'=>$table->id]);		
+        if($services->count()){            
+            //now exist a service active
+            if($table->tableOrderStatusOneTwoOpen()->count()){
+                Session::flash('danger', [['SERVICE_DONT_CLOSE']]);    
+            }else{
+                Session::flash('info', [['SERVICE_CLOSE_OK']]);    
+                return view('table.index',compact('tables','table','orders'))
+                ->with('data', ['servicemodaledit'=>true]);    
+            }
+
+            return redirect('table');               
+        }
+
+        //Session::flash('data', ['servicemodal'=>true]);
+        //$data = ['servicemodal'=>true];
+        //return redirect('table')->with(compact('table','data'))->with('data',['servicemodal'=>true]);
+        return view('table.index',compact('tables','table','orders'))
+        ->with('data', ['servicemodal'=>true]);		
     }
 
     /**

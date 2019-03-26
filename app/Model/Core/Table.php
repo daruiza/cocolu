@@ -43,13 +43,22 @@ class Table extends Model
         if(!empty($service)){
             return Order::where('service_id', $service->id)
             ->where('status_id',1)
+            ->get();          
+        }        
+        return collect();
+    }
+
+    public function tableOrderStatusOneTwoOpen(){             
+        $service = $this->tableServiceOpen()->first();
+        if(!empty($service)){
+            return Order::where('service_id', $service->id)
+            ->where(function($query){
+                $query->where('status_id',1)//orden tomada
+                ->orWhere('status_id',2);//orden lista para entregar
+            })            
             ->get();            
         }
-        /*
-        return Order::where('service_id', 0)
-        ->where('status',1)
-        ->get();  
-        */
+
         return collect();
     }
 

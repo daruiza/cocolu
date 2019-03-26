@@ -13,7 +13,7 @@
 								<div class="col-md-12 orders_menu">
                                     @isset($orders)
                                     @empty(!$orders)                        
-                                        @include('table.order_paint')
+                                        @include('order.paint')
                                     @endempty
                                     @endisset
                                 </div>
@@ -119,3 +119,7 @@
 {!! Form::hidden('mesage_pay', __('messages.Pay') ) !!}
 {!! Form::hidden('mesage_recover', __('messages.Recover') ) !!}
 {!! Form::hidden('mesage_without', __('messages.Without') ) !!}
+{!! Form::hidden('mesage_openService', __('options.service') ) !!}
+{!! Form::hidden('mesage_closeService', __('options.closeService') ) !!}
+
+

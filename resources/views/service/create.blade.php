@@ -40,7 +40,7 @@
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary" form="form-table-service">{{ __('form.Send') }}</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
+        <button type="button" class="btn btn-secondary modal-btn-cancel" data-dismiss="modal">{{ __('form.Cancel') }}</button>
       </div>
     </div>
   </div>

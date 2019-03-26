@@ -11,5 +11,6 @@ return [
 	"destroy"=>"Destroy",
 	"drag"=>"Drag",
 	"service"=>"Service",
+	"closeService"=>"Close Service",
 	"editstock"=>"Edit Stock",
 ];

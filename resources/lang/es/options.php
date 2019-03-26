@@ -11,5 +11,6 @@ return [
 	"destroy"=>"Eliminar",
 	"drag"=>"Acomodar",
 	"service"=>"Servicio",
-	"editstock"=>"Editar Inventario",	
+	"closeService"=>"Cerrar Servicio",
+	"editstock"=>"Editar Inventario",
 ];

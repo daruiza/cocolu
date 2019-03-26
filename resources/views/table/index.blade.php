@@ -5,15 +5,22 @@
 
 @section('content')
 	@include('table.index_basic')
-	@include('table.order_view')
+
+	@include('order.view')
 
 	@isset($data['servicemodal'])
-		@include('table.service_create')
+		@include('service.create')
+	@endisset
+
+	@isset($data['servicemodaledit'])
+		@include('service.edit')
 	@endisset
 
 	@isset($data['ordermodal'])
-		@include('table.order_create')
-	@endisset	
+		@include('order.create')
+	@endisset
+
+
 
 	{!! Form::open(array('id'=>'form-table-home','route' =>['table.index'],'method' =>'GET')) !!}
 	{!! Form::close() !!}
@@ -98,12 +105,11 @@
                 $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
             }, 0);
         });
-        
 	</script>
 		
 	@isset($data['servicemodal'])	
 	<script type="text/javascript">		
-		$('#modal_service_create').modal('toggle');
+		$('#modal_service_create').modal('toggle');		
 	</script>
 	@endisset
 
