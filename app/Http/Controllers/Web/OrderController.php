@@ -247,9 +247,12 @@ class OrderController extends Controller
 
             //segundo descontamos en producto
             $product = Product::find($value['produt_id']);
-            $product->editProductStock(array(                
-                'volume' =>  $value['volume']                
-            )); 
+            if($product->buy_price){
+                $product->editProductStock(array(                
+                    'volume' =>  $value['volume']                
+                ));     
+            }           
+            
             
             //2.1 relacion con order products    
             $order_product = new OrderProduct();                  
@@ -314,10 +317,11 @@ class OrderController extends Controller
             $description = json_decode($order->description,true);
             $today = new DateTime();
             $today = $today->format('Y-m-d H:i:s');
+
             $this->editStockAndInventary($order,$description,false,0,$today);
             //1. descuento de invetario
             //2. Descuento en stock
-            //3. cambio de estado         
+            //3. cambio de estado        
 
             $order->status_id = 1;
             $order->save();
