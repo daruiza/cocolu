@@ -14,11 +14,14 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Traits\Web\ServiceRequestTrait;
+
 use DateTime;
 
 class ServiceController extends Controller
 {	
 	//protected $tableController;
+    use ServiceRequestTrait;
 
     public function __construct()
     {               
@@ -81,11 +84,10 @@ class ServiceController extends Controller
             if($table->tableOrderStatusOneTwoOpen()->count()){
                 Session::flash('danger', [['SERVICE_DONT_CLOSE']]);    
             }else{
-                Session::flash('info', [['SERVICE_CLOSE_OK']]);    
+                //Session::flash('info', [['SERVICE_CLOSE_OK']]);    
                 return view('table.index',compact('tables','table','orders'))
-                ->with('data', ['servicemodaledit'=>true]);    
+                ->with('data', ['servicemodalclose'=>true]);    
             }
-
             return redirect('table');               
         }
 
@@ -110,23 +112,27 @@ class ServiceController extends Controller
             ->where('active',1)
             ->orderBy('id','ASC')
             ->get();
+        $orders = Order::ordersStatusOne(Auth::user()->store()->id);
 
         $services = Service::
             where('table_id',$request->input('table_id'))  
             ->where('open',1)            
             ->get();
         if($services->count()){
-           return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_MULTI_SERVERS']]); 
+           return view('table.index',compact('tables','table','orders'))
+           ->with('data', [])->with('danger', [['NO_MULTI_SERVERS']]); 
         }    
 
         if(!Auth::user()->validateUserStore($table->store_id)){         
-            return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_STORE_OWNER']]);
+            return view('table.index',compact('tables','table','orders'))
+            ->with('data', [])->with('danger', [['NO_STORE_OWNER']]);
         }
+
         $service = new Service();
 		//fecha y hora
 		$today = new DateTime();
 		$today = $today->format('Y-m-d H:i:s');		
-		$request->request->add(['date' => $today]);
+		$request->request->add(['date_open' => $today]);
 		
         $cousure = Clousure::
             where('store_id',Auth::user()->store()->id)
@@ -134,7 +140,8 @@ class ServiceController extends Controller
             ->get();
         //validate only one Clousure        
         if($cousure->count() <> 1){         
-            return view('table.index',compact('tables'))->with('data', [])->with('danger', [['NO_ONLYONE_CLOUSURE']]);
+            return view('table.index',compact('tables','table','orders'))
+            ->with('data', [])->with('danger', [['NO_ONLYONE_CLOUSURE']]);
         }
 
 		$request->request->add(['rel_clousure_id' => $cousure->first()->id]);		
@@ -145,7 +152,8 @@ class ServiceController extends Controller
         //verificate onli one service
         /*****/
         
-        return view('table.index',compact('tables','table'))->with('data', [])->with('success', [['SERVICE_NEW_OK']]);
+        return view('table.index',compact('tables','table','orders'))
+        ->with('data', [])->with('success', [['SERVICE_NEW_OK']]);
     }
 
     /**
@@ -177,7 +185,7 @@ class ServiceController extends Controller
      * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(Request $request, $id)
     {
         //
     }

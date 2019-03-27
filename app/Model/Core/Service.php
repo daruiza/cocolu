@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    protected $fillable = ['id','name','description','date','kept','open','rel_clousure_id','table_id'];
+    protected $fillable = ['id','name','description','date_open','date_close','kept','open','rel_clousure_id','table_id'];
 
     public function table(){
 		//no usa el namespace

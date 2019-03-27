@@ -101,7 +101,7 @@ class OrderController extends Controller
         */
 
         $products = array();
-        $i = -1;
+        //$i = -1;
         //dd($request->input());
         foreach ($request->input() as $key => $value) {
             $array = explode('_',$key);                

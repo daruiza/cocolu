@@ -17,7 +17,8 @@ class CreateServicesTable extends Migration
             $table->increments('id');
             $table->string('name',128)->nullable()->default(null);
             $table->string('description',512)->nullable()->default(null);
-            $table->dateTime('date');
+            $table->dateTime('date_open')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('date_close');
             $table->boolean('kept')->default(false);//reserved
             $table->boolean('open')->default(true);//one service open for table						
             $table->timestamps();

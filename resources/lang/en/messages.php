@@ -74,5 +74,6 @@ return [
     "Serve" => "Serve",
     "Recover" => "Recover",
     "Without" => "Without",
+    "Safe" => "Are you sure to close the service?",
     
 ];

@@ -73,6 +73,7 @@ return [
     "Ingredients" => "Ingredientes",
     "Groups" => "Grupos",
     "Recover" => "Recuperar",
-    "Without" => "Sin"
+    "Without" => "Sin",
+    "Safe" => "¿Estas seguro de cerrar el servicio?",
     
 ];

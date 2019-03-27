@@ -60,6 +60,9 @@ Route::get('table/{id}/service', [
 Route::post('table/{id}/saveservice', [
    'as' => 'table.saveservice', 'uses' => 'Web\TableController@saveService'
 ]);
+Route::post('table/{id}/closeservice', [
+   'as' => 'table.closeservice', 'uses' => 'Web\TableController@closeService'
+]);
 Route::post('waiter/changepassword', [
    'as' => 'waiter.changepassword', 'uses' => 'Web\WaiterController@showResetForm'
 ]);

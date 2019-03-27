@@ -25,6 +25,7 @@ return [
 	"TableService" => "Información del servicio",
 	"createTable" => "Crear Nueva Mesa",	
 	"TableServiceCreate" => "Nuevo Servicio",
+	"TableServiceClose" => "Cerrar Servicio",
 	"createWaiter" => "Crear Mesero",
 	"AddIngredients" => "Agregar Ingrediente",
 	"AddComponents" => "Agregar Componentes",

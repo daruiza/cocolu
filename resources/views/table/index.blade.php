@@ -12,8 +12,8 @@
 		@include('service.create')
 	@endisset
 
-	@isset($data['servicemodaledit'])
-		@include('service.edit')
+	@isset($data['servicemodalclose'])
+		@include('service.close')
 	@endisset
 
 	@isset($data['ordermodal'])
@@ -113,6 +113,14 @@
 	</script>
 	@endisset
 
+	@isset($data['servicemodalclose'])	
+	<script type="text/javascript">		
+		$('#modal_service_close').modal('toggle');		
+	</script>
+	@endisset
+
+	
+	
 	@isset($data['ordermodal'])
 		<script type="text/javascript" src="{{ asset('js/traits/order_detail.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/traits/order_create.js') }}"></script>		

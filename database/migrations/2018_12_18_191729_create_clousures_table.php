@@ -18,6 +18,8 @@ class CreateClousuresTable extends Migration
             $table->string('name',128);
             $table->string('description',512)->nullable()->default(null);
             $table->boolean('open')->default(true);//one clousere open for session
+            $table->dateTime('date_open')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('date_close');
 
             $table->integer('store_id')->unsigned();            
             $table->foreign('store_id')->references('id')->on('stores')

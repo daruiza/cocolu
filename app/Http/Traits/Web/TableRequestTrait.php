@@ -114,6 +114,9 @@ trait TableRequestTrait
     public function saveOrder(Request $request,$id){        
         return $this->orderController->store($request);
     }
-    
+
+    public function closeService(Request $request,$id){        
+        return $this->serviceController->close($request);
+    }
 	
 }
