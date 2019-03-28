@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Collection;
 
+use DateTime;
+
 trait ServiceRequestTrait
 {	
 	public function close(Request $request){
