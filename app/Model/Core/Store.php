@@ -2,6 +2,8 @@
 
 namespace App\Model\Core;
 
+use App\Model\Core\Clousure;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
@@ -24,6 +26,11 @@ class Store extends Model
     public function clousures(){
         //no usa el namespace
         return $this->hasMany(Clousure::class);
+    }
+
+    public function clousureOpen(){
+        $clousure = Clousure::where('open',1)->get()->first();
+        return $clousure;
     }
 
     public function updateStore($data){

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\User;
+use App\Model\Core\Store;
 use App\Model\Core\Clousure;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -69,8 +71,13 @@ class ClousureController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,$id)
-    {
-        dd($request->input());
+    {        
+        $user = User::findOrFail($id);
+        //validación de credenciales de usuario
+       if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);
+       //$store = $user->store();        
+       $clousure = $user->store()->clousureOpen();
+       dd($clousure);
     }
 
     /**
