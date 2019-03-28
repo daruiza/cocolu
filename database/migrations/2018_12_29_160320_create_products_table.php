@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name',128);
             $table->integer('price')->default(0);
             $table->integer('buy_price')->default(0);
-            $table->integer('volume')->default(0);
+            $table->float('volume')->default(0);
             $table->integer('critical_volume')->default(0);
             $table->string('description',512)->nullable()->default(null);
             $table->string('image1', 128)->default('default.png');         

@@ -15,7 +15,7 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('volume');
+            $table->float('volume');
             $table->boolean('shift')->default(false);
             $table->string('description',512)->nullable()->default(null);
             $table->dateTime('date');

@@ -56,7 +56,7 @@ class ClousureController extends Controller
      * @param  \App\Clousure  $clousure
      * @return \Illuminate\Http\Response
      */
-    public function edit(Clousure $clousure)
+    public function edit(Request $request, $id)
     {
         //
     }
@@ -68,9 +68,9 @@ class ClousureController extends Controller
      * @param  \App\Clousure  $clousure
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Clousure $clousure)
+    public function update(Request $request,$id)
     {
-        //
+        dd($request->input());
     }
 
     /**

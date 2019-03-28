@@ -21,7 +21,7 @@ class CreateProductProductTable extends Migration
             $table->integer('ingredient_id')->unsigned()->default(1);
             $table->foreign('ingredient_id')->references('id')->on('products')->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->integer('volume')->default(0);
+            $table->float('volume')->default(0);
             $table->string('group')->nullable()->default(null);
             $table->timestamps();
         });

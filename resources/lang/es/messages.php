@@ -43,6 +43,7 @@ return [
     "superAdmin"=> "Administrador de Modulos, Usuarios, Roles, Permisos y Cuentas",
     "editProfile" =>"Editar Perfil",
     "editStore"=>"Editar Tienda",
+    "workClousure"=>"Cierre de Labor",
     "Reset Password" => "Restablecer la contraseña",
     "Send Password Reset Link" => "Enviar contraseña Restablecer enlace",
     "Send"=>"Enviar",
