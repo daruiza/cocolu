@@ -60,7 +60,7 @@ class ClousureController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        //
+        
     }
 
     /**
