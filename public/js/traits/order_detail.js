@@ -178,6 +178,7 @@ order_detail.prototype.orders_paint = function(container) {
     container.appendChild(node);
 	
 	//no se logro ubicar en otro lugar, product_obj aún no esta creado
+	//POR ESTE LADO NO ES
     order.showOrderModal();
 };
 
