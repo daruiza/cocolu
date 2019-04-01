@@ -15,9 +15,10 @@ trait UserRequestTrait
     	
     	$user = User::findOrFail($request->input('id'));
     	if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);
-        return view('user.passwords.reset')->with(
-            ['token' => $request->input('_token'),'options'=>$user->rol_options()]
-        );
+        return view('user.passwords.reset')
+            ->with(['token' => $request->input('_token'),'options'=>$user->rol_options()])
+            ->with('data', ['options'=>$user->rol_options()]);
+
     }
 
     public function resetPassword(Request $request)
@@ -25,7 +26,9 @@ trait UserRequestTrait
         $user = User::findOrFail($request->input('id'));
     	if ($this->validatorPassword($request->all())->fails()) {    		
     		$message[0][0] = 'editPasswordNOOK';
-    		return view('user.passwords.reset')->with(['token' => $request->input('_token'),'options'=>$user->rol_options(), 'danger'=> $message])->withErrors($this->validatorPassword($request->all()));
+    		return view('user.passwords.reset')
+            ->with(['token' => $request->input('_token'),'options'=>$user->rol_options(), 'danger'=> $message])
+            ->withErrors($this->validatorPassword($request->all()));
 		}
 
         $user->password = Hash::make($request->input('password'));;

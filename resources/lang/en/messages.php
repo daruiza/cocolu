@@ -41,7 +41,7 @@ return [
     "Order"=>"Order",
     "superAdmin"=> "Modules, Users, Roles, Permissions and Accounts Manager",
     "editProfile" =>"Edit Profile",
-    "workClousure"=>"Work Clousure",
+    "editClousure"=>"Work Clousure",
     "editStore"=>"Edit Store",
     "Reset Password" => "Reset Password",
     "Send Password Reset Link" => "Send Password Reset Link",

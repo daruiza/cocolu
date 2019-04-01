@@ -14,33 +14,7 @@
             		<div class="card">
 	                    <div class="card-header">{{ __('messages.Options') }}</div>
 	                    @if (!empty($data['options']) )
-	                    	<div class="card-body">
-	                    		<ul class="list-group">	                    			
-	                    			@foreach( $data['options'] as $option )
-	                    				<li class="list-group-item li-option" onclick="event.preventDefault();
-                                                     document.getElementById('{{ $option }}').submit()";>
-	                    					{{ __('messages.'. $option) }} 	
-	                    				</li>
-	                    			@endforeach
-	                    		</ul>	
-	                    	</div>
-
-	                    	<form id="editProfile" action="{{ route('user.edit', \Auth::user()->id ) }}" method="GET" style="display: none;">
-                                
-                            </form>
-
-                            <form id="editStore" action="{{ route('store.edit', \Auth::user()->id ) }}" method="GET" style="display: none;">                               
-                            </form>
-
-                            <form id="workClousure" action="{{ route('clousure.update', \Auth::user()->id ) }}" method="POST" ">
-                            	@csrf                            	
-                            	<input type="hidden" name="id" value="{{ \Auth::user()->id }}">
-                            </form>
-
-                            <form id="passwordChange" action="{{ route('user.changepassword') }}" method="POST" style="display: none;">
-		                        @csrf                               
-		                        <input type="hidden" name="id" value="{{ \Auth::user()->id }}">
-		                    </form>
+	                    	@include('layouts.form_options_profile')
 	                    @endif	                    
                 	</div>
             	</div>

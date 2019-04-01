@@ -6,10 +6,28 @@ use App\User;
 use App\Model\Core\Store;
 use App\Model\Core\Clousure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+
+use DateTime;
 
 class ClousureController extends Controller
 {
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => '
+                required|
+                string|
+                max:16',
+            'description' => '
+                required|
+                string'
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -60,7 +78,10 @@ class ClousureController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        
+        $user = User::findOrFail($id);
+        //validación de credenciales de usuario
+        if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);
+        return View::make('clousure.edit',compact('user'))->with('data', ['options'=>$user->rol_options()]);
     }
 
     /**
@@ -71,13 +92,30 @@ class ClousureController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,$id)
-    {        
+    {
+        $this->validator($request->all())->validate();
         $user = User::findOrFail($id);
+
         //validación de credenciales de usuario
-       if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);
-       //$store = $user->store();        
-       $clousure = $user->store()->clousureOpen();
-       dd($clousure);
+        if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);
+
+        $today = new DateTime();
+        $today = $today->format('Y-m-d H:i:s');
+
+        $clousure = $user->store()->clousureOpen();
+        $clousure->description = $request->input('description');
+        $clousure->date_close = $today;
+        $clousure->open = 0;
+        $clousure->save();
+
+        $new_colusure = new Clousure();
+        $new_colusure->name = $request->input('name');
+        $new_colusure->description = $request->input('new_description');
+        $new_colusure->store_id = $user->store()->id;
+        $new_colusure->save();
+        
+        $message[0][0] = 'workClousureOK';
+        return view('clousure.edit',compact('user'))->with('success', $message)->with('data', ['options'=>$user->rol_options()]);
     }
 
     /**

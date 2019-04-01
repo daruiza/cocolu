@@ -12,19 +12,8 @@
             	<div class="col-md-4 ">
             		<div class="card">
 	                    <div class="card-header">{{ __('messages.Options') }}</div>
-	                    @if (!empty($data['options']) )
-	                    	<div class="card-body">
-	                    		<ul class="list-group">	                    			
-	                    			@foreach( $data['options'] as $option )
-	                    				<li class="list-group-item li-option" onclick="event.preventDefault();
-                                                     document.getElementById('{{ $option }}').submit()";>
-	                    					{{ __('messages.'. $option) }} 	
-	                    				</li>
-	                    			@endforeach
-	                    		</ul>	
-	                    	</div>
-	                    	@include('layouts.form_options_profile')
-                            
+	                    @if (!empty($data['options']) )	                    	
+	                    	@include('layouts.form_options_profile')                            
 	                    @endif	                    
                 	</div>
             	</div>
