@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('template')
-    <link href="{{ asset('css/custom/welcome.css') }}" rel="stylesheet">    
+    <link href="{{ asset('css/custom/welcome.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet">    
 @endsection
 
 @section('content')
@@ -19,39 +20,30 @@
 @endauth
 
 <div class="flex-center position-ref full-height container">
-    
-    <div class="container">
-        <div class="row">
-       
+    <div class="container">       
+        @guest
+            <div class="row">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('messages.welcome') }}</div>
                     <div class="card-body">
-                        {{ __('messages.welcomeContent') }}
+                        {{ __('messages.welcomeContent') }}                        
                     </div>
                 </div>
             </div>
-
+                
             <div class="col-md-4">
-                
-                @include('layouts.alert')
-                
                 <div class="card">
                     <div class="card-header">{{ __('messages.welcome') }}</div>
                     <div class="card-body">
                         {{ __('messages.welcomeContent') }}
                     </div>
                 </div>
-                
             </div>
-            <div class="col-md-6 align-self-center">
-                @guest
-                @else
-                    <!--Usuarios Logueados-->
-                    
-                @endguest
-                
-            </div>            
+            </div>
+        @else
+            @include($page)
+        @endguest            
         </div>        
     </div>
 
@@ -67,7 +59,6 @@
         $('#video_background').css('width',window.innerWidth);
     }
     */
-
 </script> 
 @endsection
 

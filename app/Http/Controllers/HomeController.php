@@ -21,8 +21,7 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct()
-    {
-               
+    {               
         //$this->middleware('auth', ['except' => 'index','postLocale']);
         //$this->middleware('guest', ['except' => 'index','postLocale']);
     }
@@ -34,16 +33,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$rol = App\Model\Admin\Rol::find(1);
-        //dd($rol->users);
+        if(Auth::check()) {
+            if(Auth::user()->rol()->first()->id){
+                $page = 'admin_dashboard';
+                return view('welcome',compact('page'));    
+            }
+            $page = 'waiter_dashboard';
+            return view('welcome',compact('page'));
+        }
 
-        //primer ciclo recorre todas las opciones
-
-        //$option = App\Model\Admin\Option::find(1);
-        //dd($option->module);
-
-        //dd(Session::get('permits'));
-        //dd(Auth::user()->rol()->get()[0]);
         return view('welcome');
     }
 

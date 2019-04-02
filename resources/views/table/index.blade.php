@@ -20,8 +20,6 @@
 		@include('order.create')
 	@endisset
 
-
-
 	{!! Form::open(array('id'=>'form-table-home','route' =>['table.index'],'method' =>'GET')) !!}
 	{!! Form::close() !!}
 
@@ -132,7 +130,6 @@
 	<link href="{{ asset('css/custom/table_index.css') }}" rel="stylesheet">    
 	<!--esto no se hace asi, css debe poder recivir variables-->
 	<style type="text/css">
-
 		#modal_order_create .row{
 			border: 1px solid {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
 		}
@@ -179,7 +176,6 @@
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderPay'] }};
 			color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};	
 		}
-		
 	</style>
 
 	@isset($data['ordermodal'])	

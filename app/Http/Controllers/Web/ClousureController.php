@@ -96,7 +96,8 @@ class ClousureController extends Controller
             ->with('danger', [['orderOpen']]);
         }        
 
-        return View::make('clousure.edit',compact('user'))->with('data', ['options'=>$user->rol_options()]);
+        return View::make('clousure.edit',compact('user'))
+        ->with('data', ['options'=>$user->rol_options()]);
     }
 
     /**
@@ -130,7 +131,8 @@ class ClousureController extends Controller
         $new_colusure->save();
         
         $message[0][0] = 'workClousureOK';
-        return view('clousure.edit',compact('user'))->with('success', $message)->with('data', ['options'=>$user->rol_options()]);
+        return view('clousure.edit',compact('user'))->with('success', $message)
+        ->with('data', ['options'=>$user->rol_options()]);
     }
 
     /**
