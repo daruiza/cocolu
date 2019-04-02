@@ -13,6 +13,11 @@ class Service extends Model
         return $this->belongsTo(Table::class);
     }
 
+    public function orders(){
+        //no usa el namespace
+        return $this->hasMany(Order::class);
+    }
+
     public function clousure(){
 		//no usa el namespace		
         $clousure = 

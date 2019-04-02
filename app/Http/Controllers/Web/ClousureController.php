@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\User;
 use App\Model\Core\Store;
 use App\Model\Core\Clousure;
+use App\Model\Core\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
@@ -81,6 +82,20 @@ class ClousureController extends Controller
         $user = User::findOrFail($id);
         //validación de credenciales de usuario
         if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);
+
+        //validar si tiene servicios con odenes sin pagar
+        $orders = $user->store()->clousureOpen()->servicesBuilder()
+        ->leftJoin('orders','orders.service_id','services.id')
+        ->where('orders.status_id',1)
+        ->orWhere('orders.status_id',2)
+        ->get();
+
+        if($orders->count()){
+            return View::make('user.index',compact('user'))
+            ->with('data', ['options'=>$user->rol_options()])
+            ->with('danger', [['orderOpen']]);
+        }        
+
         return View::make('clousure.edit',compact('user'))->with('data', ['options'=>$user->rol_options()]);
     }
 
