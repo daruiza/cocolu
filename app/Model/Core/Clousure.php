@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Clousure extends Model
 {
-    protected $fillable = ['id','name','description','open','store_id'];
+    protected $fillable = ['id','name','description','open','date_open','date_close','store_id'];
 
     //una cierre pertenece a una tienda
     public function store(){

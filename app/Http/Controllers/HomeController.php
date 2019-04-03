@@ -34,12 +34,32 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::check()) {
-            if(Auth::user()->rol()->first()->id){
-                $page = 'admin_dashboard';
-                return view('welcome',compact('page'));    
+
+            if(Auth::user()->rol()->first()->id == 1){                
+                return view('welcome');    
             }
-            $page = 'waiter_dashboard';
-            return view('welcome',compact('page'));
+
+            if(Auth::user()->rol()->first()->id == 2){                
+                //consultamos las ordenes del clousure open
+                $orders = array();                
+                foreach (Auth::user()->store()->clousureOpen()->services() as $key_o => $orders_array) {
+                    foreach ($orders_array->orders()->get() as $key_r => $order) {
+                        $orders[] = $order;
+                    }                    
+                }
+                $page = 'admin_dashboard';
+
+                return view('welcome',compact('page','orders'))
+                ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);    
+            }
+
+            if(Auth::user()->rol()->first()->id == 3){                
+                return view('welcome');    
+            }
+
+            
+
+            
         }
 
         return view('welcome');

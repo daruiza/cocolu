@@ -76,5 +76,5 @@ return [
     "Recover" => "Recuperar",
     "Without" => "Sin",
     "Safe" => "¿Estas seguro de cerrar el servicio?",
-    
+    "SystemDate" => "Fecha del Sistema",    
 ];

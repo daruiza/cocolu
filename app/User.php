@@ -55,6 +55,10 @@ class User extends Authenticatable
         return json_decode(\Auth::user()->rol->label,true)['options'];        
     }
 
+    public function rol_options_dashboard(){
+        return json_decode(\Auth::user()->rol->label,true)['options_dashboard'];        
+    }
+
     public function edit($id){
         //verificación de usuario.
         if( \Auth::user()->id == $id) return true;

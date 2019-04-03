@@ -50,16 +50,16 @@
 </div>
 @endsection
 
-@section('script')
-
-<script type="text/javascript">
-    /*
-    if(window.innerWidth>980){
-        $('#video_background').css('height',window.innerHeight);
-        $('#video_background').css('width',window.innerWidth);
-    }
-    */
-</script> 
+@section('script')    
+    <script type="text/javascript">
+        /*
+        if(window.innerWidth>980){
+            $('#video_background').css('height',window.innerHeight);
+            $('#video_background').css('width',window.innerWidth);
+        }
+        */
+    </script>
+    @yield('subscript') 
 @endsection
 
 

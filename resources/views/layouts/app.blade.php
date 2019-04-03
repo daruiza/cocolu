@@ -146,6 +146,16 @@
 
         <main class="py-4">
             @yield('content')
+            @auth
+                <footer>
+                    <p>
+                        {{ __('messages.SystemDate') }} 
+                        {{ Auth::user()->store()->clousureOpen()->date_open }}</p>
+                    <p>
+                        Copyright © {{date("Y")}} TempoSolutions
+                    </p>
+                </footer>                
+            @endauth
         </main>
 
         @yield('modal')
@@ -158,7 +168,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
         -->
         <script src="{{ asset('js/popper.min.js') }}"></script> 
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script> 
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>        
         <script src="{{ asset('js/ajaxobject.js') }}"></script> 
         <script src="{{ asset('js/entity/store.js') }}"></script>    
         @yield('script')        
