@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Core\Order;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -41,12 +43,18 @@ class HomeController extends Controller
 
             if(Auth::user()->rol()->first()->id == 2){                
                 //consultamos las ordenes del clousure open
+                /*
                 $orders = array();                
                 foreach (Auth::user()->store()->clousureOpen()->services() as $key_o => $orders_array) {
                     foreach ($orders_array->orders()->get() as $key_r => $order) {
                         $orders[] = $order;
                     }                    
                 }
+                */
+                $orders = Order::orderStatus(Auth::user()->store()->clousureOpen());
+
+
+                
                 $page = 'admin_dashboard';
 
                 return view('welcome',compact('page','orders'))

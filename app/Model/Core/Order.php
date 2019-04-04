@@ -4,6 +4,7 @@ namespace App\Model\Core;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Core\Service;
+use App\Model\Core\Clousure;
 
 class Order extends Model
 {
@@ -65,5 +66,19 @@ class Order extends Model
             ->get();
                     
         return $order->first()->order_price;
+    }
+
+    //retorna un array asociativo con los estados de las ordes vigentes y su cantida
+    static function orderStatus(Clousure $clousure){
+        $orders_array = array();
+        $orders = Order::select('orders.*','order_status.name as status',\DB::raw('count(*) as total'))
+        ->leftJoin('services','orders.service_id','services.id')
+        ->leftJoin('clousures','services.rel_clousure_id','clousures.id')
+        ->leftJoin('order_status','orders.status_id','order_status.id')
+        ->where('clousures.id',$clousure->id)
+        ->groupBy('status_id')
+        ->get()->toArray();
+        dd($orders);
+        return $orders_array;
     }
 }
