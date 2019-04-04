@@ -144,11 +144,11 @@
         }
 
 		.row-impar{
-		    background-color: {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
+		    background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['colorRow'] }};
 		}
 
         .object-product{
-            border: 1px solid {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
+            border: 1px solid {{ json_decode(Auth::user()->store()->label,true)['table']['colorRow'] }};
             padding-top: 2px;
             padding-bottom: 2px;
             margin-top: 2px;
@@ -160,7 +160,7 @@
         }
 
         .selected-object{
-            background-color: {{ json_decode(Auth::user()->store()->label,true)['selectTable'] }} !important;
+            background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['selectTable'] }} !important;
         }
 
         .critical_volume{

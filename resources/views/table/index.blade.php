@@ -93,7 +93,7 @@
 		}
 
 		$("#containment-wrapper").height($("#containment-wrapper").height()+
-			{!! json_decode(Auth::user()->store()->label,true)['TableHeight'] !!});
+			{!! json_decode(Auth::user()->store()->label,true)['table']['TableHeight'] !!});
 		
 		/*Multiple Modal*/
 		$(document).on('show.bs.modal', '.modal', function (event) {
@@ -131,50 +131,50 @@
 	<!--esto no se hace asi, css debe poder recivir variables-->
 	<style type="text/css">
 		#modal_order_create .row{
-			border: 1px solid {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
+			border: 1px solid {{ json_decode(Auth::user()->store()->label,true)['table']['colorRow'] }};
 		}
 		.row-impar{
-		    background-color: {{ json_decode(Auth::user()->store()->label,true)['colorRow'] }};
+		    background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['colorRow'] }};
 		}
 		.services-table{
 			text-align: center;
 		}
 		.selected-table{			
-		    background-color: {{ json_decode(Auth::user()->store()->label,true)['selectTable'] }} !important;
+		    background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['selectTable'] }} !important;
 		}
 		.service-open-table{
-		    background-color: {{ json_decode(Auth::user()->store()->label,true)['serviceOpenTable'] }};
+		    background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['serviceOpenTable'] }};
 		}		
 
 		.service-open-table.status-OrderNew{	
-			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};
 		}
 
 		.badge{	
-			color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
+			color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};
 		}
 
 		.status-OrderNew{			
-			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};
 		}
 
 		.menu-status-OrderNew{
-			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }};
+			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }};
 		}
 
 		.status-OrderOK{
-			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};
-			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderOK'] }};	
+			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }};	
 		}
 		
 		.status-OrderCancel{			
-			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderCancel'] }};
-			color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};	
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderCancel'] }};
+			color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};	
 		}		
 
 		.status-OrderPay{			
-			background-color: {{ json_decode(Auth::user()->store()->label,true)['OrderPay'] }};
-			color: {{ json_decode(Auth::user()->store()->label,true)['OrderStatusOne'] }};	
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderPay'] }};
+			color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};	
 		}
 	</style>
 

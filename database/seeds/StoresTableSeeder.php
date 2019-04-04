@@ -19,7 +19,7 @@ class StoresTableSeeder extends Seeder
 			'description'=>'default store',
 			'logo'=>'default.png',
 			'currency'=>'COP',
-			'label'=>'{"menu":"page","TableHeight":"125","icon":"fas fa-list","selectTable":"lemonchiffon","serviceOpenTable":"sandybrown","colorRow":"gainsboro","OrderStatusOne":"aliceblue","OrderOK":"cadetblue","OrderPay":"cornflowerblue","OrderCancel":"slategrey"}',
+			'label'=>'{"table":{"menu":"page","TableHeight":"125","icon":"fas fa-list","selectTable":"lemonchiffon","serviceOpenTable":"sandybrown","colorRow":"gainsboro"},"order":{"OrderNew":"aliceblue","OrderOK":"cadetblue","OrderPay":"cornflowerblue","OrderCancel":"slategrey"}}',
 			)
 		);		
     }

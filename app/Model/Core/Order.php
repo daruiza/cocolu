@@ -69,8 +69,10 @@ class Order extends Model
     }
 
     //retorna un array asociativo con los estados de las ordes vigentes y su cantida
-    static function orderStatus(Clousure $clousure){
+    static function orderStatus(Clousure $clousure, $array){        
         $orders_array = array();
+        $orders_array['labels'] = array();
+        $orders_array['data'] = array();
         $orders = Order::select('orders.*','order_status.name as status',\DB::raw('count(*) as total'))
         ->leftJoin('services','orders.service_id','services.id')
         ->leftJoin('clousures','services.rel_clousure_id','clousures.id')
@@ -78,7 +80,15 @@ class Order extends Model
         ->where('clousures.id',$clousure->id)
         ->groupBy('status_id')
         ->get()->toArray();
-        dd($orders);
+
+        //armamos el array        
+        foreach ($orders as $key => $order) {            
+            if(!in_array($order['status'],$orders_array['labels'])){
+                $orders_array['labels'][] = __('messages.'.$order['status']);                    
+                $orders_array['data'][] = $order['total'];
+                $orders_array['backgroundColor'][] = $array[$order['status']];
+            }
+        }        
         return $orders_array;
     }
 }

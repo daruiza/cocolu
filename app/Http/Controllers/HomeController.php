@@ -51,9 +51,11 @@ class HomeController extends Controller
                     }                    
                 }
                 */
-                $orders = Order::orderStatus(Auth::user()->store()->clousureOpen());
 
-
+                $orders = Order::orderStatus(
+                    Auth::user()->store()->clousureOpen(),
+                    json_decode(Auth::user()->store()->label,true)['order']
+                );
                 
                 $page = 'admin_dashboard';
 
@@ -63,11 +65,7 @@ class HomeController extends Controller
 
             if(Auth::user()->rol()->first()->id == 3){                
                 return view('welcome');    
-            }
-
-            
-
-            
+            }            
         }
 
         return view('welcome');
