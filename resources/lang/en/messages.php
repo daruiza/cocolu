@@ -67,7 +67,7 @@ return [
     "errorIngredientEdit" => "Huy this is a serious error, it is advised to log in again",
     "TableOrderView" => "Update Order",
     "OrderNew" => "New Order",
-    "OrderOK" => "Service Ok",
+    "OrderOK" => "Order Served",
     "OrderPay" => "Paid order",
     "OrderCancel" => "Cancel order", 
     "Ingredients" => "Ingredients",
@@ -77,5 +77,6 @@ return [
     "Without" => "Without",
     "Safe" => "Are you sure to close the service?",
     "SystemDate" => "System Date",
-    
+    "ordersPaid" => "Total paid",
+    "ordersToPay" => "Total to pay"
 ];

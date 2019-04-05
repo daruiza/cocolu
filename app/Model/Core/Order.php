@@ -69,10 +69,11 @@ class Order extends Model
     }
 
     //retorna un array asociativo con los estados de las ordes vigentes y su cantida
-    static function orderStatus(Clousure $clousure, $array){        
+    static function orderStatus(Clousure $clousure, $array, $array_border){        
         $orders_array = array();
         $orders_array['labels'] = array();
         $orders_array['data'] = array();
+        
         $orders = Order::select('orders.*','order_status.name as status',\DB::raw('count(*) as total'))
         ->leftJoin('services','orders.service_id','services.id')
         ->leftJoin('clousures','services.rel_clousure_id','clousures.id')
@@ -87,8 +88,40 @@ class Order extends Model
                 $orders_array['labels'][] = __('messages.'.$order['status']);                    
                 $orders_array['data'][] = $order['total'];
                 $orders_array['backgroundColor'][] = $array[$order['status']];
+                $orders_array['borderColor'][] = $array_border[$order['status']];
             }
         }        
         return $orders_array;
+    }
+
+    static function ordersPaid(Clousure $clousure){
+        
+        //consultamos las ordenes pagas
+        $orders = Order::select(            
+            \DB::raw('SUM(products.price * order_product.volume) as total')
+        )
+        ->leftJoin('services','orders.service_id','services.id')
+        ->leftJoin('clousures','services.rel_clousure_id','clousures.id')        
+        ->leftJoin('order_product','orders.id','order_product.order_id')
+        ->leftJoin('products','order_product.product_id','products.id') 
+        ->where('clousures.id',$clousure->id)
+        ->where('orders.status_id',3)        
+        ->get();        
+        return $orders->first()->total;
+    }
+
+    static function orderToPay(Clousure $clousure){
+        //consultamos las ordenes pagas
+        $orders = Order::select(            
+            \DB::raw('SUM(products.price * order_product.volume) as total')
+        )
+        ->leftJoin('services','orders.service_id','services.id')
+        ->leftJoin('clousures','services.rel_clousure_id','clousures.id')        
+        ->leftJoin('order_product','orders.id','order_product.order_id')
+        ->leftJoin('products','order_product.product_id','products.id') 
+        ->where('clousures.id',$clousure->id)
+        ->where('orders.status_id',2)        
+        ->get();        
+        return $orders->first()->total;
     }
 }

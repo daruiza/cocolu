@@ -54,12 +54,16 @@ class HomeController extends Controller
 
                 $orders = Order::orderStatus(
                     Auth::user()->store()->clousureOpen(),
-                    json_decode(Auth::user()->store()->label,true)['order']
+                    json_decode(Auth::user()->store()->label,true)['order'],
+                    json_decode(Auth::user()->store()->label,true)['order_status']
                 );
+
+                $orderpaid = Order::ordersPaid(Auth::user()->store()->clousureOpen());
+                $orderstopay = Order::orderToPay(Auth::user()->store()->clousureOpen());
                 
                 $page = 'admin_dashboard';
 
-                return view('welcome',compact('page','orders'))
+                return view('welcome',compact('page','orders','orderpaid','orderstopay'))
                 ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);    
             }
 

@@ -23,6 +23,21 @@
             <div class="card-header">{{ __('messages.DashboardImform') }}</div>
             <div class="card-body">
                 <div class="container">
+                    <div class="row row-info">
+                        <div class="col-md-3 col-md-offset-0">
+                            <span>{{ __('messages.ordersPaid') }}</span> 
+                            ${{number_format($orderpaid)}}
+                        </div>
+                        <div class="col-md-3 col-md-offset-0">
+                            <span>{{ __('messages.ordersToPay') }}</span> ${{number_format($orderstopay)}}
+                        </div>
+                        <div class="col-md-3 col-md-offset-0">
+                            
+                        </div>
+                        <div class="col-md-3 col-md-offset-0">
+                            
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6 col-md-offset-0">
                             <canvas id="pai-orders" width="400" height="400"></canvas>
@@ -45,9 +60,26 @@
     var labels = {!! json_encode($orders['labels']) !!};
     var data = {!! json_encode($orders['data']) !!};
     var backgroundColor = {!! json_encode($orders['backgroundColor']) !!};
-    var borderColor = {!! json_encode($orders['backgroundColor']) !!};
+    var borderColor = {!! json_encode($orders['borderColor']) !!};
 
     object_chart.paint_chart('pai-orders','doughnut','Title',labels,data,backgroundColor,borderColor);
     
 </script>
+@endsection
+
+@section('subtemplate')
+<style type="text/css">
+    
+    .navbar-laravel{           
+        background: none;
+        position: relative;
+        width: auto;               
+        z-index: 0;     
+    }
+    .pb-4, .py-4 {
+        padding-bottom: 0rem!important;
+        padding-top: 0rem!important;
+    }
+    
+</style>
 @endsection

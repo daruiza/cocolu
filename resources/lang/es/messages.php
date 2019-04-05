@@ -64,7 +64,7 @@ return [
     "CriticalVolume" => "Cantidad Critico",
     "unity" => "Unidad",
     "NewOrder" => "Nueva Orden",
-    "OrderOK" => "Servicio OK",
+    "OrderOK" => "Orden Servida",
     "OrderPay" => "Orden Pagada",
     "OrderCancel" =>"Orden Cancelada",   
     "Suggestion" => "Sugerencia",
@@ -76,5 +76,7 @@ return [
     "Recover" => "Recuperar",
     "Without" => "Sin",
     "Safe" => "¿Estas seguro de cerrar el servicio?",
-    "SystemDate" => "Fecha del Sistema",    
+    "SystemDate" => "Fecha del Sistema",
+    "ordersPaid" => "Total pago",
+    "ordersToPay" => "Total por pagar"
 ];
