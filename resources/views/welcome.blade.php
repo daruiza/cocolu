@@ -2,8 +2,7 @@
 
 @section('template')
     <link href="{{ asset('css/custom/welcome.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet">
-    @yield('subtemplate') 
+    <link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet">     
 @endsection
 
 @section('content')
@@ -60,7 +59,10 @@
         }
         */
     </script>
-    @yield('subscript') 
+    @yield('subscript')
+
+    {{-- no es un buen punto, pero en template no funciono--}}
+    @yield('subtemplate')
 @endsection
 
 

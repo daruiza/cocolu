@@ -73,12 +73,11 @@
     .navbar-laravel{           
         background: none;
         position: relative;
-        width: auto;               
-        z-index: 0;     
+        width: auto;        
     }
     .pb-4, .py-4 {
-        padding-bottom: 0rem!important;
-        padding-top: 0rem!important;
+        padding-bottom: 1.5rem!important;
+        padding-top: 1.5rem!important;
     }
     
 </style>
