@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Core\Order;
+use App\Model\Core\Product;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,16 +42,7 @@ class HomeController extends Controller
                 return view('welcome');    
             }
 
-            if(Auth::user()->rol()->first()->id == 2){                
-                //consultamos las ordenes del clousure open
-                /*
-                $orders = array();                
-                foreach (Auth::user()->store()->clousureOpen()->services() as $key_o => $orders_array) {
-                    foreach ($orders_array->orders()->get() as $key_r => $order) {
-                        $orders[] = $order;
-                    }                    
-                }
-                */
+            if(Auth::user()->rol()->first()->id == 2){                                
 
                 $orders = Order::orderStatus(
                     Auth::user()->store()->clousureOpen(),
@@ -60,10 +52,16 @@ class HomeController extends Controller
 
                 $orderpaid = Order::ordersPaid(Auth::user()->store()->clousureOpen());
                 $orderstopay = Order::orderToPay(Auth::user()->store()->clousureOpen());
+                $services = Auth::user()->store()->clousureOpen()->services()->count();
+                $ordercount = Order::ordersClousure(Auth::user()->store()->clousureOpen());
+                $orderclosecount = Order::ordersCancelClousure(Auth::user()->store()->clousureOpen());
+
+                //productos consumidos
+                $products = Product::productByClousure(Auth::user()->store()->clousureOpen());
                 
                 $page = 'admin_dashboard';
-
-                return view('welcome',compact('page','orders','orderpaid','orderstopay'))
+                
+                return view('welcome',compact('page','orders','orderpaid','orderstopay','services','ordercount','orderclosecount','products'))
                 ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);    
             }
 

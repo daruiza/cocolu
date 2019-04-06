@@ -188,5 +188,26 @@ class Product extends Model
             $this->save();
         }       
     }
+
+    static function productByClousure(Clousure $clousure){
+        $products_array = array();
+        $products_array['labels'] = array();
+        $products_array['data'] = array();
+        //consultamos las ordenes pagas
+        $products = Order::select('products.name',
+        \DB::raw('SUM(order_product.volume) as product_volume'))
+        ->leftJoin('services','orders.service_id','services.id')
+        ->leftJoin('clousures','services.rel_clousure_id','clousures.id')        
+        ->leftJoin('order_product','orders.id','order_product.order_id')
+        ->leftJoin('products','order_product.product_id','products.id') 
+        ->where('clousures.id',$clousure->id)
+        ->groupBy('products.id')      
+        ->get();    
+        foreach ($products as $key => $product) {
+            $products_array['labels'][] = $product->name;                    
+            $products_array['data'][] = $product->product_volume;
+        }    
+        return $products_array;
+    }
     
 }

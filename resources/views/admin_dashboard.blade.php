@@ -25,17 +25,19 @@
                 <div class="container">
                     <div class="row row-info">
                         <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.ordersPaid') }}</span> 
+                            <span>{{ __('messages.ordersPaid')}}:</span> 
                             ${{number_format($orderpaid)}}
                         </div>
                         <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.ordersToPay') }}</span> ${{number_format($orderstopay)}}
+                            <span>{{ __('messages.ordersToPay')}}:</span> ${{number_format($orderstopay)}}
                         </div>
                         <div class="col-md-3 col-md-offset-0">
-                            
+                            <span>{{ __('messages.Services')}}:</span> 
+                            {{number_format($services)}}
                         </div>
                         <div class="col-md-3 col-md-offset-0">
-                            
+                            <span>{{ __('messages.Orders')}}:</span> 
+                            {{number_format($ordercount)}} [{{number_format($orderclosecount)}}]
                         </div>
                     </div>
                     <div class="row">
@@ -63,6 +65,11 @@
     var borderColor = {!! json_encode($orders['borderColor']) !!};
 
     object_chart.paint_chart('pai-orders','doughnut','Title',labels,data,backgroundColor,borderColor);
+
+    var labels = {!! json_encode($products['labels']) !!};
+    var data = {!! json_encode($products['data']) !!};
+
+    object_chart.paint_chart_bar('pai-products','bar','{{__("messages.Products")}}',labels,data,backgroundColor,borderColor);
     
 </script>
 @endsection

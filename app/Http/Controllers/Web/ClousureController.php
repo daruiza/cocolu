@@ -119,10 +119,14 @@ class ClousureController extends Controller
         $today = $today->format('Y-m-d H:i:s');
 
         $clousure = $user->store()->clousureOpen();
+        Service::closeServices($clousure);
         $clousure->description = $request->input('description');
         $clousure->date_close = $today;
         $clousure->open = 0;
         $clousure->save();
+
+        //cerramos todos los servicios que pudieron quedar abieertos
+
 
         $new_colusure = new Clousure();
         $new_colusure->name = $request->input('name');

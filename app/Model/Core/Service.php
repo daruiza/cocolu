@@ -3,6 +3,7 @@
 namespace App\Model\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Model\Core\Clousure;
 
 class Service extends Model
 {
@@ -26,5 +27,12 @@ class Service extends Model
         	->where('services.rel_clousure_id',$this->rel_clousure_id)
         	->distinct();
         return $clousure;
+    }
+
+    //cierra todos lo servicios asociados a un clousure
+    static function closeServices(Clousure $clousure){
+        dd($clousure);
+        Service::
+        return true;
     }
 }

@@ -40,6 +40,7 @@ return [
 	"Table"=>"Mesa",
     "Products"=>"Productos",
     "Order"=>"Orden",
+    "Orders"=>"Ordenes",
     "superAdmin"=> "Administrador de Modulos, Usuarios, Roles, Permisos y Cuentas",
     "editProfile" =>"Editar Perfil",
     "editStore"=>"Editar Tienda",
@@ -78,5 +79,6 @@ return [
     "Safe" => "¿Estas seguro de cerrar el servicio?",
     "SystemDate" => "Fecha del Sistema",
     "ordersPaid" => "Total pago",
-    "ordersToPay" => "Total por pagar"
+    "ordersToPay" => "Total por pagar",
+    "Services" => "Servicios"
 ];

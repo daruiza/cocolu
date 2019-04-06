@@ -61,7 +61,7 @@ class Order extends Model
         select(\DB::raw('SUM(products.price*order_product.volume) as order_price'))
             ->leftJoin('order_product','order_product.order_id','orders.id')
             ->leftJoin('products','products.id','order_product.product_id')
-            ->where('orders.id',$this->id)                
+            ->where('orders.id',$this->id)               
             ->groupBy('orders.id')
             ->get();
                     
@@ -73,7 +73,9 @@ class Order extends Model
         $orders_array = array();
         $orders_array['labels'] = array();
         $orders_array['data'] = array();
-        
+        $orders_array['backgroundColor'] = array();
+        $orders_array['borderColor'] = array();
+
         $orders = Order::select('orders.*','order_status.name as status',\DB::raw('count(*) as total'))
         ->leftJoin('services','orders.service_id','services.id')
         ->leftJoin('clousures','services.rel_clousure_id','clousures.id')
@@ -123,5 +125,30 @@ class Order extends Model
         ->where('orders.status_id',2)        
         ->get();        
         return $orders->first()->total;
+    }
+
+    static function ordersClousure(Clousure $clousure){
+        //consultamos las ordenes pagas
+        $orders = Order::select('orders.*')
+        ->leftJoin('services','orders.service_id','services.id')
+        ->leftJoin('clousures','services.rel_clousure_id','clousures.id')                
+        ->where('clousures.id',$clousure->id)
+        ->where('orders.status_id',1)
+        ->orWhere('orders.status_id',2) 
+        ->orWhere('orders.status_id',3)        
+        ->orWhere('orders.status_id',4)        
+        ->get();        
+        return $orders->count();
+    }
+
+    static function ordersCancelClousure(Clousure $clousure){
+        //consultamos las ordenes pagas
+        $orders = Order::select('orders.*')
+        ->leftJoin('services','orders.service_id','services.id')
+        ->leftJoin('clousures','services.rel_clousure_id','clousures.id')                
+        ->where('clousures.id',$clousure->id)
+        ->where('orders.status_id',4)        
+        ->get();        
+        return $orders->count();
     }
 }

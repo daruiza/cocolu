@@ -1,7 +1,7 @@
 
 <div class="card-body">
     <ul class="list-group">                                 
-        @foreach( $data['options'] as $option )
+        @foreach( $data['options'] as $option )            
             <li class="list-group-item li-option" onclick="event.preventDefault();
                          document.getElementById('{{ $option }}').submit()";>
                 {{ __('messages.'. $option) }}  

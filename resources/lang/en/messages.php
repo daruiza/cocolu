@@ -39,6 +39,7 @@ return [
 	"Table"=>"Table",
     "Products"=>"Products",
     "Order"=>"Order",
+    "Orders"=>"Orders",
     "superAdmin"=> "Modules, Users, Roles, Permissions and Accounts Manager",
     "editProfile" =>"Edit Profile",
     "editClousure"=>"Work Clousure",
@@ -78,5 +79,6 @@ return [
     "Safe" => "Are you sure to close the service?",
     "SystemDate" => "System Date",
     "ordersPaid" => "Total paid",
-    "ordersToPay" => "Total to pay"
+    "ordersToPay" => "Total to pay",
+    "Services" => "Services"
 ];
