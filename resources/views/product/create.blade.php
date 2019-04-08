@@ -151,7 +151,7 @@
 @section('style')	
 	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
 	<link href="{{ asset('css/chosen.min.css') }}" rel="stylesheet"> 
-	<style>
+	<style type="text/css">
 		select {
 		  font-family: 'FontAwesome';
 		}

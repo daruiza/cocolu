@@ -205,7 +205,7 @@ class ProductController extends Controller
                 string|
                 max:32',
             'description' => '
-                max:64',            
+                max:256',            
             'price' => '                
                 numeric',
             'buy_price' => '                

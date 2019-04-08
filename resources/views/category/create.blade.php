@@ -36,7 +36,7 @@
 	                    	<div class="container">
 		                    	<div class="row">
 			                    	<div class="col-md-12">
-			                    		{!! Form::model($category,['enctype' => 'multipart/form-data','id'=>'form-product','route'=>['category.store'],'method'=>'POST']) !!}
+			                    		{!! Form::model($category,['enctype' => 'multipart/form-data','id'=>'form-expense','route'=>['category.store'],'method'=>'POST']) !!}
 
 			                    			{!!Form::hidden('store_id', Auth::user()->store()->id)!!}
 			                    			@include('category.form')
