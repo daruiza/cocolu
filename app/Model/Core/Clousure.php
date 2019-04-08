@@ -26,8 +26,8 @@ class Clousure extends Model
         }
     }
 
-    public function scopeDate_open($query,$nit){
-        if($nit){
+    public function scopeDate_open($query,$date_open){
+        if($date_open){
             return $query->where('clousures.date_open','LIKE',"%$date_open%");
         }
     }
