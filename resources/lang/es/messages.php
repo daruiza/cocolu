@@ -78,6 +78,7 @@ return [
     "Without" => "Sin",
     "Safe" => "¿Estas seguro de cerrar el servicio?",
     "SystemDate" => "Fecha del Sistema",
+    "DateOpen" => "Fecha de Apertura",
     "ordersPaid" => "Total pago",
     "ordersToPay" => "Total por pagar",
     "Services" => "Servicios"

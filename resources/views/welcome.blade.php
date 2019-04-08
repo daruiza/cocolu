@@ -2,7 +2,8 @@
 
 @section('template')
     <link href="{{ asset('css/custom/welcome.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet">     
+    <link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom/perfil.css') }}" rel="stylesheet">    
 @endsection
 
 @section('content')
@@ -18,7 +19,6 @@
         </video>
     </div>
 @endauth
-
 <div class="flex-center position-ref full-height container">
     <div class="container">       
         @guest
@@ -61,7 +61,7 @@
     </script>
     @yield('subscript')
 
-    {{-- no es un buen punto, pero en template no funciono--}}
+    {{-- no es un buen punto, pero en template no funciono, es style css--}}
     @yield('subtemplate')
 @endsection
 

@@ -54,7 +54,8 @@ class ProductController extends Controller
         $product = new Product();
         $category = new Category();
         $unity = new Unity();
-        return view('product.create',compact('product','category','unity'))->with('data', []);
+        $order_max = Product::select('order')->max('order')+1;   
+        return view('product.create',compact('product','category','unity','order_max'))->with('data', []);
     }
 
     /**
@@ -128,14 +129,17 @@ class ProductController extends Controller
             }
 
             foreach ($array as $key => $value) {
-                DB::table('product_product')->insert(
-                    [
-                        'product_id' => $product->id,
-                        'ingredient_id' => $value['product'],
-                        'volume' => $value['volume'],
-                        'group' => $value['group']
-                    ]
-                );
+                if(!empty($value['volume'])){
+                    DB::table('product_product')->insert(
+                        [
+                            'product_id' => $product->id,
+                            'ingredient_id' => $value['product'],
+                            'volume' => $value['volume'],
+                            'group' => $value['group']
+                        ]
+                    );
+                }
+                
             }
 
 
@@ -201,10 +205,18 @@ class ProductController extends Controller
                 string|
                 max:32',
             'description' => '
-                max:64',       
+                max:64',            
+            'price' => '                
+                numeric',
+            'buy_price' => '                
+                numeric',        
+            'volume' => '                
+                numeric',    
+            'critical_volume' => '                
+                numeric',        
             'order' => '                
                 numeric|                
-                digits_between:1,1024',
+                digits_between:1,10240',
             'category_id' => '
                 required',
             'active' => '

@@ -91,7 +91,7 @@
                 <strong>{{ $errors->first('order') }}</strong>
             </span>
 		@else
-			{!! Form::number('order',null, ['class'=>'form-control']) !!}
+			{!! Form::number('order',$order_max, ['class'=>'form-control']) !!}
 		@endif	
 	</div>
 </div>

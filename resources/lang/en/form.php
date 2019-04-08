@@ -30,6 +30,7 @@ return [
 	"AddIngredients" => "Add Ingredient",
 	"AddComponents" => "Add Components",
 	"Category" => "Category",
-	"Serve" => "Serve"
+	"Serve" => "Serve",
+	"ClousureConsult" => "Check Closures"
 	
 ];

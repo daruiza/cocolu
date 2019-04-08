@@ -96,6 +96,7 @@ class Order extends Model
         return $orders_array;
     }
 
+    //$$$$ plata en caja
     static function ordersPaid(Clousure $clousure){
         
         //consultamos las ordenes pagas
@@ -112,6 +113,7 @@ class Order extends Model
         return $orders->first()->total;
     }
 
+    //$$$$ plata por pagar
     static function orderToPay(Clousure $clousure){
         //consultamos las ordenes pagas
         $orders = Order::select(            
@@ -127,20 +129,24 @@ class Order extends Model
         return $orders->first()->total;
     }
 
+    //conteo  ordenes despachadas
     static function ordersClousure(Clousure $clousure){
         //consultamos las ordenes pagas
         $orders = Order::select('orders.*')
         ->leftJoin('services','orders.service_id','services.id')
         ->leftJoin('clousures','services.rel_clousure_id','clousures.id')                
-        ->where('clousures.id',$clousure->id)
-        ->where('orders.status_id',1)
-        ->orWhere('orders.status_id',2) 
-        ->orWhere('orders.status_id',3)        
-        ->orWhere('orders.status_id',4)        
+        ->where('clousures.id',$clousure->id)        
+        ->where(function($query){
+            $query->where('orders.status_id',1)//orden tomada
+            ->orWhere('orders.status_id',2)//orden lista para entregar
+            ->orWhere('orders.status_id',3)
+            ->orWhere('orders.status_id',4);
+        })        
         ->get();        
         return $orders->count();
     }
 
+    //ordenes canceladas
     static function ordersCancelClousure(Clousure $clousure){
         //consultamos las ordenes pagas
         $orders = Order::select('orders.*')

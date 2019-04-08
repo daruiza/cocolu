@@ -3,7 +3,8 @@ return [
 	"Tables"=>"Tables",	
 	"Waiters"=>"Waiters",
 	"Products"=>"Products",	
-	"Categories"=>"Categories",	
+	"Categories"=>"Categories",
+	"Expenses"=>"Expenses",
 	"index"=>"List",
 	"create"=>"Create",	
 	"show"=>"Show",	
@@ -13,4 +14,8 @@ return [
 	"service"=>"Service",
 	"closeService"=>"Close Service",
 	"editstock"=>"Edit Stock",
+	"consultClousure"=>"Consult Closure",
+	"alertStock"=>"Alert Inventory",
+	"topProducts"=>"Top Products",
+	"salesForWaiter"=>"Sales for Waiter",
 ];

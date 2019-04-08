@@ -1,16 +1,15 @@
-
 <div class="card-body">
     <ul class="list-group">                                 
         @foreach( $data['options'] as $option )            
             <li class="list-group-item li-option" onclick="event.preventDefault();
                          document.getElementById('{{ $option }}').submit()";>
-                {{ __('messages.'. $option) }}  
+                {{ __('options.'. $option) }}  
             </li>
         @endforeach
     </ul>   
 </div>
 
-<form id="editProfile" action="{{ route('user.edit', \Auth::user()->id ) }}" method="GET" "></form>
+<form id="consultClousure" action="{{ route('clousure.showclousures', \Auth::user()->id ) }}" method="GET" "></form>
 
 <form id="editStore" action="{{ route('store.edit', \Auth::user()->id ) }}" method="GET" "></form>
 

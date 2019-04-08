@@ -30,5 +30,6 @@ return [
 	"AddIngredients" => "Agregar Ingrediente",
 	"AddComponents" => "Agregar Componentes",
 	"Category" => "Categoria",
-	"Serve" => "Servir"
+	"Serve" => "Servir",
+	"ClousureConsult" => "Consultar Cierres"
 ];

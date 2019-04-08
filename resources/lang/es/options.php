@@ -3,7 +3,8 @@ return [
 	"Tables"=>"Mesas",	
 	"Waiters"=>"Meseros",
 	"Products"=>"Productos",
-	"Categories"=>"Categorias",	
+	"Categories"=>"Categorias",
+	"Expenses"=>"Gastos",
 	"index"=>"Listar",
 	"create"=>"Crear",	
 	"show"=>"Mostrar",	
@@ -13,4 +14,8 @@ return [
 	"service"=>"Servicio",
 	"closeService"=>"Cerrar Servicio",
 	"editstock"=>"Editar Inventario",
+	"consultClousure"=>"Consultar Cierre",
+	"alertStock"=>"Alertas de Inventario",
+	"topProducts"=>"Productos Top",
+	"salesForWaiter"=>"Ventas por Mesero",
 ];

@@ -78,6 +78,7 @@ return [
     "Without" => "Without",
     "Safe" => "Are you sure to close the service?",
     "SystemDate" => "System Date",
+    "DateOpen" => "Open Date",
     "ordersPaid" => "Total paid",
     "ordersToPay" => "Total to pay",
     "Services" => "Services"

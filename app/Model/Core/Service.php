@@ -30,9 +30,8 @@ class Service extends Model
     }
 
     //cierra todos lo servicios asociados a un clousure
-    static function closeServices(Clousure $clousure){
-        dd($clousure);
-        Service::
+    static function closeServices(Clousure $clousure){        
+        Service::where('rel_clousure_id',$clousure->id)->update(['open'=>0]);
         return true;
     }
 }

@@ -32,6 +32,7 @@ Route::resource('clousure', 'Web\ClousureController');
 Route::resource('waiter', 'Web\WaiterController');
 Route::resource('procuct', 'Web\ProductController');
 Route::resource('order', 'Web\OrderController');
+Route::resource('expense', 'Web\ExpenseController');
 
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');
@@ -74,4 +75,10 @@ Route::post('product/{id}/addproduct', [
 ]);
 Route::post('table/{id}/saveorder', [
    'as' => 'table.saveorder', 'uses' => 'Web\TableController@saveOrder'
+]);
+Route::get('clousure/{id}/showclousures', [
+   'as' => 'clousure.showclousures', 'uses' => 'Web\ClousureController@showClousures'
+]);
+Route::post('clousure/{id}/consultclousure', [
+   'as' => 'clousure.consultclousure', 'uses' => 'Web\ClousureController@consultClousure'
 ]);

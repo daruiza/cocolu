@@ -39,7 +39,8 @@ class CategoryController extends Controller
     public function create()
     {
         $category = new Category();
-        return view('category.create',compact('category'))->with('data', []);
+        $order_max = Category::select('order')->max('order')+1;        
+        return view('category.create',compact('category','order_max'))->with('data', []);
     }
 
     /**
@@ -119,6 +120,9 @@ class CategoryController extends Controller
                 required|
                 string|
                 max:32',
+            'order' => '                
+                numeric|                
+                digits_between:1,10240',
             'description' => '
                 max:64',            
             'active' => '

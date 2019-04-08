@@ -11,10 +11,14 @@ use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
+use App\Http\Traits\Web\ClousureRequestTrait;
+
 use DateTime;
 
 class ClousureController extends Controller
 {
+
+    use ClousureRequestTrait;
 
     protected function validator(array $data)
     {
@@ -22,7 +26,7 @@ class ClousureController extends Controller
             'name' => '
                 required|
                 string|
-                max:16',
+                max:32',
             'description' => '
                 required|
                 string'
@@ -57,7 +61,7 @@ class ClousureController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -66,9 +70,10 @@ class ClousureController extends Controller
      * @param  \App\Clousure  $clousure
      * @return \Illuminate\Http\Response
      */
-    public function show(Clousure $clousure)
-    {
-        //
+    public function show($id)
+    {   
+        $clousures = Clousure::where('open',0)->get();        
+        return redirect('/')->with('clousure-modal-create', $clousures);
     }
 
     /**

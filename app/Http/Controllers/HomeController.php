@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Core\Order;
 use App\Model\Core\Product;
+use App\Model\Core\Clousure;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,34 +35,40 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Clousure $clousure)    {
+        
         if(Auth::check()) {
+
+            if(empty($clousure->id))$clousure = Auth::user()->store()->clousureOpen();
 
             if(Auth::user()->rol()->first()->id == 1){                
                 return view('welcome');    
             }
+            if(Auth::user()->rol()->first()->id == 2){
 
-            if(Auth::user()->rol()->first()->id == 2){                                
-
+                $page = 'admin_dashboard';
+                $store = Auth::user()->store();
+                //para pintar el chart de ordenes y sus estados
                 $orders = Order::orderStatus(
-                    Auth::user()->store()->clousureOpen(),
+                    $clousure,
                     json_decode(Auth::user()->store()->label,true)['order'],
                     json_decode(Auth::user()->store()->label,true)['order_status']
                 );
-
-                $orderpaid = Order::ordersPaid(Auth::user()->store()->clousureOpen());
-                $orderstopay = Order::orderToPay(Auth::user()->store()->clousureOpen());
-                $services = Auth::user()->store()->clousureOpen()->services()->count();
-                $ordercount = Order::ordersClousure(Auth::user()->store()->clousureOpen());
-                $orderclosecount = Order::ordersCancelClousure(Auth::user()->store()->clousureOpen());
+                //ordenes pagadas $plata
+                $orderpaid = Order::ordersPaid($clousure);
+                //ordenes por pagar $plata
+                $orderstopay = Order::orderToPay($clousure);
+                $services = $clousure->servicesAll()->count();
+                //Ordenes terminadas
+                $ordercount = Order::ordersClousure($clousure);
+                $orderclosecount = Order::ordersCancelClousure($clousure);
 
                 //productos consumidos
-                $products = Product::productByClousure(Auth::user()->store()->clousureOpen());
+                $products = Product::productByClousure($clousure);
                 
-                $page = 'admin_dashboard';
                 
-                return view('welcome',compact('page','orders','orderpaid','orderstopay','services','ordercount','orderclosecount','products'))
+                
+                return view('welcome',compact('page','store','orders','orderpaid','orderstopay','services','ordercount','orderclosecount','products'))
                 ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);    
             }
 

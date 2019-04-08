@@ -14,7 +14,31 @@ class Clousure extends Model
         return $this->belongsTo(Store::class);
     }
 
+    //Query Scope    
+    public function scopeName($query,$name){
+        if($name){
+            return $query->where('name','LIKE',"%$name%");
+        }
+    }
+    public function scopeDescription($query,$description){
+        if($description){
+            return $query->where('description','LIKE',"%$description%");
+        }
+    }
+
+    public function scopeDate_open($query,$nit){
+        if($nit){
+            return $query->where('date_open','LIKE',"%$date_open%");
+        }
+    }
+
+
     //un ciere puede estar en muchos servicios    
+    public function servicesAll(){
+        return Service::where('rel_clousure_id', $this->id)        
+        ->get();        
+    }
+
     public function services(){
         return Service::where('rel_clousure_id', $this->id)
         ->where('open',1)
