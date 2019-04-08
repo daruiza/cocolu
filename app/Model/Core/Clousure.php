@@ -17,18 +17,18 @@ class Clousure extends Model
     //Query Scope    
     public function scopeName($query,$name){
         if($name){
-            return $query->where('name','LIKE',"%$name%");
+            return $query->where('clousures.name','LIKE',"%$name%");
         }
     }
     public function scopeDescription($query,$description){
         if($description){
-            return $query->where('description','LIKE',"%$description%");
+            return $query->where('clousures.description','LIKE',"%$description%");
         }
     }
 
     public function scopeDate_open($query,$nit){
         if($nit){
-            return $query->where('date_open','LIKE',"%$date_open%");
+            return $query->where('clousures.date_open','LIKE',"%$date_open%");
         }
     }
 

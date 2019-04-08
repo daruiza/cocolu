@@ -12,6 +12,30 @@
       </div>
 
       <div class="modal-body"> 
+        <div class="body-header">          
+
+          {{Form::open(array('route'=>['clousure.showclousures',0],'method'=>'GET','class'=> 'form-inline pull-right form-center'))}}          
+            
+            <div class="form-group form-search">                              
+                {{Form::text('name',Session::get('data.inputs')['name'],['class'=>'form-control','placeholder'=>__('messages.Name')])}}
+            </div>
+
+            <div class="form-group form-search">                              
+                {{Form::text('description',Session::get('data.inputs')['description'],['class'=>'form-control','placeholder'=>__('messages.Description')])}}
+            </div>
+
+            <div class="form-group form-search">                              
+                {{Form::text('date_open',Session::get('data.inputs')['date_open'],['class'=>'form-control','placeholder'=>__('messages.DateOpen')])}}
+            </div>
+
+            <div class="form-group form-search">
+                <button type="submit" class="btn btn-default">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+          {{Form::close()}}
+          
+        </div>
         <div class="container table-container">
             <div class="row">
               <div class="col-md-3">{{ __('messages.Name') }}</div>

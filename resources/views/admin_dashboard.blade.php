@@ -155,6 +155,16 @@
             background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['selectTable'] }} !important;
         }
 
+        .body-header > form{
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .form-search{
+            margin: 4px;
+        }
+
     @endif    
 
     @media (max-width: 768px) {
