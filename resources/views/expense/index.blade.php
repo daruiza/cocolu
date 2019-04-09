@@ -50,7 +50,7 @@
                                     <div class="col-md-3">{{ __('messages.Value') }}</div>
                                     <div class="col-md-3">{{ __('messages.Clousure') }}</div>
                                 </div>
-                                @foreach($expenses as $key => $value)
+                                @foreach($expenses as $key => $value)                                
                                 <div class="row object-expense 
                                     @if($key%2) @else row-impar @endif">
                                     {{ Form::hidden('expense-id', $value->id) }}
@@ -80,6 +80,35 @@
 <script type="text/javascript" src="{{ asset('js/entity/expense.js') }}"></script>
 <script type="text/javascript">
     expense.selectObject('object-expense','selected-object');
+    function category_show_submit(id){
+        if($("#"+id+" input[name=id]").val() !== ""){
+            $('#'+id)[0].submit();
+            return true;
+        }
+        alert("{{ __('messages.CategorySelectNone') }}");
+        return false;           
+    }
+
+    function category_edit_submit(id){
+        if($("#"+id+" input[name=id]").val() !== ""){
+            $('#'+id)[0].submit();
+            return true;
+        }
+        alert("{{ __('messages.CategorySelectNone') }}");
+        return false;           
+    }
+
+    function category_destroy_submit(id){          
+        if(confirm("{{ __('messages.CategoryConfirmDestroy') }}")){
+            if($("#"+id+" input[name=id]").val() !== ""){
+            $('#'+id)[0].submit();
+                return true;
+            }
+            alert("{{ __('messages.CategorySelectNone') }}");
+            return false;
+        }
+        return false;
+    }
 </script>
    
 @endsection

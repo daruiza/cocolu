@@ -31,8 +31,9 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::            
-            leftJoin('clousures','clousures.id','expenses.clousure_id')
+        $expenses = Expense::
+            select('expenses.*')
+            ->leftJoin('clousures','clousures.id','expenses.clousure_id')
             ->where('clousures.store_id',Auth::user()->store()->id)            
             ->orderBy('expenses.id','ASC')
             ->get();
@@ -91,9 +92,10 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        //
+        //editar solo antes de trres minutos
+        dd('hi');
     }
 
     /**
