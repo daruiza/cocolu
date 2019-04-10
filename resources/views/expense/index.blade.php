@@ -80,7 +80,7 @@
 <script type="text/javascript" src="{{ asset('js/entity/expense.js') }}"></script>
 <script type="text/javascript">
     expense.selectObject('object-expense','selected-object');
-    function category_show_submit(id){
+    function expense_show_submit(id){
         if($("#"+id+" input[name=id]").val() !== ""){
             $('#'+id)[0].submit();
             return true;
@@ -89,7 +89,7 @@
         return false;           
     }
 
-    function category_edit_submit(id){
+    function expense_edit_submit (id){
         if($("#"+id+" input[name=id]").val() !== ""){
             $('#'+id)[0].submit();
             return true;
@@ -98,7 +98,7 @@
         return false;           
     }
 
-    function category_destroy_submit(id){          
+    function expense_destroy_submit(id){          
         if(confirm("{{ __('messages.CategoryConfirmDestroy') }}")){
             if($("#"+id+" input[name=id]").val() !== ""){
             $('#'+id)[0].submit();
