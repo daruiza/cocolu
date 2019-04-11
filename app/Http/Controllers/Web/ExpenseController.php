@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
-
+use DateTime;
 
 class ExpenseController extends Controller
 {
@@ -95,7 +95,26 @@ class ExpenseController extends Controller
     public function edit(Request $request,$id)
     {
         //editar solo antes de trres minutos
-        dd('hi');
+        $expense = Expense::find($request->input('id'));
+        $date_create = $expense->created_at->modify("+3 minutes");
+        //$date_create = $date_create->format('Y-m-d H:i:s');
+
+        $today = new DateTime();
+        //$today = $today->format('Y-m-d H:i:s');
+        $diff = $today->diff($date_create);
+        $diff = intval($diff->format('%i'));
+        
+        if($diff > intval(json_decode(Auth::user()->store()->label,true)['table']['graceTimeExpense'])){            
+            //y no podemos editar el gasto, ha pasado el tiempo de gracia
+            Session::flash('danger', [['ExpenseEditOutGraceTime']]);
+            return $this->index();
+        }
+        
+
+        //en caso de pasar el filtro se procede a editar
+        $expense = Expense::find($request->input('id'));
+        $clousure = new Clousure();    
+        return view('expense.edit',compact('expense','clousure'))->with('data', []);        
     }
 
     /**
@@ -107,7 +126,21 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validator($request->all())->validate();
+        if(!Auth::user()->validateUserStore($request->input('store-id'))) {
+          return Redirect::back()->with('danger', [['NO_STORE_OWNER']]);  
+        }
+
+        $expense = Expense::find($id);
+
+        $expense->name=$request->input('name');
+        $expense->description=$request->input('description');
+        $expense->value=$request->input('value');
+        $expense->save();
+         
+        Session::flash('success', [['ExpenseEditOk']]);
+        return $this->index();   
+        
     }
 
     /**
