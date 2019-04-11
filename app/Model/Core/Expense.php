@@ -12,5 +12,9 @@ class Expense extends Model
     public function clousure(){
         return $this->belongsTo(Clousure::class);
     }
+
+    static function totalexpenseClousure(Clousure $clousure){    	
+    	return  Expense::select('*')->where('clousure_id',$clousure->id)->sum('value');        
+    }
     
 }

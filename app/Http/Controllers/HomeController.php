@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Core\Order;
 use App\Model\Core\Product;
+use App\Model\Core\Expense;
 use App\Model\Core\Clousure;
 
 use Illuminate\Http\Request;
@@ -65,10 +66,11 @@ class HomeController extends Controller
 
                 //productos consumidos
                 $products = Product::productByClousure($clousure);
+
+                //gastos
+                $totalexpense = Expense::totalexpenseClousure($clousure);
                 
-                
-                
-                return view('welcome',compact('page','store','orders','orderpaid','orderstopay','services','ordercount','orderclosecount','products'))
+                return view('welcome',compact('page','store','orders','orderpaid','orderstopay','services','ordercount','orderclosecount','products','totalexpense'))
                 ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);    
             }
 

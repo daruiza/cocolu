@@ -39,6 +39,10 @@
                             <span>{{ __('messages.Orders')}}:</span> 
                             {{number_format($ordercount)}} [{{number_format($orderclosecount)}}]
                         </div>
+                        <div class="col-md-3 col-md-offset-0">
+                            <span>{{ __('messages.TotalExpenses')}}:</span> 
+                            ${{number_format($totalexpense)}}
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-md-offset-0">

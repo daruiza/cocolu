@@ -8,8 +8,10 @@ use App\Model\Core\Clousure;
 use App\Model\Core\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Traits\Web\ClousureRequestTrait;
 
@@ -83,7 +85,7 @@ class ClousureController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, $id)
-    {
+    {        
         $user = User::findOrFail($id);
         //validación de credenciales de usuario
         if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);
@@ -95,14 +97,15 @@ class ClousureController extends Controller
         ->orWhere('orders.status_id',2)
         ->get();
 
-        if($orders->count()){
-            return View::make('user.index',compact('user'))
-            ->with('data', ['options'=>$user->rol_options()])
-            ->with('danger', [['orderOpen']]);
-        }        
-
-        return View::make('clousure.edit',compact('user'))
-        ->with('data', ['options'=>$user->rol_options()]);
+        if($orders->count()){            
+            Session::flash('danger', [['orderOpen']]);
+            return  app('App\Http\Controllers\HomeController')->index(Auth::user()->store()->clousureOpen());
+        }
+        
+        $page = 'clousure.edit';
+        return view('welcome',compact('page','user'))
+        ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);    
+        
     }
 
     /**
@@ -138,10 +141,9 @@ class ClousureController extends Controller
         $new_colusure->description = $request->input('new_description');
         $new_colusure->store_id = $user->store()->id;
         $new_colusure->save();
-        
-        $message[0][0] = 'workClousureOK';
-        return view('clousure.edit',compact('user'))->with('success', $message)
-        ->with('data', ['options'=>$user->rol_options()]);
+                
+        Session::flash('success', [['workClousureOK']]);
+        return  app('App\Http\Controllers\HomeController')->index(Auth::user()->store()->clousureOpen());
     }
 
     /**

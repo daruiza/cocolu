@@ -81,5 +81,6 @@ return [
     "DateOpen" => "Open Date",
     "ordersPaid" => "Total paid",
     "ordersToPay" => "Total to pay",
-    "Services" => "Services"
+    "Services" => "Services",
+    "TotalExpenses" => "Total Expenses"
 ];

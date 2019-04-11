@@ -106,8 +106,6 @@ class Product extends Model
             ->get();
     }
 
-    
-
     public function categories_toString(){
         $string = "";
         foreach ($this->categories()->get() as $key => $value) {
@@ -149,6 +147,7 @@ class Product extends Model
         }        
     }
 
+    //aumenta la cantidad de productos, usada en la mifificacion d euna orden
     public function editProductStockIngredient($data,$opt=false){
         
         if(!$opt){
@@ -177,6 +176,7 @@ class Product extends Model
                
     }
 
+    //aumenta el stock de productos, usada en la mifificacion d euna orden
     public function editProductStockIngredientUp($data){
         //consultamos el volumen
         $relation = \DB::table('product_product')           
@@ -189,6 +189,7 @@ class Product extends Model
         }       
     }
 
+    //usada en homeController para chart pie
     static function productByClousure(Clousure $clousure){
         $products_array = array();
         $products_array['labels'] = array();
