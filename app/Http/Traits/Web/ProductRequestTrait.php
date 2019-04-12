@@ -23,7 +23,10 @@ trait ProductRequestTrait
 
 	}
 
+    //entrga los datos de los productos para realizar una factura de compra
     public function purchaseOrder(Request $request,$id){
+
+        //
 
         Session::flash('danger', [['ProductPurchageOrder']]);
         return redirect('product');
