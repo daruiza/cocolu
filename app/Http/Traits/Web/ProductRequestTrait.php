@@ -23,6 +23,13 @@ trait ProductRequestTrait
 
 	}
 
+    public function purchaseOrder(Request $request,$id){
+
+        Session::flash('danger', [['ProductPurchageOrder']]);
+        return redirect('product');
+    }
+    
+
 	public function addProduct(Request $request,$id){
 		//retur pruduct an his components		
 		//$product = Product::find($request->input('id'));

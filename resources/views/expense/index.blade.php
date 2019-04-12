@@ -124,7 +124,7 @@
 	    background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['colorRow'] }};
 	}
 
-    .object-product{
+    .object-expense{
         border: 1px solid {{ json_decode(Auth::user()->store()->label,true)['table']['colorRow'] }};
         padding-top: 2px;
         padding-bottom: 2px;
@@ -132,7 +132,7 @@
         margin-bottom: 2px;
     }
 
-    .object-product:hover{
+    .object-expense:hover{
         cursor:pointer;
     }
 

@@ -15,9 +15,11 @@ return [
 	"closeService"=>"Close Service",
 	"editClousure"=>"Work Clousure",
 	"editstock"=>"Edit Stock",
+	"purchaseorder"=>"Purchase Products",
 	"consultClousure"=>"Consult Closure",
 	"alertStock"=>"Alert Inventory",
 	"topProducts"=>"Top Products",
 	"salesForWaiter"=>"Sales for Waiter",
+
 
 ];

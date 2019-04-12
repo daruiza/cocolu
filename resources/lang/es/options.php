@@ -14,6 +14,7 @@ return [
 	"service"=>"Servicio",
 	"closeService"=>"Cerrar Servicio",
 	"editstock"=>"Editar Inventario",
+	"purchaseorder"=>"Compra de Productos",
 	"consultClousure"=>"Consultar Cierre",
 	"editClousure"=>"Cierre de Labor",
 	"alertStock"=>"Alertas de Inventario",

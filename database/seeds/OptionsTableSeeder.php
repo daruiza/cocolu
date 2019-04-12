@@ -196,8 +196,14 @@ class OptionsTableSeeder extends Seeder
 			'module_id'=>9	
 			)
 		);
+		\DB::table('options')->insert(array(
+			'name'=>'purchaseorder',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-file-alt"}',
+			'module_id'=>9	
+			)
+		);
 
-		//Modulo Category opt 30
+		//Modulo Category opt 31
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
 			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
@@ -229,7 +235,7 @@ class OptionsTableSeeder extends Seeder
 			)
 		);		
 
-		//Modulo Gastos opt 35
+		//Modulo Gastos opt 36
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
 			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
@@ -261,6 +267,6 @@ class OptionsTableSeeder extends Seeder
 			)
 		);
 
-		//Modulo opt 40	
+		//Modulo opt 41
     }
 }

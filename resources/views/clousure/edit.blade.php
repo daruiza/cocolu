@@ -1,11 +1,19 @@
 <div class="row ">	
 	<div class="col-md-3 col-lateral-table">
         <div class="col-md-12">
-		<div class="card">
+		<div class="card card-menu-table">
             <div class="card-header">{{ __('messages.Options') }}</div>
-            @if (!empty($data['options']) )	                    	
-            	@include('layouts.options_dashboard')                            
-            @endif	                    
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">                                
+                        <div class="col-md-12 ">
+                            @if (!empty($data['options']) )	                    	
+                            	@include('layouts.options_dashboard')                            
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>     
     	</div>
         </div>
 	</div>
