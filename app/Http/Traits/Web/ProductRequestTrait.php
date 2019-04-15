@@ -23,10 +23,16 @@ trait ProductRequestTrait
 
 	}
 
-    //entrga los datos de los productos para realizar una factura de compra
+    //entrega los datos de los productos para realizar una factura de compra
     public function purchaseOrder(Request $request,$id){
 
-        //
+
+        //0. validaciones
+        //No valida, solo entrega, luego el metodo de store valida
+
+        //1. consultamos los productos - todos
+
+        //2. consultamos los proveedores - todos
 
         Session::flash('danger', [['ProductPurchageOrder']]);
         return redirect('product');

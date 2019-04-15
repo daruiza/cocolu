@@ -154,6 +154,17 @@ class User extends Authenticatable
         }
         chmod('users/'.$user_id.'/products/default.png', 0777);
 
+        if(!mkdir('users/'.$user_id.'/supports',0777,true)){
+            return false;                                    
+        }                               
+        chmod('users/'.$user_id, 0777);
+
+        //ubicamos la imagen del producto por defecto
+        if (!copy('images/supports/default.png', 'users/'.$user_id.'/supports/default.png')) {
+           return false;  
+        }
+        chmod('users/'.$user_id.'/supports/default.png', 0777);
+
         return true;
     }
 	

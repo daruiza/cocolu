@@ -127,7 +127,8 @@
 @endsection
 
 @section('style')	
-	<link href="{{ asset('css/custom/table_index.css') }}" rel="stylesheet">    
+	<link href="{{ asset('css/custom/table_index.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet">    
 	<!--esto no se hace asi, css debe poder recivir variables-->
 	<style type="text/css">
 		/*

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('template')
-    <link href="{{ asset('css/custom/welcome.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet">    
+@section('template')        
 @endsection
 
 @section('content')

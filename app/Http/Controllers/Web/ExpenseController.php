@@ -61,14 +61,29 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validator($request->all())->validate();
         //validar store
         if(!Auth::user()->validateUserStore($request->input('store-id'))) {
           return Redirect::back()->with('danger', [['NO_STORE_OWNER']]);  
-        } 
+        }
 
-        $expense = new Expense();
-        $request->request->add(['clousure_id' => Auth::user()->store()->clousureOpen()->id]);            
+         if(!empty($request->file('image'))){
+            $this->validatorImage(['image'=>$request->file('image')])->validate();
+             if($request->file('image')->isValid()){
+                $destinationPath = 'users/'.Auth::user()->id.'/supports';
+                $extension = $request->file('image')->getClientOriginalExtension(); // getting image extension
+                $fileName_image = rand(1,9999999).'.'.$extension; // renameing image
+                $request->file('image')->move($destinationPath, $fileName_image);
+                chmod('users/'.Auth::user()->id.'/supports/'.$fileName_image, 0777);
+
+                $request->request->add(['support' => $fileName_image]);
+             }
+         }
+        
+        $request->request->add(['clousure_id' => Auth::user()->store()->clousureOpen()->id]);
+
+        $expense = new Expense();                    
         $expense::create($request->input());
 
         Session::flash('success', [['ExpenseCreateOk']]);
@@ -168,6 +183,15 @@ class ExpenseController extends Controller
                 required|
                 not_in:0|
                 integer|min:0',   
+        ]);
+    }
+
+     protected function validatorImage(array $data)
+    {        
+        return Validator::make($data, [
+            'image'=>'
+                required|
+                mimes:jpeg,bmp,png',            
         ]);
     }
 }

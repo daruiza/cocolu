@@ -1,3 +1,15 @@
+.flex-center .container .row{
+    justify-content: center;
+}
+
+.row-info{
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+
 .lang li a{
     display: block;
     padding: 3px 20px;
