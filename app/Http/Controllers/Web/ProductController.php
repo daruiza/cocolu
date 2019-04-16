@@ -158,7 +158,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request,$id)
-    {
+    {        
         $product = Product::find($request->input('id'));        
         return view('product.show',compact('product'))->with('success', [[]])->with('data', []);
     }

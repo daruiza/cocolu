@@ -56,6 +56,7 @@
 													</span>
 												@endif
 											</div>
+											{!! Form::label('support',__('messages.Support'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
 											<!--
 											<div class="col-md-12 button-submit">
 												<button type="submit" class="btn btn-primary" form="form-expense">

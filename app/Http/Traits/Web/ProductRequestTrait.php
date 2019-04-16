@@ -3,6 +3,7 @@
 namespace App\Http\Traits\Web;
 
 use App\Model\Core\Product;
+use App\Model\Core\Provider;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,18 +25,30 @@ trait ProductRequestTrait
 	}
 
     //entrega los datos de los productos para realizar una factura de compra
-    public function purchaseOrder(Request $request,$id){
-
-
+    public function purchaseOrder(){
+        
         //0. validaciones
         //No valida, solo entrega, luego el metodo de store valida
 
-        //1. consultamos los productos - todos
-
-        //2. consultamos los proveedores - todos
-
-        Session::flash('danger', [['ProductPurchageOrder']]);
-        return redirect('product');
+        //1. consultamos los productos - todos. tener en cuenta si no hay
+        $products = Product::            
+            where('active',1)
+            ->where('store_id',Auth::user()->store()->id)
+            ->orderBy('id','ASC')
+            ->get();
+        if(!$products->count()){
+            Session::flash('info', [['PurchageOrderNoProducts']]);
+            return redirect('product');
+        }
+        
+        //2. consultamos los proveedores - todos        
+        $providers = Provider::            
+            where('active',1)
+            ->where('store_id',Auth::user()->store()->id)
+            ->orderBy('id','ASC')
+            ->get();
+        
+        return view('invoice.create',compact('products','providers'))->with('data', []);
     }
     
 

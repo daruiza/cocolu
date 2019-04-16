@@ -15,7 +15,7 @@ class CreateProvidersTable extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('numero',128)->nullable();
+            $table->string('number',128)->nullable();
             $table->string('name',128);
             $table->string('description',256);
             $table->string('logo', 128)->default('default.png');
@@ -23,6 +23,10 @@ class CreateProvidersTable extends Migration
             $table->string('email', 128)->unique();
             $table->string('phone', 32)->nullable();
             $table->boolean('active')->default(true);
+            $table->integer('store_id')->unsigned()->default(2);        
+            $table->foreign('store_id')->references('id')->on('stores')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }

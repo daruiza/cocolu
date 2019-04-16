@@ -31,5 +31,8 @@ return [
 	"AddComponents" => "Agregar Componentes",
 	"Category" => "Categoria",
 	"Serve" => "Servir",
-	"ClousureConsult" => "Consultar Cierres"
+	"ClousureConsult" => "Consultar Cierres",
+	"Number" => "Número",
+	"tax" => "Impuesto",
+
 ];

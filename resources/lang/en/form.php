@@ -31,6 +31,7 @@ return [
 	"AddComponents" => "Add Components",
 	"Category" => "Category",
 	"Serve" => "Serve",
-	"ClousureConsult" => "Check Closures"
-	
+	"ClousureConsult" => "Check Closures",
+	"Number" => "Number",	
+	"Tax" => "Tax",
 ];

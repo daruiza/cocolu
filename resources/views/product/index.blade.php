@@ -126,11 +126,13 @@
             alert("{{ __('messages.ProductSelectNone') }}");
             return false; 
         }
-
+        /*
         function product_purchaseorder_submit(id){          
             $('#'+id)[0].submit();
             return true;
         }
+        */
+
         
         
     </script>   

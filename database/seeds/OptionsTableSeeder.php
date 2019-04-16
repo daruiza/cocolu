@@ -154,7 +154,7 @@ class OptionsTableSeeder extends Seeder
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'changepassword',			
-			'label'=>'{"menu":"page","method":"post","icon":"fas fa-times-circle"}',
+			'label'=>'{"menu":"top","method":"post","icon":"fas fa-times-circle"}',
 			'module_id'=>8	
 			)
 		);

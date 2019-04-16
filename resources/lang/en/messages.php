@@ -82,5 +82,7 @@ return [
     "ordersPaid" => "Total paid",
     "ordersToPay" => "Total to pay",
     "Services" => "Services",
-    "TotalExpenses" => "Total Expenses"
+    "TotalExpenses" => "Total Expenses",
+    "InformationInvoice" => "Invoice Information",
+    "InformationProvider" => "Provider Information",
 ];

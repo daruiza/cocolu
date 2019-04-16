@@ -18,6 +18,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('product/purchaseorder', [
+   'as' => 'product.purchaseorder', 'uses' => 'Web\ProductController@purchaseOrder'
+]);
+
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('locale', 'HomeController@postLocale')->name('locale');
 Route::resource('rol', 'Web\RolController');
@@ -33,6 +37,7 @@ Route::resource('waiter', 'Web\WaiterController');
 Route::resource('procuct', 'Web\ProductController');
 Route::resource('order', 'Web\OrderController');
 Route::resource('expense', 'Web\ExpenseController');
+Route::resource('invoice', 'Web\InvoiceController');
 
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');
@@ -70,9 +75,7 @@ Route::post('waiter/changepassword', [
 Route::get('product/{id}/editstock', [
    'as' => 'product.editstock', 'uses' => 'Web\ProductController@editStock'
 ]);
-Route::get('product/{id}/purchaseorder', [
-   'as' => 'product.purchaseorder', 'uses' => 'Web\ProductController@purchaseOrder'
-]);
+
 Route::post('product/{id}/addproduct', [
    'as' => 'product.addproduct', 'uses' => 'Web\ProductController@addProduct'
 ]);

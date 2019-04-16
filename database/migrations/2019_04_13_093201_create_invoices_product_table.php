@@ -20,7 +20,7 @@ class CreateInvoicesProductTable extends Migration
             $table->integer('invoice_id')->unsigned();            
             $table->foreign('invoice_id')->references('id')->on('invoices');            
             $table->integer('product_id')->unsigned();            
-            $table->foreign('product_id')->references('id')->on('product');            
+            $table->foreign('product_id')->references('id')->on('products');            
             $table->timestamps();
         });
     }

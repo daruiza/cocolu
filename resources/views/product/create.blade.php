@@ -160,6 +160,9 @@
 			width: 100%;
 			margin-top: 10%;
 		}
+		.chosen-container{
+			font-size: 1rem;
+		}		
 		.chosen-container .chosen-container-multi{
 			border: 1px solid #ccc !important;
 			border-radius: 4px !important;

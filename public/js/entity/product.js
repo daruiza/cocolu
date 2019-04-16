@@ -70,7 +70,7 @@ product.prototype.addIngredient = function(objectClass,selectClass) {
     
     var products = document.getElementById("products");
     var select = document.createElement("select");
-    select.setAttribute("class", "form-control");
+    select.setAttribute("class", "form-control chosen-select");
     select.setAttribute("name", "item_product_"+n);
 
     var opt1 = document.createElement('option');    
@@ -90,6 +90,9 @@ product.prototype.addIngredient = function(objectClass,selectClass) {
     node.appendChild(subnode);
 
     cn.appendChild(node);
+
+    $('.chosen-select').chosen();
+    $('.chosen-container').width('100%');
 }
 
 
