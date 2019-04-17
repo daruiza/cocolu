@@ -4,6 +4,7 @@ namespace App\Http\Traits\Web;
 
 use App\Model\Core\Product;
 use App\Model\Core\Provider;
+use App\Model\Core\Invoice;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,7 @@ trait ProductRequestTrait
         //No valida, solo entrega, luego el metodo de store valida
 
         //1. consultamos los productos - todos. tener en cuenta si no hay
+        $invoice = new Invoice();
         $products = Product::            
             where('active',1)
             ->where('store_id',Auth::user()->store()->id)
@@ -48,7 +50,7 @@ trait ProductRequestTrait
             ->orderBy('id','ASC')
             ->get();
         
-        return view('invoice.create',compact('products','providers'))->with('data', []);
+        return view('invoice.create',compact('invoice','providers'))->with('data', []);
     }
     
 

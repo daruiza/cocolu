@@ -123,17 +123,17 @@
 		</div>
 
 		<div class="col-md-6">
-	{!! Form::label('description_provider',__('messages.Description'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
-		<div class="col-md-12">
-			@if($errors->has('description_provider'))
-				{!! Form::textarea('description_provider',null, ['class'=>'form-control is-invalid','rows'=>'3']) !!}
-				<span class="invalid-feedback">
-	                <strong>{{ $errors->first('description_provider') }}</strong>
-	            </span>
-			@else
-				{!! Form::textarea('description_provider',null, ['class'=>'form-control','rows'=>'3']) !!}
-			@endif	
-		</div>
+			{!! Form::label('description_provider',__('messages.Description'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
+			<div class="col-md-12">
+				@if($errors->has('description_provider'))
+					{!! Form::textarea('description_provider',null, ['class'=>'form-control is-invalid','rows'=>'3']) !!}
+					<span class="invalid-feedback">
+		                <strong>{{ $errors->first('description_provider') }}</strong>
+		            </span>
+				@else
+					{!! Form::textarea('description_provider',null, ['class'=>'form-control','rows'=>'3']) !!}
+				@endif	
+			</div>
 	</div>
 
 	</div>

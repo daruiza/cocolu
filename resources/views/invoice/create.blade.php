@@ -58,7 +58,9 @@
 
 			                    		{!! Form::close() !!}
 									</div>
-
+									
+									{!! Form::select('products',$product->productsArrayCategoryDefault(),null,['id'=>'products','class'=>'form-control','style'=>'display:none']) !!}
+									
 									
 								</div>
 							</div>
@@ -71,6 +73,9 @@
        </div>
    </div>
 </div>
+
+{!! Form::hidden('input_placeholder_volume', __('messages.Volume') ) !!}
+{!! Form::hidden('input_placeholder_price', __('messages.Price') ) !!}
 
 @endsection
 

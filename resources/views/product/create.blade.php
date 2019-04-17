@@ -103,17 +103,16 @@
 							</div>	
                     	</div>
 	                </div>
-
-	                {!! Form::hidden('input_placeholder_volume', __('messages.Volume') ) !!}
-	                {!! Form::hidden('input_placeholder_group', __('messages.Group') ) !!}
-	                
         		</div>
-
         		</div>
             </div>
         </div>
     </div>
 </div>
+
+{!! Form::hidden('input_placeholder_volume', __('messages.Volume') ) !!}
+{!! Form::hidden('input_placeholder_group', __('messages.Group') ) !!}
+
 @endsection
 
 @section('script')
