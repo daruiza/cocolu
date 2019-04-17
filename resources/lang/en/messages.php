@@ -85,4 +85,5 @@ return [
     "TotalExpenses" => "Total Expenses",
     "InformationInvoice" => "Invoice Information",
     "InformationProvider" => "Provider Information",
+    "InformationProducts" => "Products Information"
 ];

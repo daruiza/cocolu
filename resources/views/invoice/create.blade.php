@@ -75,6 +75,8 @@
 @endsection
 
 @section('script')
+	<script type="text/javascript" src="{{ asset('js/chosen.jquery.min.js') }}"></script>	
+	<script type="text/javascript" src="{{ asset('js/entity/invoice.js') }}"></script>
 	<script type="text/javascript"> 
 		$('#img_support').change(function(e) {
 	    	var file = e.target.files[0],

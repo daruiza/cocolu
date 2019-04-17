@@ -85,4 +85,5 @@ return [
     "TotalExpenses" => "Total gastos",
     "InformationInvoice" => "Información de Factura",
     "InformationProvider" => "Información de Proveedor",
+    "InformationProducts" => "Información de Productos"
 ];

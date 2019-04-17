@@ -16,7 +16,7 @@
 	{!! Form::label('description',__('messages.Description'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('description'))
-			{!! Form::textarea('description',null, ['class'=>'form-control is-invalid','rows'=>'3']) !!}
+			{!! Form::textarea('description',null, ['class'=>'form-control is-invalid']) !!}
 			<span class="invalid-feedback">
                 <strong>{{ $errors->first('description') }}</strong>
             </span>
@@ -107,7 +107,7 @@
                 </strong>
             </span>
 		@else
-			{!! Form::select('category_id', $category->categories(),null,['class'=>'form-control chosen-select','multiple'=>'multiple','id'=>'category_id']) !!}			
+			{!! Form::select('category_id', $category->categories(),null,['class'=>'form-control chosen-select','multiple'=>'multiple','id'=>'category_id','data-placeholder'=>__('form.SelectOption')]) !!}			
 		@endif	
 		{!! Form::hidden('category_ids',null,array('id'=>'category_ids')) !!}	
 	</div>	                    			

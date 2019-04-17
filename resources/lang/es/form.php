@@ -29,10 +29,11 @@ return [
 	"createWaiter" => "Crear Mesero",
 	"AddIngredients" => "Agregar Ingrediente",
 	"AddComponents" => "Agregar Componentes",
+	"AddProducts" => "Agregar Productos",
 	"Category" => "Categoria",
 	"Serve" => "Servir",
 	"ClousureConsult" => "Consultar Cierres",
 	"Number" => "Número",
-	"tax" => "Impuesto",
-
+	"Tax" => "Impuesto",
+	"SelectOption" => "Selecciona una o varias opciones",
 ];

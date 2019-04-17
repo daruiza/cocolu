@@ -29,9 +29,11 @@ return [
 	"createWaiter" => "Create Waiter",
 	"AddIngredients" => "Add Ingredient",
 	"AddComponents" => "Add Components",
+	"AddProducts" => "Add Products",
 	"Category" => "Category",
 	"Serve" => "Serve",
 	"ClousureConsult" => "Check Closures",
 	"Number" => "Number",	
 	"Tax" => "Tax",
+	"SelectOption" => "Select options",
 ];

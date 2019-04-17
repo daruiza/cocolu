@@ -159,28 +159,23 @@
 		.button-submit button{
 			width: 100%;
 			margin-top: 10%;
-		}
-		.chosen-container{
-			font-size: 1rem;
-		}		
-		.chosen-container .chosen-container-multi{
-			border: 1px solid #ccc !important;
-			border-radius: 4px !important;
+		}	
+		
+		.chosen-container-multi .chosen-choices,
+		.chosen-container .chosen-single{
+			height: calc(2.25rem + 2px);
+    		padding: .375rem .75rem;
+    		background-image: -webkit-gradient(linear,left top,left bottom,color-stop(1%,transparent),color-stop(15%,transparent));
+    		background-image: linear-gradient(transparent 1%,transparent 15%);
+    		border: 1px solid #ced4da;
+    		border-radius: .25rem;
 		}
 
-		.chosen-container-multi .chosen-choices{
-			background-color: #fff;
-		    background-clip: padding-box;
-		    border: 1px solid #ced4da;
-		    border-radius: .25rem;
-		    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-		    height: calc(2.25rem + 2px);
-		    padding: .375rem .75rem;
-		    font-size: 1rem;
-		    line-height: 1.5;
-		    color: #495057;
-		    background-image: none;
+		.chosen-container .chosen-single > div{
+			top: 6px;
 		}
+
+
 		.content-add-ingredient{
 			padding: 10px;
     		border: 1px solid #ced4da;
