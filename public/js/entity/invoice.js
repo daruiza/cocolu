@@ -24,7 +24,8 @@ invoice.prototype.addProduct = function() {
     var n=cn.childElementCount;
 
     var node = document.createElement("div");
-    node.setAttribute("class", "form-group row");
+    node.setAttribute("class", "col-md-12 row");
+    node.setAttribute("style", "margin: 0px;margin-bottom: 5px;");
 
     var subnode = document.createElement("div");
     subnode.setAttribute("class", "col-sm-3 text-md-right");
@@ -60,7 +61,7 @@ invoice.prototype.addProduct = function() {
     opt1.setAttribute('disabled','disabled');
     opt1.setAttribute('hidden','hidden');
     opt1.innerHTML = 'Elije un Producto...';
-    /*
+    
     for(var i=0;i<products.childElementCount;i++){
         var opt = products.options[i];
         var opt1 = document.createElement('option');   
@@ -68,7 +69,6 @@ invoice.prototype.addProduct = function() {
         opt1.innerHTML = opt.innerHTML;
         select.appendChild(opt1);
     }
-    */  
 
     subnode.appendChild(select);
     node.appendChild(subnode);

@@ -93,6 +93,17 @@ class Product extends Model
         return $products;
     }
 
+    static function productsArrayCategoryAll(){
+        $products = Array();
+        $products_array = Product::getProducts()
+            ->orderBy('products.name','ASC')->get();
+
+        foreach ($products_array as $key => $value) {            
+            $products[$value->id] = $value->name.' - ('.$value->unity->name.')';
+        }
+        return $products;
+    }
+
     static function productstByStore(){
         
         return Product::getProducts()

@@ -28,6 +28,18 @@ class Store extends Model
         return $this->hasMany(Clousure::class);
     }
 
+    //una tienda puede tener muchos proveedores
+    public function providers(){
+        //no usa el namespace
+        return $this->hasMany(Provider::class);
+    }
+
+    //una tienda puede tener muchos proveedores
+    public function invoices(){
+        //no usa el namespace
+        return $this->hasMany(Invoice::class);
+    }
+
     public function clousureOpen(){
         $clousure = Clousure::where('open',1)->get()->first();
         return $clousure;

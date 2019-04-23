@@ -31,6 +31,7 @@ return [
 	"AddComponents" => "Agregar Componentes",
 	"AddProducts" => "Agregar Productos",
 	"Category" => "Categoria",
+	"Categories" => "Categorias",
 	"Serve" => "Servir",
 	"ClousureConsult" => "Consultar Cierres",
 	"Number" => "Número",

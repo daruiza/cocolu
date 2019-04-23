@@ -18,8 +18,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('product/purchaseorder', [
-   'as' => 'product.purchaseorder', 'uses' => 'Web\ProductController@purchaseOrder'
+Route::get('invoice/purchaseorder', [
+   'as' => 'product.purchaseorder', 'uses' => 'Web\InvoiceController@purchaseOrder'
 ]);
 
 Route::get('/', 'HomeController@index')->name('home');

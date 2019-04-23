@@ -31,6 +31,7 @@ return [
 	"AddComponents" => "Add Components",
 	"AddProducts" => "Add Products",
 	"Category" => "Category",
+	"Categories" => "Categories",
 	"Serve" => "Serve",
 	"ClousureConsult" => "Check Closures",
 	"Number" => "Number",	

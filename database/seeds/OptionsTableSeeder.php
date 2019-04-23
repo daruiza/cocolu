@@ -154,7 +154,7 @@ class OptionsTableSeeder extends Seeder
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'changepassword',			
-			'label'=>'{"menu":"top","method":"post","icon":"fas fa-times-circle"}',
+			'label'=>'{"menu":"page","method":"post","icon":"fas fa-times-circle"}',
 			'module_id'=>8	
 			)
 		);
@@ -198,7 +198,7 @@ class OptionsTableSeeder extends Seeder
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'purchaseorder',			
-			'label'=>'{"menu":"page","method":"get","icon":"fas fa-file-alt"}',
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-file-alt"}',
 			'module_id'=>9	
 			)
 		);

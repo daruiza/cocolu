@@ -32,6 +32,11 @@ class UnitiesTableSeeder extends Seeder
             )
         );
         \DB::table('unities')->insert(array(            
+            'name'=>'onza',         
+            'contract'=>'oz',
+            )
+        );
+        \DB::table('unities')->insert(array(            
             'name'=>'litro'  ,       
             'contract'=>'lr',
             )

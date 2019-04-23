@@ -98,12 +98,12 @@
 		{!! Form::label('email_provider',__('messages.E-Mail Address'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
 			<div class="col-md-12">
 				@if($errors->has('email_provider'))
-					{!! Form::text('email_provider',null, ['class'=>'form-control is-invalid']) !!}
+					{!! Form::email('email_provider',null, ['class'=>'form-control is-invalid']) !!}
 					<span class="invalid-feedback">
 		                <strong>{{ $errors->first('email_provider') }}</strong>
 		            </span>
 				@else
-					{!! Form::text('email_provider',null, ['class'=>'form-control']) !!}
+					{!! Form::email('email_provider',null, ['class'=>'form-control']) !!}
 				@endif	
 			</div>
 		</div>
@@ -154,7 +154,7 @@
 	<div class="col-md-12">
 		<h5>{{__('messages.InformationProducts')}}</h5>
 	</div>
-	<div class="col-md-12 row content-products">
+	<div class="content-products" style="width: 100%;margin-bottom: 15px;">
 	</div>
 	<div class="col-md-6">
 	</div>

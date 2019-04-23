@@ -50,7 +50,7 @@
                                     <div class="col-md-2">{{ __('messages.Price') }}</div>
                                     <div class="col-md-2">{{ __('messages.Buy_Price') }}</div>
                                     <div class="col-md-2">{{ __('messages.Volume') }}</div>
-                                    <div class="col-md-3">{{ __('messages.Categories') }}</div>
+                                    <div class="col-md-3">{{ __('form.Categories') }}</div>
                                 </div>   
 		                    	@foreach($products as $key => $value)                                        
 		                    		<div class="row object-product 

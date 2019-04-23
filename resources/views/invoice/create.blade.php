@@ -59,7 +59,13 @@
 			                    		{!! Form::close() !!}
 									</div>
 									
-									{!! Form::select('products',$product->productsArrayCategoryDefault(),null,['id'=>'products','class'=>'form-control','style'=>'display:none']) !!}
+									{!! Form::select('products',$product->productsArrayCategoryAll(),null,['id'=>'products','class'=>'form-control','style'=>'display:none']) !!}
+
+									<div class="col-md-12 button-submit">
+										<button type="submit" class="btn btn-primary" form="form-invoice">
+											{{ __('messages.Send') }}
+										</button>
+									</div>
 									
 									
 								</div>
@@ -117,6 +123,7 @@
 
 @section('style')	
 	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
+	<link href="{{ asset('css/chosen.min.css') }}" rel="stylesheet"> 
 	<style>
 		#form-invoice .form-group.row{
 			border: 1px solid rgba(0,0,0,.125);
@@ -126,6 +133,20 @@
 
 		#form-invoice h5{
 			text-align: center;
+		}
+
+		.chosen-container-multi .chosen-choices,
+		.chosen-container .chosen-single{
+			height: calc(2.25rem + 2px);
+    		padding: .375rem .75rem;
+    		background-image: -webkit-gradient(linear,left top,left bottom,color-stop(1%,transparent),color-stop(15%,transparent));
+    		background-image: linear-gradient(transparent 1%,transparent 15%);
+    		border: 1px solid #ced4da;
+    		border-radius: .25rem;
+		}
+
+		.chosen-container .chosen-single > div{
+			top: 6px;
 		}
 	</style>
 @endsection

@@ -24,34 +24,6 @@ trait ProductRequestTrait
         return redirect('product');
 
 	}
-
-    //entrega los datos de los productos para realizar una factura de compra
-    public function purchaseOrder(){
-        
-        //0. validaciones
-        //No valida, solo entrega, luego el metodo de store valida
-
-        //1. consultamos los productos - todos. tener en cuenta si no hay
-        $invoice = new Invoice();
-        $products = Product::            
-            where('active',1)
-            ->where('store_id',Auth::user()->store()->id)
-            ->orderBy('id','ASC')
-            ->get();
-        if(!$products->count()){
-            Session::flash('info', [['PurchageOrderNoProducts']]);
-            return redirect('product');
-        }
-        
-        //2. consultamos los proveedores - todos        
-        $providers = Provider::            
-            where('active',1)
-            ->where('store_id',Auth::user()->store()->id)
-            ->orderBy('id','ASC')
-            ->get();
-        
-        return view('invoice.create',compact('invoice','providers'))->with('data', []);
-    }
     
 
 	public function addProduct(Request $request,$id){
