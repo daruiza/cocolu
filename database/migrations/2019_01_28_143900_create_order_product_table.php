@@ -18,9 +18,11 @@ class CreateOrderProductTable extends Migration
             $table->integer('order_id')->unsigned();            
             $table->integer('product_id')->unsigned();
             $table->string('ingredients',2048)->nullable()->default(null);     
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade')
+            $table->foreign('order_id')->references('id')->on('orders')
+            ->onDelete('cascade')
             ->onUpdate('cascade');           
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')
+            $table->foreign('product_id')->references('id')->on('products')
+            ->onDelete('cascade')
             ->onUpdate('cascade');
             $table->integer('volume')->default(0);
             $table->timestamps();

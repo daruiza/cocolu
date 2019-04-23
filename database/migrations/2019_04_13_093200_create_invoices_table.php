@@ -20,8 +20,10 @@ class CreateInvoicesTable extends Migration
             $table->string('support', 128);
             $table->float('tax')->default(0);
             $table->integer('provider_id')->unsigned();            
-            $table->foreign('provider_id')->references('id')->on('providers');
-            $table->integer('store_id')->unsigned()->default(2);        
+            $table->foreign('provider_id')->references('id')->on('providers')
+            ->onDelete('cascade')
+            ->onUpdate('cascade'); 
+            $table->integer('store_id')->unsigned();        
             $table->foreign('store_id')->references('id')->on('stores')
             ->onDelete('cascade')
             ->onUpdate('cascade');           

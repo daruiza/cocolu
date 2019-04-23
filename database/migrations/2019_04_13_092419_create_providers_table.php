@@ -23,7 +23,7 @@ class CreateProvidersTable extends Migration
             $table->string('email', 128)->unique();
             $table->string('phone', 32)->nullable();
             $table->boolean('active')->default(true);
-            $table->integer('store_id')->unsigned()->default(2);        
+            $table->integer('store_id')->unsigned();        
             $table->foreign('store_id')->references('id')->on('stores')
             ->onDelete('cascade')
             ->onUpdate('cascade');

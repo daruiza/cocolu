@@ -45,5 +45,6 @@ class UsersTableSeeder extends Seeder
 			'rel_store_id'=>1
 			)
 		);
+		
     }
 }
