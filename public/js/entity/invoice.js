@@ -1,4 +1,5 @@
-function invoice() {	
+function invoice() {	    
+    this.datos_providers = [];
 }
 	
 invoice.prototype.onjquery = function() {	
@@ -79,5 +80,10 @@ invoice.prototype.addProduct = function() {
     $('.chosen-container').width('100%');
 
 };
+
+invoice.prototype.consultaRespuestaProvider = function(result) {
+    alert('comeback');
+};
+
 
 var invoice = new invoice();

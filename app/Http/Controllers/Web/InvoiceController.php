@@ -50,7 +50,7 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         
         $this->validator($request->all())->validate();
         if(!Auth::user()->validateUserStore($request->input('store-id'))){            
@@ -103,10 +103,8 @@ class InvoiceController extends Controller
 
         }else{
             //actualizamos el proveedor
-            dd('hay proveeedor  para actualizar');
+            $provider->first()->updateProvider($request);            
         }
-
-        
 
         //creación de factura
 

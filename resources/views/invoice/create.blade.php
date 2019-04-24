@@ -61,6 +61,8 @@
 									
 									{!! Form::select('products',$product->productsArrayCategoryAll(),null,['id'=>'products','class'=>'form-control','style'=>'display:none']) !!}
 
+									{!! Form::select('providers',$provider->allProviders(),null,['id'=>'providers','class'=>'form-control','style'=>'display:none']) !!}
+
 									<div class="col-md-12 button-submit">
 										<button type="submit" class="btn btn-primary" form="form-invoice">
 											{{ __('messages.Send') }}
@@ -80,6 +82,12 @@
    </div>
 </div>
 
+<!-- Form en blanco para consultar Proveedor -->
+{!! Form::open(array('id'=>'form_consult_provider','url' => 'consultprovider')) !!}
+	{!! Form::hidden('store-id', Auth::user()->store()->id) !!}			
+	{!! Form::hidden('number') !!}
+{!! Form::close() !!}
+
 {!! Form::hidden('input_placeholder_volume', __('messages.Volume') ) !!}
 {!! Form::hidden('input_placeholder_price', __('messages.Price') ) !!}
 
@@ -88,7 +96,30 @@
 @section('script')
 	<script type="text/javascript" src="{{ asset('js/chosen.jquery.min.js') }}"></script>	
 	<script type="text/javascript" src="{{ asset('js/entity/invoice.js') }}"></script>
-	<script type="text/javascript"> 
+	<script type="text/javascript">
+		//autocomplete con los datos iniciales
+		//options
+		var providers = document.getElementById("providers");
+		for(var i=0;i<providers.childElementCount;i++){
+			invoice.datos_providers.push(providers.options[i].innerHTML);
+	    }		
+		$( "#number_provider" ).autocomplete({
+		      source: invoice.datos_providers,	      
+		      select: function(event, ui) {
+		      	$("input[name=number]").val(ui.item.value);		      	
+                $("#number_provider").blur();
+            }
+            
+	    });
+
+	    $("#number_provider").focusout(function(){
+	    	//realizamos un la consulta de proveedor y sus datos
+	    	$("input[name=number]").val($("#number_provider").val());
+		 	var datos = new Array();
+			//datos['id'] =$( "#department option:selected" ).val();			   
+			ajaxobject.peticionajax($('#form_consult_provider').attr('action'),datos,"invoice.consultaRespuestaProvider");
+		});
+
 		$('#img_support').change(function(e) {
 	    	var file = e.target.files[0],
 		    imageType = /image.*/;
@@ -118,6 +149,7 @@
 	    	}
 	    reader.readAsDataURL(file);
     	});
+
 	</script>
 @endsection
 
@@ -148,5 +180,56 @@
 		.chosen-container .chosen-single > div{
 			top: 6px;
 		}
+
+		.ui-autocomplete {
+		 	position: absolute;
+		  	top: 100%;
+			left: 0;
+			z-index: 1000;
+			float: left;
+			display: none;
+			min-width: 160px;
+			_width: 160px;
+			padding: 4px 0;
+			margin: 2px 0 0 0;
+			list-style: none;
+			background-color: #ffffff;
+			border-color: #ccc;
+			border-color: rgba(0, 0, 0, 0.2);
+			border-style: solid;
+			border-width: 1px;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+			-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+			-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+			box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+			-webkit-background-clip: padding-box;
+			-moz-background-clip: padding;
+			background-clip: padding-box;
+			*border-right-width: 2px;
+			*border-bottom-width: 2px;
+
+			.ui-menu-item > a.ui-corner-all {
+			    display: block;
+			    padding: 3px 15px;
+			    clear: both;
+			    font-weight: normal;
+			    line-height: 18px;
+			    color: #555555;
+			    white-space: nowrap;
+
+			    &.ui-state-hover, &.ui-state-active {
+			      color: #ffffff;
+			      text-decoration: none;
+			      background-color: #0088cc;
+			      border-radius: 0px;
+			      -webkit-border-radius: 0px;
+			      -moz-border-radius: 0px;
+			      background-image: none;
+		    	}
+		  	}
+		}
+
 	</style>
 @endsection

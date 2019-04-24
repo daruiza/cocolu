@@ -76,7 +76,7 @@ class Product extends Model
         $products = Array();
         $products_array = Product::getProducts()->orderBy('products.name','ASC')->get();        
         foreach ($products_array as $key => $value) {
-            $products[$value->id] = $value->name.' - ('.$value->unity->name.')';
+            $products[$value->id] = $value->name.' - ['.$value->unity->name.']';
         }
         return $products;
     }
@@ -88,7 +88,7 @@ class Product extends Model
             ->where('category_product.category_id',1)
             ->orderBy('products.name','ASC')->get();                
         foreach ($products_array as $key => $value) {
-            $products[$value->product_id] = $value->name.' - ('.$value->unity->name.')';
+            $products[$value->product_id] = $value->name.' - ['.$value->unity->name.']';
         }
         return $products;
     }
@@ -99,7 +99,7 @@ class Product extends Model
             ->orderBy('products.name','ASC')->get();
 
         foreach ($products_array as $key => $value) {            
-            $products[$value->id] = $value->name.' - ('.$value->unity->name.')';
+            $products[$value->id] = $value->name.' - ['.$value->unity->name.']';
         }
         return $products;
     }

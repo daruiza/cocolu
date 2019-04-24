@@ -16,7 +16,7 @@ trait InvoiceRequestTrait
         //0. validaciones
         //No valida, solo entrega, luego el metodo de store valida
 
-        //1. consultamos los productos - todos. tener en cuenta si no hay
+        //1. consultamos los productos - todos. tener en cuenta si no hay        
         $product = new Product();        
         if(!count($product->productsArrayCategoryAll())){
             Session::flash('info', [['PurchageOrderNoProducts']]);
@@ -24,15 +24,9 @@ trait InvoiceRequestTrait
         }
         
         //2. consultamos los proveedores - todos
-        /*     
-        $providers = Provider::            
-            where('active',1)
-            ->where('store_id',Auth::user()->store()->id)
-            ->orderBy('id','ASC')
-            ->get();
-        */    
+        $provider = new Provider();
         
-        return view('invoice.create',compact('product'))->with('data', []);
+        return view('invoice.create',compact('product','provider'))->with('data', []);
     }
 	
 }

@@ -17,14 +17,8 @@
 
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <!--
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> 
-    -->
+   
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">   
-    <!--<link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">-->
-    
     
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     
@@ -163,10 +157,6 @@
         
         <script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>        
         <script type="text/javascript" src="{{ url('js/jquery-ui.min.js') }}"></script>
-        <!--
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-        -->
         <script src="{{ asset('js/popper.min.js') }}"></script> 
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>        
         <script src="{{ asset('js/ajaxobject.js') }}"></script> 

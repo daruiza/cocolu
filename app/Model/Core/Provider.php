@@ -3,6 +3,8 @@
 namespace App\Model\Core;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +17,18 @@ class Provider extends Model
         return $this->belongsTo(Store::class);
     }
 
+    public function allProviders(){
+        $providers = Array();
+        $providers_array = \DB::table('providers')            
+            ->where('store_id',Auth::user()->store()->id)
+            ->orderBy('id','ASC')
+            ->get();
+        foreach ($providers_array as $key => $value) {            
+            $providers[$value->id] = $value->number;
+        }
+        return $providers;    
+    }    
+
     public function storeProvider(Request $request){
     	
     	$this->number = $request->input('number_provider');
@@ -22,31 +36,58 @@ class Provider extends Model
     	$this->description = $request->input('description_provider');
     	$this->address = $request->input('adress_provider');
     	$this->email = $request->input('email_provider');
-    	$this->phone = $request->input('phone_provider');
+    	$this->phone = $request->input('phone_provider');        
 
-    	if(!empty($request->file('img_provider'))){
+    	if(!empty($request->file('image_provider'))){
 
-            $this->validatorImage(['img_provider'=>$request->file('img_provider')])->validate();
+            $this->validatorImage(['image_provider'=>$request->file('image_provider')])->validate();
 
-            if($request->file('img_provider')->isValid()){
+            if($request->file('image_provider')->isValid()){
 
                 $destinationPath = 'users/'.Auth::user()->id.'/providers';
-                $extension = $request->file('img_provider')->getClientOriginalExtension(); // getting image extension
+                $extension = $request->file('image_provider')->getClientOriginalExtension(); // getting image extension
                 $fileName_image = rand(1,9999999).'.'.$extension; // renameing image
-                $request->file('img_provider')->move($destinationPath, $fileName_image);
+                $request->file('image_provider')->move($destinationPath, $fileName_image);
+                chmod('users/'.Auth::user()->id.'/providers/'.$fileName_image, 0777);
+                
+                $this->logo = $fileName_image;
+            }
+        }
+        $this->store_id = $request->input('store-id');
+    	$this->save();
+    }
+
+    public function updateProvider(Request $request){
+
+        $this->name = $request->input('name_provider');
+        $this->description = $request->input('description_provider');
+        $this->address = $request->input('adress_provider');
+        $this->email = $request->input('email_provider');
+        $this->phone = $request->input('phone_provider');
+
+        if(!empty($request->file('image_provider'))){
+
+            $this->validatorImage(['image_provider'=>$request->file('image_provider')])->validate();
+
+            if($request->file('image_provider')->isValid()){
+
+                $destinationPath = 'users/'.Auth::user()->id.'/providers';
+                $extension = $request->file('image_provider')->getClientOriginalExtension(); // getting image extension
+                $fileName_image = rand(1,9999999).'.'.$extension; // renameing image
+                $request->file('image_provider')->move($destinationPath, $fileName_image);
                 chmod('users/'.Auth::user()->id.'/providers/'.$fileName_image, 0777);
                 
                 $this->logo = $fileName_image;
             }
         }
 
-    	$this->save();
+        $this->save();
     }
 
     protected function validatorImage(array $data)
     {        
         return Validator::make($data, [            
-            'img_provider'=>'
+            'image_provider'=>'
                 required|
                 mimes:jpeg,bmp,png|
                 dimensions:max_width=1024,max_width=1024|

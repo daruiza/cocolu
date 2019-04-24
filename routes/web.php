@@ -38,6 +38,7 @@ Route::resource('procuct', 'Web\ProductController');
 Route::resource('order', 'Web\OrderController');
 Route::resource('expense', 'Web\ExpenseController');
 Route::resource('invoice', 'Web\InvoiceController');
+Route::resource('provider', 'Web\ProviderController');
 
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');
@@ -87,4 +88,7 @@ Route::get('clousure/{id}/showclousures', [
 ]);
 Route::post('clousure/{id}/consultclousure', [
    'as' => 'clousure.consultclousure', 'uses' => 'Web\ClousureController@consultClousure'
+]);
+Route::post('provider/consultprovider', [
+   'as' => 'provider.consultprovider', 'uses' => 'Web\ProviderController@consultProvider'
 ]);

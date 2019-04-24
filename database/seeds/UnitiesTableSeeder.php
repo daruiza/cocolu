@@ -40,12 +40,7 @@ class UnitiesTableSeeder extends Seeder
             'name'=>'litro'  ,       
             'contract'=>'lr',
             )
-        );
-		\DB::table('unities')->insert(array(			
-			'name'=>'litro',		
-            'contract'=>'lr',
-			)
-		);
+        );		
         \DB::table('unities')->insert(array(            
             'name'=>'mililitro',         
             'contract'=>'ml',

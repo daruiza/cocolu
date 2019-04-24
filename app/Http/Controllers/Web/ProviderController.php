@@ -6,8 +6,17 @@ use App\Provider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Traits\Web\ProviderRequestTrait;
+
 class ProviderController extends Controller
 {
+
+    use ProviderRequestTrait;
+
+    public function __construct()
+    {               
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
