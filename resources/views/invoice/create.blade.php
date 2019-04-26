@@ -83,10 +83,13 @@
 </div>
 
 <!-- Form en blanco para consultar Proveedor -->
-{!! Form::open(array('id'=>'form_consult_provider','url' => 'consultprovider')) !!}
-	{!! Form::hidden('store-id', Auth::user()->store()->id) !!}			
+{!! Form::open(array('id'=>'form_consult_provider','route' => 'provider.consultprovider','method' =>'POST')) !!}
+	{!! Form::hidden('store-id', Auth::user()->store()->id) !!}
 	{!! Form::hidden('number') !!}
 {!! Form::close() !!}
+
+{!! Form::open(array('id'=>'form_home','url' => '/')) !!}
+{!! Form::close() !!}    
 
 {!! Form::hidden('input_placeholder_volume', __('messages.Volume') ) !!}
 {!! Form::hidden('input_placeholder_price', __('messages.Price') ) !!}
@@ -114,9 +117,12 @@
 
 	    $("#number_provider").focusout(function(){
 	    	//realizamos un la consulta de proveedor y sus datos
-	    	$("input[name=number]").val($("#number_provider").val());
+	    	if($("input[name=number]").val() == ""){
+	    		$("input[name=number]").val($("#number_provider").val());
+	    	}	    	
 		 	var datos = new Array();
-			//datos['id'] =$( "#department option:selected" ).val();			   
+			datos['storeid'] = $("input[name=store-id]").val();
+			datos['number'] = $("input[name=number]").val();		
 			ajaxobject.peticionajax($('#form_consult_provider').attr('action'),datos,"invoice.consultaRespuestaProvider");
 		});
 

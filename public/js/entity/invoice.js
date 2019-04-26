@@ -82,7 +82,26 @@ invoice.prototype.addProduct = function() {
 };
 
 invoice.prototype.consultaRespuestaProvider = function(result) {
-    alert('comeback');
+    if(result.data != null){
+        //asignamos los datos
+        $("input[name=name_provider]").val(result.data.name);
+        $("input[name=adress_provider]").val(result.data.address);
+        $("input[name=description_provider]").val(result.data.description);
+        $("input[name=email_provider]").val(result.data.email);
+        $("input[name=phone_provider]").val(result.data.phone);
+        $("#img_provider_img")[0].setAttribute('src',$("#form_home").attr("action")+'/users/'+result.userid+'/providers/'+result.data.logo);        
+        
+    }else{
+        //limpiamos los datos
+        $("input[name=name_provider]").val('');
+        $("input[name=adress_provider]").val('');
+        $("input[name=description_provider]").val('');
+        $("input[name=email_provider]").val('');
+        $("input[name=phone_provider]").val('');
+        $("#img_provider_img")[0].setAttribute('src',$("#form_home").attr("action")+'/images/providers/default.png');
+    }
+
+    $("input[name=number]").val('');
 };
 
 
