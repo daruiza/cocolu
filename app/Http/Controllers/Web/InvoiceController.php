@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Invoice;
+use App\Model\Core\InvoiceProduct;
 use App\Model\Core\Provider;
 use App\Model\Core\Product;
+use App\Model\Core\Stock;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +16,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 use App\Http\Traits\Web\InvoiceRequestTrait;
+
+use DateTime;
 
 class InvoiceController extends Controller
 {
@@ -91,11 +95,9 @@ class InvoiceController extends Controller
         //iniciamos el almaceniemto de la información
 
         //creación o actualización de proveedor
-
         $provider = Provider::select()
             ->where('number','LIKE',$request->input('number_provider'))
             ->get();
-
         if(empty($provider->first())){
             //creamos el nuevo proveedor
             $provider = new Provider();
@@ -104,15 +106,67 @@ class InvoiceController extends Controller
         }else{
             //actualizamos el proveedor
             $provider->first()->updateProvider($request);            
+            $provider = $provider->first();
         }
 
-        //creación de factura
+        //creación de factura 
+        $invoice = Invoice::select()
+            ->where('number','LIKE',$request->input('number_invoice'))
+            ->where('provider_id',$provider->id)
+            ->get();
+        if(empty($invoice->first())){
+            $invoice = new Invoice();
+            $invoice->storeInvoice($request,$provider->id); 
+        }else{
+            $invoice->first()->updateInvoice($request);            
+            $invoice = $invoice->first();
+        }
+               
 
         //relación de detalles
+        foreach ($array as $key => $value) {
 
-        //actualización de cantidad en producto
+            $value['invoice_id'] = $invoice->id;
+            $value['product_id'] = $value['product'];
+            $invoiceproduct = InvoiceProduct::select()
+                ->where('invoice_id',$invoice->id)
+                ->where('product_id',$value['product'])
+                ->get();
 
-        //creación de relación de stock
+            if(empty($invoiceproduct->first())){
+                $invoiceproduct = new InvoiceProduct();
+                $invoiceproduct->storeInvoiceProduct($value); 
+            }else{                
+                $invoiceproduct->first()->updateInvoiceProduct($value);            
+                $invoiceproduct = $invoiceproduct->first();
+            }           
+
+            dd($value);
+
+            $today = new DateTime();
+            $today = $today->format('Y-m-d H:i:s');     
+
+            //creación de relación de stock
+            if($value['price']){
+                $stock = new Stock();            
+                $stock->storeStockProduct(array(
+                    'product_id' =>  $value['product'],
+                    'volume' =>  $value['volume'],
+                    'shift' =>  1, 
+                    'date' =>  $today
+                ));
+            }
+
+            //actualización de cantidad en producto
+
+
+            
+            //modificamos el buy price, operacion contable
+        }
+
+        
+
+        
 
         
         dd('va bien la vuelta');
@@ -185,21 +239,5 @@ class InvoiceController extends Controller
             
         ]);
     }
-
-    protected function validatorImage(array $data)
-    {        
-        return Validator::make($data, [
-            'img_support'=>'
-                required|
-                mimes:jpeg,bmp,png|
-                dimensions:max_width=1024,max_width=1024|
-                dimensions:min_width=64,min_width=64',
-
-            'img_provider'=>'
-                required|
-                mimes:jpeg,bmp,png|
-                dimensions:max_width=1024,max_width=1024|
-                dimensions:min_width=64,min_width=64',                
-        ]);
-    }
+   
 }
