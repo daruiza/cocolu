@@ -117,59 +117,41 @@ class InvoiceController extends Controller
         if(empty($invoice->first())){
             $invoice = new Invoice();
             $invoice->storeInvoice($request,$provider->id); 
-        }else{
-            $invoice->first()->updateInvoice($request);            
-            $invoice = $invoice->first();
-        }
-               
 
-        //relación de detalles
-        foreach ($array as $key => $value) {
+            //relación de detalles
+            foreach ($array as $key => $value) {
 
-            $value['invoice_id'] = $invoice->id;
-            $value['product_id'] = $value['product'];
-            $invoiceproduct = InvoiceProduct::select()
-                ->where('invoice_id',$invoice->id)
-                ->where('product_id',$value['product'])
-                ->get();
-
-            if(empty($invoiceproduct->first())){
+                $value['invoice_id'] = $invoice->id;
+                $value['product_id'] = $value['product'];            
                 $invoiceproduct = new InvoiceProduct();
-                $invoiceproduct->storeInvoiceProduct($value); 
-            }else{                
-                $invoiceproduct->first()->updateInvoiceProduct($value);            
-                $invoiceproduct = $invoiceproduct->first();
-            }           
+                $invoiceproduct->storeInvoiceProduct($value);            
 
-            dd($value);
+                $today = new DateTime();
+                $today = $today->format('Y-m-d H:i:s');     
 
-            $today = new DateTime();
-            $today = $today->format('Y-m-d H:i:s');     
+                //creación de relación de stock
+                if($value['price']){
+                    $stock = new Stock();            
+                    $stock->storeStockProduct(array(
+                        'product_id' =>  $value['product'],
+                        'volume' =>  $value['volume'],
+                        'shift' =>  1, 
+                        'date' =>  $today
+                    ));
+                }
 
-            //creación de relación de stock
-            if($value['price']){
-                $stock = new Stock();            
-                $stock->storeStockProduct(array(
-                    'product_id' =>  $value['product'],
-                    'volume' =>  $value['volume'],
-                    'shift' =>  1, 
-                    'date' =>  $today
-                ));
+                //actualización de cantidad en producto
+
+
+                
+                //modificamos el buy price, operacion contable
             }
-
-            //actualización de cantidad en producto
-
-
-            
-            //modificamos el buy price, operacion contable
+            dd('todo va bien');
+        }else{
+            dd('El codigo de esta factura ya existe '.$request->input('number_invoice'));    
         }
-
         
-
         
-
-        
-        dd('va bien la vuelta');
 
         
     }

@@ -18,7 +18,7 @@ class CreateStocksTable extends Migration
             $table->float('volume');
             $table->boolean('shift')->default(false);
             $table->string('description',512)->nullable()->default(null);
-            $table->dateTime('date');
+            $table->dateTime('date')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
             $table->integer('product_id')->unsigned()->default(1);            
             $table->foreign('product_id')->references('id')->on('products')
