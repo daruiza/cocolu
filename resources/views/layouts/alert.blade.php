@@ -10,7 +10,7 @@
         <ul>
             @foreach (Session::get('danger') as $error)
                 @if (array_key_exists(1,$error))
-                    <li>{{ __('errors.'.$error[0],['Name'=>$error[1]]) }}</li>
+                    <li>{{ __('errors.'.$error[0],['name'=>$error[1]]) }}</li>
                 @else
                     <li>{{ __('errors.'.$error[0]) }}</li>
                 @endif
@@ -31,7 +31,7 @@
         <ul>
             @foreach (Session::get('success') as $message)
                 @if (array_key_exists(1,$message))
-                    <li>{{ __('success.'.$message[0],['Name'=>$message[1]]) }}</li>
+                    <li>{{ __('success.'.$message[0],['name'=>$message[1]]) }}</li>
                 @else
                     <li>{{ __('success.'.$message[0]) }}</li>
                 @endif
@@ -51,7 +51,7 @@
         <ul>
             @foreach (Session::get('info') as $message)
                 @if (array_key_exists(1,$message))
-                    <li>{{ __('info.'.$message[0],['Name'=>$message[1]]) }}</li>
+                    <li>{{ __('info.'.$message[0],['name'=>$message[1]]) }}</li>
                 @else
                     <li>{{ __('info.'.$message[0]) }}</li>
                 @endif
@@ -72,7 +72,7 @@
         <ul>
             @foreach ($danger as $error)
                 @if (array_key_exists(1,$error))
-                    <li>{{ __('errors.'.$error[0],['Name'=>$error[1]]) }}</li>
+                    <li>{{ __('errors.'.$error[0],['name'=>$error[1]]) }}</li>
                 @else
                     <li>{{ __('errors.'.$error[0]) }}</li>
                 @endif
@@ -93,7 +93,7 @@
         <ul>
             @foreach ($success as $message)
                 @if (array_key_exists(1,$message))
-                    <li>{{ __('success.'.$message[0],['Name'=>$message[1]]) }}</li>
+                    <li>{{ __('success.'.$message[0],['name'=>$message[1]]) }}</li>
                 @else
                     <li>{{ __('success.'.$message[0]) }}</li>
                 @endif
@@ -113,7 +113,7 @@
         <ul>
             @foreach ($info as $message)
                 @if (array_key_exists(1,$message))
-                    <li>{{ __('info.'.$message[0],['Name'=>$message[1]]) }}</li>
+                    <li>{{ __('info.'.$message[0],['name'=>$message[1]]) }}</li>
                 @else
                     <li>{{ __('info.'.$message[0]) }}</li>
                 @endif

@@ -9,4 +9,5 @@ return [
     "errorUser" => "Failed to check user account",
     "userLogOut" =>"Please restart the session so to start to work again",
     "editPasswordNOOK" => "Do not worry, just that the password field is special",
+    "NumberEnvoiceNowExist"=>'Number existe, :NAME',
 ];

@@ -158,6 +158,19 @@ class Product extends Model
         }        
     }
 
+    public function editProductStockUpBuyPrice($data){
+        if($this->buy_price){
+            //actualización de costo
+            if(array_key_exists('buy_price',$data)){
+                //actualización d eprecio de compra
+                $old_cost = $this->volume * $this->buy_price;
+                $new_cost = intval($data['buy_price']);                
+                $this->buy_price = ($old_cost+$new_cost)/($this->volume+$data['volume']);
+            }
+            $this->editProductStockUp($data);            
+        }   
+    }
+
     //aumenta la cantidad de productos, usada en la mifificacion d euna orden
     public function editProductStockIngredient($data,$opt=false){
         

@@ -85,5 +85,7 @@ return [
     "TotalExpenses" => "Total Expenses",
     "InformationInvoice" => "Invoice Information",
     "InformationProvider" => "Provider Information",
-    "InformationProducts" => "Products Information"
+    "InformationProducts" => "Products Information",
+    "EnvoiceSaveOk"=>'Invoice Save Ok, :NAME',
+    
 ];

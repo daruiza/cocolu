@@ -115,6 +115,7 @@ class InvoiceController extends Controller
             ->where('provider_id',$provider->id)
             ->get();
         if(empty($invoice->first())){
+
             $invoice = new Invoice();
             $invoice->storeInvoice($request,$provider->id); 
 
@@ -141,18 +142,22 @@ class InvoiceController extends Controller
                 }
 
                 //actualización de cantidad en producto
-
-
-                
                 //modificamos el buy price, operacion contable
+                $product  = Product::find($value['product']);
+                $product->editProductStockUpBuyPrice([
+                    'volume'=>$value['volume'],
+                    'buy_price'=>$value['price']
+                ]);                
+                
             }
-            dd('todo va bien');
+            Session::flash('success', [['EnvoiceSaveOk',$invoice->numbers]]);            
+            return Redirect::back();
         }else{
-            dd('El codigo de esta factura ya existe '.$request->input('number_invoice'));    
+            Session::flash('danger', [[
+                'NumberEnvoiceNowExist',$request->input('number_invoice')
+            ]]);            
+            return Redirect::back()->withInput($request->input());
         }
-        
-        
-
         
     }
 
