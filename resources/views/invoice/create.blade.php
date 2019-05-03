@@ -26,20 +26,7 @@
 	                    </div>	                    
 	                </div>
 					</div>
-												
-					<div class="col-md-12">
-						<div class="col-md-12 img-container">
-							{{ Html::image('users/'.\Auth::user()->id.'/supports/default.png','Imagen no disponible',array('id'=>'img_support_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;','onclick'=>'$("#img_support").trigger("click")'))}}
-							@if ($errors->has('image'))		                        	
-								<span class="invalid-feedback" style="display: block;">
-									<strong>{{ $errors->first('image') }}</strong>
-								</span>
-							@endif
-						</div>
-						{!! Form::label('support',__('messages.Support'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
-						
-					</div>											
-																	
+																
             	</div>
 
             	<div class="col-md-9">

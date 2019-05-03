@@ -2,8 +2,8 @@
 	<div class="col-md-12">
 		<h5>{{__('messages.InformationInvoice')}}</h5>
 	</div>
-	<div class="col-md-6">
-		<div class="col-md-12">
+	<div class="col-md-9 row">
+		<div class="col-md-6">
 		{!! Form::label('number_invoice',__('form.Number'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
 			<div class="col-md-12">
 				@if($errors->has('number_invoice'))
@@ -16,7 +16,7 @@
 				@endif	
 			</div>
 		</div>
-		<div class="col-md-12">
+		<div class="col-md-6">
 		{!! Form::label('tax_invoice',__('form.Tax'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
 			<div class="col-md-12">
 				@if($errors->has('tax_invoice'))
@@ -29,20 +29,31 @@
 				@endif	
 			</div>
 		</div>
+		<div class="col-md-12">
+			{!! Form::label('description_invoice',__('messages.Description'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
+			<div class="col-md-12">
+				@if($errors->has('description_invoice'))
+					{!! Form::textarea('description_invoice',null, ['class'=>'form-control is-invalid','rows'=>'4']) !!}
+					<span class="invalid-feedback">
+		                <strong>{{ $errors->first('description_invoice') }}</strong>
+		            </span>
+				@else
+					{!! Form::textarea('description_invoice',null, ['class'=>'form-control','rows'=>'4']) !!}
+				@endif	
+			</div>
+		</div>
 	</div>
 
-	<div class="col-md-6">
-	{!! Form::label('description_invoice',__('messages.Description'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
-		<div class="col-md-12">
-			@if($errors->has('description_invoice'))
-				{!! Form::textarea('description_invoice',null, ['class'=>'form-control is-invalid','rows'=>'4']) !!}
-				<span class="invalid-feedback">
-	                <strong>{{ $errors->first('description_invoice') }}</strong>
-	            </span>
-			@else
-				{!! Form::textarea('description_invoice',null, ['class'=>'form-control','rows'=>'4']) !!}
-			@endif	
+	<div class="col-md-3">
+		<div class="col-md-12 img-container">
+			{{ Html::image('users/'.\Auth::user()->id.'/supports/default.png','Imagen no disponible',array('id'=>'img_support_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;','onclick'=>'$("#img_support").trigger("click")'))}}
+			@if ($errors->has('image'))		                        	
+				<span class="invalid-feedback" style="display: block;">
+					<strong>{{ $errors->first('image') }}</strong>
+				</span>
+			@endif
 		</div>
+		{!! Form::label('support',__('messages.Support'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}				
 	</div>
 
 </div>
@@ -147,6 +158,7 @@
 				</span>
 			@endif
 		</div>
+		{!! Form::label('support',__('messages.ProviderLogo'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
 	</div>
 </div>
 
