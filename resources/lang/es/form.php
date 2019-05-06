@@ -30,6 +30,7 @@ return [
 	"AddIngredients" => "Agregar Ingrediente",
 	"AddComponents" => "Agregar Componentes",
 	"AddProducts" => "Agregar Productos",
+	"DeleteProducts" => "Eliminar Productos",
 	"Category" => "Categoria",
 	"Categories" => "Categorias",
 	"Serve" => "Servir",

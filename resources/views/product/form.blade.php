@@ -100,16 +100,16 @@
 	{!! Form::label('category_id',__('form.Category'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('category_id'))
-			{!! Form::select('category_id', $category->categories(),null,['class'=>'form-control is-invalid chosen-select','multiple'=>'multiple','id'=>'category_id']) !!}
+			{!! Form::select('category_id', $category->categories(),$product->categoryArray(),['class'=>'form-control is-invalid chosen-select chosen-select-multiple','multiple'=>'multiple','id'=>'category_id']) !!}
 			<span class="invalid-feedback">
                 <strong>
                 	{{ $errors->first('category_id') }}
                 </strong>
             </span>
 		@else
-			{!! Form::select('category_id', $category->categories(),null,['class'=>'form-control chosen-select','multiple'=>'multiple','id'=>'category_id','data-placeholder'=>__('form.SelectOption')]) !!}			
+			{!! Form::select('category_id', $category->categories(),$product->categoryArray(),['class'=>'form-control chosen-select','multiple'=>'multiple','id'=>'category_id','data-placeholder'=>__('form.SelectOption')]) !!}			
 		@endif	
-		{!! Form::hidden('category_ids',null,array('id'=>'category_ids')) !!}	
+		{!! Form::hidden('category_ids',implode(',',$product->categoryArray()),array('id'=>'category_ids')) !!}	
 	</div>	                    			
 </div>
 

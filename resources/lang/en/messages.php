@@ -14,11 +14,15 @@ return [
 	"Login"=> "Login",	
 	"Register"=> "Register",
     "Name"=> "Name",
-    "Surname"=> "Surname",
-    "Phone"=>"Phone",
+    "Surname"=> "Surname",    
 	"Logout"=> "Logout",
 	"Profile" => "Profile",
     "Surname"=> "Surname",
+    "Value" => "Value",
+    "Phone"=>"Phone",
+    "Clousure" => "Clousure",
+    "Provider" => "Provider",
+    "Number" => "Number",
     "Confirm Password"=> "Confirm Password",
     "Change Password"=> "Change Password",
     "welcome" => "Welcome to Cocolú",
@@ -87,5 +91,6 @@ return [
     "InformationProvider" => "Provider Information",
     "InformationProducts" => "Products Information",
     "EnvoiceSaveOk"=>'Invoice Save Ok, :NAME',
-    
+    "EnvoiceEditOk"=>'Invoice Edit Ok, :NAME',
+     
 ];

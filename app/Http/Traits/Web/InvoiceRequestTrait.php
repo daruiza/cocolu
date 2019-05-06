@@ -28,5 +28,9 @@ trait InvoiceRequestTrait
         
         return view('invoice.create',compact('product','provider'))->with('data', []);
     }
+
+    public function purchase(){
+
+    }
 	
 }

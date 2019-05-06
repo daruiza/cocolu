@@ -40,11 +40,14 @@ class HomeController extends Controller
         
         if(Auth::check()) {
 
-            if(empty($clousure->id))$clousure = Auth::user()->store()->clousureOpen();
-
-            if(Auth::user()->rol()->first()->id == 1){                
-                return view('welcome');    
+            if(Auth::user()->rol()->first()->id == 1){
+                $page = 'home';
+                return view('welcome',compact('page'));    
             }
+            
+            if(empty($clousure->id))$clousure = Auth::user()->store()->clousureOpen();
+            
+            
             if(Auth::user()->rol()->first()->id == 2){
 
                 $page = 'admin_dashboard';

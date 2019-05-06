@@ -59,7 +59,10 @@ class TableController extends Controller
     {
         //return View::make('table.create')->with('data', []);
         $table = new Table();
-
+        if($table->validateAcount()){
+            Session::flash('danger', [['NoMoreTables']]);
+            return redirect('table');
+        }
         //validar session
         //if(!Auth::check()) return redirect('/');
         //data es el listado de iconos disponibles

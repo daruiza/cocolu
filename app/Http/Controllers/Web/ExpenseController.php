@@ -111,7 +111,7 @@ class ExpenseController extends Controller
     {
         //editar solo antes de trres minutos
         $expense = Expense::find($request->input('id'));
-        $date_create = $expense->created_at->modify("+3 minutes");
+        $date_create = $expense->created_at->modify("+15 minutes");
         //$date_create = $date_create->format('Y-m-d H:i:s');
 
         $today = new DateTime();

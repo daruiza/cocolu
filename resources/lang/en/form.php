@@ -30,6 +30,7 @@ return [
 	"AddIngredients" => "Add Ingredient",
 	"AddComponents" => "Add Components",
 	"AddProducts" => "Add Products",
+	"DeleteProducts" => "Delete Products",
 	"Category" => "Category",
 	"Categories" => "Categories",
 	"Serve" => "Serve",

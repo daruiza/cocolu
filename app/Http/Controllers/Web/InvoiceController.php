@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Invoice;
+use App\Model\Core\Clousure;
 use App\Model\Core\InvoiceProduct;
 use App\Model\Core\Provider;
 use App\Model\Core\Product;
 use App\Model\Core\Stock;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +36,16 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        
+        $invoices = Invoice::
+            select('invoices.*')
+            ->leftJoin('clousures','clousures.id','invoices.clousure_id')
+            ->where('invoices.store_id',Auth::user()->store()->id)            
+            ->orderBy('invoices.id','ASC')
+            ->get();
+        
+        return view('invoice.index',compact('invoices'))->with('data', []);
+        
     }
 
     /**
@@ -54,49 +65,13 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        
-        $this->validator($request->all())->validate();
-        if(!Auth::user()->validateUserStore($request->input('store-id'))){            
-            Session::flash('danger', [['NO_STORE_OWNER']]);
-            return redirect('invoice/purchaseorder');
-        }
-
-        //preparacion de datos
-        $array = array();
-        foreach($request->input() as $key=>$value){
-            if(strpos($key,'item_') !== false){
-                $vector=explode('_',$key);
-                $n=count($vector);
-                $id_item = end($vector);
-                $array[$id_item][$vector[$n-2]] = ucfirst($value);
-            }
-        }
-
-        if(!count($array)){
-            Session::flash('danger', [['NO_PRODUCT_ADD']]);
-            //return redirect('invoice/purchaseorder')->withInput($request->input());            
-            return Redirect::back()->withInput($request->input());
-        }
-
-        $flat = false;
-        foreach ($array as $key => $value) {
-            //value es un array
-            if(empty($value['volume']))$flat = true;
-            if(empty($value['price']))$flat = true;
-            if(empty($value['product']))$flat = true;
-        }
-
-        if($flat){
-            Session::flash('danger', [['NO_PRODUCT_ADD_VALUE_EMPTY']]);            
-            return Redirect::back()->withInput($request->input());
-        }
-
+    {        
+        $array = $this->validatorInvoice($request);
         //iniciamos el almaceniemto de la información
-
         //creación o actualización de proveedor
         $provider = Provider::select()
-            ->where('number','LIKE',$request->input('number_provider'))
+            ->where('number','LIKE',explode('-',$request->input('number_provider'))[0])
+            ->where('store_id',Auth::user()->store()->id)
             ->get();
         if(empty($provider->first())){
             //creamos el nuevo proveedor
@@ -112,6 +87,7 @@ class InvoiceController extends Controller
         //creación de factura 
         $invoice = Invoice::select()
             ->where('number','LIKE',$request->input('number_invoice'))
+            ->where('store_id',Auth::user()->store()->id)
             ->where('provider_id',$provider->id)
             ->get();
         if(empty($invoice->first())){
@@ -150,7 +126,7 @@ class InvoiceController extends Controller
                 ]);                
                 
             }
-            Session::flash('success', [['EnvoiceSaveOk',$invoice->numbers]]);            
+            Session::flash('success', [['EnvoiceSaveOk',$invoice->first()->number]]);            
             return Redirect::back();
         }else{
             Session::flash('danger', [[
@@ -178,9 +154,20 @@ class InvoiceController extends Controller
      * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function edit(Invoice $invoice)
+    public function edit(Request $request,$id)
     {
-        //
+        //en caso de pasar el filtro se procede a editar
+        $invoice = Invoice::find($request->input('id'));        
+        //solo se puede editar una factura dentro del mismo clousure
+        if($invoice->clousure()->first()->id != Auth::user()->store()->clousureOpen()->id){
+            Session::flash('danger', [[
+                'EnvoiceNotEdit',$invoice->number
+            ]]);            
+            return Redirect::back();
+        }
+
+        $clousure = new Clousure();            
+        return view('invoice.edit',compact('invoice','clousure'))->with('data', []); 
     }
 
     /**
@@ -190,9 +177,57 @@ class InvoiceController extends Controller
      * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Invoice $invoice)
+    public function update(Request $request,$id)
     {
-        //
+        $array = $this->validatorInvoice($request);
+        //1. devolvemos la factura
+        $invoice = Invoice::select()
+            ->where('id',$id)            
+            ->get();
+
+        if(!empty($invoice->first())){
+            //relación de detalles
+            foreach ($invoice->first()->products()->get() as $key => $value) {
+
+                $today = new DateTime();
+                $today = $today->format('Y-m-d H:i:s'); 
+
+                //creación de relación de stock
+                if($value['price']){
+                    $stock = new Stock();
+                    $stock->storeStockProduct(array(
+                        'product_id' =>  $value['product_id'],
+                        'volume' =>  $value['volume'],
+                        'shift' =>  0,
+                        'date' =>  $today
+                    ));
+                }
+
+                //actualización de cantidad en producto
+                //modificamos el buy price, operacion contable
+                $product  = Product::find($value['product_id']);
+                $product->editProductStockDownBuyPrice([
+                    'volume'=>$value['volume'],
+                    'buy_price'=>$value['price']
+                ]);      
+                
+            }
+        }else{
+            Session::flash('danger', [[
+                'NumberEnvoiceNoExist',$request->input('number_invoice')
+            ]]);            
+            return Redirect::back()->withInput($request->input());
+        }
+
+        //1. 
+        //eliminar la factura
+        $invoice->first()->delete();
+
+        //2. guardamos la factura nueva
+        $this->store($request);
+
+        Session::flash('success', [['EnvoiceEditOk',$invoice->first()->number]]);            
+        return redirect('invoice');
     }
 
     /**
@@ -204,6 +239,48 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+
+
+    private function validatorInvoice(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        if(!Auth::user()->validateUserStore($request->input('store-id'))){            
+            Session::flash('danger', [['NO_STORE_OWNER']]);
+            return redirect('invoice/purchaseorder');
+        }
+
+        //preparacion de datos
+        $array = array();
+        foreach($request->input() as $key=>$value){
+            if(strpos($key,'item_') !== false){
+                $vector=explode('_',$key);
+                $n=count($vector);
+                $id_item = end($vector);
+                $array[$id_item][$vector[$n-2]] = ucfirst($value);
+            }
+        }
+
+        if(!count($array)){
+            Session::flash('danger', [['NO_PRODUCT_ADD']]);
+            //return redirect('invoice/purchaseorder')->withInput($request->input());            
+            return Redirect::back()->withInput($request->input());
+        }
+
+        $flat = false;
+        foreach ($array as $key => $value) {
+            //value es un array
+            if(empty($value['volume']))$flat = true;
+            if(empty($value['price']))$flat = true;
+            if(empty($value['product']))$flat = true;
+        }
+
+        if($flat){
+            Session::flash('danger', [['NO_PRODUCT_ADD_VALUE_EMPTY']]);            
+            return Redirect::back()->withInput($request->input());
+        }
+
+        return $array;
     }
 
     protected function validator(array $data)

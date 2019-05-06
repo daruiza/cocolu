@@ -22,6 +22,10 @@ Route::get('invoice/purchaseorder', [
    'as' => 'product.purchaseorder', 'uses' => 'Web\InvoiceController@purchaseOrder'
 ]);
 
+Route::get('invoice/purchase', [
+   'as' => 'invoice.purchase', 'uses' => 'Web\InvoiceController@purchaseOrder'
+]);
+
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('locale', 'HomeController@postLocale')->name('locale');
 Route::resource('rol', 'Web\RolController');

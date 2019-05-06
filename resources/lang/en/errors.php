@@ -10,4 +10,5 @@ return [
     "userLogOut" =>"Please restart the session so to start to work again",
     "editPasswordNOOK" => "Do not worry, just that the password field is special",
     "NumberEnvoiceNowExist"=>'Number existe, :NAME',
+    "EnvoiceNotEdit"=>"Invoice Can Not be Edit - it is out of Clousure , :NAME",
 ];

@@ -10,4 +10,5 @@ return [
     "userLogOut" =>"Por favor reinicia la sesion asi no podemos trabajar",
     "editPasswordNOOK" => "¡No te preocupes!, solo que el campo contraseña es especial",
     "NumberEnvoiceNowExist"=>'El número de la facruta ya existe para el Proveedor, :NAME',
+    "EnvoiceNotEdit"=>"Factura No puede ser Editada - esta fuera del Cierre , :NAME",
 ];

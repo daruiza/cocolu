@@ -24,14 +24,14 @@ class Provider extends Model
             ->orderBy('id','ASC')
             ->get();
         foreach ($providers_array as $key => $value) {            
-            $providers[$value->id] = $value->number;
+            $providers[$value->id] = $value->number.'-'.$value->name;
         }
         return $providers;    
     }    
 
     public function storeProvider(Request $request){
     	
-    	$this->number = $request->input('number_provider');
+    	$this->number = explode('-',$request->input('number_provider'))[0];
     	$this->name = $request->input('name_provider');
     	$this->description = $request->input('description_provider');
     	$this->address = $request->input('adress_provider');

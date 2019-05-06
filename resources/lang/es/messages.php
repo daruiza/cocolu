@@ -14,8 +14,12 @@ return [
     "Forgot Your Password?"=> "¿Olvidaste tu contraseña?",
     "Register"=> "Registro",
     "Name"=> "Nombre",
-    "Surname"=> "Apellido",    
+    "Surname"=> "Apellido",
+    "Value" => "Valor",
     "Phone"=>"Teléfono",
+    "Clousure" => "Cierre",
+    "Provider" => "Proveedor",
+    "Number" => "Número",
     "Confirm Password"=> "Confirmar Contraseña",
     "Reset Password"=> "Reestablecer Contraseña",
     "Change Password"=> "Cambiar Contraseña",
@@ -87,5 +91,7 @@ return [
     "InformationProvider" => "Información de Proveedor",
     "InformationProducts" => "Información de Productos",
     "EnvoiceSaveOk"=>'Factura Almacenada Correctamente, :NAME',
+    "EnvoiceEditOk"=>'Factura Editada Correctamente, :NAME',
+    
     
 ];

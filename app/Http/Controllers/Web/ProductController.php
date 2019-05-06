@@ -35,13 +35,14 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $product = new Product();
         $products = Product::            
             where('active',1)
             ->where('store_id',Auth::user()->store()->id)
             ->orderBy('id','ASC')
-            ->get();  
-        //dd($products[1]->ingredients());    
-        return view('product.index',compact('products'))->with('data', []);
+            ->get();
+
+        return view('product.index',compact('products','product'))->with('data', []);
     }
 
     /**
@@ -54,7 +55,13 @@ class ProductController extends Controller
         $product = new Product();
         $category = new Category();
         $unity = new Unity();
-        $order_max = Product::select('order')->max('order')+1;   
+        $order_max = Product::select('order')->where('store_id',Auth::user()->store()->id)->max('order')+1;
+        
+        if($product->validateAcount()){
+            Session::flash('danger', [['NoMoreProdducts']]);
+            return redirect('product');
+        }
+
         return view('product.create',compact('product','category','unity','order_max'))->with('data', []);
     }
 
@@ -65,7 +72,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
         //validaciom orden null
         if(!empty($request->input['order'])){
             $request->request->add(['order' => Product::select('order')->max('order')+1]);            
@@ -169,9 +176,15 @@ class ProductController extends Controller
      * @param  \App\Model\Core\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
-        dd($request->input());
+        $product = Product::find($request->input('id'));
+        $category = new Category();
+        $unity = new Unity();
+        $order_max = $product->order;
+
+        //dd($product->productsArrayCategoryDefault());                
+        return view('product.edit',compact('product','category','unity','order_max'))->with('data', []);
     }
 
     /**
@@ -181,9 +194,23 @@ class ProductController extends Controller
      * @param  \App\Model\Core\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validator($request->all())->validate();
+        if(!Auth::user()->validateUserStore($request->input('store_id'))){            
+            Session::flash('danger', [['NO_STORE_OWNER']]);
+            return redirect('product');
+        }
+        //actualizamos el producto, no se puede borrar y reacer
+        //1. actualizamos el producto        
+        $product = Product::find($request->input('product_id'));
+        $product->updateProduct($request);
+
+        //2. actualizamos los ingredientes
+        
+
+        Session::flash('success', [['STORE_Edit_OK']]);
+        return redirect('product');
     }
 
     /**

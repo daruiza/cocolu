@@ -44,8 +44,29 @@
                 <div class="card-body">
                 	<div class="container">
                     	<div class="row">
+                            <div class="col-md-12">
+                                <div class="page-header">                                               
+                                    {!! Form::model($product,['enctype' => 'multipart/form-data','id'=>'form-product','route'=>['product.index'],'method'=>'GET']) !!}
+                                        <div class="form-group form-search">                              
+                                            {{Form::text('name',null,['class'=>'form-control','placeholder'=>__('messages.name')])}}
+                                        </div>
+                                        <div class="form-group form-search">                              
+                                            {{Form::text('category',null,['class'=>'form-control','placeholder'=>__('messages.category')])}}
+                                        </div>
+                                        
+                                        <div class="form-group form-search">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    {{Form::close()}}
+                                    
+                                </div>
+                                
+                            </div>
+
 	                    	<div class="col-md-12 m-b-md table-container">
-	                    		<div class="row">
+	                    		<div class="row table-header">
                                     <div class="col-md-3">{{ __('messages.Name') }}</div>
                                     <div class="col-md-2">{{ __('messages.Price') }}</div>
                                     <div class="col-md-2">{{ __('messages.Buy_Price') }}</div>
@@ -57,14 +78,14 @@
                                         @if($key%2) @else row-impar @endif">
                                         {{ Form::hidden('product-id', $value->id) }}
 										<div class="col-md-3">{{$value->name}}</div>
-                                        <div class="col-md-2">{{$value->price}}</div>
-                                        <div class="col-md-2">{{$value->buy_price}}</div> 
+                                        <div class="col-md-2">${{number_format($value->price)}}</div>
+                                        <div class="col-md-2">${{number_format($value->buy_price)}}</div> 
                                         <div class="col-md-2 
                                         @if($value->critical_volume_calc()) critical_volume  @endif"
                                         @if($value->critical_volume_calc()) 
                                             data-toggle="tooltip" 
-                                            title="{{__('messages.CriticalVolume').' '.$value->critical_volume}}!"
-                                        @endif >{{$value->volume}}
+                                            title="{{__('messages.CriticalVolume').' '.number_format($value->critical_volume)}}!"
+                                        @endif >{{number_format($value->volume)}}
                                         </div> 
                                         <div class="col-md-3">{{$value->categories_toString()}}</div>
 									</div>										
@@ -169,6 +190,31 @@
         .critical_volume{
             border: 2px solid red;
             background-color: #e47b7b;
+        }
+
+        form#form-product{
+            display: flex;            
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-search{
+            margin: 4px;
+        }
+
+        .page-header{
+            margin: 10px;   
+        }
+
+        .table-header{
+            border: 1px solid gainsboro;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
         }
 
 	</style>	

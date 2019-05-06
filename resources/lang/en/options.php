@@ -5,6 +5,7 @@ return [
 	"Products"=>"Products",	
 	"Categories"=>"Categories",
 	"Expenses"=>"Expenses",
+	"Invoices"=>"Invoices",
 	"index"=>"List",
 	"create"=>"Create",	
 	"show"=>"Show",	
@@ -16,10 +17,9 @@ return [
 	"editClousure"=>"Work Clousure",
 	"editstock"=>"Edit Stock",
 	"purchaseorder"=>"Purchase Products",
+	"purchase"=>"Purchase Products",
 	"consultClousure"=>"Consult Closure",
 	"alertStock"=>"Alert Inventory",
 	"topProducts"=>"Top Products",
 	"salesForWaiter"=>"Sales for Waiter",
-
-
 ];

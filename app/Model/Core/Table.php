@@ -6,6 +6,7 @@ use App\Model\Core\Service;
 use App\Model\Core\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class Table extends Model
 {
@@ -31,6 +32,14 @@ class Table extends Model
         if(array_key_exists('store_id',$data))$this->store_id = $data['store_id'];        
         $this->save();
     }
+
+    public function validateAcount(){
+        //verificación de cuenta
+        $tables = Table::where('store_id',Auth::user()->store()->id)->count();        
+        if($tables+1 > Auth::user()->acount()->first()->tables)return true;
+        return false;    
+    }
+    
 	
 	public function tableServiceOpen(){				
 		return Service::where('table_id', $this->id)

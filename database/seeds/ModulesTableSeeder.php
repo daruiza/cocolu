@@ -77,6 +77,12 @@ class ModulesTableSeeder extends Seeder
 			'label'=>'{"action":"expense"}'
 			)
 		);
+		\DB::table('modules')->insert(array(
+			'name'=>'Invoices',
+			'description'=>'ModuleInvoices',
+			'label'=>'{"action":"invoice"}'
+			)
+		);
 		
     }
 }

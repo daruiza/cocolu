@@ -12,7 +12,7 @@
 		                <strong>{{ $errors->first('number_invoice') }}</strong>
 		            </span>
 				@else
-					{!! Form::text('number_invoice',null, ['class'=>'form-control']) !!}
+					{!! Form::text('number_invoice',$invoice->number, ['class'=>'form-control']) !!}
 				@endif	
 			</div>
 		</div>
@@ -25,7 +25,7 @@
 		                <strong>{{ $errors->first('tax_invoice') }}</strong>
 		            </span>
 				@else
-					{!! Form::text('tax_invoice',null, ['class'=>'form-control']) !!}
+					{!! Form::text('tax_invoice',$invoice->tax, ['class'=>'form-control']) !!}
 				@endif	
 			</div>
 		</div>
@@ -38,7 +38,7 @@
 		                <strong>{{ $errors->first('description_invoice') }}</strong>
 		            </span>
 				@else
-					{!! Form::textarea('description_invoice',null, ['class'=>'form-control','rows'=>'4']) !!}
+					{!! Form::textarea('description_invoice',$invoice->description, ['class'=>'form-control','rows'=>'4']) !!}
 				@endif	
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 
 	<div class="col-md-3">
 		<div class="col-md-12 img-container">
-			{{ Html::image('users/'.\Auth::user()->id.'/supports/default.png','Imagen no disponible',array('id'=>'img_support_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;','onclick'=>'$("#img_support").trigger("click")'))}}
+			{{ Html::image('users/'.\Auth::user()->id.'/supports/'.$invoice->support,'Imagen no disponible',array('id'=>'img_support_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;','onclick'=>'$("#img_support").trigger("click")'))}}
 			@if ($errors->has('image'))		                        	
 				<span class="invalid-feedback" style="display: block;">
 					<strong>{{ $errors->first('image') }}</strong>
@@ -72,7 +72,7 @@
 		                <strong>{{ $errors->first('number_provider') }}</strong>
 		            </span>
 				@else
-					{!! Form::text('number_provider',null, ['class'=>'form-control']) !!}
+					{!! Form::text('number_provider',$invoice->provider()->first()->number, ['class'=>'form-control']) !!}
 				@endif	
 			</div>
 		</div>
@@ -86,7 +86,7 @@
 		                <strong>{{ $errors->first('name_provider') }}</strong>
 		            </span>
 				@else
-					{!! Form::text('name_provider',null, ['class'=>'form-control']) !!}
+					{!! Form::text('name_provider',$invoice->provider()->first()->name, ['class'=>'form-control']) !!}
 				@endif	
 			</div>
 		</div>
@@ -100,7 +100,7 @@
 		                <strong>{{ $errors->first('adress_provider') }}</strong>
 		            </span>
 				@else
-					{!! Form::text('adress_provider',null, ['class'=>'form-control']) !!}
+					{!! Form::text('adress_provider',$invoice->provider()->first()->address, ['class'=>'form-control']) !!}
 				@endif	
 			</div>
 		</div>
@@ -114,7 +114,7 @@
 		                <strong>{{ $errors->first('email_provider') }}</strong>
 		            </span>
 				@else
-					{!! Form::email('email_provider',null, ['class'=>'form-control']) !!}
+					{!! Form::email('email_provider',$invoice->provider()->first()->email, ['class'=>'form-control']) !!}
 				@endif	
 			</div>
 		</div>
@@ -128,7 +128,7 @@
 		                <strong>{{ $errors->first('phone_provider') }}</strong>
 		            </span>
 				@else
-					{!! Form::text('phone_provider',null, ['class'=>'form-control']) !!}
+					{!! Form::text('phone_provider',$invoice->provider()->first()->phone, ['class'=>'form-control']) !!}
 				@endif	
 			</div>
 		</div>
@@ -142,7 +142,7 @@
 		                <strong>{{ $errors->first('description_provider') }}</strong>
 		            </span>
 				@else
-					{!! Form::textarea('description_provider',null, ['class'=>'form-control','rows'=>'3']) !!}
+					{!! Form::textarea('description_provider',$invoice->provider()->first()->description, ['class'=>'form-control','rows'=>'3']) !!}
 				@endif	
 			</div>
 	</div>
@@ -151,7 +151,7 @@
 	<div class="col-md-3">
 		
 		<div class="col-md-12 img-container">
-			{{ Html::image('users/'.\Auth::user()->id.'/providers/default.png','Imagen no disponible',array('id'=>'img_provider_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;','onclick'=>'$("#img_provider").trigger("click")'))}}
+			{{ Html::image('users/'.\Auth::user()->id.'/providers/'.$invoice->provider()->first()->logo,'Imagen no disponible',array('id'=>'img_provider_img','style'=>'width: 100%; border:2px solid #ddd;border-radius: 0%;','onclick'=>'$("#img_provider").trigger("click")'))}}
 			@if ($errors->has('image_provider'))		                        	
 				<span class="invalid-feedback" style="display: block;">
 					<strong>{{ $errors->first('image_provider') }}</strong>
@@ -167,6 +167,22 @@
 		<h5>{{__('messages.InformationProducts')}}</h5>
 	</div>
 	<div class="content-products" style="width: 100%;margin-bottom: 15px;">
+		@php ($sum = 0)
+		@foreach($invoice->products()->get() as $key => $value)
+			<div class="col-md-12 row" style="margin: 0px;margin-bottom: 5px;">
+				<div class="col-sm-3 text-md-right">
+					{!! Form::number('item_volume_'.$key,$value->volume, ['class'=>'form-control volume_input','placeholder'=>__('messages.Volume')]) !!}	
+				</div>
+				<div class="col-sm-3 text-md-right">
+					{!! Form::number('item_price_'.$key,$value->price, ['class'=>'form-control price_input','placeholder'=>__('messages.Price')]) !!}	
+				</div>
+				<div class="col-sm-6">
+					{!! Form::select('item_product_'.$key,$invoice->store()->first()->products()->first()->productsArrayCategoryAll(),$value->product_id,['class'=>'form-control chosen-select']) !!}
+				</div>
+				
+			</div>
+			@php ($sum = $sum+$value->price)
+		@endforeach
 	</div>
 	<div class="col-md-6">
 	</div>
@@ -181,12 +197,11 @@
 				{{__('form.DeleteProducts')}} <i class="fas fa-minus"></i>
 			</a>	
 		</div>
-		
 	</div>
 	<div class="col-md-6">		
 	</div>
 	<div class="col-md-6 text-md-right">		
-		<h6 class=" details-total"></h6>
+		<h6 class=" details-total">${{number_format($sum)}}</h6>
 	</div>
 	
 </div>

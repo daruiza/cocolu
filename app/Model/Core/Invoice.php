@@ -10,11 +10,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
-    protected $fillable = ['id','number','description','support','tax','provider_id','store_id'];
+    protected $fillable = ['id','number','description','support','tax','provider_id','store_id','clousure_id'];
 
-    //a pruduct belongs a store    
+    //a invoice belongs a store    
     public function store(){
         return $this->belongsTo(Store::class);
+    }
+
+    public function clousure(){
+        return $this->belongsTo(Clousure::class);
+    }
+
+    public function products(){
+        //no usa el namespace
+        return $this->hasMany(InvoiceProduct::class);
+        //return $this->belongsToMany(Product::class);
+    }
+
+    public function provider(){
+        return $this->belongsTo(Provider::class);
     }
 
     public function storeInvoice(Request $request, $provider_id){
@@ -30,18 +44,19 @@ class Invoice extends Model
 
             if($request->file('image_suport')->isValid()){
 
-                $destinationPath = 'users/'.Auth::user()->id.'/providers';
+                $destinationPath = 'users/'.Auth::user()->id.'/supports';
                 $extension = $request->file('image_suport')->getClientOriginalExtension(); // getting image extension
                 $fileName_image = rand(1,9999999).'.'.$extension; // renameing image
                 $request->file('image_suport')->move($destinationPath, $fileName_image);
-                chmod('users/'.Auth::user()->id.'/providers/'.$fileName_image, 0777);
+                chmod('users/'.Auth::user()->id.'/supports/'.$fileName_image, 0777);
                 
                 $this->support = $fileName_image;
             }
         }
 
         $this->store_id = $request->input('store-id');
-        $this->provider_id = $provider_id;        
+        $this->provider_id = $provider_id;
+        $this->clousure_id = Auth::user()->store()->clousureOpen()->id;     
     	$this->save();
 
 	}
@@ -72,9 +87,17 @@ class Invoice extends Model
     	$this->save();
     }
 
+    public function invoicePrice(){
+        //total de invoice
+        return \DB::table('invoice_product')           
+            ->where('invoice_id',$this->id)            
+            ->orderBy('id','ASC')
+            ->groupBy('invoice_id')
+            ->sum('price');
+            
+    }
 
-
-     protected function validatorImage(array $data)
+    protected function validatorImage(array $data)
     {        
         return Validator::make($data, [            
             'image_suport'=>'

@@ -196,14 +196,8 @@ class OptionsTableSeeder extends Seeder
 			'module_id'=>9	
 			)
 		);
-		\DB::table('options')->insert(array(
-			'name'=>'purchaseorder',			
-			'label'=>'{"menu":"top","method":"get","icon":"fas fa-file-alt"}',
-			'module_id'=>9	
-			)
-		);
-
-		//Modulo Category opt 31
+		
+		//Modulo Category opt 30
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
 			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
@@ -235,7 +229,7 @@ class OptionsTableSeeder extends Seeder
 			)
 		);		
 
-		//Modulo Gastos opt 36
+		//Modulo Gastos opt 35
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
 			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
@@ -267,6 +261,39 @@ class OptionsTableSeeder extends Seeder
 			)
 		);
 
-		//Modulo opt 41
+		//Modulo Invoice opt 40
+		\DB::table('options')->insert(array(
+			'name'=>'index',			
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
+			'module_id'=>12
+			)
+		);
+		\DB::table('options')->insert(array(
+			'name'=>'show',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
+			'module_id'=>12
+			)
+		);
+		\DB::table('options')->insert(array(
+			'name'=>'purchase',			
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
+			'module_id'=>12
+			)
+		);		
+		\DB::table('options')->insert(array(
+			'name'=>'edit',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
+			'module_id'=>12
+			)
+		);		
+		\DB::table('options')->insert(array(
+			'name'=>'destroy',			
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
+			'module_id'=>12
+			)
+		);
+
+		//Modulo option 45
+
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Model\Core;
 
 use App\Model\Core\Clousure;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,7 +42,7 @@ class Store extends Model
     }
 
     public function clousureOpen(){
-        $clousure = Clousure::where('open',1)->get()->first();
+        $clousure = Clousure::where('open',1)->where('store_id',Auth::user()->store()->id)->get()->first();
         return $clousure;
     }
 

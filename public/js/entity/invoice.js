@@ -32,7 +32,10 @@ invoice.prototype.addProduct = function() {
     subnode.setAttribute("class", "col-sm-3 text-md-right");
 
     var input = document.createElement("input");
-    input.setAttribute("class", "form-control");
+    input.setAttribute("class", "form-control volume_input");
+    input.setAttribute("type", "number");
+    input.setAttribute("step", "0.5");
+    input.setAttribute("min", "0");
     input.setAttribute("name", "item_volume_"+n);
     input.setAttribute("placeholder", $( "input[name='input_placeholder_volume']" ).val());
 
@@ -43,7 +46,8 @@ invoice.prototype.addProduct = function() {
     subnode.setAttribute("class", "col-sm-3 text-md-right");
 
     var input = document.createElement("input");
-    input.setAttribute("class", "form-control");
+    input.setAttribute("class", "form-control price_input");
+    input.setAttribute("type", "number");
     input.setAttribute("name", "item_price_"+n);
     input.setAttribute("placeholder", $( "input[name='input_placeholder_price']" ).val());  
     
@@ -76,8 +80,38 @@ invoice.prototype.addProduct = function() {
 
     cn.appendChild(node);
 
+    //logica boton eliminar
+    if($('.content-products').children().length){
+        $('.delete-products')[0].setAttribute("style","display:block");    
+    }else{
+        $('.delete-products')[0].setAttribute("style","display:none");
+    }
+    
+
     $('.chosen-select').chosen();
     $('.chosen-container').width('100%');
+
+    $(".content-products .price_input").focusout(function(){
+        var sum = 0;
+        for (var i = $('.price_input').length - 1; i >= 0; i--) {
+            if($('.price_input')[i].value != ""){
+                sum = sum + parseInt($('.price_input')[i].value);    
+            }            
+        }
+        $('.details-total').html('Total: $'+invoice.formatNumber(sum));
+    });
+
+};
+
+invoice.prototype.deleteProduct = function() {
+    //eliminamos el ultimo hijo    
+    $('.content-products')[0].removeChild($('.content-products')[0].lastChild);
+    //logica boton eliminar
+    if($('.content-products').children().length){
+        $('.delete-products')[0].setAttribute("style","display:block");    
+    }else{
+        $('.delete-products')[0].setAttribute("style","display:none");
+    }
 
 };
 
@@ -86,22 +120,28 @@ invoice.prototype.consultaRespuestaProvider = function(result) {
         //asignamos los datos
         $("input[name=name_provider]").val(result.data.name);
         $("input[name=adress_provider]").val(result.data.address);
-        $("input[name=description_provider]").val(result.data.description);
+        $("textarea[name=description_provider]").val(result.data.description);
         $("input[name=email_provider]").val(result.data.email);
         $("input[name=phone_provider]").val(result.data.phone);
         $("#img_provider_img")[0].setAttribute('src',$("#form_home").attr("action")+'/users/'+result.userid+'/providers/'+result.data.logo);        
         
     }else{
         //limpiamos los datos
+        /*
         $("input[name=name_provider]").val('');
         $("input[name=adress_provider]").val('');
         $("input[name=description_provider]").val('');
         $("input[name=email_provider]").val('');
         $("input[name=phone_provider]").val('');
         $("#img_provider_img")[0].setAttribute('src',$("#form_home").attr("action")+'/images/providers/default.png');
+        */
     }
 
     $("input[name=number]").val('');
+};
+
+invoice.prototype.formatNumber = function(num){
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 };
 
 

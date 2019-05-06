@@ -109,9 +109,9 @@
 	    	}	    	
 		 	var datos = new Array();
 			datos['storeid'] = $("input[name=store-id]").val();
-			datos['number'] = $("input[name=number]").val();		
+			datos['number'] = $("input[name=number]").val().split("-")[0];		
 			ajaxobject.peticionajax($('#form_consult_provider').attr('action'),datos,"invoice.consultaRespuestaProvider");
-		});
+		});		
 
 		$('#img_support').change(function(e) {
 	    	var file = e.target.files[0],
@@ -146,7 +146,7 @@
 	</script>
 @endsection
 
-@section('style')	
+@section('style')
 	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
 	<link href="{{ asset('css/chosen.min.css') }}" rel="stylesheet"> 
 	<style>
@@ -222,6 +222,10 @@
 			      background-image: none;
 		    	}
 		  	}
+		}
+
+		.details-total{
+			text-align: right;
 		}
 
 	</style>
