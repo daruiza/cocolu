@@ -41,6 +41,14 @@ class Store extends Model
         return $this->hasMany(Invoice::class);
     }
 
+    //consulta todos los proveedores de la tienda
+    public function allProvider(){
+        foreach(Auth::user()->store()->first()->providers()->get() as $key => $value){
+            $array[] = $value->name;
+        }
+        return $array;
+    }
+
     public function clousureOpen(){
         $clousure = Clousure::where('open',1)->where('store_id',Auth::user()->store()->id)->get()->first();
         return $clousure;

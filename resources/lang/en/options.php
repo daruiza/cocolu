@@ -22,4 +22,5 @@ return [
 	"alertStock"=>"Alert Inventory",
 	"topProducts"=>"Top Products",
 	"salesForWaiter"=>"Sales for Waiter",
+	"changepassword"=> "Change Password",
 ];

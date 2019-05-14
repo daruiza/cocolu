@@ -10,7 +10,7 @@
     	<div class="col-md-3 col-lateral-table">
             <div class="col-md-12">
             <div class="card card-menu-table">
-                <div class="card-header">{{ __('messages.ProductIndex') }}</div>
+                <div class="card-header">{{ __('form.ProductIndex') }}</div>
                 <div class="card-body">
                     <div class="container products-table">
                         <div class="row">								
@@ -22,7 +22,7 @@
 
             <div class="col-md-12">
             <div class="card card-menu-table">
-                <div class="card-header">{{ __('messages.ProductOptions') }}</div>
+                <div class="card-header">{{ __('form.ProductOptions') }}</div>
                 <div class="card-body">
                     <div class="container">
                         <div class="row">
@@ -40,18 +40,24 @@
     	<div class="col-md-9">            		
     		@include('layouts.alert')
     		<div class="card">
-                <div class="card-header">{{ __('messages.indexProduct') }}</div>
+                <div class="card-header">{{ __('form.indexProduct') }}</div>
                 <div class="card-body">
                 	<div class="container">
                     	<div class="row">
+                            
                             <div class="col-md-12">
-                                <div class="page-header">                                               
+                                <div class="page-header">
+
                                     {!! Form::model($product,['enctype' => 'multipart/form-data','id'=>'form-product','route'=>['product.index'],'method'=>'GET']) !!}
                                         <div class="form-group form-search">                              
-                                            {{Form::text('name',null,['class'=>'form-control','placeholder'=>__('messages.name')])}}
+                                            {{Form::text('name',null,['class'=>'form-control','placeholder'=>__('messages.Name')])}}
                                         </div>
                                         <div class="form-group form-search">                              
-                                            {{Form::text('category',null,['class'=>'form-control','placeholder'=>__('messages.category')])}}
+                                            {!! Form::select('category',$product->categoryArrayAll(),null,['class'=>'form-control','placeholder' => __('form.Category')]) !!}
+                                        </div>
+
+                                        <div class="form-group form-search">                              
+                                            {!! Form::select('active',[__('form.Inactive'),__('form.Active')],null,['class'=>'form-control','placeholder'=>__('form.Status')]) !!}
                                         </div>
                                         
                                         <div class="form-group form-search">
@@ -60,6 +66,8 @@
                                             </button>
                                         </div>
                                     {{Form::close()}}
+
+                                    {!! Form::select('products',$product->productsArray(),null,['id'=>'products','class'=>'form-control','style'=>'display:none']) !!}
                                     
                                 </div>
                                 
@@ -75,7 +83,8 @@
                                 </div>   
 		                    	@foreach($products as $key => $value)                                        
 		                    		<div class="row object-product 
-                                        @if($key%2) @else row-impar @endif">
+                                        @if($key%2) @else row-impar @endif
+                                        @if($value->active)  @else row-no-active @endif">
                                         {{ Form::hidden('product-id', $value->id) }}
 										<div class="col-md-3">{{$value->name}}</div>
                                         <div class="col-md-2">${{number_format($value->price)}}</div>
@@ -90,9 +99,14 @@
                                         <div class="col-md-3">{{$value->categories_toString()}}</div>
 									</div>										
 		                    	@endforeach
-
 	                    	</div>
-	                    </div>	                    			        		
+                            {{ $products->appends([
+                                'name'=>$product->name,
+                                'category'=>$product->category,
+                                'active'=>$product->active
+                                ])
+                                ->links() }}
+	                    </div>                   			        		
                 	</div>
             	</div>
             </div>
@@ -154,6 +168,14 @@
         }
         */
 
+        var products = document.getElementById("products");
+        for(var i=0;i<products.childElementCount;i++){
+            product.datos_products.push(products.options[i].innerHTML);
+        }       
+        $( "input[name='name']" ).autocomplete({
+              source: product.datos_products
+        });
+
         
         
     </script>   
@@ -161,6 +183,7 @@
 
 @section('style')	
 	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/jquery-ui.min.autocomplete.css') }}" rel="stylesheet"> 
 	<style type="text/css">
 
         .table-container{
@@ -216,6 +239,16 @@
             justify-content: center;
             font-weight: 600;
         }
+
+        .row-no-active{
+            background: {{ json_decode(Auth::user()->store()->label,true)['table']['colorInactive'] }};
+            color: {{ json_decode(Auth::user()->store()->label,true)['table']['colorRow'] }};
+        }
+        .selected-object{
+            color: #212529
+        }
+
+        
 
 	</style>	
 @endsection

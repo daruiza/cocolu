@@ -106,6 +106,13 @@ invoice.prototype.addProduct = function() {
 invoice.prototype.deleteProduct = function() {
     //eliminamos el ultimo hijo    
     $('.content-products')[0].removeChild($('.content-products')[0].lastChild);
+    var sum = 0;
+    for (var i = $('.price_input').length - 1; i >= 0; i--) {
+        if($('.price_input')[i].value != ""){
+            sum = sum + parseInt($('.price_input')[i].value);    
+        }            
+    }
+    $('.details-total').html('Total: $'+invoice.formatNumber(sum));
     //logica boton eliminar
     if($('.content-products').children().length){
         $('.delete-products')[0].setAttribute("style","display:block");    

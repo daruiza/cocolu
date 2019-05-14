@@ -10,7 +10,7 @@
     	<div class="col-md-3 col-lateral-table">
             <div class="col-md-12">
             <div class="card card-menu-table">
-                <div class="card-header">{{ __('messages.ExpenseIndex') }}</div>
+                <div class="card-header">{{ __('form.ExpenseIndex') }}</div>
                 <div class="card-body">
                     <div class="container expenses-table">
                         <div class="row">								
@@ -22,7 +22,7 @@
 
             <div class="col-md-12">
             <div class="card card-menu-table">
-                <div class="card-header">{{ __('messages.ExpenseOptions') }}</div>
+                <div class="card-header">{{ __('form.ExpenseOptions') }}</div>
                 <div class="card-body">
                     <div class="container">
                         <div class="row">
@@ -39,7 +39,7 @@
         <div class="col-md-9">                  
             @include('layouts.alert')
             <div class="card">
-                <div class="card-header">{{ __('messages.indexProduct') }}</div>
+                <div class="card-header">{{ __('form.indexExpense') }}</div>
                 <div class="card-body">
                     <div class="container">
                         <div class="row">

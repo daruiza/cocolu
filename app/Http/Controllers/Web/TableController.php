@@ -128,7 +128,7 @@ class TableController extends Controller
     public function update(Request $request, $id)
     {        
         $this->validator($request->all())->validate();       
-        $table = new Table();
+        
         //validar store
         if(Auth::user()->validateUserStore($request->input('store_id'))){
             $table = Table::find($id);
@@ -139,7 +139,7 @@ class TableController extends Controller
             //return view('table.edit',compact('table'))->with('success', [['OK']])->with('data', []);
 
         }
-		
+		$table = Table::find($request->input('id'));
         return view('table.edit',compact('table'))->with('danger', [['NOOK']])->with('data', []);       
         //return Redirect::back()->with($request->input())->with('success', [['OK']]);
     }

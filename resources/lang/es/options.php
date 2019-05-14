@@ -22,4 +22,5 @@ return [
 	"alertStock"=>"Alertas de Inventario",
 	"topProducts"=>"Productos Top",
 	"salesForWaiter"=>"Ventas por Mesero",
+	"changepassword"=> "Cambiar Contraseña",
 ];

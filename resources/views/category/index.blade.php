@@ -11,7 +11,7 @@
         	<div class="col-md-3 col-lateral-table">
                 <div class="col-md-12">
                 <div class="card card-menu-table">
-                    <div class="card-header">{{ __('messages.CategoryIndex') }}</div>
+                    <div class="card-header">{{ __('form.CategoryIndex') }}</div>
                     <div class="card-body">
                         <div class="container services-table">
                             <div class="row">                                
@@ -27,7 +27,7 @@
 
                 <div class="col-md-12">
                 <div class="card card-menu-table">
-                    <div class="card-header">{{ __('messages.CategoryOptions') }}</div>
+                    <div class="card-header">{{ __('form.CategoryOptions') }}</div>
                     <div class="card-body">
                         <div class="container">
                             <div class="row">
@@ -44,7 +44,7 @@
         	<div class="col-md-9">            		
         		@include('layouts.alert')
         		<div class="card">
-                    <div class="card-header">{{ __('messages.indexCategories') }}</div>
+                    <div class="card-header">{{ __('form.indexCategories') }}</div>
                     <div class="card-body">
                     	<div class="container">
 	                    	<div class="row">

@@ -34,17 +34,26 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request)
+    {   
+        $invoice = new Product();
+        $invoice->number = $request->input('number');
+        $invoice->date = $request->input('date');
+        $invoice->provider = $request->input('provider');
+        $invoice->clousure = $request->input('clousure');
         
         $invoices = Invoice::
             select('invoices.*')
-            ->leftJoin('clousures','clousures.id','invoices.clousure_id')
-            ->where('invoices.store_id',Auth::user()->store()->id)            
-            ->orderBy('invoices.id','ASC')
-            ->get();
+            ->where('invoices.store_id',Auth::user()->store()->id)
+            ->number($invoice->number)
+            ->date($invoice->date)
+            ->provider($invoice->provider)
+            ->clousure($invoice->clousure)
+            ->leftJoin('clousures','clousures.id','invoices.clousure_id')            
+            ->orderBy('invoices.id','DESC')
+            ->paginate(16);
         
-        return view('invoice.index',compact('invoices'))->with('data', []);
+        return view('invoice.index',compact('invoices','invoice'))->with('data', []);
         
     }
 

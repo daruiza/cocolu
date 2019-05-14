@@ -33,14 +33,23 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $product = new Product();
+        $product->name = trim(explode('-',$request->input('name'))[0]);
+        $product->category = $request->input('category');
+        $product->active = $request->input('active');
+        
         $products = Product::            
-            where('active',1)
-            ->where('store_id',Auth::user()->store()->id)
-            ->orderBy('id','ASC')
-            ->get();
+            where('store_id',Auth::user()->store()->id)
+            //->where('active',0)
+            ->name($product->name)
+            ->category($product->category)
+            ->active($product->active)            
+            ->orderBy('products.id','ASC')
+            ->paginate(16);
+
+        //dd($products);
 
         return view('product.index',compact('products','product'))->with('data', []);
     }

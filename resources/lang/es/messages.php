@@ -58,7 +58,7 @@ return [
     "TableSelectNone" => "Para ejecutar esta opción es necesario que selecciones una mesa",
 	"indexTable"=>"Salon de Mesas",
 	"TableService" => "Servicio Activo",
-	"TableOptions" => "opciones de Mesa",
+	"TableOptions" => "Opciones de Mesa",
 	"OpenService" => "Servicio Abierto",
     "Basic" => "Básico",
     "Components" => "Componentes",

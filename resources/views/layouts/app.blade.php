@@ -9,11 +9,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        @if(Auth::user()->rol()->first()->id != 1)
-            {{Auth::user()->store()->name}}
-        @else
+        @guest
             {{ config('app.name', 'Cocolú') }}
-        @endif        
+        @else
+            @if(Auth::user()->rol()->first()->id != 1)
+                {{Auth::user()->store()->name}}
+            @else
+                {{ config('app.name', 'Cocolú') }}
+            @endif
+        @endguest       
     </title>
 
     <!-- Scripts -->
@@ -39,11 +43,15 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    @if(Auth::user()->rol()->first()->id != 1)
-                        {{Auth::user()->store()->name}}
-                    @else
+                     @guest
                         {{ config('app.name', 'Cocolú') }}
-                    @endif
+                    @else
+                        @if(Auth::user()->rol()->first()->id != 1)
+                            {{Auth::user()->store()->name}}
+                        @else
+                            {{ config('app.name', 'Cocolú') }}
+                        @endif
+                    @endguest
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -153,14 +161,16 @@
             @auth
                 <footer>
                     <p>
-                        @if(Auth::user()->rol()->first()->id != 1)
-                            {{ __('messages.SystemDate') }}                        
-                            {{ Auth::user()->store()->clousureOpen()->date_open }}
-                        @endif
-                    </p>
-                    <p>
-                        Copyright © {{date("Y")}} TempoSolutions
-                    </p>
+                        @guest
+                            Copyright © {{date("Y")}} TempoSolutions
+                        @else
+                            @if(Auth::user()->rol()->first()->id != 1)
+                                {{ __('messages.SystemDate') }}                        
+                                {{ Auth::user()->store()->clousureOpen()->date_open }}
+                                Copyright © {{date("Y")}} TempoSolutions
+                            @endif
+                        @endguest
+                    </p>                    
                 </footer>                
             @endauth
         </main>

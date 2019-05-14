@@ -14,6 +14,28 @@ class Product extends Model
 {
     protected $fillable = ['id','name','price','buy_price','volume','critical_volume','description','image1','image2','image3','order','label','active','unity_id','store_id'];
 
+    public function scopeName($query,$name){
+        if($name){
+            return $query->where('name','LIKE',"%$name%");
+        }
+    }
+
+    public function scopeActive($query,$active){        
+        
+        if(!empty($active) || $active == "0"){            
+            return $query->where('active',intval($active));
+        }                
+    }
+
+    public function scopeCategory($query,$category){
+        if($category){
+            return $query
+            ->select('products.*')
+            ->leftJoin('category_product','category_product.product_id','products.id')
+            ->where('category_product.category_id',$category);
+        }
+    }
+
     //a pruduct belongs a store    
     public function store(){
         return $this->belongsTo(Store::class);
@@ -156,12 +178,25 @@ class Product extends Model
         return $products;
     }
 
+    //todas las categorias de los productos de una tienda
+    public function categoryArrayAll(){
+    
+        $array=Array();        
+        $category_array = Category::select('id','name')
+            ->where('categories.rel_store_id',Auth::user()->store()->id)
+            ->orderBy('categories.name','ASC')->get();
+        foreach ($category_array as $key => $value) {
+            $array[$value->id] = $value->name;
+        }
+        return $array;
+
+    }
+
     //funcion para hallar las categorias de un producto
-    public function categoryArray(){
-        
+    public function categoryArray(){        
         $array = Array();
         $category_array = CategoryProduct::select('category_id')            
-            ->where('category_product.product_id',$this->id)            
+            ->where('category_product.product_id',$this->id)
             ->orderBy('category_id','ASC')->get();
         foreach ($category_array as $key => $value) {
             $array[] = $value->category_id;

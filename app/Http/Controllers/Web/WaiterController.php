@@ -28,17 +28,28 @@ class WaiterController extends Controller
         $this->middleware('auth');		
     }
      
-    public function index()
-    {		
+    public function index(Request $request)
+    {	
+        $waiter = new Waiter();
+        $waiter->name = $request->input('name');
+        $waiter->surname = $request->input('surname');
+        $waiter->email = $request->input('email');
+        $waiter->phone = $request->input('phone');
+        $waiter->active = $request->input('active');
+
         $waiters = Waiter::
 			select('waiters.*')
+            ->name($waiter->name)
+            ->surname($waiter->surname)
+            ->email($waiter->email)
+            ->phone($waiter->phone)            
+            ->active($waiter->active)            
 			->leftjoin('users','waiters.user_id','users.id')
-            ->where('users.rel_store_id', Auth::user()->store()->id)			
-            ->where('users.active',1)
+            ->where('users.rel_store_id', Auth::user()->store()->id)            
             ->orderBy('waiters.id','ASC')
-            ->get();
+            ->paginate(16);
 		//dd($waiters->first()->user()->get()->first()->name);		
-		return view('waiter.index',compact('waiters'))->with('data', []);
+		return view('waiter.index',compact('waiters','waiter'))->with('data', []);
     }
 
     /**
@@ -59,17 +70,15 @@ class WaiterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {    
-
+    {
         //validate store        
         if(!Auth::user()->validateUserStore($request->input('store_id'))){            
             Session::flash('danger', [['WaiterCreateNOOk']]);
             return redirect('waiter');
             //return view('waiter.create',compact('waiter'))->with('danger', [['WaiterCreateNOOk']])->with('data', []);    
         }
-
-		//this method create a acount		
-		$this->validatorUser($request->all())->validate();
+				
+		$this->validator($request->all())->validate();
         if(!empty($request->file('image')))$this->validatorImage(['image'=>$request->file('image')])->validate();
 		
 		$request->request->add(['rol_id' => 3]);
@@ -78,7 +87,7 @@ class WaiterController extends Controller
 		
 		$user = new User();
 		$user = $user->create($request->all());
-		$user->repositoryWaiter($user->id);
+		$user->repositoryWaiter($user->id);        
         $user->updateUser($request->all()); 
 		
 		$request->request->add(['user_id' => $user->id]);						
@@ -96,9 +105,16 @@ class WaiterController extends Controller
      * @param  \App\Waiter  $waiter
      * @return \Illuminate\Http\Response
      */
-    public function show(Waiter $waiter)
-    {
-        //
+    public function show(Request $request, $id){
+        $waiter = Waiter::find($request->input('id'));
+        $description = $waiter->description;
+        $id_waiter = $waiter->id;
+        $waiter = $waiter->user()->first(); 
+        $waiter->description = $description;               
+        $waiter->id_waiter = $id_waiter;
+        
+        return view('waiter.show',compact('waiter'))->with('data', []);
+        
     }
 
     /**
@@ -107,9 +123,15 @@ class WaiterController extends Controller
      * @param  \App\Waiter  $waiter
      * @return \Illuminate\Http\Response
      */
-    public function edit(Waiter $waiter)
-    {
-        //
+    public function edit(Request $request, $id)
+    {        
+        $waiter = Waiter::find($request->input('id'));
+        $description = $waiter->description;
+        $id_waiter = $waiter->id;
+        $waiter = $waiter->user()->first(); 
+        $waiter->description = $description;               
+        $waiter->id_waiter = $id_waiter;        
+        return view('waiter.edit',compact('waiter'))->with('data', []);
     }
 
     /**
@@ -119,9 +141,24 @@ class WaiterController extends Controller
      * @param  \App\Waiter  $waiter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Waiter $waiter)
-    {
-        //
+    public function update(Request $request, $id)
+    {        
+        $this->validatorEdit($request->all(),$id)->validate();       
+        
+        if(Auth::user()->validateUserStore($request->input('store_id'))){
+            
+            $waiter = Waiter::find($request->input('waiter_id'));            
+            $waiter->storeWaiter($request->all());
+            
+            Session::flash('success', [['WaiterEditOk']]);
+            return redirect('waiter');
+        }
+
+        $waiter = Waiter::find($request->input('id'));
+        $description = $waiter->description;
+        $waiter = $waiter->user()->first(); 
+        $waiter->description = $description;
+        return view('waiter.edit',compact('waiter'))->with('danger', [['NOOK']])->with('data', []);       
     }
 
     /**
@@ -135,12 +172,25 @@ class WaiterController extends Controller
         //
     }
 	
-	protected function validatorUser(array $data)
+	protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => 'required|string|max:16',
             'email' => 'required|string|email|max:128|unique:users',
             'password' => 'required|string|min:4|confirmed',
+            'description' => 'min:0|max:512',
+        ]);
+    }
+
+    protected function validatorEdit(array $data ,$id)
+    {         
+        return Validator::make($data, [
+            'name' => 'required|string|max:16',
+            'email' => 'required|
+                string|
+                email|
+                max:128|
+                unique:users,email,'.$id,            
             'description' => 'min:0|max:512',
         ]);
     }
@@ -151,8 +201,8 @@ class WaiterController extends Controller
             'image'=>'
                 required|
                 mimes:jpeg,bmp,png|
-                dimensions:max_width=700,max_width=700|
-                dimensions:min_width=250,min_width=250',            
+                dimensions:max_width=960,max_width=960|
+                dimensions:min_width=120,min_width=120',            
         ]);
     }
 }

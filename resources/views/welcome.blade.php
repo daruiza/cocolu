@@ -42,7 +42,9 @@
             </div>
             </div>
         @else
-            @include($page)
+            @isset($page)
+                @include($page)
+            @endisset
         @endguest            
         </div>        
     </div>

@@ -12,6 +12,57 @@ class Invoice extends Model
 {
     protected $fillable = ['id','number','description','support','tax','provider_id','store_id','clousure_id'];
 
+    public function scopeNumber($query,$number){
+        if($number){
+            return $query->where('number','LIKE',"%$number%");
+        }
+    }
+
+    public function scopeDate($query,$date){
+        if($date){
+            //si solo fecha de año y mes
+            //1. año - mes
+            if(count(explode('-',$date)) == 2){
+                if(strlen($date) == 6 || strlen($date) == 7){                    
+
+                    $aux_date = $date.'-01 00:00:00';                    
+                    $result = strtotime($aux_date);
+                    $result = strtotime('-1 second', strtotime('+1 month', $result));
+                    
+                    return $query
+                        ->whereBetween('invoices.created_at',[
+                            $aux_date,
+                            date('Y-m-d', $result)
+                        ]);
+                }
+            }
+            return $query
+                ->whereBetween('invoices.created_at',[
+                    "$date".' 00:00:00',
+                    "$date".' 23:59:59'
+                ]);
+        }
+    }
+
+    public function scopeClousure($query,$clousure){        
+        if($clousure){            
+            return $query                
+                ->whereBetween('clousures.date_open',[
+                    "$clousure".' 00:00:00',
+                    "$clousure".' 23:59:59'
+                ]);   
+        }
+    }
+
+    public function scopeProvider($query,$provider){
+        if($provider){
+            return $query
+                ->select('invoices.*')
+                ->leftJoin('providers','providers.id','invoices.provider_id')
+                ->where('providers.name','LIKE',"%$provider%");
+        }
+    }
+
     //a invoice belongs a store    
     public function store(){
         return $this->belongsTo(Store::class);

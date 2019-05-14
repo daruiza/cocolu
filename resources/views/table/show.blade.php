@@ -97,14 +97,11 @@
 
 @section('style')
 <style>
-
-.row.make-columns {
-        
+.row.make-columns {        
         -moz-column-width: 19em;
         -webkit-column-width: 19em;
         -moz-column-gap: 1em;
-        -webkit-column-gap:1em; 
-
+        -webkit-column-gap:1em;
     }
 
     .row.make-columns > div {
@@ -113,13 +110,10 @@
         width:  100%; 
     }
 
-    
     .card {
         display: inline-block;
         height: 100%;
         width:  100%;
-    }
-
-	
+    }	
 </style>
 @endsection

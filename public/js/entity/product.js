@@ -1,4 +1,5 @@
-function product() {	
+function product() {    
+    this.datos_products = [];
 }
 	
 product.prototype.onjquery = function() {	
