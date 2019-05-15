@@ -83,9 +83,11 @@ Route::post('waiter/passwordrequest', [
 Route::get('product/{id}/editstock', [
    'as' => 'product.editstock', 'uses' => 'Web\ProductController@editStock'
 ]);
-
 Route::post('product/{id}/addproduct', [
    'as' => 'product.addproduct', 'uses' => 'Web\ProductController@addProduct'
+]);
+Route::post('product/{id}/savestock', [
+   'as' => 'product.savestock', 'uses' => 'Web\ProductController@saveStock'
 ]);
 Route::post('table/{id}/saveorder', [
    'as' => 'table.saveorder', 'uses' => 'Web\TableController@saveOrder'

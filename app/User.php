@@ -85,6 +85,7 @@ class User extends Authenticatable
         $this->surname = $data['surname'];
         $this->phone = $data['phone'];
         $this->email = $data['email'];
+        $this->active = $data['active'];
         //FALTA ingresamos a imagen...
         if(!empty($data['image'])){
             if($data['image']->isValid()){                      

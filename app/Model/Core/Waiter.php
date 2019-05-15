@@ -46,7 +46,7 @@ class Waiter extends Model
     }
 
     public function storeWaiter($data){
-        //save user
+        //save user        
         $user = $this->user()->first();
         $user->updateUser($data);
 

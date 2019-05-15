@@ -87,7 +87,9 @@
                                         <div class="col-md-2">{{ __('messages.Phone') }}</div>
                                     </div>   
 			                    	@foreach($waiters as $key => $value)                                        
-			                    		<div class="row object-waiter @if($key%2) @else row-impar @endif" >
+			                    		<div class="row object-waiter
+                                         @if($key%2) @else row-impar @endif
+                                         @if($value->active)  @else row-no-active @endif" >
                                             {{ Form::hidden('waiter-id', $value->id) }}
 											<div class="col-md-3">{{$value->user()->get()->first()->name}}</div>
 											<div class="col-md-3">{{$value->user()->get()->first()->surname}}</div>

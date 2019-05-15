@@ -43,6 +43,7 @@ class Store extends Model
 
     //consulta todos los proveedores de la tienda
     public function allProvider(){
+        $array = array();
         foreach(Auth::user()->store()->first()->providers()->get() as $key => $value){
             $array[] = $value->name;
         }

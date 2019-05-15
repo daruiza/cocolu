@@ -233,6 +233,20 @@ class ProductController extends Controller
         //
     }
 
+    protected function validatorEditStock(array $data)
+    {
+        return Validator::make($data, [
+            
+            'description_change' => '
+                max:256',            
+            
+            'volume_change' => '                
+                numeric|
+                required'           
+            
+        ]);
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [

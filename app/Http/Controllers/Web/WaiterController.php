@@ -38,7 +38,7 @@ class WaiterController extends Controller
         $waiter->active = $request->input('active');
 
         $waiters = Waiter::
-			select('waiters.*')
+			select('waiters.*','users.active')
             ->name($waiter->name)
             ->surname($waiter->surname)
             ->email($waiter->email)
