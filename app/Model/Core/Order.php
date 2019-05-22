@@ -30,6 +30,19 @@ class Order extends Model
         return $this->belongsTo(OrderStatus::class);
     }
 
+    public function orderProducts(){
+        return json_encode(Order::select(
+                        'order_product.id',
+                        'order_product.status_serve',
+                        'order_product.status_paid',
+                        'order_product.order_id',
+                        'order_product.product_id'
+                    )
+                    ->leftJoin('order_product','orders.id','order_product.order_id')
+                    ->where('orders.id',$this->id)
+                    ->get()->toArray());
+    }
+
     public function nextSerial(Service $service){
     	$order_serial = Order::select('serial')
             ->leftJoin('services','orders.service_id','services.id')

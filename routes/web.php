@@ -101,3 +101,8 @@ Route::post('clousure/{id}/consultclousure', [
 Route::post('provider/consultprovider', [
    'as' => 'provider.consultprovider', 'uses' => 'Web\ProviderController@consultProvider'
 ]);
+Route::post('order/order_paid', [
+   'as' => 'order.order_paid', 'uses' => 'Web\OrderController@orderPaid'
+]);
+
+

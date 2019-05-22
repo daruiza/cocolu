@@ -1,6 +1,6 @@
 <div class="form-group">
     @php($sum_service=0)
-
+    
     @foreach($orders as $key => $value)
 
         <div class="row order-obj status-{{$value->status()->first()->name}} menu-status-{{$value->status()->first()->name}}" id="order-{{$value->id}}">
@@ -14,6 +14,8 @@
         {!! Form::hidden('order_id', $value->id) !!}
 
         {!! Form::hidden('order_description', $value->description) !!}
+
+        {!! Form::hidden('order_product', $value->orderProducts()) !!}        
 
         {!! Form::hidden('order_waiter', $value->waiter()->first()->user()->first()->name) !!}
 

@@ -162,7 +162,6 @@ class OrderController extends Controller
             return redirect('table');    
         }
         
-
         //1. crear la orden de pedido
         $order = new Order();
         //fecha y hora
@@ -174,7 +173,7 @@ class OrderController extends Controller
         $request->request->add(['serial' => $order->nextSerial($service)]);
         $obj_order=$order::create($request->input());
                 
-        $ingredients = array();//para almacenar los ingredientes
+        
         //2. descontar de inventario, 2 procesos (movimiento y descuento)
         //hay que buscar la relación del producto y el ingrediente
         
@@ -205,7 +204,7 @@ class OrderController extends Controller
                         ));
 
                         $sub_value['volume']=$stock->volume;
-                        $ingredients['ing'][]=$sub_value;                        
+                        //$ingredients['ing'][]=$sub_value;                        
 
                         //descuento by product
                         $sub_product = Product::find($sub_value['ingredient_id']);
@@ -233,7 +232,7 @@ class OrderController extends Controller
                         ));
 
                         $sub_value['volume']=$stock->volume;
-                        $ingredients['gru'][]=$sub_value;
+                        //$ingredients['gru'][]=$sub_value;
                         
 
                         //desceunto by product
@@ -255,6 +254,13 @@ class OrderController extends Controller
                 ));     
             }           
             
+            $ingredients = array();//para almacenar los ingredientes
+            if(array_key_exists('ingredients', $value)){
+                $ingredients = [
+                    'ingredients'=>$value['ingredients'],
+                    'groups'=>$value['groups']
+                ];
+            }
             
             //2.1 relacion con order products    
             $order_product = new OrderProduct();                  
@@ -262,7 +268,8 @@ class OrderController extends Controller
                 'order_id'=>$obj_order->id,
                 'product_id'=>$value['produt_id'],
                 'ingredients' =>  json_encode($ingredients),                      
-                'volume' =>  $value['volume']
+                'volume' =>  $value['volume'],
+                'price' => $value['price']
             ));        
         }
                 
@@ -303,7 +310,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {        
+    {           
         //validamos            
         $table = Table::find($request->input('table_id'));        
         $service = $table->tableServiceOpen()->first();
@@ -333,10 +340,81 @@ class OrderController extends Controller
             
         }
 
-        //actualizamos el estado de la orden
-        $order = Order::find($request->input('order_id'));
-        $order->status_id = $request->input('next_status');
-        $order->save();
+        //validamos que todos los detalles esten servidos
+        $array = array();       
+        
+        if($request->input('next_status') == 2){
+            foreach($request->input() as $key=>$value){
+                if(strpos($key,'status_serve') !== false){
+                    $vector=explode('-',$key);
+                    $n=count($vector);
+                    $id_item = $vector[$n-2];
+                    $array[$id_item][$vector[$n-2]] = ucfirst($value);
+                    $array[$id_item]['id'] = end($vector);                    
+                }
+            }
+
+            foreach ($array as $key => $value) {
+                $order_product = OrderProduct::find($value['id']);            
+                $order_product->status_serve = 1;
+                $order_product->save();
+            }
+        }
+
+        if($request->input('next_status') == 3){
+            foreach($request->input() as $key=>$value){
+                if(strpos($key,'status_paid') !== false){
+                    $vector=explode('-',$key);
+                    $n=count($vector);
+                    $id_item = $vector[$n-3];
+                    $array[$id_item][$vector[$n-3]] = ucfirst($value);
+                    $array[$id_item]['id'] = end($vector);                    
+                }
+            }            
+            foreach ($array as $key => $value) {
+                $order_product = OrderProduct::find($value['id']);            
+                $order_product->status_paid = 1;
+                $order_product->save();
+            }
+        }
+        
+        if(array_key_exists('order_id', $request->input())){
+            //actualizamos el estado de la orden
+            $order = Order::find($request->input('order_id'));
+            if(count(json_decode($order->orderProducts())) == count($array)){
+                $order->status_id = $request->input('next_status');
+                $order->save();    
+            }    
+        }else{
+            /*hay varias ordenes por cambiar su estado*/
+            
+            $array = array();
+            if($request->input('next_status') == 3){
+                foreach($request->input() as $key=>$value){
+                    if(strpos($key,'status_paid') !== false){
+                        $vector=explode('-',$key);
+                        $n=count($vector);
+                        $id_item = $vector[$n-2];
+                        $array[$id_item][$vector[$n-3]]['order_id'] = $id_item;
+                        $array[$id_item][$vector[$n-3]]['order_product_id'] = end($vector);                    
+                    }
+                }
+                foreach ($array as $key => $value) {
+                    //$key es el id de order
+                    $order = Order::find($key);                    
+                    if(count($value) == $order->products()->count()){
+                        //actualizamos el order
+                        $order->status_id = $request->input('next_status');
+                        $order->save();
+                    }
+                    
+                    
+                }
+
+            }
+            
+        }
+                
 
         Session::flash('success', [['EditOrderTableOK']]);
         return redirect('table');

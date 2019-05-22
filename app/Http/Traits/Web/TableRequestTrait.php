@@ -97,10 +97,17 @@ trait TableRequestTrait
                     ->orWhere('status_id',4);//orden cerrada
                  })
                 ->groupBy('orders.id')
+                ->orderBy('orders.status_id','ASC')
                 ->get();    
-        }		
+        }
+
+        //order_product	
+        $order_products = array();
+        foreach ($orders as $key => $value) {
+            $order_products[$value->id]=$value->orderProducts();
+        }
 		
-		return response()->json(['return'=>true,'data'=>['request'=>$request->input(),'store_id'=>$id,'service'=>$service,'table'=>$table,'orders'=>$orders]]);		
+		return response()->json(['return'=>true,'data'=>['request'=>$request->input(),'store_id'=>$id,'service'=>$service,'table'=>$table,'orders'=>$orders,'order_product'=>$order_products]]);		
 	}
 	
 	public function service(Request $request,$id){		

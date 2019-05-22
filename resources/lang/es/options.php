@@ -23,4 +23,5 @@ return [
 	"topProducts"=>"Productos Top",
 	"salesForWaiter"=>"Ventas por Mesero",
 	"changepassword"=> "Cambiar Contraseña",
+	"orderPaid" => "Pagar Ordenes"
 ];

@@ -12,7 +12,7 @@
 								<div class="col-md-12 table"></div>								
 								<div class="col-md-12 orders_menu">
                                     @isset($orders)
-                                    @empty(!$orders)                        
+                                    @empty(!$orders)                                        
                                         @include('order.paint')
                                     @endempty
                                     @endisset
@@ -88,10 +88,17 @@
                                                     <i class="fas fa-clipboard"></i>
                                                     <span class="span-order">{{ __('messages.NewOrder') }}</span>
                                                 </a>
+
                                                 {!! Form::open(array('id'=>'table'.$value->id,'route'=>'order.create','method' =>'GET')) !!}
                                                     {{ Form::hidden('store-id',Auth::user()->store()->id) }}
                                                     {{ Form::hidden('table-id', $value->id) }}                          
                                                 {!! Form::close() !!}
+
+                                                {!! Form::open(array('id'=>'table_order_paid'.$value->id,'route'=>'order.order_paid','method' =>'POST')) !!}
+                                                    {{ Form::hidden('store-id',Auth::user()->store()->id) }}
+                                                    {{ Form::hidden('table-id', $value->id) }}                          
+                                                {!! Form::close() !!}
+
                                             </div>
                                             @endif
 										</div>
@@ -121,5 +128,6 @@
 {!! Form::hidden('mesage_without', __('messages.Without') ) !!}
 {!! Form::hidden('mesage_openService', __('options.service') ) !!}
 {!! Form::hidden('mesage_closeService', __('options.closeService') ) !!}
+{!! Form::hidden('mesage_orderPaid', __('options.orderPaid') ) !!}
 
 

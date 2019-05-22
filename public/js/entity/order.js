@@ -6,7 +6,7 @@ order.prototype.onjquery = function() {
 	order.showOrderModal();	
 };
 
-order.prototype.showOrderModal = function() {	
+order.prototype.showOrderModal = function() {
 	$('.order-obj').on( "click", function() {
 		//result.data.orders[0].date
 		$('#modal_order_view .modal-title-subtext').html($('#'+this.id+" .serial")[0].children[0].innerHTML+" ["+$('#'+this.id+" .date")[0].children[0].innerHTML+"]");
@@ -25,8 +25,7 @@ order.prototype.showOrderModal = function() {
 	    input.setAttribute("type", "hidden");	    
 	    input.setAttribute("name", "store_id");
 	    input.setAttribute("value", $("input[name='order_store_id-"+this.id+"']" ).val());   	    
-	    node.appendChild(input);
-	    
+	    node.appendChild(input);	    
 
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");	    
@@ -108,6 +107,7 @@ order.prototype.showOrderModal = function() {
 	    var sum = 0;
 
 	    var products = JSON.parse($('#'+this.id+" input[name='order_description']").val())
+	    var order_product = JSON.parse($('#'+this.id+" input[name='order_product']").val())
 	    for(obj in products){
 
 	    	var subsubnode = document.createElement("div");    	
@@ -118,7 +118,38 @@ order.prototype.showOrderModal = function() {
 			}
 			subsubnode.setAttribute("id", "order_product_"+obj);
 			subsubnode.setAttribute("style", "display: flex;flex-wrap: wrap;");		
-    				
+    		
+    		if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 1){	
+				var div = document.createElement("div");
+				div.setAttribute("class", "col-sm-1");
+				div.setAttribute("style", "text-align: center;");						
+				var input = document.createElement("input");				
+				input.setAttribute("type", "checkbox");
+				input.setAttribute("name", "status_serve-"+obj+"-"+order_product[obj].id)		
+			    input.setAttribute("class","form-control control-checkbox")
+			    if(order_product[obj].status_serve == 1){
+			    	input.setAttribute("checked", "checked");	
+			    }		    
+			    div.appendChild(input);			
+			    subsubnode.appendChild(div);		    
+			}else{
+				
+				if(parseInt($( '#'+this.id+" input[name='order_status']" ).val()) == 2){
+					var div = document.createElement("div");
+					div.setAttribute("class", "col-sm-1");
+					div.setAttribute("style", "text-align: center;");						
+					var input = document.createElement("input");
+					input.setAttribute("type", "checkbox");
+					input.setAttribute("name", "status_paid-"+obj+"-"+order_product[obj].id)		
+				    input.setAttribute("class","form-control control-checkbox")
+				    if(order_product[obj].status_paid == 1){
+				    	input.setAttribute("checked", "checked");	
+				    }		    
+				    div.appendChild(input);			
+				    subsubnode.appendChild(div);		    
+				}
+
+			}
 
 	    	var div = document.createElement("div");
 			div.setAttribute("class", "col-sm-3");
@@ -134,7 +165,6 @@ order.prototype.showOrderModal = function() {
 		    subsubnode.appendChild(div);		    
 
 		    sum = sum + (parseInt(products[obj].price) * parseInt(products[obj].volume));
-
 
 		    var div = document.createElement("div");
 			div.setAttribute("class", "col-sm-3");
@@ -228,7 +258,7 @@ order.prototype.showOrderModal = function() {
 
 		    //TOTALES
 		    var div = document.createElement("div");
-			div.setAttribute("class", "col-sm-3");
+			div.setAttribute("class", "col-sm-2");
 			div.setAttribute("style", "text-align: center;");	
 
 		    var span = document.createElement("span");		

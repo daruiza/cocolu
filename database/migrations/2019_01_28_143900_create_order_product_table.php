@@ -15,6 +15,8 @@ class CreateOrderProductTable extends Migration
     {
         Schema::create('order_product', function (Blueprint $table) {
             $table->increments('id');            
+            $table->boolean('status_serve')->default(false);
+            $table->boolean('status_paid')->default(false);     
             $table->integer('order_id')->unsigned();            
             $table->integer('product_id')->unsigned();
             $table->string('ingredients',2048)->nullable()->default(null);     
@@ -25,6 +27,7 @@ class CreateOrderProductTable extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
             $table->integer('volume')->default(0);
+            $table->integer('price')->default(0);
             $table->timestamps();
         });
     }

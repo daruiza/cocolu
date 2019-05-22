@@ -92,6 +92,17 @@
 			return false;			
 		}
 
+		function order_paid_submit(id){			
+			//$('#'+id)[0].submit();
+			
+			var data = new Array();
+			data['store_id'] = $("#"+id+" input[name=store-id]").val();			
+			data['table_id'] = $("#"+id+" input[name=table-id]").val();				
+			ajaxobject.peticionajax($('#'+id).attr('action'),data,"table.orderPaidResponse");		
+			
+						
+		}		
+
 		$("#containment-wrapper").height($("#containment-wrapper").height()+
 			{!! json_decode(Auth::user()->store()->label,true)['table']['TableHeight'] !!});
 		
@@ -178,6 +189,11 @@
 		.status-OrderPay{			
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderPay'] }};
 			color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};	
+		}
+
+		.control-checkbox{
+			height: calc(2.25rem + 2px);
+    		width: 100%;
 		}
 	</style>
 

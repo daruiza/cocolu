@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits\Web;
 
+use App\Model\Core\Table;
 use App\Model\Core\Stock;
 use App\Model\Core\Product;
 use App\Model\Core\OrderProduct;
@@ -83,5 +84,34 @@ trait OrderRequestTrait
         }
 
 	}
+
+    public function orderPaid(Request $request){
+        //consultamos todos los detalles de todas las ordenes de la mesa vigentes
+        //las ordenes que estan en estado 1
+        $table = Table::select('id','name')->where('id',$request->input('table_id'))->get();
+        $order_product = OrderProduct::select(
+                'orders.id',
+                'order_product.id as order_poduct_id',
+                'order_product.status_paid',
+                'order_product.ingredients',
+                'order_product.volume',
+                'order_product.price',
+                'products.name',
+                )
+            ->leftJoin('orders','order_product.order_id','orders.id')
+            ->leftJoin('products','order_product.product_id','products.id')
+            ->leftJoin('services','orders.service_id','services.id')
+            ->where('orders.status_id',2)
+            ->where('services.open',1)
+            ->where('services.table_id',$request->input('table_id'))            
+            ->get();
+        return response()->json([
+            'return'=>true,
+            'data'=>[
+                'request'=>$request->input(),            
+                'table'=>$table,
+                'order_product'=>$order_product
+            ]]);
+    }
 	
 }
