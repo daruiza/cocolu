@@ -22,7 +22,7 @@ class CreateStoresTable extends Migration
             $table->string('description',512)->nullable()->default(null);
             $table->string('logo', 256)->default('default.png');
             $table->string('currency', 32)->default('COP');
-            $table->string('label',1024)->nullable()->default('{"table":{"menu":"page","TableHeight":"125","icon":"fas fa-list","selectTable":"lemonchiffon","serviceOpenTable":"sandybrown","colorRow":"gainsboro","colorInactive":"black"},"order":{"OrderNew":"aliceblue","OrderOK":"cadetblue","OrderPay":"cornflowerblue","OrderCancel":"slategrey"},"order_status":{"OrderNew":"#4da9f9","OrderOK":"#3c6263","OrderPay":"#4167ab","OrderCancel":"#333a42"}}');
+            $table->string('label',1024)->nullable()->default('{"table":{"menu":"page","StoreHeight":"325","TableHeight":"120","icon":"fas fa-list","selectTable":"lemonchiffon","serviceOpenTable":"sandybrown","colorRow":"gainsboro","colorInactive":"black","graceTimeExpense":"15"},"order":{"OrderNew":"aliceblue","OrderOK":"cadetblue","OrderPay":"cornflowerblue","OrderCancel":"slategrey"},"order_status":{"OrderNew":"#4da9f9","OrderOK":"#3c6263","OrderPay":"#4167ab","OrderCancel":"#333a42"}}');
             $table->boolean('active')->default(true);            
             $table->timestamps();
         });

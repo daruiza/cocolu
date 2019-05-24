@@ -1,5 +1,5 @@
 .card-body{
-	/*padding: 0.50rem;*/
+	padding: 0.50rem;
 }
 #containment-wrapper{
 	/*padding: 0px;*/
@@ -57,9 +57,9 @@
     border-radius: 10px;
 }
 
-.draggable { 
-	/*width: 150px;*/
-	height: 190px;
+.draggable {	
+	min-height: 100px;
+	max-height: 200px;
 	padding: 0.5em; 
 	border: solid 1px gainsboro;
 	text-align: center;
@@ -85,6 +85,10 @@
 #modal_order_view .product_obj,
 #modal_order_view .last-div-total{
 	border-top: 1px solid;
+}
+
+.p-tittle{
+    margin-bottom: 0rem;
 }
 
 @media only screen and (max-width: 991px) and (min-width: 768px){

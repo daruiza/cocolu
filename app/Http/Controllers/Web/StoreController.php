@@ -120,6 +120,17 @@ class StoreController extends Controller
         //validación de credenciales de usuario
         if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);                
         $store = $user->store();        
+        $store->storeheight = json_decode($store->label)->table->StoreHeight;
+        $store->tableheight = json_decode($store->label)->table->TableHeight;
+        $store->selecttable = json_decode($store->label)->table->selectTable;
+        $store->serviceopentable = json_decode($store->label)->table->serviceOpenTable;
+        $store->colorrow = json_decode($store->label)->table->colorRow;
+        $store->colorinactive = json_decode($store->label)->table->colorInactive;
+        $store->ordernew = json_decode($store->label)->order->OrderNew;
+        $store->orderok = json_decode($store->label)->order->OrderOK;
+        $store->orderpay = json_decode($store->label)->order->OrderPay;
+        $store->ordercancel = json_decode($store->label)->order->OrderCancel;        
+                
         $departments = Department::departments();
         $cities = [];
         if(!empty($store->department)){
@@ -140,6 +151,7 @@ class StoreController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         //$this->validator($request->all())->validate();
         if ($this->validator($request->all())->fails()) {
             return Redirect::back()->withErrors($this->validator($request->all()))->withInput();
@@ -149,7 +161,8 @@ class StoreController extends Controller
         if(!empty($request->file('image')))$this->validatorImage(['image'=>$request->file('image')])->validate();
 
         $store = new Store();
-        $store = Store::find($id);        
+        $store = Store::find($id);
+
         //validamos que la tienda sea del usuario
         $user = new User();        
         if($user->validateUserStore($store->id)){                        
@@ -164,9 +177,15 @@ class StoreController extends Controller
         $departments = Department::departments();        
         if(!empty($store->department)){
             $cities = City::cities($store->department);            
-            return view('store.edit',compact('store','departments','cities'))->with('success', $message)->with('data', ['options'=>$user->rol_options()]);
-        }        
-        return view('store.edit',compact('store','departments'))->with('success', $message)->with('data', ['options'=>$user->rol_options()]);
+            return view('store.edit',compact('store','departments','cities'))
+                ->with('success', $message)
+                ->with('data', ['options'=>$user->rol_options()]);
+        }
+
+
+        return view('store.edit',compact('store','departments'))
+            ->with('success', $message)
+            ->with('data', ['options'=>$user->rol_options()]);
     
     }
 

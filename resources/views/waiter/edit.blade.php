@@ -19,7 +19,7 @@
 	                    	<div class="container">
 		                    	<div class="row">
 			                    	<div class="col-md-12">
-			                    		Descripcion de cuenta de mesero apunto de crear
+			                    		Descripcion de cuenta de mesero apunto de editar
 			                    	</div>
 			                    </div>	                    			        		
 	                    	</div>	        		
@@ -33,7 +33,7 @@
             		@include('layouts.alert')
 					
             		<div class="card">
-	                    <div class="card-header">{{ __('form.createWaiter') }}</div>
+	                    <div class="card-header">{{ __('form.editWaiter') }}</div>
 	                    <div class="card-body">
 							
 							<div class="content">

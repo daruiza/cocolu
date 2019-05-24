@@ -21,14 +21,23 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $category = new Category();
+        $category->name = $request->input('name');
+        $category->description = $request->input('description');        
+        $category->active = $request->input('active');
+
+
         $categories = Category::            
-            where('active',1)
-            ->where('rel_store_id',Auth::user()->store()->id)
+            //where('active',1)
+            where('rel_store_id',Auth::user()->store()->id)
+            ->name($category->name)
+            ->description($category->description)            
+            ->active($category->active)            
             ->orderBy('id','ASC')
             ->get();            
-        return view('category.index',compact('categories'))->with('data', []);
+        return view('category.index',compact('categories','category'))->with('data', []);
     }
 
     /**
@@ -61,11 +70,10 @@ class CategoryController extends Controller
             $request->request->add(['rel_store_id' => Auth::user()->store()->id]);            
             $category::create($request->input());
             Session::flash('success', [['CategoryCreateOk']]);
-            return $this->index();
-
+            return redirect('category');
         }  
         Session::flash('danger', [['CategoryCreateNOOk']]);
-        return $this->index();     
+        return redirect('category');   
     }
 
     /**
@@ -74,9 +82,10 @@ class CategoryController extends Controller
      * @param  \App\ModelCoreCategory  $modelCoreCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(ModelCoreCategory $modelCoreCategory)
+    public function show(Request $request,$id)
     {
-        //
+        $category = Category::find($request->input('id'));        
+        return view('category.show',compact('category'))->with('success', [[]])->with('data', []);
     }
 
     /**
@@ -85,9 +94,11 @@ class CategoryController extends Controller
      * @param  \App\ModelCoreCategory  $modelCoreCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(ModelCoreCategory $modelCoreCategory)
+    public function edit(Request $request,$id)
     {
-        //
+        $category = Category::find($request->input('id'));                
+        $order_max = Category::select('order')->max('order');                
+        return view('category.edit',compact('category','order_max'))->with('data', []);
     }
 
     /**
@@ -97,9 +108,23 @@ class CategoryController extends Controller
      * @param  \App\ModelCoreCategory  $modelCoreCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ModelCoreCategory $modelCoreCategory)
-    {
-        //
+    public function update(Request $request,$id)
+    {                
+        $this->validator($request->all())->validate();
+        //validar store
+        if(!Auth::user()->validateUserStore($request->input('store_id'))) {
+          return Redirect::back()->with('danger', [['NO_STORE_OWNER']]);  
+        }
+
+        $category = Category::find($request->input('id'));
+        $category->name=$request->input('name');
+        $category->description=$request->input('description');
+        $category->order=$request->input('order');
+        $category->active=$request->input('active');
+        $category->save();
+
+        Session::flash('success', [['CategoryEditOk']]);
+        return redirect('category');  
     }
 
     /**
@@ -108,7 +133,7 @@ class CategoryController extends Controller
      * @param  \App\ModelCoreCategory  $modelCoreCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ModelCoreCategory $modelCoreCategory)
+    public function destroy(Request $request,$id)
     {
         //
     }

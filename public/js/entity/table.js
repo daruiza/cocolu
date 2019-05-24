@@ -222,16 +222,35 @@ table.prototype.orderPaidResponse = function(result) {
 
     var subnode = document.createElement("div");    
     subnode.setAttribute("class", "row");
+
+    var subsubnode = document.createElement("div");
+    subsubnode.setAttribute("class", "col-sm-12");
+    subsubnode.setAttribute("style","display: flex;flex-wrap: wrap;")   
+
+    var div = document.createElement("div");
+	div.setAttribute("class", "col-sm-1");
+	div.setAttribute("style", "text-align: center;");						
+	var input = document.createElement("input");
+	input.setAttribute("type", "checkbox");
+	input.setAttribute("name", "")		;
+    input.setAttribute("class","form-control control-checkbox-header")	
+    div.appendChild(input);
+	subsubnode.appendChild(div);
     
     var div = document.createElement("div");
-	div.setAttribute("class", "col-sm-12");		
+	div.setAttribute("class", "col-sm-11");		
 	div.setAttribute("style", "text-align: center;"); 
 	var span = document.createElement("span");		
     span.setAttribute("class", "");			    			    
     span.innerHTML ="<b>"+$( "input[name='mesage_producs']" ).val().toUpperCase()+"</b>";
-    div.appendChild(span);		    
-    subnode.appendChild(div);
-    
+    div.appendChild(span);
+    subsubnode.appendChild(div);
+
+    subnode.appendChild(subsubnode);
+
+    //funcionamiento de checkbox global
+    var flat_checkbox = true;
+
     for(obj in result.data.order_product) {
 		var subsubnode = document.createElement("div");    	
 		if(obj%2){
@@ -258,7 +277,8 @@ table.prototype.orderPaidResponse = function(result) {
 		input.setAttribute("name", "status_paid-"+obj+"-"+result.data.order_product[obj].id+"-"+result.data.order_product[obj].order_poduct_id)		
 	    input.setAttribute("class","form-control control-checkbox")
 	    if(result.data.order_product[obj].status_paid == 1){
-	    	input.setAttribute("checked", "checked");	
+	    	input.setAttribute("checked", "checked");
+	    	flat_checkbox = false;	
 	    }		    
 	    div.appendChild(input);			
 	    subsubnode.appendChild(div);
@@ -356,7 +376,7 @@ table.prototype.orderPaidResponse = function(result) {
 	    var span = document.createElement("span");		
 	    span.setAttribute("class", "span-subtotal");			    			    
 	    span.innerHTML = (parseInt(result.data.order_product[obj].price) * parseInt(result.data.order_product[obj].volume)).toLocaleString();
-	    div.appendChild(span);		    
+	    div.appendChild(span);
 	    subsubnode.appendChild(div);
 		
 			
@@ -395,6 +415,25 @@ table.prototype.orderPaidResponse = function(result) {
 			$('.span-total').html(parseInt($('.span-total').html().replace(',',''))-parseInt($($(this).parent().parent().children()[4]).children()[2].innerHTML.replace('.','')));			
 		}
 	});
+
+	if(flat_checkbox){
+		$('.control-checkbox-header').change(function(){
+			$('.control-checkbox').attr('checked', $(this).is( ":checked" ));
+			$( ".control-checkbox" ).prop( "checked", $(this).is( ":checked" ) );
+			//actualizamos el total
+
+			var sum = 0;
+			if($(this).is( ":checked" )){
+				for(i=0;i<$( ".control-checkbox" ).length;i++){
+					sum = sum + parseInt($($( ".control-checkbox" )[i]).parent().parent()[0].children[4].children[2].innerHTML.replace('.',''))	
+				}	
+			}
+
+			$('.span-total').html(sum);		
+			
+		});	
+	}
+	
 }
 
 table.prototype.returnAddProduct = function(result) {	

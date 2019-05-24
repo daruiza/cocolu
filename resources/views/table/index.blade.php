@@ -98,13 +98,11 @@
 			var data = new Array();
 			data['store_id'] = $("#"+id+" input[name=store-id]").val();			
 			data['table_id'] = $("#"+id+" input[name=table-id]").val();				
-			ajaxobject.peticionajax($('#'+id).attr('action'),data,"table.orderPaidResponse");		
-			
-						
+			ajaxobject.peticionajax($('#'+id).attr('action'),data,"table.orderPaidResponse");
 		}		
 
 		$("#containment-wrapper").height($("#containment-wrapper").height()+
-			{!! json_decode(Auth::user()->store()->label,true)['table']['TableHeight'] !!});
+			{!! json_decode(Auth::user()->store()->label,true)['table']['StoreHeight'] !!});
 		
 		/*Multiple Modal*/
 		$(document).on('show.bs.modal', '.modal', function (event) {
@@ -147,6 +145,9 @@
 			border: 1px solid {{ json_decode(Auth::user()->store()->label,true)['table']['colorRow'] }};
 		}
 		*/
+		.draggable { 			
+			height: {{ json_decode(Auth::user()->store()->label,true)['table']['TableHeight'] }}px;			
+		}
 		.row-impar{
 		    background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['colorRow'] }};
 		}
@@ -173,22 +174,29 @@
 		}
 
 		.menu-status-OrderNew{
+			/*
 			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }};
+			*/
 		}
 
 		.status-OrderOK{
+			/*
 			box-shadow: 0 2px 4px 0 {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }},0 2px 10px 0 {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};
+			*/
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }};	
 		}
-		
+		/*
 		.status-OrderCancel{			
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderCancel'] }};
 			color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};	
-		}		
+		}
+		*/		
 
 		.status-OrderPay{			
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderPay'] }};
-			color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};	
+			/*
+			coor: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};	
+			*/
 		}
 
 		.control-checkbox{

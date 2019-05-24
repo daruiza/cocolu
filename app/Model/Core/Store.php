@@ -76,8 +76,57 @@ class Store extends Model
             $this->logo = $fileName_image;
             
         }
-        $this->save();         
+        
+        //label        
+        $label = json_decode($this->label);        
+        if(!empty($data["storeheight"])){
+            $label->table->StoreHeight = $data["storeheight"];            
+        } 
+        if(!empty($data["tableheight"])){
+            $label->table->TableHeight = $data["tableheight"];            
+        } 
+        if(!empty($data["selecttable"])){
+            $label->table->selectTable = $data["selecttable"];          
+        } 
+        if(!empty($data["serviceopentable"])){
+            $label->table->serviceOpenTable = $data["serviceopentable"];          
+        } 
+        if(!empty($data["colorrow"])){
+            $label->table->colorRow = $data["colorrow"];            
+        }
+        if(!empty($data["colorinactive"])){
+            $label->table->colorInactive = $data["colorinactive"];          
+        } 
 
+        if(!empty($data["ordernew"])){
+            $label->order->OrderNew = $data["ordernew"];            
+        } 
+        if(!empty($data["orderok"])){
+            $label->order->OrderOK = $data["orderok"];            
+        } 
+        if(!empty($data["orderpay"])){
+            $label->order->OrderPay = $data["orderpay"];
+            
+        }
+        if(!empty($data["ordercancel"])){
+            $label->order->OrderCancel = $data["ordercancel"];             
+        }
+        
+        $this->label = json_encode($label);
+
+        $this->save();
+        
+        $this->storeheight = $data["storeheight"];
+        $this->tableheight = $data["tableheight"];
+        $this->selecttable = $data["selecttable"];
+        $this->serviceopentable = $data["serviceopentable"];
+        $this->colorrow = $data["colorrow"];
+        $this->colorinactive = $data["colorinactive"];
+        $this->ordernew = $data["ordernew"];
+        $this->orderok = $data["orderok"];
+        $this->orderpay = $data["orderpay"];
+        $this->ordercancel = $data["ordercancel"];         
+        
         return $this;
     }
 

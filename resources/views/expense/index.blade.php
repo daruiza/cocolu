@@ -43,8 +43,33 @@
                 <div class="card-body">
                     <div class="container">
                         <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="page-header">
+
+                                    {!! Form::model($expense,['enctype' => 'multipart/form-data','id'=>'form-expense','route'=>['expense.index'],'method'=>'GET']) !!}
+                                        <div class="form-group form-search">                              
+                                            {{Form::text('name',null,['class'=>'form-control','placeholder'=>__('messages.Name')])}}
+                                        </div>
+                                        <div class="form-group form-search">                              
+                                            {{Form::text('description',null,['class'=>'form-control','placeholder'=>__('messages.Description')])}}
+                                        </div>                                        
+                                        <div class="form-group form-search">
+                                            {{Form::text('clousure',null,['class'=>'form-control','placeholder'=>__('messages.Clousure')])}}
+                                        </div>                                        
+                                        <div class="form-group form-search">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                        
+                                    {{Form::close()}}
+                                    
+                                </div>                                
+                                </div>
+
                             <div class="col-md-12 m-b-md table-container">
-                                <div class="row">
+                                <div class="row table-header">
                                     <div class="col-md-3">{{ __('messages.Name') }}</div>
                                     <div class="col-md-3">{{ __('messages.Description') }}</div>
                                     <div class="col-md-3">{{ __('messages.Value') }}</div>
@@ -63,7 +88,8 @@
                                     </div>                                    
                                 </div>      
                                 @endforeach                                       
-                            </div>                            
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -143,6 +169,35 @@
     .critical_volume{
         border: 2px solid red;
         background-color: #e47b7b;
+    }
+
+    .table-header{
+        border: 1px solid gainsboro;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+    }
+
+    .row-no-active{
+        background: {{ json_decode(Auth::user()->store()->label,true)['table']['colorInactive'] }};
+        color: {{ json_decode(Auth::user()->store()->label,true)['table']['colorRow'] }};
+    }
+    .selected-object{
+        color: #212529
+    }
+
+    form#form-expense{
+        display: flex;            
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-search{
+        margin: 4px;
     }
 
 </style>

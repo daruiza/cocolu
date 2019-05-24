@@ -14,7 +14,7 @@ class AcountsTableSeeder extends Seeder
         \DB::table('acounts')->insert(array(
 			'name'=>'Basic',
 			'tables'=>12,
-			'products'=>48,
+			'products'=>36,
 			'label'=>'{}'			
 			)
 		);

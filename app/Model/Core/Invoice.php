@@ -44,7 +44,17 @@ class Invoice extends Model
         }
     }
 
-    public function scopeClousure($query,$clousure){        
+    public function scopeClousure($query,$clousure){
+        if(count(explode('-',$clousure)) == 2){
+            $date = new DateTime($clousure.'.-01');
+            $date->modify('+1 month');
+            $date->modify('-1 day');            
+            return $query                
+                ->whereBetween('clousures.date_open',[
+                    $clousure."-01".'01 00:00:00',
+                    $date->format('Y-m-d').' 23:59:59'
+                ]);   
+        }        
         if($clousure){            
             return $query                
                 ->whereBetween('clousures.date_open',[

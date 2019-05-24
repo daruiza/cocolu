@@ -50,7 +50,8 @@
 			    $(this).addClass("obstacle");
 			});
 
-			$("#containment-wrapper").height($("#containment-wrapper").height()+125);
+			$("#containment-wrapper").height($("#containment-wrapper").height()+
+			{!! json_decode(Auth::user()->store()->label,true)['table']['StoreHeight'] !!});
 		}
 
 		//table.selectTable('object-table','selected-table');
@@ -85,6 +86,10 @@
 @section('style')
 	<link href="{{ asset('css/custom/table_index.css') }}" rel="stylesheet">    
 	<style type="text/css">
+		
+		.draggable { 			
+			height: {{ json_decode(Auth::user()->store()->label,true)['table']['TableHeight'] }}px;			
+		}
 		.draggable {			
 			cursor: grabbing;	
 		}

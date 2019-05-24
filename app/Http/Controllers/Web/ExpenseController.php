@@ -29,16 +29,24 @@ class ExpenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $expense = new Expense();
+        $expense->name = $request->input('name');
+        $expense->description = $request->input('description');
+        $expense->clousure = $request->input('clousure');                
+
         $expenses = Expense::
             select('expenses.*')
+            ->name($expense->name)
+            ->description($expense->description) 
+            ->clousure($expense->clousure)           
             ->leftJoin('clousures','clousures.id','expenses.clousure_id')
             ->where('clousures.store_id',Auth::user()->store()->id)            
             ->orderBy('expenses.id','ASC')
             ->get();
         
-        return view('expense.index',compact('expenses'))->with('data', []);
+        return view('expense.index',compact('expenses','expense'))->with('data', []);
     }
 
     /**
@@ -87,7 +95,7 @@ class ExpenseController extends Controller
         $expense::create($request->input());
 
         Session::flash('success', [['ExpenseCreateOk']]);
-        return $this->index();
+        return redirect('expense');
     }
 
     /**
@@ -122,7 +130,7 @@ class ExpenseController extends Controller
         if($diff > intval(json_decode(Auth::user()->store()->label,true)['table']['graceTimeExpense'])){            
             //y no podemos editar el gasto, ha pasado el tiempo de gracia
             Session::flash('danger', [['ExpenseEditOutGraceTime']]);
-            return $this->index();
+            return redirect('expense');
         }
         
 
@@ -154,7 +162,7 @@ class ExpenseController extends Controller
         $expense->save();
          
         Session::flash('success', [['ExpenseEditOk']]);
-        return $this->index();   
+        return redirect('expense');
         
     }
 

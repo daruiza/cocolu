@@ -92,5 +92,11 @@ return [
     "InformationProducts" => "Products Information",
     "EnvoiceSaveOk"=>'Invoice Save Ok, :NAME',
     "EnvoiceEditOk"=>'Invoice Edit Ok, :NAME',
+    "Storeheight"=> 'Living room Height',
+    "tableHeight" => 'Table Height',
+    "selectTable" => 'Select Table',
+    "serviceOpenTable" => 'Open Table',
+    "colorRow" => "Color de Fila",
+    "colorInactive" => "Color de Fila Inactiva"
      
 ];

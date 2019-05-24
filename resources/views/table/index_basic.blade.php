@@ -60,7 +60,7 @@
                                             <div class="object-table">
                                                 
                                                 {{ Form::hidden('table-id', $value->id) }}
-    										  	<p>
+    										  	<p class="p-tittle">
                                                     <i class="{{$value->icon}}"> </i>
                                                     {{$value->name}}        
                                                 </p>
@@ -76,9 +76,9 @@
                                                 				
     											@if($value->tableServiceOpen()->count())
     												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
-    												<div><i class="fas fa-clipboard"></i> {{ __('messages.OpenService') }}</div>
+    												<div>{{ __('messages.OpenService') }}</div>
     												<div>{{$value->tableServiceOpen()->first()->date}}</div>
-    												<div>Total a Pagar</div>                         
+    												                      
     											@endif
 
                                             </div>

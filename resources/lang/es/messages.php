@@ -92,6 +92,11 @@ return [
     "InformationProducts" => "Información de Productos",
     "EnvoiceSaveOk"=>'Factura Almacenada Correctamente, :NAME',
     "EnvoiceEditOk"=>'Factura Editada Correctamente, :NAME',
-    
+    "Storeheight" => 'Altura de Salón',
+    "tableHeight" => 'Altura de Mesa',
+    "selectTable" => 'Mesa seleccionada',
+    "serviceOpenTable" => 'Mesa Ocupada',
+    "colorRow" => "Row Color",
+    "colorInactive" => "Row Color Inactive"
     
 ];

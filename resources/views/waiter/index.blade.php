@@ -76,9 +76,9 @@
                                         </div>
                                     {{Form::close()}}
                                     
+                                </div>                                
                                 </div>
                                 
-                            </div>
 		                    	<div class="col-md-12 m-b-md table-container">
 		                    		<div class="row table-header">
                                         <div class="col-md-3">{{ __('messages.Name') }}</div>

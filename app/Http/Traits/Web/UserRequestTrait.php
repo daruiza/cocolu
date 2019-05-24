@@ -24,17 +24,26 @@ trait UserRequestTrait
     public function resetPassword(Request $request)
     {
         $user = User::findOrFail($request->input('id'));
-    	if ($this->validatorPassword($request->all())->fails()) {    		
+    	if ($this->validatorPassword($request->all())->fails()) {
+            
     		$message[0][0] = 'editPasswordNOOK';
     		return view('user.passwords.reset')
-            ->with(['token' => $request->input('_token'),'options'=>$user->rol_options(), 'danger'=> $message])
+            ->with(['token' => $request->input('_token'),
+                    'options'=>$user->rol_options(),
+                    'danger'=> $message])
+            ->with('data', ['options'=>$user->rol_options()])
             ->withErrors($this->validatorPassword($request->all()));
 		}
 
         $user->password = Hash::make($request->input('password'));;
         $user->save();
         $message[0][0] = 'editPasswordOK';
-        return view('user.passwords.reset')->with(['token' => $request->input('_token'),'options'=>$user->rol_options(), 'success'=> $message])->withErrors($this->validatorPassword($request->all()));
+        return view('user.passwords.reset')
+            ->with(['token' => $request->input('_token'),
+                    'options'=>$user->rol_options(),
+                    'success'=> $message])
+            ->with('data', ['options'=>$user->rol_options()])
+            ->withErrors($this->validatorPassword($request->all()));
         
     }
 

@@ -17,10 +17,18 @@ class RolsTableSeeder extends Seeder
 			'label'=>'{"options":["editProfile","passwordChange","acountSummary","termsConditions"]}'			
 			)
 		);
+		/*
 		\DB::table('rols')->insert(array(
 			'name'=>'Administrador',
 			'description'=>'admin',
 			'label'=>'{"options":["editProfile","editStore","passwordChange","acountSummary","sendSuggestions","termsConditions"],"options_dashboard":["consultClousure","alertStock","topProducts","salesForWaiter","editClousure"]}'
+			)
+		);
+		*/
+		\DB::table('rols')->insert(array(
+			'name'=>'Administrador',
+			'description'=>'admin',
+			'label'=>'{"options":["editProfile","editStore","passwordChange"],"options_dashboard":["consultClousure","alertStock","topProducts","salesForWaiter","editClousure"]}'
 			)
 		);
 		\DB::table('rols')->insert(array(
