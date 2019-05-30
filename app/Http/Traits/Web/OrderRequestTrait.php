@@ -96,7 +96,7 @@ trait OrderRequestTrait
                 'order_product.ingredients',
                 'order_product.volume',
                 'order_product.price',
-                'products.name',
+                'products.name'
                 )
             ->leftJoin('orders','order_product.order_id','orders.id')
             ->leftJoin('products','order_product.product_id','products.id')

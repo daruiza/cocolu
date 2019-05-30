@@ -77,8 +77,8 @@
 		                    		<div class="row table-header">
                                         <div class="col-md-3">{{ __('messages.Name') }}</div>
                                         <div class="col-md-4">{{ __('messages.Description') }}</div>
-                                        <div class="col-md-3">{{ __('messages.Order') }}</div>
-                                        <div class="col-md-2">{{ __('messages.Father') }}</div>
+                                        <div class="col-md-2">{{ __('messages.Order') }}</div>
+                                        <div class="col-md-3">{{ __('messages.Father') }}</div>
                                     </div>   
 			                    	@foreach($categories as $key => $value)                                        
 			                    		<div class="row object-category
@@ -87,8 +87,8 @@
                                             {{ Form::hidden('product-id', $value->id) }}
 											<div class="col-md-3">{{$value->name}}</div>
                                             <div class="col-md-4">{{$value->description}}</div>
-                                            <div class="col-md-3">{{$value->order}}</div>
-                                            <div class="col-md-2">{{$value->categoryFather()}}</div>
+                                            <div class="col-md-2">{{$value->order}}</div>
+                                            <div class="col-md-3">{{$value->categoryFather()}}</div>
 										</div>										
 			                    	@endforeach
 

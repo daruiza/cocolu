@@ -102,7 +102,7 @@ class TableController extends Controller
      */
     public function show(Request $request,$id)
     {
-        $table = Table::find($request->input('id'));        
+        $table = Table::find($request->input('id'));                
         return view('table.show',compact('table'))->with('success', [[]])->with('data', []);        
     }
 

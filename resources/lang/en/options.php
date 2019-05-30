@@ -23,5 +23,6 @@ return [
 	"topProducts"=>"Top Products",
 	"salesForWaiter"=>"Sales for Waiter",
 	"changepassword"=> "Change Password",
-	"orderPaid" => "Paid Orders"
+	"orderPaid" => "Paid Orders",
+	"BottonSave" => "Save",
 ];

@@ -95,8 +95,10 @@ return [
     "Storeheight"=> 'Living room Height',
     "tableHeight" => 'Table Height',
     "selectTable" => 'Select Table',
-    "serviceOpenTable" => 'Open Table',
-    "colorRow" => "Color de Fila",
-    "colorInactive" => "Color de Fila Inactiva"
+    "serviceOpenTable" => 'Open Table',    
+    "colorRow" => "Row Color",
+    "colorInactive" => "Row Color Inactive",
+    "Father" => "Father category",
+    "TableShow" => "Show table",
      
 ];

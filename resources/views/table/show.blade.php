@@ -19,23 +19,35 @@
 								<li class="list-group-item ">
 									<div><i class="{{$table->icon}}">  </i> {{$table->name}}</div>
 									<div>{{$table->description}}</div>										
-								</li>
+								</li>								
+									@foreach(json_decode($table->label)->options as $option)
+										@if($option == "orderCreate")
+											@if($table->tableServiceOpen()->count())
+												<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
+													{{ __('messages.'. $option) }} 	
+												</li>
+											@endif
+										@else
+											<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
+													{{ __('messages.'. $option) }} 	
+											</li>
+										@endif
+									@endforeach
 								
-								@foreach(json_decode($table->label)->options as $option)
-									<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
-										{{ __('messages.'. $option) }} 	
-									</li>
-								@endforeach
 								
 								<form id="serviceCreate" action="{{ route('service.create',$table->id) }}" method="GET" style="display: none;">
 									<input type="hidden" name="id" value="{{ $table->id }}">									
 								</form>
+
+								<form id="orderCreate" method="GET" action="http://localhost/backend/cocolu/public/order/create" accept-charset="UTF-8" id="table1">
+                                    <input name="store-id" type="hidden" value="{{$table->store_id}}">
+                                    <input name="table-id" type="hidden" value="{{$table->id}}">                          
+                                </form>
 							</ul>      		
 	                    </div>	                    
 	                </div>
 
-                    <form id="createService" action="{{ route('service.create') }}" method="GET" style="display: none;">                                
-                    </form>
+                    
 
             	</div>           
             	<div class="col-md-8">

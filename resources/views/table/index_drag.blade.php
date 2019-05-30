@@ -11,7 +11,7 @@
         	<div class="col-md-3">
     			<a class="btn btn-primary" href="javascript: table_drag_save_submit('table-drag-save-form')">
 			    	<i class=""></i>
-			        {{ __('messages.BottonSave') }}
+			        {{ __('options.BottonSave') }}
 			    </a>
 			    {!! Form::open(array('id'=>'table-drag-save-form','route' =>['table.savedrag',Auth::user()->store()->id],'method' =>'POST')) !!}
 			    	{!! Form::hidden('data','') !!}			    	

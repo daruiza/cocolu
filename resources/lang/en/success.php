@@ -5,5 +5,9 @@ return [
 	"userOK" => "Your account is ready. We can start!",
 	"userIN" => "That good to have you back.",
 	"editUserOK" => "Done! Your user profile has been correctly edited",
-	"editStoreOK" => "Done!, your store has been correctly edited"
+	"editStoreOK" => "Done!, your store has been correctly edited",
+	"OK" => "Done!",
+	"TableEditOk" => "Table Edit OK",
+	"WaiterEditOk" => "Excellent, your server was edited correctly",
+	"SERVICE_NEW_OK" => "Super! the service was created correctly",
 ];

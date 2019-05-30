@@ -96,7 +96,9 @@ return [
     "tableHeight" => 'Altura de Mesa',
     "selectTable" => 'Mesa seleccionada',
     "serviceOpenTable" => 'Mesa Ocupada',
-    "colorRow" => "Row Color",
-    "colorInactive" => "Row Color Inactive"
+    "colorRow" => "Color de Fila",
+    "colorInactive" => "Color de Fila Inactiva",
+    "Father" => "Categoria Padre",
+    "TableShow" => "Vista de Tabla",
     
 ];
