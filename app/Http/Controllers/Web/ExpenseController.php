@@ -76,7 +76,7 @@ class ExpenseController extends Controller
           return Redirect::back()->with('danger', [['NO_STORE_OWNER']]);  
         }
 
-         if(!empty($request->file('image'))){
+        if(!empty($request->file('image'))){
             $this->validatorImage(['image'=>$request->file('image')])->validate();
              if($request->file('image')->isValid()){
                 $destinationPath = 'users/'.Auth::user()->id.'/supports';
@@ -104,9 +104,13 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        //
+        $expense = Expense::find($request->input('id'));        
+        
+        return view('expense.show',compact('expense'))
+            ->with('success', [[]])
+            ->with('data', []);
     }
 
     /**

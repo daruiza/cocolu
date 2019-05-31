@@ -176,8 +176,9 @@
         </main>
 
         @yield('modal')
-        <!--Bootatrap JS, Popper.js, and jQuery-->
-        
+        @include('layouts.modal_alert')        
+
+        <!--Bootatrap JS, Popper.js, and jQuery-->        
         <script type="text/javascript" src="{{ url('js/jquery.min.js') }}"></script>        
         <script type="text/javascript" src="{{ url('js/jquery-ui.min.js') }}"></script>
         <script src="{{ asset('js/popper.min.js') }}"></script> 

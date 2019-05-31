@@ -11,4 +11,5 @@ return [
     "editPasswordNOOK" => "¡No te preocupes!, solo que el campo contraseña es especial",
     "NumberEnvoiceNowExist"=>'El número de la facruta ya existe para el Proveedor, :NAME',
     "EnvoiceNotEdit"=>"Factura No puede ser Editada - esta fuera del Cierre , :NAME",
+    "ExpenseEditOutGraceTime" => "Edición de Gastos fuera del tiempo de gracia",
 ];

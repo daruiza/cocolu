@@ -24,12 +24,12 @@
 										@if($option == "orderCreate")
 											@if($table->tableServiceOpen()->count())
 												<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
-													{{ __('messages.'. $option) }} 	
+													{{ __('options.'. $option) }} 	
 												</li>
 											@endif
 										@else
 											<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
-													{{ __('messages.'. $option) }} 	
+													{{ __('options.'. $option) }} 	
 											</li>
 										@endif
 									@endforeach

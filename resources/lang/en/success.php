@@ -10,4 +10,7 @@ return [
 	"TableEditOk" => "Table Edit OK",
 	"WaiterEditOk" => "Excellent, your server was edited correctly",
 	"SERVICE_NEW_OK" => "Super! the service was created correctly",
+	"workClousureOK" => "Excellent! you have closed the labor day",
+	"TableCreateOk" => "Table created successfully",
+	"tableDeleteOk" => "Table deleted successfully",
 ];

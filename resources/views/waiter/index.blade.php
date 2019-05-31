@@ -128,8 +128,9 @@
             if($("#"+id+" input[name=id]").val() !== ""){
                 $('#'+id)[0].submit();
                 return true;
-            }
-            alert("{{ __('messages.TableSelectNone') }}");
+            }            
+            $('#modal-alert .content-text').html("{{ __('messages.WaiterSelectNone') }}");
+            $("#modal-alert").modal('show');
             return false;           
         }
 
@@ -138,24 +139,32 @@
                 $('#'+id)[0].submit();
                 return true;
             }
-            alert("{{ __('messages.TableSelectNone') }}");
+            $('#modal-alert .content-text').html("{{ __('messages.WaiterSelectNone') }}");
+            $("#modal-alert").modal('show');
             return false;           
         }
 
         function waiter_destroy_submit(id){          
-            if(confirm("{{ __('messages.TableConfirmDestroy') }}")){
-                if($("#"+id+" input[name=id]").val() !== ""){
-                $('#'+id)[0].submit();
-                    return true;
-                }
-                alert("{{ __('messages.TableSelectNone') }}");
-                return false;
+            if($("#"+id+" input[name=id]").val() !== ""){
+                $('#modal-confirm .submit').attr('form',id);
+                $('#modal-confirm .content-text').html("{{ __('messages.ConfirmOption') }}");
+                $('#modal-confirm').modal('show');              
+                return false;               
             }
+            $('#modal-alert .content-text').html("{{ __('messages.WaiterSelectNone') }}");
+            $("#modal-alert").modal('show');
             return false;
         }
 
         function waiter_changepassword_submit(id){
-            $('#'+id)[0].submit();
+            if($("#"+id+" input[name=id]").val() !== ""){                
+                $('#'+id)[0].submit();
+                return true;
+            }
+            $('#modal-alert .content-text').html("{{ __('messages.WaiterSelectNone') }}");
+            $("#modal-alert").modal('show');
+            return false;           
+            
         }
     </script>   
 @endsection

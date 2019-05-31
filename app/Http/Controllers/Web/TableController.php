@@ -152,8 +152,19 @@ class TableController extends Controller
      */
     public function destroy(Request $request,$id)
     {
+        //lo mejor es no destriur sino, desactivar
+        $table = Table::find($request->input('id'));
+        
+        if(!Auth::user()->validateUserStore($table->store_id)){            
+            Session::flash('danger', [['NO_STORE_OWNER']]);
+            return redirect('product');
+        }
+        
+        $table->active = 0;
+        $table->save();
 
-        return 'destroy';
+        Session::flash('success', [['tableDeleteOk']]);
+        return redirect('table');
     }
 
     protected function validator(array $data)

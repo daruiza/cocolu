@@ -152,9 +152,12 @@ class InvoiceController extends Controller
      * @param  \App\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(Invoice $invoice)
+    public function show(Request $request,$id)
     {
-        //
+        $invoice = Invoice::find($request->input('id'));        
+        return view('invoice.show',compact('invoice'))
+            ->with('success', [[]])
+            ->with('data', []);
     }
 
     /**

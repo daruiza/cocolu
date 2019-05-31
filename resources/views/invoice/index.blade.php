@@ -130,8 +130,9 @@
         if($("#"+id+" input[name=id]").val() !== ""){
             $('#'+id)[0].submit();
             return true;
-        }
-        alert("{{ __('messages.CategorySelectNone') }}");
+        }        
+        $('#modal-alert .content-text').html("{{ __('messages.InvoiceSelectNone') }}");
+        $("#modal-alert").modal('show');
         return false;           
     }
 
@@ -140,20 +141,22 @@
             $('#'+id)[0].submit();
             return true;
         }
-        alert("{{ __('messages.CategorySelectNone') }}");
+        $('#modal-alert .content-text').html("{{ __('messages.InvoiceSelectNone') }}");
+        $("#modal-alert").modal('show');
         return false;           
     }
 
-    function invoice_destroy_submit(id){          
-        if(confirm("{{ __('messages.CategoryConfirmDestroy') }}")){
-            if($("#"+id+" input[name=id]").val() !== ""){
-            $('#'+id)[0].submit();
-                return true;
-            }
-            alert("{{ __('messages.CategorySelectNone') }}");
-            return false;
+    function invoice_destroy_submit(id){
+
+        if($("#"+id+" input[name=id]").val() !== ""){
+            $('#modal-confirm .submit').attr('form',id);
+            $('#modal-confirm .content-text').html("{{ __('messages.ConfirmOption') }}");
+            $('#modal-confirm').modal('show');              
+            return false;               
         }
-        return false;
+        $('#modal-alert .content-text').html("{{ __('messages.InvoiceSelectNone') }}");
+        $("#modal-alert").modal('show');
+        return false;        
     }
 
     var providers = document.getElementById("providers");

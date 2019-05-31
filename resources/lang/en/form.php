@@ -57,4 +57,8 @@ return [
 	"InvoiceOptions" => "Invoice Options",
 	"InvoiceIndex" => "Index Invoice",
 	"indexInvoice" => "Invoices Table",
+	"descriptionExpense" => "Description expense",
+    "createExpense" => "Create expense",
+    "InvoiceCreate" => "Descripción de Factura",
+    "createInvoice" => "Crear Factura",
 ];

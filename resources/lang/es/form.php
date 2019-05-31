@@ -57,4 +57,6 @@ return [
 	"InvoiceOptions" => "Opciones de Factura",
 	"InvoiceIndex" => "Menu de Factura",
 	"indexInvoice" => "Tabla de Facturas",
+	"descriptionExpense" => "Description de Gastos",
+    "createExpense" => "Crear Gasto",
 ];

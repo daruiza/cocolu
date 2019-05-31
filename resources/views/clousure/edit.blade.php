@@ -43,7 +43,7 @@
                 	 			<div>{{ $user->store()->clousureOpen()->name }}</div>	
                 	 		</label>
                 	 		<label for="date" class="col-md-3 col-form-label text-md-center">
-                	 			<div> {{ __('messages.Date') }} </div>	
+                	 			<div> {{ __('messages.StartDate') }} </div>	
                 	 			<div>{{ $user->store()->clousureOpen()->date_open }}</div>
                 	 		</label>
                 	 		<label for="date" class="col-md-6 col-form-label text-md-center">
@@ -106,8 +106,7 @@
             </div>
         </div>
  	</div>
-</div>
-    
+</div>    
 
 <div id="modal-confirm" class="modal" tabindex="-1" role="dialog" >
 	<div class="modal-dialog modal-sm" role="document">

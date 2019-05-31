@@ -25,4 +25,7 @@ return [
 	"changepassword"=> "Change Password",
 	"orderPaid" => "Paid Orders",
 	"BottonSave" => "Save",
+	"serviceCreate" => " Create service",
+	"orderCreate" => "Create order",
+	"Accept" => "Accept",
 ];

@@ -22,6 +22,11 @@ class InvoiceProduct extends Model
         if(array_key_exists('volume',$data))$this->volume = $data['volume'];        
         $this->save();
     }
+
+    public function product(){
+        //return $this->hasOne(::class);
+        return $this->belongsTo(Product::class);
+    }
 }
 
 

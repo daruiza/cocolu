@@ -85,6 +85,7 @@ class Invoice extends Model
     public function products(){
         //no usa el namespace
         return $this->hasMany(InvoiceProduct::class);
+        //->leftJoin('invoice_product','products.id','invoice_product.product_id');
         //return $this->belongsToMany(Product::class);
     }
 

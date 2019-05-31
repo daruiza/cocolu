@@ -25,4 +25,7 @@ return [
 	"changepassword"=> "Cambiar Contraseña",
 	"orderPaid" => "Pagar Ordenes",
 	"BottonSave" => "Guardar cambios",
+	"serviceCreate" => "Crear servicio",
+	"orderCreate" => "Crear orden",
+	"Accept" => "Aceptar",
 ];

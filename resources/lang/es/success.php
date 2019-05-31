@@ -10,4 +10,7 @@ return [
 	"TableEditOk" => "Súper, tu mesa se editó correctamente",
 	"WaiterEditOk" => "Excelente, tu mesero se editó correctamente",
 	"SERVICE_NEW_OK" => "Super! el servicio se creo correctamente",
+	"workClousureOK" => "Excelente! Has cerrado el día de labor",
+	"TableCreateOk" => "Mesa creada satisfactoriamente",
+	"tableDeleteOk" => "Mesa eliminada correctamente",
 ];

@@ -18,7 +18,7 @@ class CreateExpensesTable extends Migration
             $table->string('name')->nullable()->default(null);
             $table->string('description',2048)->nullable()->default(null);
             $table->integer('value')->default(0);
-            $table->string('support', 128)->nullable();
+            $table->string('support', 128)->default('default.png');
             $table->integer('clousure_id')->unsigned();            
             $table->foreign('clousure_id')->references('id')->on('clousures')->onDelete('cascade')
             ->onUpdate('cascade');            

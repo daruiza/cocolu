@@ -11,4 +11,5 @@ return [
     "editPasswordNOOK" => "Do not worry, just that the password field is special",
     "NumberEnvoiceNowExist"=>'Number existe, :NAME',
     "EnvoiceNotEdit"=>"Invoice Can Not be Edit - it is out of Clousure , :NAME",
+    "ExpenseEditOutGraceTime" => "Edit Expense Out Grace Time",
 ];
