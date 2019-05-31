@@ -20,7 +20,7 @@ class CreateTablesTable extends Migration
             $table->string('icon', 32)->default(null);
             $table->string('label', 128)
                 ->nullable()
-                ->default('{"options":["addTable","editTable"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}');            
+                ->default('{"options":["serviceCreate","serviceCreate"],"position":["","","",""],"logo":"table.png","icon":"fas fa-list"}');            
             $table->string('order', 16)->default(1);
             $table->boolean('active')->default(true);         
             $table->timestamps();

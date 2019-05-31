@@ -77,7 +77,7 @@ trait ProductRequestTrait
         
         $product = Product::find($request->input('id'));        
         if(Auth::user()->validateUserStore($product->store_id)){            
-            return view('product.editStock',compact('product'))->with('data', []);          
+            return view('product.editstock',compact('product'))->with('data', []);          
         }
         
         Session::flash('danger', [['ProductEditStockNOOk']]);

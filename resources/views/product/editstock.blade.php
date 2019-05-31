@@ -19,21 +19,7 @@
                 </div>                            
             </div>
             </div>
-
-            <div class="col-md-12">
-            <div class="card card-menu-table">
-                <div class="card-header">{{ __('form.ProductEditStockMenu') }}</div>
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                'Edit Stock'
-                            </div>
-                        </div>                                                  
-                    </div>                  
-                </div>                            
-            </div>
-            </div>
+            
         </div>
 
         <div class="col-md-9">            		

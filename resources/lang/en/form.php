@@ -61,4 +61,7 @@ return [
     "createExpense" => "Create expense",
     "InvoiceCreate" => "Descripción de Factura",
     "createInvoice" => "Crear Factura",
+    "ProductEditStock"=>"Description EPStock",
+    "EditStockProduct"=>"Edit Product Stock",
+    
 ];

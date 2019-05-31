@@ -59,4 +59,6 @@ return [
 	"indexInvoice" => "Tabla de Facturas",
 	"descriptionExpense" => "Description de Gastos",
     "createExpense" => "Crear Gasto",
+    "ProductEditStock"=>"Descripción Edición",
+    "EditStockProduct"=>"Editar inventario",
 ];
