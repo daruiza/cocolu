@@ -50,7 +50,7 @@ product.prototype.addIngredient = function(objectClass,selectClass) {
     var input = document.createElement("input");
     input.setAttribute("class", "form-control");
     input.setAttribute("type", "number");
-    input.setAttribute("step", "0.5");
+    input.setAttribute("step", "0.05");
     input.setAttribute("min", "0");    
     input.setAttribute("name", "item_volume_"+n);
     input.setAttribute("placeholder", $( "input[name='input_placeholder_volume']" ).val());

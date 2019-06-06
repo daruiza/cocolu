@@ -209,10 +209,14 @@ class Product extends Model
         $products = Array();
         $products_array = Product::getProducts()
             ->leftJoin('category_product','products.id','product_id')
-            ->where('category_product.category_id',1)
-            ->orderBy('products.name','ASC')->get();                
+            ->leftJoin('categories','category_product.category_id','categories.id')
+            ->where('categories.category_id',0)
+            ->orderBy('products.name','ASC')
+            ->select('products.*')
+            ->get();
+                    
         foreach ($products_array as $key => $value) {
-            $products[$value->product_id] = $value->name.' - ['.$value->unity->name.']';
+            $products[$value->id] = $value->name.' - ['.$value->unity->name.']';
         }
         return $products;
     }

@@ -86,7 +86,7 @@
                                         @if($key%2) @else row-impar @endif
                                         @if($value->active)  @else row-no-active @endif">
                                         {{ Form::hidden('product-id', $value->id) }}
-										<div class="col-md-3">{{$value->name}}</div>
+										<div class="col-md-3">{{$value->name}} - [{{$value->unity->name}}]</div>
                                         <div class="col-md-2">${{number_format($value->price)}}</div>
                                         <div class="col-md-2">${{number_format($value->buy_price)}}</div> 
                                         <div class="col-md-2 
