@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Model\Core\Product;
+use App\Model\Core\Clousure;
 use App\Model\Core\Category;
 use App\Model\Core\Stock;
 use App\Model\Core\Unity;
@@ -124,10 +125,16 @@ class ProductController extends Controller
                 );
             }
 
+            $cousure = Clousure::
+                where('store_id',Auth::user()->store()->id)
+                ->where('open',1)
+                ->get();
+
             //relation to stock
             $stock = new Stock();
             $request->request->add(['product_id' => $product->id]);
-            $request->request->add(['shift' => 1]);//entrada            
+            $request->request->add(['shift' => 1]);//entrada  
+            $request->request->add(['rel_clousure_id' => $cousure->first()->id]);
             $today = new DateTime();
             $today = $today->format('Y-m-d H:i:s'); 
             $request->request->add(['date' => $today]);     

@@ -104,6 +104,10 @@ class InvoiceController extends Controller
             $invoice = new Invoice();
             $invoice->storeInvoice($request,$provider->id); 
 
+            $cousure = Clousure::
+                where('store_id',Auth::user()->store()->id)
+                ->where('open',1)
+                ->get();
             //relación de detalles
             foreach ($array as $key => $value) {
 
@@ -122,6 +126,7 @@ class InvoiceController extends Controller
                         'product_id' =>  $value['product'],
                         'volume' =>  $value['volume'],
                         'shift' =>  1, 
+                        'rel_clousure_id' => $cousure->first()->id,
                         'date' =>  $today
                     ));
                 }
@@ -196,6 +201,11 @@ class InvoiceController extends Controller
         $invoice = Invoice::select()
             ->where('id',$id)            
             ->get();
+            
+        $cousure = Clousure::
+            where('store_id',Auth::user()->store()->id)
+            ->where('open',1)
+            ->get();    
 
         if(!empty($invoice->first())){
             //relación de detalles
@@ -211,6 +221,7 @@ class InvoiceController extends Controller
                         'product_id' =>  $value['product_id'],
                         'volume' =>  $value['volume'],
                         'shift' =>  0,
+                        'rel_clousure_id' => $cousure->first()->id,
                         'date' =>  $today
                     ));
                 }

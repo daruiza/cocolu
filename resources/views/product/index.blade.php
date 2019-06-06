@@ -75,20 +75,26 @@
 
 	                    	<div class="col-md-12 m-b-md table-container">
 	                    		<div class="row table-header">
-                                    <div class="col-md-3">{{ __('messages.Name') }}</div>
+                                    <div class="col-md-4">{{ __('messages.Name') }}</div>
                                     <div class="col-md-2">{{ __('messages.Price') }}</div>
-                                    <div class="col-md-2">{{ __('messages.Buy_Price') }}</div>
+                                    <!--<div class="col-md-2">{{ __('messages.Buy_Price') }}</div>-->
                                     <div class="col-md-2">{{ __('messages.Volume') }}</div>
-                                    <div class="col-md-3">{{ __('form.Categories') }}</div>
+                                    <div class="col-md-4">{{ __('form.Categories') }}</div>
                                 </div>   
 		                    	@foreach($products as $key => $value)                                        
 		                    		<div class="row object-product 
                                         @if($key%2) @else row-impar @endif
                                         @if($value->active)  @else row-no-active @endif">
                                         {{ Form::hidden('product-id', $value->id) }}
-										<div class="col-md-3">{{$value->name}} - [{{$value->unity->name}}]</div>
-                                        <div class="col-md-2">${{number_format($value->price)}}</div>
-                                        <div class="col-md-2">${{number_format($value->buy_price)}}</div> 
+										<div class="col-md-4">{{$value->name}} - [{{$value->unity->name}}]</div>
+                                        <div class="col-md-2"
+                                            data-toggle="tooltip" 
+                                            title="{{__('messages.Buy_Price').' '.number_format($value->buy_price)}}">
+                                            ${{number_format($value->price)}}
+                                        </div>
+                                        <!--
+                                            <div class="col-md-2">${{number_format($value->buy_price)}}</div>
+                                        -->
                                         <div class="col-md-2 
                                         @if($value->critical_volume_calc()) critical_volume  @endif"
                                         @if($value->critical_volume_calc()) 
@@ -96,7 +102,7 @@
                                             title="{{__('messages.CriticalVolume').' '.number_format($value->critical_volume)}}!"
                                         @endif >{{number_format($value->volume)}}
                                         </div> 
-                                        <div class="col-md-3">{{$value->categories_toString()}}</div>
+                                        <div class="col-md-4">{{$value->categories_toString()}}</div>
 									</div>										
 		                    	@endforeach
 	                    	</div>

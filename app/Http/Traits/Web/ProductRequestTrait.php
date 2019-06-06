@@ -3,6 +3,7 @@
 namespace App\Http\Traits\Web;
 
 use App\Model\Core\Product;
+use App\Model\Core\Clousure;
 use App\Model\Core\Provider;
 use App\Model\Core\Invoice;
 use App\Model\Core\Stock;
@@ -95,13 +96,19 @@ trait ProductRequestTrait
         
             $volume = $request->input('volume_change');
 
+            $cousure = Clousure::
+                where('store_id',Auth::user()->store()->id)
+                ->where('open',1)
+                ->get();
+
             //edit stock
             $stock = new Stock();
             $request->request->add(['product_id' => $request->input('product_id')]);                    
             $today = new DateTime();
             $today = $today->format('Y-m-d H:i:s'); 
             $request->request->add(['date' => $today]);       
-            $request->request->add(['shift' => 1]);//entrada        
+            $request->request->add(['shift' => 1]);//entrada
+            $request->request->add(['rel_clousure_id' => $cousure->first()->id]);       
             if(intval($request->input('volume_change'))<0){            
                 $request->request->add(['shift' => 0]);//sale
                 $volume = abs(intval($volume));

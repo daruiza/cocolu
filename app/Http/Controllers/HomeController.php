@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Core\Order;
 use App\Model\Core\Product;
+use App\Model\Core\Stock;
 use App\Model\Core\Expense;
 use App\Model\Core\Clousure;
 
@@ -69,6 +70,9 @@ class HomeController extends Controller
 
                 //productos consumidos
                 $products = Product::productByClousure($clousure);
+
+                //consumo total de productos e ingredientes
+                $ingredients = Stock::productByClousure($clousure);
 
                 //gastos
                 $totalexpense = Expense::totalexpenseClousure($clousure);

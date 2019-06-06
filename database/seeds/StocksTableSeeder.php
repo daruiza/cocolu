@@ -14,49 +14,56 @@ class StocksTableSeeder extends Seeder
         \DB::table('stocks')->insert(array(        	
 			'volume'=>4500.00,									
 			'shift'=>1,			
-			'product_id' => 1
+			'product_id' => 1,
+            'rel_clousure_id' =>1
 			)
 		);
 
         \DB::table('stocks')->insert(array(         
             'volume'=>500.00,                                  
             'shift'=>1,         
-            'product_id' =>2
+            'product_id' =>2,
+            'rel_clousure_id' =>1
             )
         );
 
         \DB::table('stocks')->insert(array(         
             'volume'=>45.00,                                  
             'shift'=>1,         
-            'product_id' =>3
+            'product_id' =>3,
+            'rel_clousure_id' =>1
             )
         );
 
         \DB::table('stocks')->insert(array(         
             'volume'=>2000.00,                                  
             'shift'=>1,         
-            'product_id' =>4
+            'product_id' =>4,
+            'rel_clousure_id' =>1
             )
         );
 
         \DB::table('stocks')->insert(array(         
             'volume'=>2000.00,                                  
             'shift'=>1,         
-            'product_id' =>5
+            'product_id' =>5,
+            'rel_clousure_id' =>1
             )
         );
 
         \DB::table('stocks')->insert(array(         
             'volume'=>95.00,                                  
             'shift'=>1,         
-            'product_id' =>6
+            'product_id' =>6,
+            'rel_clousure_id' =>1
             )
         );
 
         \DB::table('stocks')->insert(array(         
             'volume'=>95.00,                                  
             'shift'=>1,         
-            'product_id' =>7
+            'product_id' =>7,
+            'rel_clousure_id' =>1
             )
         );
     }

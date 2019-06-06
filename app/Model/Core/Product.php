@@ -374,6 +374,7 @@ class Product extends Model
         ->leftJoin('order_product','orders.id','order_product.order_id')
         ->leftJoin('products','order_product.product_id','products.id') 
         ->where('clousures.id',$clousure->id)
+        ->where('products.store_id',Auth::user()->store()->id)
         ->groupBy('products.id')      
         ->get();    
         foreach ($products as $key => $product) {

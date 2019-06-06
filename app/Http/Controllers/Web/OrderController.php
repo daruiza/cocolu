@@ -7,6 +7,7 @@ use App\Model\Core\Order;
 use App\Model\Core\Stock;
 use App\Model\Core\Waiter;
 use App\Model\Core\Product;
+use App\Model\Core\Clousure;
 use App\Model\Core\OrderProduct;
 
 use Illuminate\Http\Request;
@@ -176,7 +177,11 @@ class OrderController extends Controller
         
         //2. descontar de inventario, 2 procesos (movimiento y descuento)
         //hay que buscar la relación del producto y el ingrediente
-        
+        $cousure = Clousure::
+            where('store_id',Auth::user()->store()->id)
+            ->where('open',1)
+            ->get();
+
         foreach ($products as  $key => $value) {           
             //primero descontamos en stock            
             if($value['buy_price']){
@@ -184,7 +189,9 @@ class OrderController extends Controller
                 $stock->storeStockProduct(array(
                     'product_id' =>  $value['produt_id'],
                     'volume' =>  $value['volume'],
-                    'shift' =>  0, 
+                    'shift' =>  0,
+                    'rel_clousure_id' => $cousure->first()->id,
+                    'description'=>'sold',
                     'date' =>  $today
                 ));
             }
@@ -200,6 +207,8 @@ class OrderController extends Controller
                             'volume_product' =>  $value['volume'],
                             'suggestion'=>$sub_value['suggestion'],                        
                             'shift' =>  0, 
+                            'rel_clousure_id' => $cousure->first()->id,
+                            'description'=>'sold',
                             'date' =>  $today
                         ));
 
@@ -227,7 +236,9 @@ class OrderController extends Controller
                             'ingredient_id'=>$sub_value['ingredient_id'],
                             'rel_id'=>$sub_value['rel_id'],
                             'volume_product' =>  $value['volume'],                      
-                            'shift' =>  0, 
+                            'shift' =>  0,
+                            'rel_clousure_id' => $cousure->first()->id,
+                            'description'=>'sold',
                             'date' =>  $today                        
                         ));
 

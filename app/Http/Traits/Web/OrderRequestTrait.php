@@ -5,14 +5,20 @@ namespace App\Http\Traits\Web;
 use App\Model\Core\Table;
 use App\Model\Core\Stock;
 use App\Model\Core\Product;
+use App\Model\Core\Clousure;
 use App\Model\Core\OrderProduct;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 trait OrderRequestTrait
 {
 	public function editStockAndInventary($order, $description, $opt, $shift,  $today ){
 
+        $cousure = Clousure::
+            where('store_id',Auth::user()->store()->id)
+            ->where('open',1)
+            ->get();
 		//consultamos la cantidad que se compro por producto dentro de la orden        
         foreach($description as $order_description){
 
@@ -33,7 +39,8 @@ trait OrderRequestTrait
                     'product_id' =>  $product->id,
                     'volume' =>  $order_poduct->volume,
                     'description' => 'OrderCanceled',
-                    'shift' =>   $shift, 
+                    'shift' =>   $shift,
+                    'rel_clousure_id' => $cousure->first()->id,
                     'date' =>  $today
                 ));              
             }
@@ -55,6 +62,7 @@ trait OrderRequestTrait
                             'volume_product' =>  $order_poduct->volume,
                             'suggestion'=>$sub_value['suggestion'],                        
                             'shift' =>   $shift, 
+                            'rel_clousure_id' => $cousure->first()->id,
                             'date' =>  $today
                         ));
                     }                  
@@ -76,6 +84,7 @@ trait OrderRequestTrait
                             'rel_id'=>$sub_value['rel_id'],
                             'volume_product' => $order_poduct->volume,                      
                             'shift' =>   $shift, 
+                            'rel_clousure_id' => $cousure->first()->id,
                             'date' =>  $today                        
                         ));
                     }             

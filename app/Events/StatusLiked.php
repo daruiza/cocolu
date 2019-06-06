@@ -16,15 +16,17 @@ class StatusLiked
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $user;
+    public $message;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user)
-    {
-        $this->user = $user;
+    public function __construct($message)
+    {           
+        $this->message = $message;
+
     }
 
     /**
@@ -34,7 +36,8 @@ class StatusLiked
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('user.'.$this->user->id);
+        //return new PrivateChannel('user.'.$this->user->id);
+        return ['my-channel'];
     }
     
 }

@@ -24,6 +24,7 @@ class CreateStocksTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')
             ->onDelete('cascade')
             ->onUpdate('cascade');
+            $table->integer('rel_clousure_id')->unsigned(); //relacion simbolica con algun clousure, el clousure contiene el detalle
         });
     }
 
