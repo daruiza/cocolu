@@ -28,7 +28,7 @@ class RolsTableSeeder extends Seeder
 		\DB::table('rols')->insert(array(
 			'name'=>'Administrador',
 			'description'=>'admin',
-			'label'=>'{"options":["editProfile","editStore","passwordChange"],"options_dashboard":["consultClousure","alertStock","topProducts","salesForWaiter","editClousure"]}'
+			'label'=>'{"options":["editProfile","editStore","passwordChange"],"options_dashboard":["consultClousure","editClousure"]}'
 			)
 		);
 		\DB::table('rols')->insert(array(

@@ -69,7 +69,7 @@ class Stock extends Model
             $products_array['data'][] = $product->product_volume;
         }
 
-        dd($products_array);
+        //dd($products_array);
         /*
         $products = Order::select('products.name',
         \DB::raw('SUM(order_product.volume) as product_volume'))
