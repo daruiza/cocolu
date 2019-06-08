@@ -211,9 +211,18 @@ class BroadcastManager implements FactoryContract
      * @return \Illuminate\Contracts\Broadcasting\Broadcaster
      */
     protected function createPusherDriver(array $config)
-    {
+    {   
+
+        /*Admin Change*/
+        /*
         return new PusherBroadcaster(
             new Pusher($config['key'], $config['secret'],
+            $config['app_id'], $config['options'] ?? [])
+        );
+        Fin AdminChange*/
+        
+        return new PusherBroadcaster(
+            new \Pusher\Pusher($config['key'], $config['secret'],
             $config['app_id'], $config['options'] ?? [])
         );
     }

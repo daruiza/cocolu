@@ -51,6 +51,9 @@
                         <div class="col-md-6 col-md-offset-0">
                             <canvas id="pai-products" width="80%" height="80%"></canvas>
                         </div>
+                        <div class="col-md-12 col-md-offset-0">
+                            <canvas id="pai-ingredients" width="80%" height="80%"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -79,6 +82,12 @@
         var labels = {!! json_encode($products['labels']) !!};
         var data = {!! json_encode($products['data']) !!};
         object_chart.paint_chart_bar('pai-products','bar','{{__("messages.Products")}}',labels,data,backgroundColor,borderColor);
+    @endif
+
+    @if(!empty($ingredients['data']))
+        var labels = {!! json_encode($ingredients['labels']) !!};
+        var data = {!! json_encode($ingredients['data']) !!};
+        object_chart.paint_chart_bar('pai-ingredients','bar','{{__("messages.Ingredients")}}',labels,data,backgroundColor,borderColor);
     @endif
 
     //Solo para informe de cierres

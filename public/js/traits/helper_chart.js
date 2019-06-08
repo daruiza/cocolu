@@ -29,7 +29,7 @@ object_chart.prototype.paint_chart = function(container,type,label,labels,data,b
 object_chart.prototype.paint_chart_bar = function(container,type,label,labels,data,backgroundColor,borderColor) {
 	var ctx = $('#'+container);
 	var myChart = new Chart(ctx, {
-	     type: 'bar',
+	     type: type,
 		    data: {
 		      labels: labels,
 		      datasets: [
@@ -75,10 +75,17 @@ object_chart.prototype.paint_chart_bar = function(container,type,label,labels,da
 		      },
 		      scales: {
 		            yAxes: [{
+		            	barPercentage: 0.7,
 		                ticks: {
 		                    beginAtZero: true
 		                }
-		            }]
+		            }],
+		            xAxes: [{
+			            barPercentage: 0.7,
+			            ticks: {
+		                    beginAtZero: true,
+		                }
+			        }]
 		        }
 		    }
 	});

@@ -69,17 +69,8 @@ class Stock extends Model
             $products_array['data'][] = $product->product_volume;
         }
 
-        //dd($products_array);
-        /*
-        $products = Order::select('products.name',
-        \DB::raw('SUM(order_product.volume) as product_volume'))
-        ->leftJoin('services','orders.service_id','services.id')
-        ->leftJoin('clousures','services.rel_clousure_id','clousures.id')        
-        ->leftJoin('order_product','orders.id','order_product.order_id')
-        ->leftJoin('products','order_product.product_id','products.id') 
-        ->where('clousures.id',$clousure->id)
-        ->groupBy('products.id')      
-        ->get();    
-        */
+        return $products_array;
+
+        
     }
 }
