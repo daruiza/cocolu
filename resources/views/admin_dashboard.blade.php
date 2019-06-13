@@ -61,14 +61,20 @@
     </div> 
 </div>
 
+@if(auth()->user()->rol_id == 2)                    
+    <neworder-component 
+        :user="{{ auth()->user() }}">        
+    </neworder-component>
+@endif
+
 @if(Session::has('data.clousures'))
     @include('clousure.showModal')
 @endif
 
 @section('subscript')
-<script src="{{ asset('js/charts.min.js') }}"></script>
-<script src="{{ asset('js/traits/helper_chart.js') }}"></script>
-<script type="text/javascript">   
+<script type="application/javascript" src="{{ asset('js/charts.min.js') }}"></script>
+<script type="application/javascript" src="{{ asset('js/traits/helper_chart.js') }}"></script>
+<script type="application/javascript">   
 
     @if(!empty($orders['data']))
         var labels = {!! json_encode($orders['labels']) !!};

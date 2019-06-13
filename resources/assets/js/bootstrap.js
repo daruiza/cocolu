@@ -1,6 +1,4 @@
-
 window._ = require('lodash');
-window.Popper = require('popper.js').default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -9,9 +7,11 @@ window.Popper = require('popper.js').default;
  */
 
 try {
+    /*
+    window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-
     require('bootstrap');
+    */
 } catch (e) {}
 
 /**
@@ -44,13 +44,16 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo'
+import Echo from 'laravel-echo'
 
-// window.Pusher = require('pusher-js');
+window.Pusher = require('pusher-js');
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
+window.Echo = new Echo({
+    authEndpoint : 'http://localhost/web/cocolu/public/broadcasting/auth',
+    broadcaster: 'pusher',
+    key: 'mykey',
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    disableStats: true,
+    enabledTransports: ['ws', 'wss']
+ });

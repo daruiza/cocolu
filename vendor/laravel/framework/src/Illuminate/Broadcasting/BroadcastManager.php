@@ -21,7 +21,7 @@ class BroadcastManager implements FactoryContract
     /**
      * The application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $app;
 
@@ -42,7 +42,7 @@ class BroadcastManager implements FactoryContract
     /**
      * Create a new manager instance.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
      * @return void
      */
     public function __construct($app)
@@ -132,7 +132,7 @@ class BroadcastManager implements FactoryContract
     /**
      * Get a driver instance.
      *
-     * @param  string  $driver
+     * @param  string|null  $driver
      * @return mixed
      */
     public function connection($driver = null)
@@ -165,7 +165,7 @@ class BroadcastManager implements FactoryContract
     }
 
     /**
-     * Resolve the given store.
+     * Resolve the given broadcaster.
      *
      * @param  string  $name
      * @return \Illuminate\Contracts\Broadcasting\Broadcaster
@@ -175,10 +175,6 @@ class BroadcastManager implements FactoryContract
     protected function resolve($name)
     {
         $config = $this->getConfig($name);
-
-        if (is_null($config)) {
-            throw new InvalidArgumentException("Broadcaster [{$name}] is not defined.");
-        }
 
         if (isset($this->customCreators[$config['driver']])) {
             return $this->callCustomCreator($config);
@@ -211,20 +207,17 @@ class BroadcastManager implements FactoryContract
      * @return \Illuminate\Contracts\Broadcasting\Broadcaster
      */
     protected function createPusherDriver(array $config)
-    {   
+    {
+        $pusher = new Pusher(
+            $config['key'], $config['secret'],
+            $config['app_id'], $config['options'] ?? []
+        );
 
-        /*Admin Change*/
-        /*
-        return new PusherBroadcaster(
-            new Pusher($config['key'], $config['secret'],
-            $config['app_id'], $config['options'] ?? [])
-        );
-        Fin AdminChange*/
-        
-        return new PusherBroadcaster(
-            new \Pusher\Pusher($config['key'], $config['secret'],
-            $config['app_id'], $config['options'] ?? [])
-        );
+        if ($config['log'] ?? false) {
+            $pusher->setLogger($this->app->make(LoggerInterface::class));
+        }
+
+        return new PusherBroadcaster($pusher);
     }
 
     /**
@@ -272,7 +265,11 @@ class BroadcastManager implements FactoryContract
      */
     protected function getConfig($name)
     {
-        return $this->app['config']["broadcasting.connections.{$name}"];
+        if (! is_null($name) && $name !== 'null') {
+            return $this->app['config']["broadcasting.connections.{$name}"];
+        }
+
+        return ['driver' => 'null'];
     }
 
     /**

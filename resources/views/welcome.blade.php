@@ -42,9 +42,11 @@
             </div>
             </div>
         @else
+
             @isset($page)
                 @include($page)
             @endisset
+            
         @endguest            
         </div>        
     </div>
@@ -53,7 +55,7 @@
 @endsection
 
 @section('script')    
-    <script type="text/javascript">
+    <script type="application/javascript">
         /*
         if(window.innerWidth>980){
             $('#video_background').css('height',window.innerHeight);
