@@ -104,5 +104,3 @@ Route::post('provider/consultprovider', [
 Route::post('order/order_paid', [
    'as' => 'order.order_paid', 'uses' => 'Web\OrderController@orderPaid'
 ]);
-
-

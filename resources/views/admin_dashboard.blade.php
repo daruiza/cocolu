@@ -61,11 +61,10 @@
     </div> 
 </div>
 
-@if(auth()->user()->rol_id == 2)                    
-    <neworder-component 
-        :user="{{ auth()->user() }}">        
-    </neworder-component>
-@endif
+<neworder-component 
+    :user="{{ auth()->user() }}">        
+</neworder-component>
+
 
 @if(Session::has('data.clousures'))
     @include('clousure.showModal')

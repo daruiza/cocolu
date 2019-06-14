@@ -43,9 +43,10 @@
             </div>
         @else
 
-            @isset($page)
-                @include($page)
+            @isset($page)                
+                @include($page)                
             @endisset
+
             
         @endguest            
         </div>        

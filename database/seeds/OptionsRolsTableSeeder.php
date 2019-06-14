@@ -260,7 +260,24 @@ class OptionsRolsTableSeeder extends Seeder
 			)
 		);
 		*/
-		
+
+		\DB::table('option_rol')->insert(array(
+			'rol_id'=>3,			
+			'option_id'=>11			
+			)
+		);
+
+		\DB::table('option_rol')->insert(array(
+			'rol_id'=>3,			
+			'option_id'=>12			
+			)
+		);
+
+		\DB::table('option_rol')->insert(array(
+			'rol_id'=>3,			
+			'option_id'=>17
+			)
+		);
 		
     }
 }

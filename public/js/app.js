@@ -41712,7 +41712,7 @@ if (token) {
 
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  authEndpoint: 'http://localhost/web/cocolu/public/broadcasting/auth',
+  authEndpoint: 'http://localhost/backend/cocolu/public/broadcasting/auth',
   broadcaster: 'pusher',
   key: 'mykey',
   wsHost: window.location.hostname,
@@ -41810,8 +41810,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\web\cocolu\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\web\cocolu\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! /opt/software/backend/cocolu/resources/assets/js/app.js */"./resources/assets/js/app.js");
+module.exports = __webpack_require__(/*! /opt/software/backend/cocolu/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
 
 
 /***/ })

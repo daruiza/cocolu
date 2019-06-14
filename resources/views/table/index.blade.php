@@ -34,9 +34,9 @@
 @endsection
 
 @section('script')
-	<script type="text/javascript" src="{{ asset('js/entity/table.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('js/entity/order.js') }}"></script>				
-	<script type="text/javascript">
+	<script type="application/javascript" src="{{ asset('js/entity/table.js') }}"></script>
+	<script type="application/javascript" src="{{ asset('js/entity/order.js') }}"></script>				
+	<script type="application/javascript">
 		table.onjquery();
 		order.onjquery();//para pintar el modal de una orden
 		//validar las opciones
@@ -119,13 +119,13 @@
 	</script>
 		
 	@isset($data['servicemodal'])	
-	<script type="text/javascript">		
+	<script type="application/javascript">		
 		$('#modal_service_create').modal('toggle');		
 	</script>
 	@endisset
 
 	@isset($data['servicemodalclose'])	
-	<script type="text/javascript">		
+	<script type="application/javascript">		
 		$('#modal_service_close').modal('toggle');		
 	</script>
 	@endisset
@@ -133,8 +133,8 @@
 	
 	
 	@isset($data['ordermodal'])
-		<script type="text/javascript" src="{{ asset('js/traits/order_detail.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/traits/order_create.js') }}"></script>		
+		<script type="application/javascript" src="{{ asset('js/traits/order_detail.js') }}"></script>
+		<script type="application/javascript" src="{{ asset('js/traits/order_create.js') }}"></script>		
 	@endisset
 
 @endsection

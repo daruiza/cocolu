@@ -3,6 +3,8 @@
 namespace App\Events;
 
 use App\User;
+use App\Model\Core\Order;
+
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -23,20 +25,20 @@ class NewOrder implements ShouldBroadcast
     public $user;
 
     /**
-     * Message details
+     * Order details
      *
-     * @var Message
+     * @var Oorder
      */
-    public $message;
+    public $order;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user,$message)
+    public function __construct(User $user,Order $order)
     {
         $this->user = $user;
-        $this->message = $message;
+        $this->order = $order;
     }
 
     /**

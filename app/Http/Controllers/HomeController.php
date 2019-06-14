@@ -37,7 +37,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Clousure $clousure)    {
+    public function index(Clousure $clousure){
         
         if(Auth::check()) {
 
@@ -81,13 +81,14 @@ class HomeController extends Controller
                 ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);    
             }
 
-            if(Auth::user()->rol()->first()->id == 3){                
-                return view('welcome');    
+            if(Auth::user()->rol()->first()->id == 3){  
+                $page = 'waiter_dashboard';              
+                return view('welcome',compact('page'));      
             }            
         }
 
         return view('welcome');
-    }
+    }    
 
     /**
     *

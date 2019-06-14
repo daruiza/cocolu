@@ -10,6 +10,8 @@ use App\Model\Core\Product;
 use App\Model\Core\Clousure;
 use App\Model\Core\OrderProduct;
 
+use App\Events\NewOrder;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -223,9 +225,7 @@ class OrderController extends Controller
                         ));
                     }                    
                 }
-
-                //$ingredients[]=$value['ingredients'];
-                
+                //$ingredients[]=$value['ingredients'];                
             }
             if(array_key_exists('groups',$value)){
                 //el descuento del grupo esta dado en su agrupacion
@@ -285,8 +285,9 @@ class OrderController extends Controller
         }
                 
         //notificar
-        //retornar
-        
+        broadcast(new NewOrder(auth()->user(),$obj_order))->toOthers();
+
+        //retornar        
         Session::flash('success', [['NewOrderTableOK']]);
         return redirect('table');
     }
