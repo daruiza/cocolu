@@ -285,7 +285,7 @@ class OrderController extends Controller
         }
                 
         //notificar
-        broadcast(new NewOrder(auth()->user(),$obj_order))->toOthers();
+        //broadcast(new NewOrder(auth()->user(),$obj_order))->toOthers();
 
         //retornar        
         Session::flash('success', [['NewOrderTableOK']]);
