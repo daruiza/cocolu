@@ -354,8 +354,8 @@
 
 
 @section('script')
-	<script type="text/javascript" src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>	
-	<script type="text/javascript"> 
+	<script type="application/javascript" src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>	
+	<script type="application/javascript"> 
 		$('#img_store').change(function(e) {
 	    	var file = e.target.files[0],
 		    imageType = /image.*/;

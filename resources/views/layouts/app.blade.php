@@ -20,9 +20,7 @@
         @endguest       
     </title>
 
-    <!-- Scripts -->
-    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
-
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Fonts -->
 
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -31,13 +29,13 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     
     <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--> 
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">   
+    <!--<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">-->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     @yield('template')
     @yield('style')
 </head>
 <body>
-    <div id="app">
+    <div id="app">        
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -178,15 +176,19 @@
         @yield('modal')
         @include('layouts.modal_alert')        
 
-        <!--Bootatrap JS, Popper.js, and jQuery-->        
+        <!--Bootatrap JS, Popper.js, and jQuery-->  
+        <!--      
         <script type="application/javascript" src="{{ url('js/jquery.min.js') }}"></script>        
         <script type="application/javascript" src="{{ url('js/jquery-ui.min.js') }}"></script>
         <script type="application/javascript" src="{{ asset('js/popper.min.js') }}"></script> 
         <script type="application/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>        
-        <script type="application/javascript" src="{{ asset('js/ajaxobject.js') }}"></script> 
-        <script type="application/javascript" src="{{ asset('js/entity/store.js') }}"></script>   
-         
-        @yield('script')        
+        -->        
     </div>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('js/ajaxobject.js') }}"></script> 
+    <script type="application/javascript" src="{{ asset('js/entity/store.js') }}"></script>   
+         
+    @yield('script')
+            
 </body>
 </html>
