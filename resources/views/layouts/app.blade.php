@@ -19,17 +19,15 @@
             @endif
         @endguest       
     </title>
-
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
     <!-- Fonts -->
-
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     
+    <!-- Icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     
-    <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--> 
-    <!--<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">-->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     @yield('template')
     @yield('style')
@@ -184,6 +182,7 @@
         <script type="application/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>        
         -->        
     </div>
+    
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="application/javascript" src="{{ asset('js/ajaxobject.js') }}"></script> 
     <script type="application/javascript" src="{{ asset('js/entity/store.js') }}"></script>   
