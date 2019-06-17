@@ -9,7 +9,6 @@
     text-align: center;
 }
 
-
 .lang li a{
     display: block;
     padding: 3px 20px;
@@ -55,4 +54,28 @@
 footer{
     text-align: center;
 }
+
+.alert-events{
+    display: none;
+}
+
+.alert-events li{
+    padding: 5px;
+    margin: 5px;
+    border: 1px;
+    border-style: dashed;
+    border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+    .alert-events{                
+        position: absolute;
+        z-index: 1;
+        right: 9%;    
+        border-color: #856404;
+        box-shadow: 5px 10px #b1ada2;
+    }
+}
+
+
 

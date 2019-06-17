@@ -3,7 +3,9 @@
 @section('template')
   	<link href="{{ asset('css/custom/edit.css') }}" rel="stylesheet">    
   	<link href="{{ asset('css/custom/perfil.css') }}" rel="stylesheet">
+  	<!--
   	<link href="{{ asset('css/bootstrap-colorpicker.min.css') }}" rel="stylesheet">
+  	-->
 @endsection
 
 @section('content')
@@ -354,7 +356,9 @@
 
 
 @section('script')
-	<script type="application/javascript" src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>	
+	<!--
+	<script type="application/javascript" src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
+	-->
 	<script type="application/javascript"> 
 		$('#img_store').change(function(e) {
 	    	var file = e.target.files[0],

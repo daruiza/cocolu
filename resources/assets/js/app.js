@@ -7,6 +7,14 @@
 
 require('./bootstrap');
 
+import 'jquery-ui/ui/widgets/autocomplete.js';
+import 'jquery-ui/ui/core.js';
+import 'jquery-ui/ui/widget.js';
+import 'jquery-ui/ui/widgets/mouse.js';
+import 'jquery-ui/ui/widgets/draggable.js';
+
+import 'bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js';
+
 window.Vue = require('vue');
 
 /**

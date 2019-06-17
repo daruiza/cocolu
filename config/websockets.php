@@ -17,8 +17,8 @@ return [
             'name' => env('APP_NAME'),
             'key' => env('PUSHER_APP_KEY'),
             'secret' => env('PUSHER_APP_SECRET'),
-            'enable_client_messages' => false,
-            'enable_statistics' => true,
+            'enable_client_messages' => true,
+            'enable_statistics' => false,
         ],
     ],
 
@@ -110,6 +110,8 @@ return [
          * Passphrase for your local_cert file.
          */
         'passphrase' => null,
+
+        'verify_peer' => false,
     ],
 
     /*

@@ -130,5 +130,10 @@ return [
     "InvoiceShow"=>"Show Invoice",
     "InvoiceDescription"=>"Description Invoice",
     "InvoiceImages"=>"Image Invoice",
-    "InvoiceProducts"=>"Invoice Products"
+    "InvoiceProducts"=>"Invoice Products",
+    "DashboardOptions" => "Options Dashboard",
+    "DashboardImform" => "Reports Dashboard",
+    "newEvent" => "Notifications",
+    "Waiter" => "Waiter",
+    "Hour" => "Hour",
 ];
