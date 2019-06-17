@@ -25,13 +25,15 @@
 
 
 @section('script')
-
+	
+	<!--
 	<script type="text/javascript" src="{{ url('js/jquery.ui.core.js') }}"></script>
 	<script type="text/javascript" src="{{ url('js/jquery.ui.widget.js')}}"></script>
     <script type="text/javascript" src="{{ url('js/jquery.ui.mouse.js')}}"></script>
     <script type="text/javascript" src="{{ url('js/jquery.ui.draggable.js')}}"></script>
 	<script type="text/javascript" src="{{ url('js/jquery-collision.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('js/jquery-ui-draggable-collision.min.js') }}"></script>    
+	-->
     
     <!--<script type="text/javascript" src="{{ asset('js/entity/table.js') }}"></script>-->
 

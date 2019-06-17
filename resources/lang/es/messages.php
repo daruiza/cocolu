@@ -130,5 +130,10 @@ return [
     "InvoiceShow"=>"Vista de Factura",
     "InvoiceDescription"=>"Descripción  de Factura",
     "InvoiceImages"=>"imagen de Factura",
-    "InvoiceProducts"=>"Productos de Factura"
+    "InvoiceProducts"=>"Productos de Factura",
+    "DashboardOptions" => "Menú de opciones",
+    "DashboardImform" => "Reportes de Labor",
+    "newEvent" => "Notificaciones",
+    "Waiter" => "Mesero",
+    "Hour" => "Hora",
 ];

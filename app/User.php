@@ -57,29 +57,13 @@ class User extends Authenticatable
 
     public function rol_options_dashboard(){
         return json_decode(\Auth::user()->rol->label,true)['options_dashboard'];        
-    }
+    }    
 
     public function edit($id){
         //verificación de usuario.
         if( \Auth::user()->id == $id) return true;
         return false;        
-    }
-
-    public function validateUser(){        
-        //verificación de usuario.
-        if( \Auth::user()->id == $this->id) return true;
-        return false;        
-    }
-
-    public function validateUserStore($store_id){
-        $users = User::where('users.rel_store_id',$store_id)->get();           
-        if($users->count()){
-            foreach ($users as $key => $value) {
-                if($value->id == \Auth::user()->id)return true;
-            }            
-        } 
-        return false;
-    }
+    }    
 
     public function updateUser($data){
         //guardamos los datos
@@ -117,6 +101,17 @@ class User extends Authenticatable
             'open' => true,
             'store_id' => $this->rel_store_id,
         ]);
+    }
+
+    //retrorna el id del administrador de la tienda
+    public function myAdmin(){
+        $users = User::where('users.rel_store_id',$this->rel_store_id)->get();           
+        if($users->count()){
+            foreach ($users as $key => $value) {
+                if($value->rol_id == 2)return $value->id;
+            }            
+        } 
+        return 0;
     }
 
     //crea el directorio del usuario, para el registro de tenderos
@@ -217,6 +212,22 @@ class User extends Authenticatable
             $permits[$option->module()->get()[0]->name]['options'][$option->id]=$option->toArray();
         }        
         Session::put('permits', $permits);
+    }
+
+    public function validateUser(){        
+        //verificación de usuario.
+        if( \Auth::user()->id == $this->id) return true;
+        return false;        
+    }
+
+    public function validateUserStore($store_id){
+        $users = User::where('users.rel_store_id',$store_id)->get();           
+        if($users->count()){
+            foreach ($users as $key => $value) {
+                if($value->id == \Auth::user()->id)return true;
+            }            
+        } 
+        return false;
     }
 
 }

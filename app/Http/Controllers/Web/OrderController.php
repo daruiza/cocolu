@@ -283,9 +283,11 @@ class OrderController extends Controller
                 'price' => $value['price']
             ));        
         }
-                
-        //notificar
-        //broadcast(new NewOrder(auth()->user(),$obj_order))->toOthers();
+
+        //notificar solo por los meseros
+        if(Auth::user()->rol_id == 3){
+            broadcast(new NewOrder(auth()->user(),$obj_order))->toOthers();    
+        }        
 
         //retornar        
         Session::flash('success', [['NewOrderTableOK']]);

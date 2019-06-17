@@ -61,10 +61,6 @@
     </div> 
 </div>
 
-<neworder-component 
-    :user="{{ auth()->user() }}">        
-</neworder-component>
-
 
 @if(Session::has('data.clousures'))
     @include('clousure.showModal')

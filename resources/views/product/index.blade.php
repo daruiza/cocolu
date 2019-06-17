@@ -194,7 +194,9 @@
 
 @section('style')	
 	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
+    <!--
     <link href="{{ asset('css/jquery-ui.min.autocomplete.css') }}" rel="stylesheet"> 
+    -->
 	<style type="text/css">
 
         .table-container{

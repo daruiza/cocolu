@@ -60,7 +60,7 @@
                                 @if($product->category == $category)
                                   
                                   <div class="col-md-3 ">
-                                    <div class="product-conteiner option_add_product" id ="{{$product->id}}_{{$product->store_id}}_{{$product->name}}"  style = "background-image: url({{url('users/'.\Auth::user()->id.'/products/'.$product->image1)}});">
+                                    <div class="product-conteiner option_add_product" id ="{{$product->id}}_{{$product->store_id}}_{{$product->name}}"  style = "background-image: url({{url('users/'.\Auth::user()->myAdmin().'/products/'.$product->image1)}});">
                                       <div class="product-name noselect">{{$product->name}}</div>
                                       <div class="noselect">{{\Auth::user()->store()->currency}} {{$product->price}}</div>
                                       <div class="product-volume noselect">{{ __('messages.Volume') }}:{{$product->volume}}</div>
