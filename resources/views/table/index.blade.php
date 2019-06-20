@@ -169,7 +169,7 @@
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};
 		}
 
-		.badge{	
+		.badge-table{	
 			color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};
 		}
 

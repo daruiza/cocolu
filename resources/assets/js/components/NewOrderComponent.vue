@@ -18,8 +18,9 @@
                 console.log(`${user.name} leaved`);
             })
             */
-            .listen('NewOrder', (e) => {                
-                store.showEvents(e);
+            .listen('NewOrder', (e) => {
+                //agrega un nuevo evento
+                alert_events.addEvent(e);                
             });            
         }
     }

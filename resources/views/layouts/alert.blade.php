@@ -1,5 +1,3 @@
-
-
 @if(Session::has('danger'))                  
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <h6 class="alert-heading">{{ __('errors.somethingIsWrong') }}</h6>

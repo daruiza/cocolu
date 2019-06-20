@@ -23,3 +23,5 @@ mix.webpackConfig({
 		alias: {jquery: "jquery/src/jquery"}
 	}
 });
+
+mix.setResourceRoot('../');

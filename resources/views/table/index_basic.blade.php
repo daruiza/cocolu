@@ -68,7 +68,7 @@
                                                 <!-- si la mesa tiene ordenes es etado one-->
                                                 @if($value->tableOrderStatusOneOpen()->count())
                                                     <a class="a-brange" href="#">
-                                                        <span class="badge">
+                                                        <span class="badge badge-table">
                                                             {{$value->tableOrderStatusOneOpen()->count()}}
                                                         </span>
                                                     </a>

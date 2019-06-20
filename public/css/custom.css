@@ -67,6 +67,14 @@ footer{
     border-radius: 5px;
 }
 
+.new-event{
+    color: rgba(245, 3, 3, 0.5);
+}
+
+#navbarDropdownAlert::after{
+    display: none;
+}
+
 @media (min-width: 768px) {
     .alert-events{                
         position: absolute;
@@ -74,6 +82,12 @@ footer{
         right: 9%;    
         border-color: #856404;
         box-shadow: 5px 10px #b1ada2;
+    }
+
+    .alert-option a .badge{
+        position: absolute;
+        bottom: 6px;
+        right: -6px;
     }
 }
 

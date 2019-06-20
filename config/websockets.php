@@ -111,7 +111,7 @@ return [
          */
         'passphrase' => null,
 
-        'verify_peer' => false,
+        //'verify_peer' => false,
     ],
 
     /*
