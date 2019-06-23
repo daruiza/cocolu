@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use App\User;
-use App\Model\Core\Order;
 use App\Model\Core\Table;
 
 use Illuminate\Broadcasting\Channel;
@@ -14,11 +13,11 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class NewOrder implements ShouldBroadcast
+class NewMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
+     /**
      * User that sent the message
      *
      * @var User
@@ -28,28 +27,20 @@ class NewOrder implements ShouldBroadcast
     /**
      * Order details
      *
-     * @var Order
+     * @var Message
      */
-    public $order;
-
-    /**
-     * Table that sent the message
-     *
-     * @var Table
-     */
-    public $table;
-
+    public $message;
+    
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user,Order $order)
+    public function __construct(User $user, $message)
     {
         $this->user = $user;
-        $this->order = $order;
-        $this->table = $order->service()->first()->table()->first();
+        $this->message = $message;        
     }
 
     /**
@@ -59,6 +50,6 @@ class NewOrder implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PresenceChannel('neworder.'.$this->user->rel_store_id);
+        return new PresenceChannel('newmessage.'.$this->user->rel_store_id);
     }
 }

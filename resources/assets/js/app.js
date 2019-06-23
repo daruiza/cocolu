@@ -24,6 +24,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('neworder-component', require('./components/NewOrderComponent.vue').default);
+Vue.component('newmessage-component', require('./components/NewMessageComponent.vue').default);
 
 const app = new Vue({
     el: '#app'

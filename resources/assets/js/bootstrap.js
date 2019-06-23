@@ -50,7 +50,8 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     //authEndpoint : 'http://cocolu.temposolutions.co/broadcasting/auth',
-    authEndpoint : 'http://localhost/web/cocolu/public/broadcasting/auth',
+    //authEndpoint : 'http://localhost/web/cocolu/public/broadcasting/auth',
+    authEndpoint : 'http://localhost/backend/cocolu/public/broadcasting/auth',
     broadcaster: 'pusher',
     key: 'mykey',        
     wsHost: window.location.hostname,//wsHost: 'localhost',

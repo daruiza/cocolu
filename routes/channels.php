@@ -18,3 +18,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('neworder.{store}', function ($user) {
     return $user;
 });
+
+Broadcast::channel('newmessage.{store}', function ($user) {
+    return $user;
+});

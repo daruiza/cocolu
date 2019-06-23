@@ -155,8 +155,7 @@
             {!! Form::hidden('lang','es') !!}            
         {!! Form::close() !!}
 
-        <main class="py-4">
-            @include('layouts.alert_events')
+        <main class="py-4">            
             @yield('content')
             @auth               
                 <footer>

@@ -136,4 +136,5 @@ return [
     "newEvent" => "Notifications",
     "Waiter" => "Waiter",
     "Hour" => "Hour",
+    "NewMessage" => "New Message",
 ];

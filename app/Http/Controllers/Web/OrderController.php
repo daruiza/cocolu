@@ -11,6 +11,7 @@ use App\Model\Core\Clousure;
 use App\Model\Core\OrderProduct;
 
 use App\Events\NewOrder;
+use App\Events\NewMessage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -82,7 +83,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         //validamos        
         $table = Table::find($request->input('table-id'));
         $service = $table->tableServiceOpen()->first();
@@ -286,7 +287,7 @@ class OrderController extends Controller
 
         //notificar solo por los meseros
         if(Auth::user()->rol_id == 3){
-            broadcast(new NewOrder(auth()->user(),$obj_order))->toOthers();    
+            broadcast(new NewOrder(auth()->user(),$obj_order))->toOthers();
         }        
 
         //retornar        

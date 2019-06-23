@@ -61,7 +61,6 @@
     </div> 
 </div>
 
-
 @if(Session::has('data.clousures'))
     @include('clousure.showModal')
 @endif

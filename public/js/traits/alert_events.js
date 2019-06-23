@@ -45,59 +45,89 @@ alert_events.prototype.showAlerts = function(event){
 	//construccion de los eventos
 	var cn=document.getElementsByClassName("dropdown-content")[0];
 
-	for(var i=0;i<alert_events.events.length;i++){
+	for(var i=alert_events.events.length-1;i>=0;i--){
 		//evento tipo orden
 		if(("order" in alert_events.events[i])){			
 			var node = document.createElement("div");
-        	node.setAttribute("class", "li-order-event-alert");	
-        	node.innerHTML = 'event '+i;
+        	node.setAttribute("class", "alert alert-danger alert-dismissible");
+        	
+			var subnode = document.createElement("a");
+	        subnode.setAttribute("class", "");
+	        subnode.setAttribute("href", "table");        	
+        	var subsubnode = document.createElement("h6");
+        	subsubnode.setAttribute("class","alert-heading");
+        	subsubnode.innerHTML = $("input[name='messageNeworder']").val();
+        	subnode.appendChild(subsubnode);
+        	node.appendChild(subnode);
+
+        	var subnode = document.createElement("a");
+        	subnode.setAttribute("href","#");
+        	subnode.setAttribute("id","event_"+i);
+        	subnode.setAttribute("class","close");
+        	subnode.setAttribute("data-dismiss","alert");
+        	subnode.setAttribute("aria-label","close");
+        	subnode.innerHTML = "&times";
+        	node.appendChild(subnode);
+
+        	var subnode = document.createElement("hr");
+        	node.appendChild(subnode);
+
+        	var subnode = document.createElement("div");
+	        subnode.setAttribute("class", "");	        
+	        subnode.innerHTML = $( "input[name='messageTable']").val()+': '+alert_events.events[i].table.name;        	
+        	node.appendChild(subnode);
+
+        	var div = document.createElement("div");
+        	div.setAttribute("class", "");
+        	div.innerHTML = $( "input[name='messageWaiter']").val()+': '+alert_events.events[i].user.name+' '+alert_events.events[i].user.surname;
+        	node.appendChild(div);
+
+        	var div = document.createElement("div");
+        	div.setAttribute("class", "");
+        	div.innerHTML = $( "input[name='messageOrder']").val()+': Serial-'+alert_events.events[i].order.serial+ ' '+ $( "input[name='messageHour']").val()+' -'+alert_events.events[i].order.date.substring(11,16);
+        	node.appendChild(div);        
+
+        	
 			cn.appendChild(node);
+			//add function on close event
+		}
+
+		if(("message" in alert_events.events[i])){
+			var node = document.createElement("div");
+        	node.setAttribute("class", "alert alert-info alert-dismissible");        	
+			
+        	var subnode = document.createElement("h6");
+        	subnode.setAttribute("class","alert-heading");
+        	subnode.innerHTML = $("input[name='messageNewmessage']").val();        	
+        	node.appendChild(subnode);
+
+        	var subnode = document.createElement("a");
+        	subnode.setAttribute("href","#");
+        	subnode.setAttribute("id","event_"+i);
+        	subnode.setAttribute("class","close");
+        	subnode.setAttribute("data-dismiss","alert");
+        	subnode.setAttribute("aria-label","close");
+        	subnode.innerHTML = "&times";
+        	node.appendChild(subnode);
+
+        	var subnode = document.createElement("hr");
+        	node.appendChild(subnode);
+
+        	var subnode = document.createElement("div");
+	        subnode.setAttribute("class", "");	        
+	        subnode.innerHTML = alert_events.events[i].message;        	
+        	node.appendChild(subnode);
+
+        	var div = document.createElement("div");
+        	div.setAttribute("class", "");
+        	div.innerHTML = $( "input[name='messageWaiter']").val()+': '+alert_events.events[i].user.name+' '+alert_events.events[i].user.surname;
+        	node.appendChild(div);
+
+        	cn.appendChild(node);		
 		}
 	}
 
 };
 
-
-alert_events.prototype.showEvents = function(event){
-    //usamos el contenedor de alertas, para agregar un nuevo evento
-    if(("order" in event)){            
-        //abemus order, mostramos el mesero, la mesa, y un         
-        var cn=document.getElementsByClassName("ul-content")[0];
-        var node = document.createElement("li");
-        node.setAttribute("class", "li-order-event-alert");
-
-        var subnode = document.createElement("a");
-        subnode.setAttribute("class", "");
-        subnode.setAttribute("href", "table");
-        subnode.setAttribute("onclick", "store.clearEvents()");
-
-        var div = document.createElement("div");
-        div.setAttribute("class", "");
-        div.innerHTML = $( "input[name='messageNeworder']").val();
-        subnode.appendChild(div);        
-        node.appendChild(subnode);
-
-        var div = document.createElement("div");
-        div.setAttribute("class", "");
-        div.innerHTML = $( "input[name='messageWaiter']").val()+': '+event.user.name+' '+event.user.surname;
-        node.appendChild(div);        
-
-        var div = document.createElement("div");
-        div.setAttribute("class", "");
-        div.innerHTML = $( "input[name='messageTable']").val()+': '+event.table.name;
-        node.appendChild(div);        
-
-        var div = document.createElement("div");
-        div.setAttribute("class", "");
-        div.innerHTML = $( "input[name='messageOrder']").val()+': Serial-'+event.order.serial+ ' '+ $( "input[name='messageHour']").val()+' -'+event.order.date.substring(11,16);
-        node.appendChild(div);
-        
-        
-        cn.appendChild(node);
-    }    
-
-    //1. Mostramos los eventos
-    if(!$('.alert-events').is(':visible'))$('.alert-events').toggle();    
-}
 
 var alert_events = new alert_events();
