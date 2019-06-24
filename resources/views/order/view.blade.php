@@ -13,8 +13,7 @@
         </button>
       </div>
 
-      <div class="modal-body"> 
-        
+      <div class="modal-body">        
         {!! Form::open(array('id'=>'form-order-edit','route'=>['order.update',0],'method'=>'POST')) !!}            
           @csrf
 		      {{ method_field('PATCH') }}          	            
@@ -31,9 +30,17 @@
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-send" form="form-order-edit">{{ __('form.Serve') }}</button>
-        <button type="submit" class="btn btn-danger btn-cancel" form="form-order-destroy">{{ __('form.Cancel') }}</button>
-        <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">{{ __('form.Close') }}</button>
+        @if(Auth::user()->rol_id == 2)
+        <button type="submit" class="btn btn-primary btn-send" form="form-order-edit">
+          {{ __('form.Serve') }}
+        </button>
+        @endif
+        <button type="submit" class="btn btn-danger btn-cancel" form="form-order-destroy">
+          {{ __('form.Cancel') }}
+        </button>
+        <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">
+          {{ __('form.Close') }}
+        </button>
       </div>
         
     </div>

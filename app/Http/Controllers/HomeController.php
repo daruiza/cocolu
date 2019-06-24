@@ -83,7 +83,9 @@ class HomeController extends Controller
 
             if(Auth::user()->rol()->first()->id == 3){  
                 $page = 'waiter_dashboard';              
-                return view('welcome',compact('page'));      
+                return 
+                view('welcome',compact('page'))
+                ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);
             }            
         }
 

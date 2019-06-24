@@ -6,7 +6,11 @@
             <div class="card-body">
                 <div class="container services-table">
                     <div class="row">                                
-                        <div class="col-md-12 "></div>                                
+                        <div class="col-md-12 ">                            
+                            @if (!empty($data['options']))
+                                @include('layouts.options_dashboard') 
+                            @endif                      
+                        </div>                                
                     </div>                                                  
                 </div>                  
             </div>                            

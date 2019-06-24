@@ -489,6 +489,7 @@ class ComposerStaticInit4d1459ba26a4a09867ff20b5ebb040a4
     public static $classMap = array (
         'AcountsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AcountsTableSeeder.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Events\\NewMessage' => __DIR__ . '/../..' . '/app/Events/NewMessage.php',
         'App\\Events\\NewOrder' => __DIR__ . '/../..' . '/app/Events/NewOrder.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -504,6 +505,7 @@ class ComposerStaticInit4d1459ba26a4a09867ff20b5ebb040a4
         'App\\Http\\Controllers\\Web\\ClousureController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/ClousureController.php',
         'App\\Http\\Controllers\\Web\\ExpenseController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/ExpenseController.php',
         'App\\Http\\Controllers\\Web\\InvoiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/InvoiceController.php',
+        'App\\Http\\Controllers\\Web\\MessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/MessageController.php',
         'App\\Http\\Controllers\\Web\\ModuleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/ModuleController.php',
         'App\\Http\\Controllers\\Web\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/OrderController.php',
         'App\\Http\\Controllers\\Web\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/ProductController.php',
@@ -547,6 +549,7 @@ class ComposerStaticInit4d1459ba26a4a09867ff20b5ebb040a4
         'App\\Model\\Core\\Expense' => __DIR__ . '/../..' . '/app/Model/Core/Expense.php',
         'App\\Model\\Core\\Invoice' => __DIR__ . '/../..' . '/app/Model/Core/Invoice.php',
         'App\\Model\\Core\\InvoiceProduct' => __DIR__ . '/../..' . '/app/Model/Core/InvoiceProduct.php',
+        'App\\Model\\Core\\Message' => __DIR__ . '/../..' . '/app/Model/Core/Message.php',
         'App\\Model\\Core\\Order' => __DIR__ . '/../..' . '/app/Model/Core/Order.php',
         'App\\Model\\Core\\OrderProduct' => __DIR__ . '/../..' . '/app/Model/Core/OrderProduct.php',
         'App\\Model\\Core\\OrderStatus' => __DIR__ . '/../..' . '/app/Model/Core/OrderStatus.php',

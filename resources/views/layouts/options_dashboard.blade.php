@@ -19,3 +19,5 @@
     @csrf                               
     <input type="hidden" name="id" value="{{ \Auth::user()->id }}">
 </form>
+
+<form id="sendMessage" action="{{ route('message.create') }}" method="GET"></form>

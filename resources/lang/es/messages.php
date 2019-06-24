@@ -137,4 +137,8 @@ return [
     "Waiter" => "Mesero",
     "Hour" => "Hora",
     "NewMessage" => "Nuevo Mensaje",
+    "CreateMessage" => "Crear Mensaje",
+    "issue" => "Asunto",
+    "body" => "Cuerpo del Mensaje",
+
 ];

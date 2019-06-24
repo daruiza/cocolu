@@ -19,6 +19,11 @@
             })
             */
             .listen('NewMessage', (e) => {
+                if(!("events" in sessionStorage)){
+                    //creamos evenst
+                    var events = [];
+                    sessionStorage.setItem('events', JSON.stringify(events));
+                }                
                 //agrega un nuevo evento
                 alert_events.addEvent(e);                
             });            

@@ -28,4 +28,5 @@ return [
 	"serviceCreate" => " Create service",
 	"orderCreate" => "Create order",
 	"Accept" => "Accept",
+	"sendMessage" => "Send Menssage",
 ];

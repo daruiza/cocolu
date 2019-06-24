@@ -43,6 +43,7 @@ Route::resource('order', 'Web\OrderController');
 Route::resource('expense', 'Web\ExpenseController');
 Route::resource('invoice', 'Web\InvoiceController');
 Route::resource('provider', 'Web\ProviderController');
+Route::resource('message', 'Web\MessageController');
 
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');

@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\User;
 use App\Model\Core\Table;
+use App\Model\Core\Message;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -37,10 +38,10 @@ class NewMessage implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(User $user, $message)
+    public function __construct(User $user, Message $message)
     {
         $this->user = $user;
-        $this->message = $message;        
+        $this->message = $message;                
     }
 
     /**

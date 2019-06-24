@@ -42,16 +42,11 @@
             </div>
             </div>
         @else
-
             @isset($page)                
                 @include($page)                
-            @endisset
-
-            
-        @endguest            
-        </div>        
+            @endisset            
+        @endguest                       
     </div>
-
 </div>
 @endsection
 

@@ -137,4 +137,7 @@ return [
     "Waiter" => "Waiter",
     "Hour" => "Hour",
     "NewMessage" => "New Message",
+    "CreateMessage" => "Create Message",
+    "issue" => "Issue",
+    "body" => "Body Message",
 ];

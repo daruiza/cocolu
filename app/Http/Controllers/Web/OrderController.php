@@ -11,7 +11,6 @@ use App\Model\Core\Clousure;
 use App\Model\Core\OrderProduct;
 
 use App\Events\NewOrder;
-use App\Events\NewMessage;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

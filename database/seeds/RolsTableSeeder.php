@@ -34,7 +34,7 @@ class RolsTableSeeder extends Seeder
 		\DB::table('rols')->insert(array(
 			'name'=>'Agente',
 			'description'=>'adminMeans',
-			'label'=>'{"options":["editProfile","passwordChange","acountSummary","sendSuggestions","termsConditions"]}'
+			'label'=>'{"options":["editProfile","passwordChange"],"options_dashboard":["sendMessage"]}'
 			)
 		);
     }

@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'AcountsTableSeeder' => $baseDir . '/database/seeds/AcountsTableSeeder.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Events\\NewMessage' => $baseDir . '/app/Events/NewMessage.php',
     'App\\Events\\NewOrder' => $baseDir . '/app/Events/NewOrder.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -23,6 +24,7 @@ return array(
     'App\\Http\\Controllers\\Web\\ClousureController' => $baseDir . '/app/Http/Controllers/Web/ClousureController.php',
     'App\\Http\\Controllers\\Web\\ExpenseController' => $baseDir . '/app/Http/Controllers/Web/ExpenseController.php',
     'App\\Http\\Controllers\\Web\\InvoiceController' => $baseDir . '/app/Http/Controllers/Web/InvoiceController.php',
+    'App\\Http\\Controllers\\Web\\MessageController' => $baseDir . '/app/Http/Controllers/Web/MessageController.php',
     'App\\Http\\Controllers\\Web\\ModuleController' => $baseDir . '/app/Http/Controllers/Web/ModuleController.php',
     'App\\Http\\Controllers\\Web\\OrderController' => $baseDir . '/app/Http/Controllers/Web/OrderController.php',
     'App\\Http\\Controllers\\Web\\ProductController' => $baseDir . '/app/Http/Controllers/Web/ProductController.php',
@@ -66,6 +68,7 @@ return array(
     'App\\Model\\Core\\Expense' => $baseDir . '/app/Model/Core/Expense.php',
     'App\\Model\\Core\\Invoice' => $baseDir . '/app/Model/Core/Invoice.php',
     'App\\Model\\Core\\InvoiceProduct' => $baseDir . '/app/Model/Core/InvoiceProduct.php',
+    'App\\Model\\Core\\Message' => $baseDir . '/app/Model/Core/Message.php',
     'App\\Model\\Core\\Order' => $baseDir . '/app/Model/Core/Order.php',
     'App\\Model\\Core\\OrderProduct' => $baseDir . '/app/Model/Core/OrderProduct.php',
     'App\\Model\\Core\\OrderStatus' => $baseDir . '/app/Model/Core/OrderStatus.php',

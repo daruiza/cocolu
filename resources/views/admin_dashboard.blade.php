@@ -8,7 +8,7 @@
                     <div class="row">                                
                         <div class="col-md-12 ">
                             @if (!empty($data['options']))
-                                @include('layouts.options_dashboard')                            
+                                @include('layouts.options_dashboard') 
                             @endif                      
                         </div>
                     </div>                                                  
