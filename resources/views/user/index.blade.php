@@ -10,7 +10,7 @@
 	        <div class="row row-perfil">
             	
             	<div class="col-md-4 ">
-            		<div class="card">
+            		<div class="card card-menu-table">
 	                    <div class="card-header">{{ __('messages.Options') }}</div>
 	                    @if (!empty($data['options']) )	                    	
 	                    	@include('layouts.form_options_profile')                            

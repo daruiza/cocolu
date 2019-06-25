@@ -14,21 +14,13 @@
 
 /*media-query*/
 @media screen and (min-width: 768px) {
-	.navbar-laravel{		   
-	    background: #ffffff99;
-	    position: fixed;
-	    width: 100%;       
-	    top: 0px;
-	    z-index: 1;	    
-	}
-	.pb-4, .py-4 {
-	    padding-bottom: 0rem!important;
-	    padding-top: 5rem!important;
-	}
-	.flex-center .container .row .card,
-	.container .login-card .card{
-		background: #ffffff99;
-	}  
+	.navbar-laravel{           
+        background: #ffffffbb;
+        position: fixed;
+        width: 100%;       
+        top: 0px;
+        z-index: 1;     
+    }
 }
 
 @media screen and (max-width: 767px) {

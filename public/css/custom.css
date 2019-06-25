@@ -9,6 +9,12 @@
     text-align: center;
 }
 
+.lang-flat{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .lang li a{
     display: block;
     padding: 3px 20px;
@@ -76,6 +82,31 @@ footer{
 }
 
 @media (min-width: 768px) {
+
+    .navbar-laravel{           
+        background: #ffffffff;
+        position: fixed;
+        width: 100%;       
+        top: 0px;
+        z-index: 1;     
+    }
+    .pb-4, .py-4 {
+        padding-bottom: 0rem!important;
+        padding-top: 5rem!important;
+    }
+    .flex-center .container .row .card,
+    .container .login-card .card{
+        background: #ffffffbb;
+    }
+
+    .card-menu-table .card-body li{
+        background: #ffffff88;   
+    }
+
+    .card-body-table .card-body .row-info{
+        background: #ffffff88; 
+    }
+
     .alert-events{                
         position: absolute;
         z-index: 1;
@@ -107,6 +138,13 @@ footer{
 
     .alert-option .dropdown-content .alert{
         padding: 0.25rem 1.25rem;
+    }
+}
+@media (max-width: 767px) {
+    .col-lateral-table > .col-md-12{
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-bottom: 10px;
     }
 }
 

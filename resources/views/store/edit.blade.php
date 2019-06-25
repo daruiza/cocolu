@@ -14,7 +14,7 @@
 	        <div class="row row-edit-perfil">
 
 	        	<div class="col-md-4 ">
-            		<div class="card">
+            		<div class="card card-menu-table">
 	                    <div class="card-header">{{ __('messages.Options') }}</div>
 	                    @if (!empty($data['options']) )
 	                    	@include('layouts.form_options_profile')
@@ -166,6 +166,25 @@
 				                    		</div>
 
 				                    		<div class="form-group row">
+				                    			{!! Form::label('colorbody',__('messages.colorBody'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+				                    			<div class="col-md-8">
+				                    				<div id="cnt-colorbody" class="input-group">
+				                    					@if($errors->has('colorbody'))
+				                    						{!! Form::text('colorbody',null, ['class'=>'form-control is-invalid ']) !!}
+					                    					<span class="invalid-feedback">
+						                                        <strong>{{ $errors->first('colorbody') }}</strong>
+						                                    </span>
+					                    				@else
+					                    					{!! Form::text('colorbody',null, ['class'=>'form-control']) !!}
+					                    				@endif
+					                    				<span class="input-group-append">
+															<span class="input-group-text colorpicker-input-addon"><i></i></span>
+														</span>
+				                    				</div>
+				                    			</div>
+				                    		</div>
+
+				                    		<div class="form-group row">
 				                    			{!! Form::label('selecttable',__('messages.selectTable'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 				                    			<div class="col-md-8">
 				                    				<div id="cnt-selecttable" class="input-group">
@@ -185,7 +204,7 @@
 				                    		</div>
 
 				                    		<div class="form-group row">
-				                    			{!! Form::label('selecttable',__('messages.serviceOpenTable'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+				                    			{!! Form::label('serviceopentable',__('messages.serviceOpenTable'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 				                    			<div class="col-md-8">
 				                    				<div id="cnt-serviceopentable" class="input-group">
 				                    					@if($errors->has('serviceopentable'))
@@ -381,6 +400,7 @@
 			ajaxobject.peticionajax($('#form_consult_city').attr('action'),datos,"store.consultaRespuestaCity");
 		});
 
+	    colorPiker('cnt-colorbody');
 		colorPiker('cnt-selecttable');
 	    colorPiker('cnt-serviceopentable');
 	    colorPiker('cnt-colorrow');

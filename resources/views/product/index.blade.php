@@ -228,18 +228,16 @@
             background-color: #e47b7b;
         }
 
-        form#form-product{
-            display: flex;            
-            align-items: center;
-            justify-content: center;
-        }
-
         .form-search{
             margin: 4px;
         }
 
         .page-header{
             margin: 10px;   
+        }
+
+        .table-container{
+            text-align: center;
         }
 
         .table-header{
@@ -261,7 +259,13 @@
             color: #212529
         }
 
-        
+        @media (min-width: 768px) {
+            form#form-product{
+                display: flex;            
+                align-items: center;
+                justify-content: center;
+            }
+        }
 
 	</style>	
 @endsection

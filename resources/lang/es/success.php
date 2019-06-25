@@ -16,4 +16,5 @@ return [
 	"STORE_Edit_OK" => "Bien hecho! El producto se ha editado perfectamente!",
 	"ProductCreateOk" => "Bien! el producto fue creado satisfactoriamente",
 	"EnvoiceSaveOk" => "Hecho!, la factura fue procesada correctamente",
+	"messageaSendOK" => "Hecho!, Tu mensaje fue enviado correctamente"
 ];

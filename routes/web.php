@@ -26,23 +26,27 @@ Route::get('invoice/purchase', [
    'as' => 'invoice.purchase', 'uses' => 'Web\InvoiceController@purchaseOrder'
 ]);
 
+Route::get('message/{id_store}/{id_table}/request', [
+   'as' => 'message.request', 'uses' => 'Web\MessageController@request'
+]);
+
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('locale', 'HomeController@postLocale')->name('locale');
-Route::resource('rol', 'Web\RolController');
-Route::resource('user', 'Web\UserController');
-Route::resource('module', 'Web\ModuleController');
-Route::resource('store', 'Web\StoreController');
-Route::resource('category', 'Web\CategoryController');
+Route::post('locale',      'HomeController@postLocale')->name('locale');
+Route::resource('rol',     'Web\RolController');
+Route::resource('user',    'Web\UserController');
+Route::resource('module',  'Web\ModuleController');
+Route::resource('store',   'Web\StoreController');
+Route::resource('category','Web\CategoryController');
 Route::resource('product', 'Web\ProductController');
-Route::resource('table', 'Web\TableController');
+Route::resource('table',   'Web\TableController');
 Route::resource('service', 'Web\ServiceController');
-Route::resource('clousure', 'Web\ClousureController');
-Route::resource('waiter', 'Web\WaiterController');
+Route::resource('clousure','Web\ClousureController');
+Route::resource('waiter',  'Web\WaiterController');
 Route::resource('procuct', 'Web\ProductController');
-Route::resource('order', 'Web\OrderController');
+Route::resource('order',   'Web\OrderController');
 Route::resource('expense', 'Web\ExpenseController');
 Route::resource('invoice', 'Web\InvoiceController');
-Route::resource('provider', 'Web\ProviderController');
+Route::resource('provider','Web\ProviderController');
 Route::resource('message', 'Web\MessageController');
 
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');

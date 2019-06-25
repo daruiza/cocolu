@@ -14,8 +14,17 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
+use App\Http\Traits\Web\MessageRequestTrait;
+
 class MessageController extends Controller
 {
+
+    use MessageRequestTrait;
+
+    public function __construct()
+    {               
+        $this->middleware('auth', ['except' => 'request']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +32,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return 'messages';
+        //
     }
 
     /**
@@ -126,6 +135,7 @@ class MessageController extends Controller
     {
         //
     }
+    
 
     protected function validator(array $data)
     {

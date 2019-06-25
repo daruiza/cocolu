@@ -19,7 +19,7 @@
     </div>   
     <div class="col-md-9">
         @include('layouts.alert')
-        <div class="card">
+        <div class="card card-body-table">
             <div class="card-header">{{ __('messages.DashboardImform') }}</div>
             <div class="card-body">
                 <div class="container">
@@ -105,7 +105,7 @@
 <style type="text/css">
     
     .navbar-laravel{           
-        background: none;
+        /*background: none;*/
         position: relative;
         width: auto;        
     }

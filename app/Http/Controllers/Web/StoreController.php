@@ -114,7 +114,7 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {        
+    {           
         $user = new User();
         $user = User::findOrFail($id);        
         //validación de credenciales de usuario
@@ -122,6 +122,7 @@ class StoreController extends Controller
         $store = $user->store();        
         $store->storeheight = json_decode($store->label)->table->StoreHeight;
         $store->tableheight = json_decode($store->label)->table->TableHeight;
+        $store->colorbody = json_decode($store->label)->table->colorbody;        
         $store->selecttable = json_decode($store->label)->table->selectTable;
         $store->serviceopentable = json_decode($store->label)->table->serviceOpenTable;
         $store->colorrow = json_decode($store->label)->table->colorRow;

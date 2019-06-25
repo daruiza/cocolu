@@ -11,7 +11,7 @@
         <div class="row justify-content-center">
 
             <div class="col-md-4 ">                
-                <div class="card">
+                <div class="card card-menu-table">
                     <div class="card-header">{{ __('messages.Options') }}</div>
                     @if (!empty($options) )
                         @include('layouts.form_options_profile')

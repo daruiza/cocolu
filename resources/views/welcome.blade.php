@@ -34,9 +34,14 @@
                 
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header">{{ __('messages.welcome') }}</div>
-                    <div class="card-body">
-                        {{ __('messages.welcomeContent') }}
+                    <div class="card-header">{{ __('messages.welcomeTittleOffer') }}</div>
+                    <div class="card-body">                        
+                        <div>{{ __('messages.Multilanguage') }}</div>
+                        <div>{{ __('messages.RealTime') }}</div>
+                        <div>{{ __('messages.Multiaccess') }}</div>
+                        <hr>
+                        <div>{{ __('messages.inventoryManagement') }}</div>
+                        <hr>
                     </div>
                 </div>
             </div>

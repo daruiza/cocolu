@@ -22,6 +22,13 @@
     
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    @auth    
+    <style type="text/css">
+        body{
+            background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['colorbody'] }};
+        }
+    </style>
+    @endauth
 
     @yield('template')
     @yield('style')
@@ -32,7 +39,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                     @guest
+                    @guest
                         {{ config('app.name', 'Cocolú') }}
                     @else
                         @if(Auth::user()->rol()->first()->id != 1)
@@ -56,7 +63,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <div class="dropdown">
+                            <div class="dropdown lang-flat">
                                 <button class="btn dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-flag"></i>
                                 </button>

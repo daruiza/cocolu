@@ -85,6 +85,9 @@ class Store extends Model
         if(!empty($data["tableheight"])){
             $label->table->TableHeight = $data["tableheight"];            
         } 
+        if(!empty($data["colorbody"])){
+            $label->table->colorbody = $data["colorbody"];          
+        } 
         if(!empty($data["selecttable"])){
             $label->table->selectTable = $data["selecttable"];          
         } 
@@ -118,6 +121,7 @@ class Store extends Model
         
         $this->storeheight = $data["storeheight"];
         $this->tableheight = $data["tableheight"];
+        $this->colorbody = $data["colorbody"];
         $this->selecttable = $data["selecttable"];
         $this->serviceopentable = $data["serviceopentable"];
         $this->colorrow = $data["colorrow"];
