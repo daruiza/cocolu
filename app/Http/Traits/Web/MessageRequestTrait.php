@@ -9,11 +9,15 @@ use Illuminate\Http\Request;
 
 trait MessageRequestTrait
 {	
-	public function request($store, Request $request){      
+	public function request($id_store, $id_table, Request $request){      
 		//validamos los datos
-		//1 existencia de la tienda
-		dd($store);
-		dd($request->input());
-        return 'service';        
+		//1 existencia de la tienda		
+		$store = Store::findOrFail($id_store);
+		$table = Table::findOrFail($id_table)->where('store_id',$id_store);
+
+		//request
+		$request = array();
+
+        return view('message.request_store',compact('store','table','request'));
     }	
 }

@@ -109,6 +109,7 @@
 			{!! json_decode(Auth::user()->store()->label,true)['table']['StoreHeight'] !!});
 		
 		/*Multiple Modal*/
+		
 		$(document).on('show.bs.modal', '.modal', function (event) {
             var zIndex = 1040 + (10 * $('.modal:visible').length);
             $(this).css('z-index', zIndex);
@@ -116,6 +117,11 @@
                 $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
             }, 0);
         });
+		
+        $('#modal_order_conponents , #modal_detail').on('hidden.bs.modal', function () {		    
+		    $('body').addClass('modal-open');
+		});
+
 	</script>
 		
 	@isset($data['servicemodal'])	
