@@ -29,4 +29,7 @@ return [
 	"orderCreate" => "Create order",
 	"Accept" => "Accept",
 	"sendMessage" => "Send Menssage",
+	"letter" => "Our product list",
+	"moreStore" => "More Abaut - ",
+
 ];

@@ -144,6 +144,8 @@ return [
     "Hour" => "Hora",
     "NewMessage" => "Nuevo Mensaje",
     "CreateMessage" => "Crear Mensaje",
+    "WriteUsMessage" => "Escribenos tu Mensaje",
+    "WriteMessage" => "Cuentanos, ¿Que Deseas?",
     "issue" => "Asunto",
     "body" => "Cuerpo del Mensaje",
     "NotificationsRealTime" => "Notificaciones en Tiempo Real",

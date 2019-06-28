@@ -23,7 +23,7 @@ class MessageController extends Controller
 
     public function __construct()
     {               
-        $this->middleware('auth', ['except' => 'request']);
+        $this->middleware('auth', ['except' => ['request','requestStore']]);
     }
     /**
      * Display a listing of the resource.
@@ -56,8 +56,7 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        
+    {        
         //validamos los datos
         if(!Auth::user()->validateUserStore(\Auth::user()->rel_store_id)){
             return 

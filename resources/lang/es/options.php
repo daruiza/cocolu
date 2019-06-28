@@ -28,5 +28,7 @@ return [
 	"serviceCreate" => "Crear servicio",
 	"orderCreate" => "Crear orden",
 	"Accept" => "Aceptar",
-	"sendMessage" => "Enviar Mensaje",
+	"sendMessage" => "Enviar Mensaje",	
+	"letter" => "Nuestra Carta de Productos",
+	"moreStore" => "Sobre Nosotros - ",
 ];

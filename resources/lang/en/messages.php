@@ -145,6 +145,8 @@ return [
     "Hour" => "Hour",
     "NewMessage" => "New Message",
     "CreateMessage" => "Create Message",
+    "WriteUsMessage" => "Write us your Message",
+    "WriteMessage" => "Tell us, what you want?",
     "issue" => "Issue",
     "body" => "Body Message",
     "NotificationsRealTime" => "Real Time Notifications",

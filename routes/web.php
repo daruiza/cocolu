@@ -30,6 +30,10 @@ Route::get('message/{id_store}/{id_table}/request', [
    'as' => 'message.request', 'uses' => 'Web\MessageController@request'
 ]);
 
+Route::post('message/requeststore', [
+   'as' => 'message.requeststore', 'uses' => 'Web\MessageController@requestStore'
+]);
+
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('locale',      'HomeController@postLocale')->name('locale');
 Route::resource('rol',     'Web\RolController');

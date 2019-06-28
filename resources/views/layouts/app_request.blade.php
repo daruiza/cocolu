@@ -30,8 +30,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">                        
-                        <li>Ver La Carta de Productos</li>
-                        <li>Más sobre {{ $store->name }}</li>
+                        <li><i class="fas fa-tags"></i>{{ __('options.letter') }}</li>
+                        <li><i class="fas fa-home"></i>{{ __('options.moreStore') }} {{ $store->name }}</li>
                     </ul>
                 </div>
             </div>
