@@ -11,6 +11,7 @@
             <div class="content">
             	<div class="row">
             		<div class="col-md-9">
+            			@include('layouts.alert')
             			<div class="card">
             				<div class="card-header">{{ __('messages.WriteMessage') }}</div>
             				<div class="card-body">
@@ -24,7 +25,7 @@
             						<div class="form-group row">		                                
 
 		                                <div class="col-md-6">
-		                                    <textarea id="body" type="textarea" rows="5" class="form-control" name="body" required placeholder="{{ __('messages.WriteUsMessage') }}">
+		                                    <textarea id="body" type="textarea" rows="5" class="form-control" name="body" placeholder="{{ __('messages.WriteUsMessage') }}">
 		                                	</textarea>
 		                                </div>
 		                                @if ($errors->has('body'))

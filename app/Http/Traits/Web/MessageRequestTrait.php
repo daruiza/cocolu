@@ -9,6 +9,7 @@ use App\Model\Core\Message;
 use App\Events\NewRequest;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 trait MessageRequestTrait
 {	
@@ -41,8 +42,7 @@ trait MessageRequestTrait
     }
 
     public function requestStore(Request $request){    	
-
-    	/*
+    	
     	$store = Store::findOrFail($request->input('store_id'));
     	$table = Table::
     		findOrFail($request->input('table_id'))
@@ -52,20 +52,20 @@ trait MessageRequestTrait
     	$message = new Message();          
         $message->issue = $request->input('issue');
         $message->body = $request->input('body');
-        $message->rel_store_id = \Auth::user()->rel_store_id;        
+        $message->rel_store_id = $request->input('store_id');        
         $message->save();
 
         //guardamos el mensaje
-
+                
         //enviamos la notificación        
         broadcast(new NewRequest($table,$message))->toOthers();        
 
         $message = Message::find($message->id);  
-        $message->delete();  
-        */
+        $message->delete();        
 
-        Session::flash('success', [['MessageSendOk']]);
-        return redirect('message.request');
+        Session::flash('guest_success', [['MessageSendOk']]);
+        return redirect()->route('message.request',['id_store'=>$request->input('store_id'),'id_table'=>$request->input('table_id')]);
+        
 
     }
 

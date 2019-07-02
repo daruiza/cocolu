@@ -10,11 +10,19 @@
 	    <newmessage-component 
 	        :user="{{ auth()->user() }}">        
 	    </newmessage-component>
+
+	    <!-- Nuevo Request -->
+	    <newrequest-component
+	        :user="{{ auth()->user() }}">        
+	    </newrequest-component>
     @endif
 
     <!-- Waiter -->
     @if(Auth::user()->rol_id == 3)
-    	
+    	<!-- Nuevo Request -->
+	    <newrequest-component
+	        :user="{{ auth()->user() }}">        
+	    </newrequest-component>    	
     @endif
 
     {!! Form::hidden('messageNeworder', __('messages.NewOrder') ) !!}

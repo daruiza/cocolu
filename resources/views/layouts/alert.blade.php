@@ -18,7 +18,6 @@
     </div>
 @endif
 
-
 @if(Session::has('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h6 class="alert-heading">{{ __('success.successful') }}</h6>
@@ -59,6 +58,36 @@
     </div>
 @endif
 
+@if(Session::has('guest_success'))
+    <div 
+        class="alert alert-success alert-dismissible fade show"
+        role="alert"
+        style="text-align: center;">
+
+        <h6 class="alert-heading">
+            {{ __('success.guest_successful') }}
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i>                       
+        </h6>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <!--
+        <hr>
+        <ul>
+            @foreach (Session::get('guest_success') as $message)
+                @if (array_key_exists(1,$message))
+                    <li>{{ __('success.'.$message[0],['name'=>$message[1]]) }}</li>
+                @else
+                    <li>{{ __('success.'.$message[0]) }}</li>
+                @endif
+            @endforeach
+            {{Session::forget('guest_success')}}
+        </ul>                       
+        -->
+    </div>
+@endif
 
 @if(!empty($danger))     
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -121,5 +150,28 @@
     </div>
 @endif
 
+@if(!empty($guest_success))
+    <div 
+    class="alert alert-success alert-dismissible fade show"
+    role="alert"
+    style="text-align: center;>
 
-
+        <h6 class="alert-heading">{{ __('success.guest_successful') }}</h6>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <hr>
+        <!--
+        <ul>
+            @foreach ($guest_success as $message)
+                @if (array_key_exists(1,$message))
+                    <li>{{ __('success.'.$message[0],['name'=>$message[1]]) }}</li>
+                @else
+                    <li>{{ __('success.'.$message[0]) }}</li>
+                @endif
+            @endforeach
+            {{Session::forget('guest_success')}}
+        </ul>                       
+        -->
+    </div>
+@endif

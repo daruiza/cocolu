@@ -36,7 +36,7 @@ class NewRequest implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(User $table, Message $message)
+    public function __construct(Table $table, Message $message)
     {
         $this->table = $table;
         $this->message = $message;                

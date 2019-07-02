@@ -16,5 +16,7 @@ return [
 	"STORE_Edit_OK" => "Done! The Product Edit OK",
 	"ProductCreateOk" => "All right! the product was created successfully",
 	"EnvoiceSaveOk" => "Done!, the invoice was processed correctly",
-	"messageaSendOK" => "Done!, Your message has been send OK"
+	"messageaSendOK" => "Done!, Your message has been send OK",
+	"guest_successful" => "Done!, Your request has been send OK.",
+	"MessageSendOk" => "We will answer your request soon",
 ];
