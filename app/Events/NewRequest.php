@@ -29,7 +29,7 @@ class NewRequest implements ShouldBroadcast
      *
      * @var Message
      */
-    public $message;
+    public $request;
 
     /**
      * Create a new event instance.
@@ -39,7 +39,7 @@ class NewRequest implements ShouldBroadcast
     public function __construct(Table $table, Message $message)
     {
         $this->table = $table;
-        $this->message = $message;                
+        $this->request = $message;                
     }
 
     /**

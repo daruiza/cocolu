@@ -22,3 +22,7 @@ Broadcast::channel('neworder.{store}', function ($user) {
 Broadcast::channel('newmessage.{store}', function ($user) {
     return $user;
 });
+
+Broadcast::channel('newrequest.{store}', function ($user) {
+    return $user;
+});

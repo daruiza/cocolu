@@ -103,7 +103,7 @@ alert_events.prototype.showAlerts = function(){
 
 		if(("message" in events[i])){
 			var node = document.createElement("div");
-        	node.setAttribute("class", "alert alert-info alert-dismissible");        	
+        	node.setAttribute("class", "alert alert-info alert-dismissible");
 			
         	var subnode = document.createElement("h6");
         	subnode.setAttribute("class","alert-heading");
@@ -139,6 +139,32 @@ alert_events.prototype.showAlerts = function(){
 
         	cn.appendChild(node);		
 		}
+
+        if(("request" in events[i])){
+
+            var node = document.createElement("div");
+            node.setAttribute("class", "alert alert-warning alert-dismissible");
+
+            var subnode = document.createElement("h6");
+            subnode.setAttribute("class","alert-heading");
+            subnode.innerHTML = $("input[name='messageNewmessage']").val();         
+            node.appendChild(subnode);
+
+            var subnode = document.createElement("a");
+            subnode.setAttribute("href","#");
+            subnode.setAttribute("id","event_"+i);
+            subnode.setAttribute("class","close");
+            subnode.setAttribute("data-dismiss","alert");
+            subnode.setAttribute("aria-label","close");
+            subnode.innerHTML = "&times";
+            node.appendChild(subnode);
+
+            var subnode = document.createElement("hr");
+            node.appendChild(subnode);
+
+            cn.appendChild(node);       
+
+        }
 	}
 
     $('.alert-option .dropdown-content .alert').on('close.bs.alert', function () {        
