@@ -125,5 +125,9 @@ trait TableRequestTrait
     public function closeService(Request $request,$id){        
         return $this->serviceController->close($request);
     }
+
+    public function qrcode($id){
+        return 'qrcode';
+    }
 	
 }

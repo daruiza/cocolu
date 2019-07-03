@@ -113,3 +113,7 @@ Route::post('provider/consultprovider', [
 Route::post('order/order_paid', [
    'as' => 'order.order_paid', 'uses' => 'Web\OrderController@orderPaid'
 ]);
+Route::get('table/{id}/qrcode', [
+   'as' => 'table.qrcode', 'uses' => 'Web\TableController@qrcode'
+]);
+

@@ -293,7 +293,13 @@ class OptionsTableSeeder extends Seeder
 			)
 		);
 
-		//Modulo option 45
+		//Modulo Table option 45
+		\DB::table('options')->insert(array(
+			'name'=>'qrcode',			
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-clipboard"}',
+			'module_id'=>6			
+			)
+		);
 
     }
 }
