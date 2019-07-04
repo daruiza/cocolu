@@ -16,33 +16,38 @@
 	                    <div class="card-header">{{ __('messages.TableShow') }}</div>
 	                    <div class="card-body">
 							<ul class="list-group">	                    	
-								<li class="list-group-item ">
+								<li class="list-group-item li-init">
 									<div><i class="{{$table->icon}}">  </i> {{$table->name}}</div>
 									<div>{{$table->description}}</div>										
 								</li>								
 									@foreach(json_decode($table->label)->options as $option)
 										@if($option == "orderCreate")
 											@if($table->tableServiceOpen()->count())
-												<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
+												<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()">
 													{{ __('options.'. $option) }} 	
 												</li>
 											@endif
 										@else
-											<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()";>
+											<li class="list-group-item li-option" onclick="event.preventDefault(); document.getElementById('{{ $option }}').submit()">
 													{{ __('options.'. $option) }} 	
 											</li>
 										@endif
-									@endforeach
-								
+									@endforeach								
 								
 								<form id="serviceCreate" action="{{ route('service.create',$table->id) }}" method="GET" style="display: none;">
 									<input type="hidden" name="id" value="{{ $table->id }}">									
 								</form>
 
-								<form id="orderCreate" method="GET" action="http://localhost/backend/cocolu/public/order/create" accept-charset="UTF-8" id="table1">
+								<form id="orderCreate" method="GET" action="{{ route('order.create',$table->id) }}" accept-charset="UTF-8" style="display: none;">
                                     <input name="store-id" type="hidden" value="{{$table->store_id}}">
                                     <input name="table-id" type="hidden" value="{{$table->id}}">                          
                                 </form>
+
+                                <form id="qrcodeGenerate" action="{{ route('table.qrcode',$table->id) }}" method="GET" style="display: none;">
+                                	<input name="store-id" type="hidden" value="{{$table->store_id}}">
+									<input name="table-id" type="hidden" value="{{ $table->id }}">
+								</form>
+
 							</ul>      		
 	                    </div>	                    
 	                </div>
@@ -126,6 +131,10 @@
         display: inline-block;
         height: 100%;
         width:  100%;
+    }
+
+    .li-init{
+    	text-align: center;
     }	
 </style>
 @endsection

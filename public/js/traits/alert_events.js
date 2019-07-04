@@ -162,13 +162,26 @@ alert_events.prototype.showAlerts = function(){
             var subnode = document.createElement("hr");
             node.appendChild(subnode);
 
-            cn.appendChild(node);       
+            var subnode = document.createElement("div");
+            subnode.setAttribute("class", "");          
+            subnode.innerHTML = $( "input[name='messageIssue']").val()+': <strong>'+events[i].request.issue+'</strong>';            
+            node.appendChild(subnode);
 
+            var subnode = document.createElement("div");
+            subnode.setAttribute("class", "");            
+            subnode.innerHTML = events[i].request.body;            
+            node.appendChild(subnode);
+
+            var div = document.createElement("div");
+            div.setAttribute("class", "");
+            div.innerHTML = $( "input[name='messageTable']").val()+': '+events[i].table.name;
+            node.appendChild(div);
+
+            cn.appendChild(node);
         }
 	}
 
-    $('.alert-option .dropdown-content .alert').on('close.bs.alert', function () {        
-
+    $('.alert-option .dropdown-content .alert').on('close.bs.alert', function () {
         var events = JSON.parse(sessionStorage.getItem('events'));
         var i = this.children[1].id.split('_')[1];                
         events.splice(i, 1);

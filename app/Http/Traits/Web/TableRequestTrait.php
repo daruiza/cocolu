@@ -3,6 +3,7 @@
 namespace App\Http\Traits\Web;
 
 use App\Model\Core\Table;
+use App\Model\Core\Store;
 use App\Model\Core\Service;
 use App\Model\Core\Order;
 use Illuminate\Http\Request;
@@ -126,8 +127,27 @@ trait TableRequestTrait
         return $this->serviceController->close($request);
     }
 
-    public function qrcode($id){
-        return 'qrcode';
+    public function qrcode(Request $request,$id){        
+        $store = Store::findOrFail($request->input('store-id'));        
+        $table = Table::where('id',$request->input('table-id'))->where('store_id',$store->id)->first();
+        /*esto es para almacenar la imagen en public
+        \QrCode::
+        size(350)->errorCorrection('H')        
+        ->format('png')
+        ->generate(route('message.request',[$store->id,$table->id]),'../public/qrcodes/qrcode.png'); 
+        */
+        
+        
+        //return view('table.generate_qr',compact('store','table'))->render();
+        
+        $view = view::make('table.generate_qr',compact('store','table'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('QR'.$store->name.'-'.$table->name);
+
+        //$pdf = \PDF::loadView('table.generate_qr',compact('store','table'));
+        //return $pdf->stream('hello.pdf'); 
+        //return $pdf->download('hello.pdf'); 
     }
 	
 }

@@ -18,9 +18,9 @@ class CreateTablesTable extends Migration
             $table->string('name',128);
             $table->string('description',512)->nullable()->default(null);
             $table->string('icon', 32)->default(null);
-            $table->string('label', 128)
+            $table->string('label', 512)
                 ->nullable()
-                ->default('{"options":["serviceCreate","serviceCreate"],"position":["","","",""],"logo":"table.png","icon":"fas fa-list"}');            
+                ->default('{"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["","","",""],"logo":"table.png","icon":"fas fa-list"}');            
             $table->string('order', 16)->default(1);
             $table->boolean('active')->default(true);         
             $table->timestamps();

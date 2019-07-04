@@ -163,4 +163,7 @@ return [
     "colorsDistribution" => "Distribución de Colores",
     "sizeTable" => "Tamaño de Sillas",
     "sizeSalon" => "Tamaño del Salón",
+    "CodeQrTable" => "Códigos QR Para La Mesa: ",
+    "CodeQrRequest" => "Solicitudes de Clientes",
+    "letter" => "Carta de Productos",
 ];

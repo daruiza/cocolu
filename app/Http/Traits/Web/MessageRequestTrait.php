@@ -17,7 +17,7 @@ trait MessageRequestTrait
 		//validamos los datos
 		//1 existencia de la tienda		
 		$store = Store::findOrFail($id_store);
-		$table = Table::findOrFail($id_table)->where('store_id',$id_store)->first();
+		$table = Table::where('id',$id_table)->where('store_id',$id_store)->first();
 		
 		//request
 		$request = array('');
@@ -45,7 +45,7 @@ trait MessageRequestTrait
     	
     	$store = Store::findOrFail($request->input('store_id'));
     	$table = Table::
-    		findOrFail($request->input('table_id'))
+    		where('id',$request->input('table_id'))
     		->where('store_id',$request->input('store_id'))
     		->first();
 
@@ -67,6 +67,10 @@ trait MessageRequestTrait
         return redirect()->route('message.request',['id_store'=>$request->input('store_id'),'id_table'=>$request->input('table_id')]);
         
 
+    }
+
+    public function letter($id_store, Request $request){
+    	return 'letter';
     }
 
 }

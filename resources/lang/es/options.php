@@ -31,4 +31,5 @@ return [
 	"sendMessage" => "Enviar Mensaje",	
 	"letter" => "Nuestra Carta de Productos",
 	"moreStore" => "Sobre Nosotros - ",
+	"qrcodeGenerate" => "Generar Código QR",
 ];

@@ -26,14 +26,6 @@ Route::get('invoice/purchase', [
    'as' => 'invoice.purchase', 'uses' => 'Web\InvoiceController@purchaseOrder'
 ]);
 
-Route::get('message/{id_store}/{id_table}/request', [
-   'as' => 'message.request', 'uses' => 'Web\MessageController@request'
-]);
-
-Route::post('message/requeststore', [
-   'as' => 'message.requeststore', 'uses' => 'Web\MessageController@requestStore'
-]);
-
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('locale',      'HomeController@postLocale')->name('locale');
 Route::resource('rol',     'Web\RolController');
@@ -101,6 +93,9 @@ Route::post('product/{id}/savestock', [
 Route::post('table/{id}/saveorder', [
    'as' => 'table.saveorder', 'uses' => 'Web\TableController@saveOrder'
 ]);
+Route::get('table/{id}/qrcode', [
+   'as' => 'table.qrcode', 'uses' => 'Web\TableController@qrcode'
+]);
 Route::get('clousure/{id}/showclousures', [
    'as' => 'clousure.showclousures', 'uses' => 'Web\ClousureController@showClousures'
 ]);
@@ -113,7 +108,12 @@ Route::post('provider/consultprovider', [
 Route::post('order/order_paid', [
    'as' => 'order.order_paid', 'uses' => 'Web\OrderController@orderPaid'
 ]);
-Route::get('table/{id}/qrcode', [
-   'as' => 'table.qrcode', 'uses' => 'Web\TableController@qrcode'
+Route::post('message/requeststore', [
+   'as' => 'message.requeststore', 'uses' => 'Web\MessageController@requestStore'
 ]);
-
+Route::get('message/{id_store}/{id_table}/request', [
+   'as' => 'message.request', 'uses' => 'Web\MessageController@request'
+]);
+Route::get('message/{id_store}/letter', [
+   'as' => 'message.letter', 'uses' => 'Web\MessageController@letter'
+]);

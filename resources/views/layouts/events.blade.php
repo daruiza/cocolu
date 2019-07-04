@@ -32,6 +32,6 @@
 	{!! Form::hidden('messageOrder', __('messages.Order') ) !!}
 	{!! Form::hidden('messageHour', __('messages.Hour') ) !!}
 	{!! Form::hidden('messageIssue', __('messages.issue') ) !!}
-	{!! Form::hidden('messageBody', __('messages.body') ) !!}
+	{!! Form::hidden('messageBody', __('messages.body') ) !!}	
 @endauth
 

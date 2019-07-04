@@ -31,5 +31,6 @@ return [
 	"sendMessage" => "Send Menssage",
 	"letter" => "Our product list",
 	"moreStore" => "More Abaut - ",
+	"qrcodeGenerate" => "Generate QR Code",
 
 ];

@@ -164,4 +164,8 @@ return [
     "colorsDistribution" => "Colors Distribution",
     "sizeTable" => "Table Size",
     "sizeSalon" => "Salon Size",
+    "CodeQrTable" => "QR Codes For Table: ",
+    "CodeQrRequest" => "Customer Request",
+    "letter" => "Product letter",
+
 ];
