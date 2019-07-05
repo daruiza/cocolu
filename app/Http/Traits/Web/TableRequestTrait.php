@@ -143,11 +143,11 @@ trait TableRequestTrait
         $view = view::make('table.generate_qr',compact('store','table'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        return $pdf->stream('QR'.$store->name.'-'.$table->name);
+        //return $pdf->stream('QR'.$store->name.'-'.$table->name);
 
         //$pdf = \PDF::loadView('table.generate_qr',compact('store','table'));
-        //return $pdf->stream('hello.pdf'); 
-        //return $pdf->download('hello.pdf'); 
+        //return $pdf->stream('hello.pdf');         
+        return $pdf->download('QR'.$store->name.'-'.$table->name);
     }
 	
 }

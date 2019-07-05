@@ -16,7 +16,7 @@
 	                    <div class="card-header">{{ __('messages.TableShow') }}</div>
 	                    <div class="card-body">
 							<ul class="list-group">	                    	
-								<li class="list-group-item li-init">
+								<li class="list-group-item">
 									<div><i class="{{$table->icon}}">  </i> {{$table->name}}</div>
 									<div>{{$table->description}}</div>										
 								</li>								
@@ -51,8 +51,6 @@
 							</ul>      		
 	                    </div>	                    
 	                </div>
-
-                    
 
             	</div>           
             	<div class="col-md-8">
@@ -133,8 +131,12 @@
         width:  100%;
     }
 
-    .li-init{
+    .list-group{
     	text-align: center;
+    }
+
+    .content .row > div{
+    	margin-bottom: 20px;
     }	
 </style>
 @endsection
