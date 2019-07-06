@@ -32,4 +32,5 @@ return [
 	"letter" => "Nuestra Carta de Productos",
 	"moreStore" => "Sobre Nosotros - ",
 	"qrcodeGenerate" => "Generar Código QR",
+	"request"=> "Tus deseos Son Ordenes",
 ];

@@ -31,6 +31,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">                        
                         <li><i class="fas fa-tags"></i>{{ __('options.letter') }}</li>
+                        <li><i class="fas fa-microphone"></i>{{ __('options.request') }}</li>
                         <li><i class="fas fa-home"></i>{{ __('options.moreStore') }} {{ $store->name }}</li>
                     </ul>
                 </div>
@@ -43,15 +44,7 @@
             @auth               
                 <footer>
                     <p>
-                        @guest
-                            Copyright © {{date("Y")}} TempoSolutions
-                        @else
-                            @if(Auth::user()->rol()->first()->id != 1)
-                                {{ __('messages.SystemDate') }}                        
-                                {{ Auth::user()->store()->clousureOpen()->date_open }}
-                                Copyright © {{date("Y")}} TempoSolutions
-                            @endif
-                        @endguest
+                        Copyright © {{date("Y")}} TempoSolutions
                     </p>                    
                 </footer> 
             @endauth

@@ -70,7 +70,10 @@ trait MessageRequestTrait
     }
 
     public function letter($id_store, Request $request){
-    	return 'letter';
+        //Consultamos los productos d ela tinda
+        $store = Store::findOrFail($id_store);
+    	
+        return view('message.letter',compact('store'));
     }
 
 }
