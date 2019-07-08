@@ -267,10 +267,10 @@ class OrderController extends Controller
             
             $ingredients = array();//para almacenar los ingredientes
             if(array_key_exists('ingredients', $value)){
-                $ingredients = [
-                    'ingredients'=>$value['ingredients'],
-                    'groups'=>$value['groups']
-                ];
+                $ingredients = ['ingredients'=>$value['ingredients']];                
+                if(array_key_exists('groups',$value)){
+                    $ingredients['groups']=$value['groups'];
+                }
             }
             
             //2.1 relacion con order products    

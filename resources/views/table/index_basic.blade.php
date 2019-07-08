@@ -76,9 +76,8 @@
                                                 				
     											@if($value->tableServiceOpen()->count())
     												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
-    												<div>{{ __('messages.OpenService') }}</div>
-    												<div>{{$value->tableServiceOpen()->first()->date}}</div>
-    												                      
+    												<!--<div>{{ __('messages.OpenService') }}</div>-->
+    												<div>{{$value->tableServiceOpen()->first()->name}}</div>
     											@endif
 
                                             </div>
