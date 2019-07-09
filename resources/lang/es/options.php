@@ -24,6 +24,7 @@ return [
 	"salesForWaiter"=>"Ventas por Mesero",
 	"changepassword"=> "Cambiar Contraseña",
 	"orderPaid" => "Pagar Ordenes",
+	"orderPrint" => "Imprimir Factura",
 	"BottonSave" => "Guardar cambios",
 	"serviceCreate" => "Crear servicio",
 	"orderCreate" => "Crear orden",

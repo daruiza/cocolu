@@ -46,6 +46,7 @@ table.prototype.selectServiceResponse = function(result) {
 
     var sum_service = 0;
     var sum_order_paid = 0;
+    var sum_order_print = 0;
 
     for(obj in result.data.orders) {
     	var subnode = document.createElement("div");
@@ -154,8 +155,14 @@ table.prototype.selectServiceResponse = function(result) {
 	    	sum_service = sum_service + parseInt(result.data.orders[obj].order_price);
 	    }
 
+	    //ordenes servidas, listas para pagar
 	    if(result.data.orders[obj].status_id == 2){
 	    	sum_order_paid = sum_order_paid+1;
+	    }
+
+	    //ordenes pagas listas para imprimir
+	    if(result.data.orders[obj].status_id == 3){
+	    	sum_order_print = sum_order_print+1;
 	    }
     }
 
@@ -175,8 +182,12 @@ table.prototype.selectServiceResponse = function(result) {
 		$('.services-table .new-orders').html('<a class="dropdown-item" href="javascript: order_create_submit(\'table'+result.data.table[0].id+'\')"><i class="fas fa-clipboard"></i><span>'+$('.span-order').html()+'</span></a>');	
 	}
 
-	if(sum_order_paid ){
+	if(sum_order_paid){
 		$('.services-table .new-orders').html($('.services-table .new-orders').html()+'<a class="dropdown-item" href="javascript: order_paid_submit(\'table_order_paid'+result.data.table[0].id+'\')"><i class="fas fa-money-check-alt"></i><span>'+$( "input[name='mesage_orderPaid']" ).val()+'</span></a>');	
+	}
+
+	if(sum_order_print){
+		$('.services-table .new-orders').html($('.services-table .new-orders').html()+'<a class="dropdown-item" href="javascript: order_print_submit(\'table_order_print'+result.data.table[0].id+'\')"><i class="fas fa-print"></i><span>'+$( "input[name='mesage_orderPrint']" ).val()+'</span></a>');	
 	}
 
 	//pintar el modal
@@ -434,6 +445,10 @@ table.prototype.orderPaidResponse = function(result) {
 		});	
 	}
 	
+}
+
+table.prototype.orderPrintResponse = function(result) {
+	alert('Ok');
 }
 
 table.prototype.returnAddProduct = function(result) {	

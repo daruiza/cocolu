@@ -24,6 +24,7 @@ return [
 	"salesForWaiter"=>"Sales for Waiter",
 	"changepassword"=> "Change Password",
 	"orderPaid" => "Paid Orders",
+	"orderPrint" => "Print Invoice",
 	"BottonSave" => "Save",
 	"serviceCreate" => " Create service",
 	"orderCreate" => "Create order",

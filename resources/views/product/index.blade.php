@@ -265,6 +265,14 @@
                 align-items: center;
                 justify-content: center;
             }
+
+            .card-body {                
+                padding: 0.25rem;
+            }
+            
+            .object-product{
+                font-size: 14px;
+            }
         }
 
 	</style>	

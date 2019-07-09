@@ -96,13 +96,22 @@
 			return false;			
 		}
 
-		function order_paid_submit(id){			
+		function order_paid_submit(id){		
 			//$('#'+id)[0].submit();
 			
 			var data = new Array();
 			data['store_id'] = $("#"+id+" input[name=store-id]").val();			
 			data['table_id'] = $("#"+id+" input[name=table-id]").val();				
 			ajaxobject.peticionajax($('#'+id).attr('action'),data,"table.orderPaidResponse");
+		}
+
+		function order_print_submit(id){		
+			//$('#'+id)[0].submit();
+			
+			var data = new Array();
+			data['store_id'] = $("#"+id+" input[name=store-id]").val();			
+			data['table_id'] = $("#"+id+" input[name=table-id]").val();				
+			ajaxobject.peticionajax($('#'+id).attr('action'),data,"table.orderPrintResponse");
 		}		
 
 		$("#containment-wrapper").height($("#containment-wrapper").height()+

@@ -122,5 +122,13 @@ trait OrderRequestTrait
                 'order_product'=>$order_product
             ]]);
     }
+
+    public function orderPrint(Request $request){
+        return response()->json([
+            'return'=>true,
+            'data'=>[
+                'request'=>$request->input()                
+            ]]);
+    }
 	
 }

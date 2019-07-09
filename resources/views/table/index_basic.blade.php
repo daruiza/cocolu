@@ -98,6 +98,12 @@
                                                     {{ Form::hidden('table-id', $value->id) }}                          
                                                 {!! Form::close() !!}
 
+                                                {!! Form::open(array('id'=>'table_order_print'.$value->id,'route'=>'order.order_print','method' =>'POST')) !!}
+                                                    {{ Form::hidden('store-id',Auth::user()->store()->id) }}
+                                                    {{ Form::hidden('table-id', $value->id) }}                          
+                                                {!! Form::close() !!}
+
+
                                             </div>
                                             @endif
 										</div>
@@ -128,5 +134,6 @@
 {!! Form::hidden('mesage_openService', __('options.service') ) !!}
 {!! Form::hidden('mesage_closeService', __('options.closeService') ) !!}
 {!! Form::hidden('mesage_orderPaid', __('options.orderPaid') ) !!}
+{!! Form::hidden('mesage_orderPrint', __('options.orderPrint') ) !!}
 
 
