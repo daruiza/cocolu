@@ -58,6 +58,7 @@ return [
     "Send Password Reset Link" => "Send Password Reset Link",
     "Send"=>"Send",
     "Pay"=>"Pay",
+    "Print"=>"Print",
     "passwordChange"=>"Password Change",
     "acountSummary"=>"Acount Summary",
     "TableSelectNone" => "For this option you need select a table",

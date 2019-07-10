@@ -95,14 +95,15 @@
 
                                                 {!! Form::open(array('id'=>'table_order_paid'.$value->id,'route'=>'order.order_paid','method' =>'POST')) !!}
                                                     {{ Form::hidden('store-id',Auth::user()->store()->id) }}
-                                                    {{ Form::hidden('table-id', $value->id) }}                          
+                                                    {{ Form::hidden('table-id', $value->id) }}
+                                                    {{ Form::hidden('status-id', 2) }}                          
                                                 {!! Form::close() !!}
 
-                                                {!! Form::open(array('id'=>'table_order_print'.$value->id,'route'=>'order.order_print','method' =>'POST')) !!}
+                                                {!! Form::open(array('id'=>'table_order_print'.$value->id,'route'=>'order.order_paid','method' =>'POST')) !!}
                                                     {{ Form::hidden('store-id',Auth::user()->store()->id) }}
-                                                    {{ Form::hidden('table-id', $value->id) }}                          
+                                                    {{ Form::hidden('table-id', $value->id) }}
+                                                    {{ Form::hidden('status-id', 3) }}                                     
                                                 {!! Form::close() !!}
-
 
                                             </div>
                                             @endif
@@ -129,6 +130,7 @@
 {!! Form::hidden('mesage_send', __('messages.Send') ) !!}
 {!! Form::hidden('mesage_serve', __('form.Serve') ) !!}
 {!! Form::hidden('mesage_pay', __('messages.Pay') ) !!}
+{!! Form::hidden('mesage_print', __('messages.Print') ) !!}
 {!! Form::hidden('mesage_recover', __('messages.Recover') ) !!}
 {!! Form::hidden('mesage_without', __('messages.Without') ) !!}
 {!! Form::hidden('mesage_openService', __('options.service') ) !!}

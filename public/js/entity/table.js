@@ -448,7 +448,10 @@ table.prototype.orderPaidResponse = function(result) {
 }
 
 table.prototype.orderPrintResponse = function(result) {
-	alert('Ok');
+	table.orderPaidResponse(result);
+	$('#modal_order_view .btn-send').html($( "input[name='mesage_print']" ).val())
+	$( "input[name='next_status']" ).val(6);
+	
 }
 
 table.prototype.returnAddProduct = function(result) {	

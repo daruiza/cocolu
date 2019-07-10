@@ -20,7 +20,7 @@
             {{ Form::hidden('table_id', $table->id) }}            
             <div class="form-group row">
               <div class="col-md-12">
-                {!! Form::label('name',__('messages.Name'),['class'=>'col-form-label text-md-right'],'autofocus','autofocus') !!}
+                {!! Form::label('name',__('messages.Name'),['class'=>'col-form-label text-md-right','autofocus','autofocus']) !!}
                 {!! Form::text('name',null, ['class'=>'form-control']) !!}
               </div>
             </div>
@@ -32,6 +32,12 @@
               </div>
             </div>
             -->
+            <div class="form-group row">
+              <div class="col-md-12">
+                {!! Form::label('number',__('messages.Number'),['class'=>'col-form-label text-md-right']) !!}
+                {!! Form::number('number',$number, ['class'=>'form-control','min'=>'0','step'=>'1']) !!}
+              </div>
+            </div>
           {!! Form::close() !!}
            
 

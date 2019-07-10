@@ -101,7 +101,8 @@
 			
 			var data = new Array();
 			data['store_id'] = $("#"+id+" input[name=store-id]").val();			
-			data['table_id'] = $("#"+id+" input[name=table-id]").val();				
+			data['table_id'] = $("#"+id+" input[name=table-id]").val();
+			data['status_id'] = $("#"+id+" input[name=status-id]").val();				
 			ajaxobject.peticionajax($('#'+id).attr('action'),data,"table.orderPaidResponse");
 		}
 
@@ -110,7 +111,8 @@
 			
 			var data = new Array();
 			data['store_id'] = $("#"+id+" input[name=store-id]").val();			
-			data['table_id'] = $("#"+id+" input[name=table-id]").val();				
+			data['table_id'] = $("#"+id+" input[name=table-id]").val();	
+			data['status_id'] = $("#"+id+" input[name=status-id]").val();			
 			ajaxobject.peticionajax($('#'+id).attr('action'),data,"table.orderPrintResponse");
 		}		
 

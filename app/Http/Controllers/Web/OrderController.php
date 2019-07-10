@@ -324,7 +324,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {           
+    {
         //validamos            
         $table = Table::find($request->input('table_id'));        
         $service = $table->tableServiceOpen()->first();
@@ -335,7 +335,7 @@ class OrderController extends Controller
         }
 
         //Se pretende recuperar la orden
-        if($request->input('next_status') == 5){
+        if($request->input('next_status') == 5){            
             $order = Order::find($request->input('order_id'));
             $description = json_decode($order->description,true);
             $today = new DateTime();
@@ -424,7 +424,25 @@ class OrderController extends Controller
                     
                     
                 }
+            }
 
+            //se pretende imprimir
+            if($request->input('next_status') == 6){
+                foreach($request->input() as $key=>$value){
+                    if(strpos($key,'status_paid') !== false){
+                        $vector=explode('-',$key);
+                        $n=count($vector);
+                        $id_item = $vector[$n-2];
+                        $array[$id_item][$vector[$n-3]]['order_id'] = $id_item;
+                        $array[$id_item][$vector[$n-3]]['order_product_id'] = end($vector);                    
+                    }
+                }
+                foreach ($array as $key => $value) {
+                    //$key es el id de order
+                    $order = Order::find($key);
+                    var_dump($order);
+                    return 'Fin';
+                }
             }
             
         }

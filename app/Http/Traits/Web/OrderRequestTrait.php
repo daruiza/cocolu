@@ -110,7 +110,7 @@ trait OrderRequestTrait
             ->leftJoin('orders','order_product.order_id','orders.id')
             ->leftJoin('products','order_product.product_id','products.id')
             ->leftJoin('services','orders.service_id','services.id')
-            ->where('orders.status_id',2)
+            ->where('orders.status_id',$request->input('status_id'))
             ->where('services.open',1)
             ->where('services.table_id',$request->input('table_id'))            
             ->get();

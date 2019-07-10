@@ -24,7 +24,7 @@ trait MessageRequestTrait
 
 		if(app()->getLocale()=="es")$request = 
 			array(
-				'Una Cansión'=>'Una Cansión',					
+				'Una Canción'=>'Una Canción',					
 				'La Cuenta'=>'La Cuenta',
 				'Una Sugerencia'=>'Una Sugerencia',
 				'Una Queja'=>'Una Queja'

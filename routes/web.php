@@ -108,9 +108,11 @@ Route::post('provider/consultprovider', [
 Route::post('order/order_paid', [
    'as' => 'order.order_paid', 'uses' => 'Web\OrderController@orderPaid'
 ]);
+/*
 Route::post('order/order_print', [
    'as' => 'order.order_print', 'uses' => 'Web\OrderController@orderPrint'
 ]);
+*/
 Route::post('message/requeststore', [
    'as' => 'message.requeststore', 'uses' => 'Web\MessageController@requestStore'
 ]);
