@@ -58,12 +58,12 @@
 	{!! Form::label('volume',__('messages.Volume'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('volume'))
-			{!! Form::number('volume',null, ['class'=>'form-control is-invalid','min'=>'0']) !!}
+			{!! Form::number('volume',null, ['class'=>'form-control is-invalid','min'=>'0','step'=>'0.5']) !!}
 			<span class="invalid-feedback">
                 <strong>{{ $errors->first('volume') }}</strong>
             </span>
 		@else
-			{!! Form::number('volume',null, ['class'=>'form-control','min'=>'0']) !!}
+			{!! Form::number('volume',null, ['class'=>'form-control','min'=>'0','step'=>'0.5']) !!}
 		@endif	
 	</div>
 </div>
@@ -72,12 +72,12 @@
 	{!! Form::label('critical_volume',__('messages.CriticalVolume'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('critical_volume'))
-			{!! Form::number('critical_volume',null, ['class'=>'form-control is-invalid','min'=>'0']) !!}
+			{!! Form::number('critical_volume',null, ['class'=>'form-control is-invalid','min'=>'0','step'=>'0.5']) !!}
 			<span class="invalid-feedback">
                 <strong>{{ $errors->first('critical_volume') }}</strong>
             </span>
 		@else
-			{!! Form::number('critical_volume',null, ['class'=>'form-control','min'=>'0']) !!}
+			{!! Form::number('critical_volume',null, ['class'=>'form-control','min'=>'0','step'=>'0.5']) !!}
 		@endif	
 	</div>
 </div>
