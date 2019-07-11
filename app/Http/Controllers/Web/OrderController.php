@@ -451,9 +451,15 @@ class OrderController extends Controller
                 //$printer = new Printer($connector);
                 $connector = new FilePrintConnector("/dev/usb/lp2");
                 $printer = new Printer($connector);
-                $printer -> text("Hello World!\n");
-                $printer -> cut();
-                $printer -> close();
+                $printer->text("Hello World!\n");
+                $printer->setJustification(Printer::JUSTIFY_LEFT);
+                $printer->text("jjiiji\n");
+                $printer->setJustification(Printer::JUSTIFY_RIGHT);
+                $printer->text("jajaj\n");
+                $printer->feed(2);
+                $printer->cut();
+                $printer->pulse();
+                $printer->close();
             }
             
         }

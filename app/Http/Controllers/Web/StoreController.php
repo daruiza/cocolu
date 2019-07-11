@@ -130,7 +130,10 @@ class StoreController extends Controller
         $store->ordernew = json_decode($store->label)->order->OrderNew;
         $store->orderok = json_decode($store->label)->order->OrderOK;
         $store->orderpay = json_decode($store->label)->order->OrderPay;
-        $store->ordercancel = json_decode($store->label)->order->OrderCancel;        
+        $store->ordercancel = json_decode($store->label)->order->OrderCancel;
+        $store->storeso = json_decode($store->label)->print->storeso;
+        $store->conn = json_decode($store->label)->print->conn;
+
                 
         $departments = Department::departments();
         $cities = [];

@@ -40,6 +40,9 @@
 										<li class="nav-item">
 									    	<a class="nav-link" id="component-tab" data-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="false">{{ __('messages.Components') }}</a>
 										</li>
+										<li class="nav-item">
+									    	<a class="nav-link" id="advance-tab" data-toggle="tab" href="#advance" role="tab" aria-controls="advance" aria-selected="false">{{ __('messages.Advance') }}</a>
+										</li>
 									</ul>
 
 									<div class="tab-content" id="myTabContent">
@@ -332,13 +335,35 @@
 					                    				<span class="input-group-append">
 															<span class="input-group-text colorpicker-input-addon"><i></i></span>
 														</span>
-				                    				</div>				                    			
-												</div>				                    			
+				                    				</div>		
+												</div>
 				                    		</div>
-
-				                    		
-				                    		
-
+										</div>
+										<div class="tab-pane fade show" id="advance" role="tabpanel" aria-labelledby="component-tab">
+											<div class="form-group row">
+				                    			{!!Form::label('storeso',__('messages.storeso'),['class'=>'col-sm-4 col-form-label text-md-right'])!!}
+				                    			<div class="col-md-8">
+				                    				{!! Form::select('storeso',['Linux','Windows'],null, array('class' => 'form-control chosen-select')) !!}
+				                    				@if ($errors->has('storeso'))
+							                            <span class="invalid-feedback" style="display: block;">
+							                                <strong>{{ $errors->first('storeso') }}</strong>
+							                            </span>
+							                        @endif
+				                    			</div>
+				                    		</div>
+				                    		<div class="form-group row">
+				                    			{!! Form::label('conn',__('messages.conn'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+				                    			<div class="col-md-8">
+				                    				@if($errors->has('conection'))
+				                    					{!! Form::text('conn',null, ['class'=>'form-control is-invalid']) !!}
+				                    					<span class="invalid-feedback">
+					                                        <strong>{{ $errors->first('conn') }}</strong>
+					                                    </span>
+				                    				@else
+				                    					{!! Form::text('conn',null, ['class'=>'form-control']) !!}
+				                    				@endif	
+				                    			</div>
+				                    		</div>
 										</div>
 									</div>
 

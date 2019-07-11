@@ -114,6 +114,12 @@ class Store extends Model
         if(!empty($data["ordercancel"])){
             $label->order->OrderCancel = $data["ordercancel"];             
         }
+        if(!empty($data["storeso"])){
+            $label->print->storeso = $data["storeso"];             
+        }
+        if(!empty($data["conn"])){
+            $label->print->conn = $data["conn"];             
+        }
         
         $this->label = json_encode($label);
 
@@ -130,6 +136,8 @@ class Store extends Model
         $this->orderok = $data["orderok"];
         $this->orderpay = $data["orderpay"];
         $this->ordercancel = $data["ordercancel"];         
+        $this->storeso = $data["storeso"];         
+        $this->conn = $data["conn"];         
         
         return $this;
     }
