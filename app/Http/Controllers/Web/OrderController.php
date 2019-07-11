@@ -21,6 +21,11 @@ use App\Http\Traits\Web\OrderRequestTrait;
 
 use DateTime;
 
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+
 class OrderController extends Controller
 {
 
@@ -439,10 +444,16 @@ class OrderController extends Controller
                 }
                 foreach ($array as $key => $value) {
                     //$key es el id de order
-                    $order = Order::find($key);
-                    var_dump($order);
-                    return 'Fin';
+                    $order = Order::find($key);                    
                 }
+
+                //$connector = new WindowsPrintConnector("TM-T20");
+                //$printer = new Printer($connector);
+                $connector = new FilePrintConnector("/dev/usb/lp2");
+                $printer = new Printer($connector);
+                $printer -> text("Hello World!\n");
+                $printer -> cut();
+                $printer -> close();
             }
             
         }
