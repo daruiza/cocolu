@@ -95,8 +95,6 @@ order.prototype.showOrderModal = function() {
 	    div.appendChild(span);		    
 	    subnode.appendChild(div);
 
-
-
 	    var subsubnode = document.createElement("div");
 	    subsubnode.setAttribute("class", "col-sm-12");
 	    subsubnode.setAttribute("style","display: flex;flex-wrap: wrap;")   
@@ -106,6 +104,8 @@ order.prototype.showOrderModal = function() {
 		div.setAttribute("style", "text-align: center;");						
 		var input = document.createElement("input");
 		input.setAttribute("type", "checkbox");
+		input.setAttribute("checked", "checked");	
+		input.setAttribute("autofocus", "autofocus"); 	
 		input.setAttribute("name", "")		;
 	    input.setAttribute("class","form-control control-checkbox-header")	
 	    div.appendChild(input);
@@ -143,6 +143,7 @@ order.prototype.showOrderModal = function() {
 				div.setAttribute("style", "text-align: center;");						
 				var input = document.createElement("input");				
 				input.setAttribute("type", "checkbox");
+				input.setAttribute("checked", "checked");
 				input.setAttribute("name", "status_serve-"+obj+"-"+order_product[obj].id)		
 			    input.setAttribute("class","form-control control-checkbox")
 			    if(order_product[obj].status_serve == 1){

@@ -31,6 +31,7 @@ trait ClousureRequestTrait
         	->leftJoin('order_product','orders.id','order_product.order_id')
         	->leftJoin('products','order_product.product_id','products.id')
 	        ->where('clousures.open',0)
+            ->where('orders.status_id',3)
 	        ->where('clousures.store_id',Auth::user()->store()->id)
 	        ->orderBy('clousures.id','DESC')
 	        ->groupBy('clousures.id')	        

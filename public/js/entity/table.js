@@ -2,7 +2,11 @@ function table() {
 }
 	
 table.prototype.onjquery = function() {		
-	table.selectTable('object-table','selected-table');	
+	table.selectTable('object-table','selected-table');
+	//para hacer focus a cualquier modal dentro de table
+	$('.modal').on('shown.bs.modal', function() {
+	  $(this).find('[autofocus]').focus();
+	});
 };
 
 table.prototype.selectTable = function(objectClass,selectClass) {
@@ -46,7 +50,7 @@ table.prototype.selectServiceResponse = function(result) {
 
     var sum_service = 0;
     var sum_order_paid = 0;
-    var sum_order_print = 0;
+    var sum_order_print = 0;   
 
     for(obj in result.data.orders) {
     	var subnode = document.createElement("div");
@@ -177,6 +181,9 @@ table.prototype.selectServiceResponse = function(result) {
     node.appendChild(div);
 
 	orders.appendChild(node);
+
+	$(".totals-orders").html("Total: $"+sum_service.toLocaleString());
+
 	//Orden Boton nueva orden solo si hay servicio
 	if(result.data.service.length ){
 		$('.services-table .new-orders').html('<a class="dropdown-item" href="javascript: order_create_submit(\'table'+result.data.table[0].id+'\')"><i class="fas fa-clipboard"></i><span>'+$('.span-order').html()+'</span></a>');	
@@ -192,6 +199,7 @@ table.prototype.selectServiceResponse = function(result) {
 
 	//pintar el modal
 	order.showOrderModal();
+	
 
 	//cambio de opción deacuerdo a si tiene un servicio abierto
 	if(result.data.service.length){
@@ -242,7 +250,10 @@ table.prototype.orderPaidResponse = function(result) {
 	div.setAttribute("class", "col-sm-1");
 	div.setAttribute("style", "text-align: center;");						
 	var input = document.createElement("input");
-	input.setAttribute("type", "checkbox");
+	input.setAttribute("type", "checkbox");	
+	//input.setAttribute("checked", "checked");	
+	input.setAttribute("autofocus", "autofocus"); 	
+	
 	input.setAttribute("name", "")		;
     input.setAttribute("class","form-control control-checkbox-header")	
     div.appendChild(input);
@@ -486,8 +497,12 @@ table.prototype.returnAddProduct = function(result) {
     var div = document.createElement("div");
 	div.setAttribute("class", "col-sm-8");
     var input = document.createElement("input");	    
+    input.setAttribute("type", "number");
     input.setAttribute("class", "form-control");
+    input.setAttribute("autofocus", "autofocus");    
+    input.setAttribute("min", "0");
     input.setAttribute("name", "volume_"+result.data[0].id);
+    input.value = "1";
     div.appendChild(input);
     subnode.appendChild(div);
 

@@ -107,20 +107,23 @@
       </div>
 
       <div class="modal-body">
+        <form id="form_modal_order_conponents">
+          
         <div class="container">          
           <div class="row">
             <div class="col-sm-12"> 
-              <div class="card">
-                  <div class="card-body">
-                  </div>
+              <div class="card">                  
+                    <div class="card-body">
+                    </div>                  
               </div>
             </div>
           </div>
         </div>
+        </form>
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-send" form="" data-dismiss="modal" >{{ __('form.Send') }}</button>
+        <button type="submit" class="btn btn-primary btn-send" form="form_modal_order_conponents" data-dismiss="modal" >{{ __('form.Send') }}</button>
         <button type="button" class="btn btn-secondary btn-close"  data-dismiss="modal">{{ __('form.Cancel') }}</button>
       </div>
     </div>

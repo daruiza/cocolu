@@ -224,6 +224,12 @@
 			height: calc(2.25rem + 2px);
     		width: 100%;
 		}
+		.totals-orders{
+			margin-bottom: 1rem;
+		}
+		.alert-heading{
+			width: 85%
+		}
 	</style>
 
 	@isset($data['ordermodal'])	
