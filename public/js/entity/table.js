@@ -3,10 +3,7 @@ function table() {
 	
 table.prototype.onjquery = function() {		
 	table.selectTable('object-table','selected-table');
-	//para hacer focus a cualquier modal dentro de table
-	$('.modal').on('shown.bs.modal', function() {
-	  $(this).find('[autofocus]').focus();
-	});
+	//para hacer focus a cualquier modal dentro de table	
 };
 
 table.prototype.selectTable = function(objectClass,selectClass) {
@@ -594,5 +591,25 @@ table.prototype.returnAddProduct = function(result) {
 
 	$('#modal_order_conponents').modal('toggle');
 };
+
+/*Controlador de scroll de modal  modal_order_conponents */
+table.prototype.mouseWheel = function(evt) {
+	var name_input_volume = $('#form_modal_order_conponents').serializeArray()[1].name;
+	if(evt.deltaY>0){
+		if($( "input[name='"+name_input_volume+"']" ).val()>1){
+			$( "input[name='"+name_input_volume+"']" ).val(
+				parseInt($( "input[name='"+name_input_volume+"']" ).val())-1
+			);	
+		}			
+	}else{
+		$( "input[name='"+name_input_volume+"']" ).val(
+			parseInt($( "input[name='"+name_input_volume+"']" ).val())+1
+		);	
+	}
+	
+
+	console.log('Delta Y: '+evt.deltaY);/*-Up*/
+	
+}
 
 var table = new table();

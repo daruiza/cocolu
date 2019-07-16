@@ -27,7 +27,8 @@
                         <div class="container services-table">
                             <div class="row">
                                 <div class="col-md-12 table"></div>
-                                <div class="col-md-12 totals-orders"></div>                              
+                                <div class="col-md-12 totals-orders"></div>  
+                                <div class="col-md-12 new-orders"></div>                   
 								<div class="col-md-12 orders_menu">
                                     @isset($orders)
                                     @empty(!$orders)                                        
@@ -35,7 +36,6 @@
                                     @endempty
                                     @endisset
                                 </div>
-								<div class="col-md-12 new-orders"></div>
                             </div>                                                  
                         </div>                  
                     </div>                            

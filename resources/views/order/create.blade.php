@@ -91,7 +91,7 @@
   </div>
 </div>
 
-<div id="modal_order_conponents" class="modal" tabindex="-1" role="dialog">
+<div id="modal_order_conponents" class="modal" tabindex="-1" role="dialog" onwheel="table.mouseWheel(event)">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       

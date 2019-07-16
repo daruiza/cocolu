@@ -129,9 +129,16 @@
             }, 0);
         });
 		
+        $('.modal').on('shown.bs.modal', function() {
+			$(this).find('[autofocus]').focus();		
+		});
+
         $('#modal_order_conponents , #modal_detail').on('hidden.bs.modal', function () {		    
 		    $('body').addClass('modal-open');
 		});
+
+		/*FIN Multiple Modal*/
+
 
 	</script>
 		
@@ -224,7 +231,10 @@
 			height: calc(2.25rem + 2px);
     		width: 100%;
 		}
-		.totals-orders{
+		.table {		    
+		    margin-bottom: 0rem;
+		}
+		.totals-orders, .new-orders{
 			margin-bottom: 1rem;
 		}
 		.alert-heading{
