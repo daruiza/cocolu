@@ -26,7 +26,7 @@
             </div>
             <div class="form-group row">
               <div class="col-md-12 text-md-center">
-              {!! Form::label('description',__('messages.Description'),['class'=>'col-form-label text-md-center']) !!}
+              {!! Form::label('description',__('messages.Description'),['class'=>'col-form-label text-md-center','autofocus','autofocus']) !!}
               {!! Form::text('description',null, ['class'=>'form-control']) !!}
               </div>
             </div>
