@@ -70,7 +70,7 @@ return [
     "Components" => "Componentes",
     "Advance" => "Avanzado",
     "Price" => "Precio",
-    "Buy_Price" => "Precio de Compra",
+    "Buy_Price" => "Costo",
     "Volume" => "Cantidad",
     "Group" => "Grupo",
     "CriticalVolume" => "Cantidad Critico",

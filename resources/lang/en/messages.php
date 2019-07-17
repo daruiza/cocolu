@@ -70,7 +70,7 @@ return [
     "Components" => "Components",
     "Advance" => "Advance",
     "Price" => "Price",
-    "Buy_Price" => "Buy Price",
+    "Buy_Price" => "Cost",
     "Volume" => "Volume",
     "Group" => "Group",
     "CriticalVolume" => "Critical Volume",
