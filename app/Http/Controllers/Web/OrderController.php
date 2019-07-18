@@ -21,10 +21,7 @@ use App\Http\Traits\Web\OrderRequestTrait;
 
 use DateTime;
 
-use Mike42\Escpos\Printer;
-use Mike42\Escpos\EscposImage;
-use Mike42\Escpos\PrintConnectors\FilePrintConnector;
-use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use App\Http\Controller\Web\PrinterPosController;
 
 class OrderController extends Controller
 {
@@ -444,33 +441,7 @@ class OrderController extends Controller
 
             //se pretende imprimir
             if($request->input('next_status') == 6){
-                foreach($request->input() as $key=>$value){
-                    if(strpos($key,'status_paid') !== false){
-                        $vector=explode('-',$key);
-                        $n=count($vector);
-                        $id_item = $vector[$n-2];
-                        $array[$id_item][$vector[$n-3]]['order_id'] = $id_item;
-                        $array[$id_item][$vector[$n-3]]['order_product_id'] = end($vector);                    
-                    }
-                }
-                foreach ($array as $key => $value) {
-                    //$key es el id de order
-                    $order = Order::find($key);                    
-                }
-
-                //$connector = new WindowsPrintConnector("TM-T20");
-                //$printer = new Printer($connector);
-                $connector = new FilePrintConnector("/dev/usb/lp2");
-                $printer = new Printer($connector);
-                $printer->text("Hello World!\n");
-                $printer->setJustification(Printer::JUSTIFY_LEFT);
-                $printer->text("jjiiji\n");
-                $printer->setJustification(Printer::JUSTIFY_RIGHT);
-                $printer->text("jajaj\n");
-                $printer->feed(2);
-                $printer->cut();
-                $printer->pulse();
-                $printer->close();
+                return (new PrintPosController)->printPos($request);
             }
             
         }
