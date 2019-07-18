@@ -249,8 +249,7 @@ table.prototype.orderPaidResponse = function(result) {
 	var input = document.createElement("input");
 	input.setAttribute("type", "checkbox");	
 	//input.setAttribute("checked", "checked");	
-	input.setAttribute("autofocus", "autofocus"); 	
-	
+	input.setAttribute("autofocus", "autofocus");	
 	input.setAttribute("name", "")		;
     input.setAttribute("class","form-control control-checkbox-header")	
     div.appendChild(input);
@@ -297,7 +296,8 @@ table.prototype.orderPaidResponse = function(result) {
 	    input.setAttribute("class","form-control control-checkbox")
 	    if(result.data.order_product[obj].status_paid == 1){
 	    	input.setAttribute("checked", "checked");
-	    	flat_checkbox = false;	
+	    	input.setAttribute("style", "display: none;");
+	    	//flat_checkbox = false;	
 	    }		    
 	    div.appendChild(input);			
 	    subsubnode.appendChild(div);
@@ -437,8 +437,14 @@ table.prototype.orderPaidResponse = function(result) {
 
 	if(flat_checkbox){
 		$('.control-checkbox-header').change(function(){
-			$('.control-checkbox').attr('checked', $(this).is( ":checked" ));
-			$( ".control-checkbox" ).prop( "checked", $(this).is( ":checked" ) );
+			/*solo los qu no esten ocultos*/
+			for (var i = $( ".control-checkbox" ).length - 1; i >= 0; i--) {
+				if($( ".control-checkbox" )[i].style.display != "none" ){
+					$('.control-checkbox').attr('checked', $(this).is( ":checked" ));				
+					$( ".control-checkbox" ).prop( "checked", $(this).is( ":checked" ) );
+				}
+					
+			}
 			//actualizamos el total
 
 			var sum = 0;

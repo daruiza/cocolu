@@ -104,7 +104,7 @@ order.prototype.showOrderModal = function() {
 		div.setAttribute("style", "text-align: center;");						
 		var input = document.createElement("input");
 		input.setAttribute("type", "checkbox");
-		input.setAttribute("checked", "checked");	
+		//input.setAttribute("checked", "checked");	
 		input.setAttribute("autofocus", "autofocus"); 	
 		input.setAttribute("name", "")		;
 	    input.setAttribute("class","form-control control-checkbox-header")	
@@ -143,11 +143,14 @@ order.prototype.showOrderModal = function() {
 				div.setAttribute("style", "text-align: center;");						
 				var input = document.createElement("input");				
 				input.setAttribute("type", "checkbox");
-				input.setAttribute("checked", "checked");
+				//input.setAttribute("checked", "checked");
 				input.setAttribute("name", "status_serve-"+obj+"-"+order_product[obj].id)		
 			    input.setAttribute("class","form-control control-checkbox")
 			    if(order_product[obj].status_serve == 1){
-			    	input.setAttribute("checked", "checked");	
+			    	input.setAttribute("checked", "checked");
+			    	//input.setAttribute("disabled", "disabled");	
+			    	input.setAttribute("style", "display: none;");
+			    	//flat_checkbox = false;		    	
 			    }		    
 			    div.appendChild(input);			
 			    subsubnode.appendChild(div);		    
@@ -163,7 +166,9 @@ order.prototype.showOrderModal = function() {
 				    input.setAttribute("class","form-control control-checkbox")
 				    if(order_product[obj].status_paid == 1){
 				    	input.setAttribute("checked", "checked");	
-				    	flat_checkbox = false;
+				    	//input.setAttribute("disabled", "disabled");
+				    	input.setAttribute("style", "display: none;");
+				    	//flat_checkbox = false;
 				    }else{
 				    	//sum = sum + (parseInt(products[obj].price) * parseInt(products[obj].volume));
 				    }		    
@@ -362,14 +367,24 @@ order.prototype.showOrderModal = function() {
 
 		if(flat_checkbox){
 			$('.control-checkbox-header').change(function(){
-				$('.control-checkbox').attr('checked', $(this).is( ":checked" ));
-				$( ".control-checkbox" ).prop( "checked", $(this).is( ":checked" ) );
+				/*solo los qu no esten ocultos*/
+				for (var i = $( ".control-checkbox" ).length - 1; i >= 0; i--) {
+					if($( ".control-checkbox" )[i].style.display != "none" ){
+						$('.control-checkbox').attr('checked', $(this).is( ":checked" ));				
+						$( ".control-checkbox" ).prop( "checked", $(this).is( ":checked" ) );
+					}
+						
+				}
+				
 				//actualizamos el total
 
 				var sum = 0;
 				if($(this).is( ":checked" )){
 					for(i=0;i<$( ".control-checkbox" ).length;i++){
-						sum = sum + parseInt($($( ".control-checkbox" )[i]).parent().parent()[0].children[4].children[2].innerHTML.replace('.',''))	
+						if($( ".control-checkbox" )[i].style.display != "none" ){
+							sum = sum + parseInt($($( ".control-checkbox" )[i]).parent().parent()[0].children[4].children[2].innerHTML.replace('.',''))		
+						}
+						
 					}	
 				}
 

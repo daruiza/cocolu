@@ -3,21 +3,6 @@
         <div class="row">
         	
         	<div class="col-md-3 col-lateral-table">
-                @include('layouts.alert')
-                <div class="col-md-12">
-                <div class="card card-menu-table">
-                    <div class="card-header">{{ __('messages.TableOptions') }}</div>
-                    <div class="card-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    @include('layouts.options_page',['model'=>'Tables'])
-                                </div>
-                            </div>                                                  
-                        </div>                  
-                    </div>                            
-                </div>
-                </div>
                 <div class="col-md-12">
                 <div class="card card-menu-table">
                     <div class="card-header">
@@ -40,10 +25,25 @@
                         </div>                  
                     </div>                            
                 </div>
-                </div>                
+                </div>  
+                <div class="col-md-12">
+                <div class="card card-menu-table">
+                    <div class="card-header">{{ __('messages.TableOptions') }}</div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @include('layouts.options_page',['model'=>'Tables'])
+                                </div>
+                            </div>                                                  
+                        </div>                  
+                    </div>                            
+                </div>
+                </div>              
             </div>   
 
-        	<div class="col-md-9">            		        		
+        	<div class="col-md-9">
+                @include('layouts.alert')         		        		
         		<div class="card">
                     <div class="card-header">{{ __('messages.indexTable') }}</div>
                     <div class="card-body">

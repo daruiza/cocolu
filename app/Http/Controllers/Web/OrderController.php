@@ -329,7 +329,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {        
         //validamos            
         $table = Table::find($request->input('table_id'));        
         $service = $table->tableServiceOpen()->first();
@@ -380,13 +380,13 @@ class OrderController extends Controller
             }
         }
 
-        if($request->input('next_status') == 3){
+        if($request->input('next_status') == 3){            
             foreach($request->input() as $key=>$value){
                 if(strpos($key,'status_paid') !== false){
                     $vector=explode('-',$key);
                     $n=count($vector);
-                    $id_item = $vector[$n-3];
-                    $array[$id_item][$vector[$n-3]] = ucfirst($value);
+                    $id_item = $vector[$n-2];
+                    $array[$id_item][$vector[$n-2]] = ucfirst($value);
                     $array[$id_item]['id'] = end($vector);                    
                 }
             }            
@@ -415,10 +415,19 @@ class OrderController extends Controller
                         $n=count($vector);
                         $id_item = $vector[$n-2];
                         $array[$id_item][$vector[$n-3]]['order_id'] = $id_item;
-                        $array[$id_item][$vector[$n-3]]['order_product_id'] = end($vector);                    
+                        $array[$id_item][$vector[$n-3]]['order_product_id'] = end($vector);
                     }
                 }
+                
                 foreach ($array as $key => $value) {
+
+                    //actualizamos los productos
+                    foreach ($value as $llave => $valor) {
+                        $order_product = OrderProduct::find($valor['order_product_id']);            
+                        $order_product->status_paid = 1;
+                        $order_product->save();
+                    }
+
                     //$key es el id de order
                     $order = Order::find($key);                    
                     if(count($value) == $order->products()->count()){
@@ -426,6 +435,8 @@ class OrderController extends Controller
                         $order->status_id = $request->input('next_status');
                         $order->save();
                     }
+
+
                     
                     
                 }
