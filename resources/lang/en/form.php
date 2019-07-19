@@ -63,5 +63,8 @@ return [
     "createInvoice" => "Crear Factura",
     "ProductEditStock"=>"Description EPStock",
     "EditStockProduct"=>"Edit Product Stock",
+    "EditDetail"=>"Edit Detail",
+    "Edit"=>"Edit",
+    "Delete"=>"Delete",
     
 ];

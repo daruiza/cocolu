@@ -599,23 +599,21 @@ table.prototype.returnAddProduct = function(result) {
 };
 
 /*Controlador de scroll de modal  modal_order_conponents */
-table.prototype.mouseWheel = function(evt) {
-	var name_input_volume = $('#form_modal_order_conponents').serializeArray()[1].name;
+table.prototype.mouseWheel = function(evt,form,index) {
+	//var name_input_volume = $($("#"+evt.target.id+" form")[0]).serializeArray()[1].name;;
+	var name_input_volume = $("#"+form).serializeArray()[index].name;;
 	if(evt.deltaY>0){
 		if($( "input[name='"+name_input_volume+"']" ).val()>1){
 			$( "input[name='"+name_input_volume+"']" ).val(
 				parseInt($( "input[name='"+name_input_volume+"']" ).val())-1
 			);	
-		}			
+		}		
+
 	}else{
 		$( "input[name='"+name_input_volume+"']" ).val(
 			parseInt($( "input[name='"+name_input_volume+"']" ).val())+1
-		);	
+		);		
 	}
-	
-
-	console.log('Delta Y: '+evt.deltaY);/*-Up*/
-	
 }
 
 var table = new table();

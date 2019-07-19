@@ -91,7 +91,9 @@
   </div>
 </div>
 
-<div id="modal_order_conponents" class="modal" tabindex="-1" role="dialog" onwheel="table.mouseWheel(event)">
+<div 
+  id="modal_order_conponents" class="modal" tabindex="-1" role="dialog" 
+  onwheel="table.mouseWheel(event,'form_modal_order_conponents',1)">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       
@@ -107,8 +109,8 @@
       </div>
 
       <div class="modal-body">
-        <form id="form_modal_order_conponents">
-          
+
+        <form id="form_modal_order_conponents">          
         <div class="container">          
           <div class="row">
             <div class="col-sm-12"> 
@@ -120,6 +122,7 @@
           </div>
         </div>
         </form>
+
       </div>
 
       <div class="modal-footer">
@@ -131,7 +134,9 @@
   </div>
 </div>
 
-<div id="modal_detail" class="modal" tabindex="-1" role="dialog">
+<div 
+  id="modal_detail" class="modal" tabindex="-1" role="dialog" 
+  onwheel="table.mouseWheel(event,'form_modal_order_details',2)">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -147,6 +152,8 @@
       </div>
 
       <div class="modal-body">
+
+        <form id="form_modal_order_details">
         <div class="container">          
           <div class="row">
             <div class="col-sm-12"> 
@@ -158,10 +165,12 @@
             </div>
           </div>
         </div>
+        </form>
+
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-edit" form="" data-dismiss="modal" >{{ __('form.Edit') }}</button>
+        <button type="submit" class="btn btn-primary btn-edit" form="form_modal_order_details" data-dismiss="modal" >{{ __('form.Edit') }}</button>
         <button type="button" class="btn btn-secondary btn-delete" data-dismiss="modal">{{ __('form.Delete') }}</button>
       </div>
 
