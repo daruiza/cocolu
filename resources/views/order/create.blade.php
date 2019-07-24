@@ -84,7 +84,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" form="form-table-order">{{ __('form.Send') }}</button>
+        <button id="btn-submit-form-order" type="submit" class="btn btn-primary" form="form-table-order" autofocus>{{ __('form.Send') }}</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
       </div>
     </div>

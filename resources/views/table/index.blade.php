@@ -133,8 +133,15 @@
 			$(this).find('[autofocus]').focus();		
 		});
 
+
+		$('.modal').on('hidden.bs.modal', function() {
+			//por si sigue un otro modal			
+			$('.modal').find('[autofocus]').focus();				
+		});
+
         $('#modal_order_conponents , #modal_detail').on('hidden.bs.modal', function () {		    
 		    $('body').addClass('modal-open');
+		    $('#btn-submit-form-order').focus();
 		});
 
 		/*FIN Multiple Modal*/
@@ -225,6 +232,10 @@
 			/*
 			coor: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};	
 			*/
+		}
+
+		.status-OrderCancel{
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderCancel'] }};
 		}
 
 		.control-checkbox{

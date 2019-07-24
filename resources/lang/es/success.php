@@ -19,4 +19,6 @@ return [
 	"messageaSendOK" => "Hecho!, Tu mensaje fue enviado correctamente",
 	"guest_successful" => "Hecho!, Tu solicitud nos ha llegado.",
 	"MessageSendOk" => "Pronto atenderemos tu Solicitud",
+	"NewOrderTableOK" => "Excelete! La orden se registro correctamente",
+	"EditOrderTableOK" => "Super! La orden se editó correctamente",
 ];

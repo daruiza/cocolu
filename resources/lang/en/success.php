@@ -19,4 +19,6 @@ return [
 	"messageaSendOK" => "Done!, Your message has been send OK",
 	"guest_successful" => "Done!, Your request has been send OK.",
 	"MessageSendOk" => "We will answer your request soon",
+	"NewOrderTableOK" => "Excellet! your order was created correctly",
+	"EditOrderTableOK" => "Excellet! your order was edited correctly",
 ];

@@ -114,7 +114,8 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {           
+    {     
+
         $user = new User();
         $user = User::findOrFail($id);        
         //validación de credenciales de usuario
@@ -131,8 +132,9 @@ class StoreController extends Controller
         $store->orderok = json_decode($store->label)->order->OrderOK;
         $store->orderpay = json_decode($store->label)->order->OrderPay;
         $store->ordercancel = json_decode($store->label)->order->OrderCancel;
-        $store->storeso = json_decode($store->label)->print->storeso;
+        $store->os = json_decode($store->label)->print->os;
         $store->conn = json_decode($store->label)->print->conn;
+        $store->status_server = json_decode($store->label)->behavior->status_server;
 
                 
         $departments = Department::departments();

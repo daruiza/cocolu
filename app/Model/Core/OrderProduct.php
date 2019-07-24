@@ -3,6 +3,7 @@
 namespace App\Model\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class OrderProduct extends Model
 {
@@ -10,6 +11,9 @@ class OrderProduct extends Model
     protected $fillable = ['order_id','status_serve','status_paid','product_id','ingredients','volume','price'];	
 
     public function storeOrderProduct($data){
+        if(json_decode(Auth::user()->store()->label,true)['behavior']['status_server']){
+            $this->status_serve = 1;
+        }
         if(array_key_exists('order_id',$data))$this->order_id = $data['order_id'];
         if(array_key_exists('product_id',$data))$this->product_id = $data['product_id'];
         if(array_key_exists('ingredients',$data))$this->ingredients = $data['ingredients'];

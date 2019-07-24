@@ -55,7 +55,7 @@ class Store extends Model
         return $clousure;
     }
 
-    public function updateStore($data){
+    public function updateStore($data){        
         //guardamos los datos
         $this->name = $data['name'];
         $this->department = $data['department'];
@@ -79,6 +79,7 @@ class Store extends Model
         
         //label        
         $label = json_decode($this->label);        
+
         if(!empty($data["storeheight"])){
             $label->table->StoreHeight = $data["storeheight"];            
         } 
@@ -113,16 +114,15 @@ class Store extends Model
         }
         if(!empty($data["ordercancel"])){
             $label->order->OrderCancel = $data["ordercancel"];             
-        }
-        if(!empty($data["storeso"])){
-            $label->print->storeso = $data["storeso"];             
-        }
+        }                
         if(!empty($data["conn"])){
             $label->print->conn = $data["conn"];             
         }
+        $label->print->os = $data["os"];  
+        $label->behavior->status_server = $data["status_server"];
         
         $this->label = json_encode($label);
-
+        //dd($this->label);
         $this->save();
         
         $this->storeheight = $data["storeheight"];
@@ -136,8 +136,9 @@ class Store extends Model
         $this->orderok = $data["orderok"];
         $this->orderpay = $data["orderpay"];
         $this->ordercancel = $data["ordercancel"];         
-        $this->storeso = $data["storeso"];         
-        $this->conn = $data["conn"];         
+        $this->os = $data["os"];         
+        $this->conn = $data["conn"]; 
+        $this->status_server = $data["status_server"];         
         
         return $this;
     }

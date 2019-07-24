@@ -175,11 +175,11 @@ class TableController extends Controller
                 string|
                 max:16',
             'description' => '
-                max:64',
+                max:512',
             'icon' => '
                 required|
                 string|                
-                max:16',
+                max:32',
             'order' => '                
                 numeric|                
                 digits_between:1,512',

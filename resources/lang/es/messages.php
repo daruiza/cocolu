@@ -170,4 +170,5 @@ return [
     "CodeQrTable" => "Códigos QR Para La Mesa: ",
     "CodeQrRequest" => "Solicitudes de Clientes",
     "letter" => "Carta de Productos",
+    "EditDetail" => "Editar Detalle"
 ];

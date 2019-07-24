@@ -48,7 +48,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {
+    {        
         $table = Table::find($request->input('table-id'));
         //$service = $table->tableServiceOpen();
 
@@ -169,6 +169,10 @@ class OrderController extends Controller
         
         //1. crear la orden de pedido
         $order = new Order();
+        //comportamiento - sin servir
+        if(json_decode(Auth::user()->store()->label,true)['behavior']['status_server']){
+            $request->request->add(['status_id' => 2]);
+        }
         //fecha y hora
         $today = new DateTime();
         $today = $today->format('Y-m-d H:i:s');     
@@ -357,8 +361,7 @@ class OrderController extends Controller
         }
 
         //validamos que todos los detalles esten servidos
-        $array = array();       
-        
+        $array = array();        
         if($request->input('next_status') == 2){
             foreach($request->input() as $key=>$value){
                 if(strpos($key,'status_serve') !== false){

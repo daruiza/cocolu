@@ -104,6 +104,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    input.setAttribute("value", result.data.orders[obj].status_id);   	    
 	    subnode.appendChild(input);
 
+	    /*
 	    var div = document.createElement("div");
 		div.setAttribute("class", "col-sm-12");		
 		div.setAttribute("style", "text-align: center;"); 
@@ -112,6 +113,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    span.innerHTML = result.data.table[0].name;
 	    div.appendChild(span);		    
 	    subnode.appendChild(div);
+	    */
 
 	    var div = document.createElement("div");
 		div.setAttribute("class", "col-sm-7 status");		
@@ -134,7 +136,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    var div = document.createElement("div");
 		div.setAttribute("class", "col-sm-12 date");		
 		div.setAttribute("style", "text-align: center;");
-		if(result.data.orders[obj].status_id ==3)div.setAttribute("style", "text-decoration: line-through;");		
+		if(result.data.orders[obj].status_id == 3 || result.data.orders[obj].status_id == 4)div.setAttribute("style", "text-decoration: line-through;");		
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
 	    span.innerHTML = "SubTotal: $"+parseInt(result.data.orders[obj].order_price).toLocaleString();

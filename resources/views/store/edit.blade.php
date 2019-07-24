@@ -341,12 +341,12 @@
 										</div>
 										<div class="tab-pane fade show" id="advance" role="tabpanel" aria-labelledby="component-tab">
 											<div class="form-group row">
-				                    			{!!Form::label('storeso',__('messages.storeso'),['class'=>'col-sm-4 col-form-label text-md-right'])!!}
+				                    			{!!Form::label('os',__('messages.os'),['class'=>'col-sm-4 col-form-label text-md-right'])!!}
 				                    			<div class="col-md-8">
-				                    				{!! Form::select('storeso',['Linux','Windows'],null, array('class' => 'form-control chosen-select')) !!}
-				                    				@if ($errors->has('storeso'))
+				                    				{!! Form::select('os',['Linux','Windows'],null, array('class' => 'form-control chosen-select')) !!}
+				                    				@if ($errors->has('os'))
 							                            <span class="invalid-feedback" style="display: block;">
-							                                <strong>{{ $errors->first('storeso') }}</strong>
+							                                <strong>{{ $errors->first('os') }}</strong>
 							                            </span>
 							                        @endif
 				                    			</div>
@@ -362,6 +362,17 @@
 				                    				@else
 				                    					{!! Form::text('conn',null, ['class'=>'form-control']) !!}
 				                    				@endif	
+				                    			</div>
+				                    		</div>
+				                    		<div class="form-group row">
+				                    			{!!Form::label('status_server',__('messages.OrderOK'),['class'=>'col-sm-4 col-form-label text-md-right'])!!}
+				                    			<div class="col-md-8">
+				                    				{!! Form::select('status_server',[__('messages.Yes'),__('messages.Not')],null, array('class' => 'form-control chosen-select')) !!}
+				                    				@if ($errors->has('status_server'))
+							                            <span class="invalid-feedback" style="display: block;">
+							                                <strong>{{ $errors->first('status_server') }}</strong>
+							                            </span>
+							                        @endif
 				                    			</div>
 				                    		</div>
 										</div>

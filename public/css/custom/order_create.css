@@ -16,6 +16,7 @@
 
 #modal_order_create .product_obj{	
 	cursor: pointer;
+	border: 1px solid rgba(0,0,0,.125);
 }
 
 #modal_order_create .card-header,

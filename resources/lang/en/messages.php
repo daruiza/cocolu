@@ -171,5 +171,6 @@ return [
     "CodeQrTable" => "QR Codes For Table: ",
     "CodeQrRequest" => "Customer Request",
     "letter" => "Product letter",
+    "EditDetail" => "Edit Detail",
 
 ];
