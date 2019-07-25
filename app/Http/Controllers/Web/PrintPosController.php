@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Web;
 use App\Model\Core\Table;
 use App\Model\Core\Store;
 use App\Model\Core\Order;
+use App\Model\Core\OrderProduct;
+use App\Model\Core\Product;
 use App\Model\Core\City;
 use App\Model\Core\Department;
 
@@ -45,12 +47,34 @@ class PrintPosController extends Controller
             $order = Order::find($key);                    
         }
 
-        
+        $i=1;
+        $sum=0;
+        foreach ($array as $key => $value) {
+            foreach ($value as $k => $v) {                
+                $order_product = OrderProduct::find($v['order_product_id']);
+                $product = Product::find($order_product->product_id);                
+                echo substr("0".$i,strlen("0".$i)-2,strlen("0".$i));
+                echo " ";
+                echo substr($product->name,0,25)."\t";
+                echo $order_product->volume."\t";
+                echo round($order_product->price/1.19,2)."\t";
+                echo $order_product->volume*round($order_product->price/1.19,2)."\t";
+                $sum = $sum + $order_product->volume*round($order_product->price/1.19,2);
+                echo "<br>";
+                $i++;
+            }
+        }
 
-        try {            
-            
-            dd($array);
+        echo "<br>";
+        echo 'SUBTOTAL: '.$sum;
+        echo "<br>";
+        echo 'IVA: '.round($sum*0.19,2);
+        echo "<br>";
+        echo 'TOTAL: '.round($sum*1.19);
 
+        dd('Fin');
+
+        try {
             //$connector = new WindowsPrintConnector("TM-T20");
             //$printer = new Printer($connector);
             $connector = new FilePrintConnector("/dev/usb/lp2");
@@ -92,7 +116,6 @@ class PrintPosController extends Controller
             $printer->pulse();
             $printer->close();
         }catch (Exception $e) {
-
             $printer->text($e->getMessage() . "\n");
         }
     }
