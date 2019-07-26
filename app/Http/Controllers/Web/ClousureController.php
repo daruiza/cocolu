@@ -22,6 +22,11 @@ class ClousureController extends Controller
 
     use ClousureRequestTrait;
 
+    public function __construct()
+    {               
+        $this->middleware('auth');
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [

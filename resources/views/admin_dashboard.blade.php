@@ -23,26 +23,39 @@
             <div class="card-header">{{ __('messages.DashboardImform') }}</div>
             <div class="card-body">
                 <div class="container">
-                    <div class="row row-info">
-                        <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.ordersPaid')}}:</span> 
-                            ${{number_format($orderpaid)}}
+                    <div class="row ">
+                        <div class="col-md-11 col-md-offset-0">
+                            <div class="row row-info">
+                            <div class="col-md-3 col-md-offset-0">
+                                <span>{{ __('messages.ordersPaid')}}:</span> 
+                                ${{number_format($orderpaid)}}
+                            </div>                            
+                            <div class="col-md-3 col-md-offset-0">
+                                <span>{{ __('messages.ordersToPay')}}:</span> ${{number_format($orderstopay)}}
+                            </div>
+                            <div class="col-md-3 col-md-offset-0">
+                                <span>{{ __('messages.Services')}}:</span> 
+                                {{number_format($services)}}
+                            </div>
+                            <div class="col-md-3 col-md-offset-0">
+                                <span>{{ __('messages.Orders')}}:</span> 
+                                {{number_format($ordercount)}} [{{number_format($orderclosecount)}}]
+                            </div>
+                            <div class="col-md-3 col-md-offset-0">
+                                <span>{{ __('messages.TotalExpenses')}}:</span> 
+                                ${{number_format($totalexpense)}}
+                            </div>                            
+                            </div>
                         </div>
-                        <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.ordersToPay')}}:</span> ${{number_format($orderstopay)}}
+                        <div class="col-md-1 col-md-offset-0 row-download-conteiner">
+                            <i onclick="
+                                event.preventDefault();
+                                document.getElementById('clousureToExcel').submit()"
+                                class="fas fa-file-download"
+                                data-toggle="tooltip"
+                                title="{{__('messages.DownloadClousure')}}"></i>
                         </div>
-                        <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.Services')}}:</span> 
-                            {{number_format($services)}}
-                        </div>
-                        <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.Orders')}}:</span> 
-                            {{number_format($ordercount)}} [{{number_format($orderclosecount)}}]
-                        </div>
-                        <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.TotalExpenses')}}:</span> 
-                            ${{number_format($totalexpense)}}
-                        </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-md-offset-0">
@@ -97,7 +110,7 @@
           $($(this).children()[0]).submit();
         });
     @endif
-    
+    $('[data-toggle="tooltip"]').tooltip();   
 </script>
 @endsection
 
@@ -180,11 +193,32 @@
 
     @endif    
 
+    .row-download-conteiner{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    .row-download-conteiner i{
+        font-size: 30px;
+        color: rgba(0,0,0,.5);
+    }
+
+    .row-download-conteiner i:hover{
+        cursor: pointer;
+        color: rgba(0,0,0,.7);
+    }    
+
+    .tooltip-inner {     
+        background-color: rgba(0,0,0,.7);       
+    }
+    
+
     @media (max-width: 768px) {
         .col-lateral-table div:nth-of-type(1){
             padding-right: 0px;
             padding-left: 0px;
-        }
+        }        
     }
     
 </style>

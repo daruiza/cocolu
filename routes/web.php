@@ -101,7 +101,10 @@ Route::get('clousure/{id}/showclousures', [
 ]);
 Route::post('clousure/{id}/consultclousure', [
    'as' => 'clousure.consultclousure', 'uses' => 'Web\ClousureController@consultClousure'
-]);
+])->middleware('auth');
+Route::get('clousure/{id}/toexcel', [
+   'as' => 'clousure.toexcel', 'uses' => 'Web\ClousureController@toExcel'
+])->middleware('auth');
 Route::post('provider/consultprovider', [
    'as' => 'provider.consultprovider', 'uses' => 'Web\ProviderController@consultProvider'
 ]);

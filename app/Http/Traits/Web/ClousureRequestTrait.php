@@ -4,6 +4,7 @@ namespace App\Http\Traits\Web;
 
 use App\Model\Core\Clousure;
 use Illuminate\Http\Request;
+use App\Model\Exports\ClousureExports;
 //use App\Http\Controllers\HomeController;
 
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,20 @@ trait ClousureRequestTrait
         //return $home->index(Clousure::find($request->input('clousure-id')));
 		return  app('App\Http\Controllers\HomeController')->index(Clousure::find($request->input('clousure-id')));
 		
-	}	
+	}
+
+    public function toExcel(Request $request,$id){
+        $data = Clousure::all();        
+        /*
+        \Excel::create('ReporteCierreExcel',function($excel) use ($data){
+            $excel->sheet('Sheet 1',function($sheet) use ($data){
+                $sheet->fromArray($export);
+            });
+        })->download('xlsx');
+        */
+
+        return \Excel::download(new ClousureExports, 'users.xlsx');
+
+    }	
 	
 }

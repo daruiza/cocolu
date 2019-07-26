@@ -172,5 +172,6 @@ return [
     "CodeQrRequest" => "Customer Request",
     "letter" => "Product letter",
     "EditDetail" => "Edit Detail",
+    "DownloadClousure" => "Excel DownLoad",
 
 ];

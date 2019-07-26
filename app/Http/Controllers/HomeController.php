@@ -77,7 +77,7 @@ class HomeController extends Controller
                 //gastos
                 $totalexpense = Expense::totalexpenseClousure($clousure);
                 
-                return view('welcome',compact('page','store','orders','orderpaid','orderstopay','services','ordercount','orderclosecount','products','ingredients','totalexpense'))
+                return view('welcome',compact('page','store','orders','orderpaid','orderstopay','services','ordercount','orderclosecount','products','ingredients','totalexpense','clousure'))
                 ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);    
             }
 
