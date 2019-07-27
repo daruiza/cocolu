@@ -49,6 +49,8 @@ class PrintPosController extends Controller
 
         $i=1;
         $sum=0;
+
+        /*
         foreach ($array as $key => $value) {
             foreach ($value as $k => $v) {                
                 $order_product = OrderProduct::find($v['order_product_id']);
@@ -57,22 +59,21 @@ class PrintPosController extends Controller
                 echo " ";
                 echo substr($product->name,0,25)."\t";
                 echo $order_product->volume."\t";
-                echo round($order_product->price/1.19,2)."\t";
+                echo intval($order_product->price/1.19,2)."\t";
                 echo $order_product->volume*round($order_product->price/1.19,2)."\t";
                 $sum = $sum + $order_product->volume*round($order_product->price/1.19,2);
                 echo "<br>";
                 $i++;
             }
         }
-
         echo "<br>";
         echo 'SUBTOTAL: '.$sum;
         echo "<br>";
         echo 'IVA: '.round($sum*0.19,2);
         echo "<br>";
         echo 'TOTAL: '.round($sum*1.19);
-
         dd('Fin');
+        */
 
         try {
             //$connector = new WindowsPrintConnector("TM-T20");
@@ -80,7 +81,7 @@ class PrintPosController extends Controller
             $connector = new FilePrintConnector("/dev/usb/lp2");
             $printer = new Printer($connector);
 
-            $printer->setJustification(Printer::JUSTIFY_CENTER);            
+            $printer->setJustification(Printer::JUSTIFY_CENTER);         
                         
             $printer->bitImage(EscposImage::load(
                 'users/'.\Auth::user()->id.'/stores/'.$store->logo,
@@ -106,8 +107,37 @@ class PrintPosController extends Controller
             $printer->text("FECHA:  ".$service->date_open."\n");
             $printer->text("____________________________________________\n");
             $printer->feed();
+            
 
-            $printer->setJustification(Printer::JUSTIFY_LEFT);
+            foreach ($array as $key => $value) {
+                foreach ($value as $k => $v) {
+                    ///////sprintf///////
+                    $order_product = OrderProduct::find($v['order_product_id']);
+                    $product = Product::find($order_product->product_id);
+                    //$printer->setJustification(Printer::JUSTIFY_LEFT);
+                    $printer->selectCharacterTable($i);
+                    //$printer->setEmphasis(true);
+                    $printer->textRaw(substr("0".$order_product->volume,strlen("0".$order_product->volume)-2,strlen("0".$i))." - ");
+                    $printer->textRaw(substr($product->name,0,25));
+                    //echo substr("0".$i,strlen("0".$i)-2,strlen("0".$i));
+                    //echo " ";
+                    //echo substr($product->name,0,25)."\t";
+                    $printer->selectPrintMode();
+                    $printer->setJustification();
+                    $printer->setJustification(Printer::JUSTIFY_RIGHT);
+                    //$printer->text(." - ");
+                    //$printer->setPrintLeftMargin(32);
+                    $printer->textRaw(intval($order_product->price/1.19,2));
+
+                    //echo $order_product->volume."\t";
+                    //echo round($order_product->price/1.19,2)."\t";
+                    //echo $order_product->volume*round($order_product->price/1.19,2)."\t";
+                    //$sum = $sum + $order_product->volume*round($order_product->price/1.19,2);
+                    //echo "<br>";
+                    $printer->text("\n");
+                    $i++;
+                }
+            }
             
             $printer->setJustification(Printer::JUSTIFY_RIGHT);
             
