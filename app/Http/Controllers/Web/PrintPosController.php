@@ -48,13 +48,23 @@ class PrintPosController extends Controller
         }
 
         $i=1;
-        $sum=0;
-
-        /*
+        $sum=0;       
+        
         foreach ($array as $key => $value) {
-            foreach ($value as $k => $v) {                
+            foreach ($value as $k => $v) {   
+                
                 $order_product = OrderProduct::find($v['order_product_id']);
-                $product = Product::find($order_product->product_id);                
+                $product = Product::find($order_product->product_id);  
+
+                //printf("[%45s]\n",   $product->name);
+                echo sprintf('%1$02d '."%2$-35s".' %3$d',
+                    $i,
+                    str_pad(substr($product->name,0,9),25,'-'),
+                    $product->price);
+                echo "<br>";
+                               
+
+                /*
                 echo substr("0".$i,strlen("0".$i)-2,strlen("0".$i));
                 echo " ";
                 echo substr($product->name,0,25)."\t";
@@ -63,17 +73,20 @@ class PrintPosController extends Controller
                 echo $order_product->volume*round($order_product->price/1.19,2)."\t";
                 $sum = $sum + $order_product->volume*round($order_product->price/1.19,2);
                 echo "<br>";
+                */
+
                 $i++;
             }
         }
+        /*
         echo "<br>";
         echo 'SUBTOTAL: '.$sum;
         echo "<br>";
         echo 'IVA: '.round($sum*0.19,2);
         echo "<br>";
-        echo 'TOTAL: '.round($sum*1.19);
+        echo 'TOTAL: '.round($sum*1.19);       
+        */        
         dd('Fin');
-        */
 
         try {
             //$connector = new WindowsPrintConnector("TM-T20");
@@ -110,8 +123,7 @@ class PrintPosController extends Controller
             
 
             foreach ($array as $key => $value) {
-                foreach ($value as $k => $v) {
-                    ///////sprintf///////
+                foreach ($value as $k => $v) {                    
                     $order_product = OrderProduct::find($v['order_product_id']);
                     $product = Product::find($order_product->product_id);
                     //$printer->setJustification(Printer::JUSTIFY_LEFT);
