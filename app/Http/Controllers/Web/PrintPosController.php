@@ -46,58 +46,7 @@ class PrintPosController extends Controller
             //$key es el id de order
             $order = Order::find($key);                    
         }
-
-        $i=1;
-        $sum=0;       
         
-        foreach ($array as $key => $value) {
-            foreach ($value as $k => $v) {   
-                
-                $order_product = OrderProduct::find($v['order_product_id']);
-                $product = Product::find($order_product->product_id);  
-
-                //printf("[%45s]\n",   $product->name);
-                /*
-                echo sprintf('%1$02d '."%2$'--20s"."%3$'--10d"."\t".'%4$d',
-                    $i,
-                    //str_pad(substr($product->name,0,15),25,"-"),
-                    substr($product->name,0,10),
-                    $order_product->volume,
-                    $product->price);
-                echo "<br>";
-                */               
-
-                /*
-                echo substr("0".$i,strlen("0".$i)-2,strlen("0".$i));
-                echo " ";
-                echo substr($product->name,0,25)."\t";
-                echo $order_product->volume."\t";
-                echo intval($order_product->price/1.19,2)."\t";
-                echo $order_product->volume*round($order_product->price/1.19,2)."\t";
-                $sum = $sum + $order_product->volume*round($order_product->price/1.19,2);
-                echo "<br>";
-                */
-                
-                $line = sprintf('%-10.10s %5.0f %10.2f %10.2f',
-                    substr($product->name,0,10),
-                    $order_product->volume,
-                    $product->price,
-                    8500);
-                
-
-                $i++;
-            }
-        }
-        /*
-        echo "<br>";
-        echo 'SUBTOTAL: '.$sum;
-        echo "<br>";
-        echo 'IVA: '.round($sum*0.19,2);
-        echo "<br>";
-        echo 'TOTAL: '.round($sum*1.19);       
-        */                
-        //dd($line);
-
         try {
             //$connector = new WindowsPrintConnector("TM-T20");
             //$printer = new Printer($connector);
@@ -120,55 +69,76 @@ class PrintPosController extends Controller
             $printer->text(strtoupper($store->adress)."\n");
             $printer->feed();
 
-            $printer->text("RESPONSABLE DE IVA\n");
-            $printer->text("RANGOS DE FACTURACIÓN: E 1 HASTA E 500000\n");
-            $printer->text("RESOLUCIÓN DIAN 18762014208677 DE 26-04-2019\n");                
+            $printer->text(__('print.responsible')."\n");
+            $printer->text(__('print.ranges').": E 1 ".__('print.until')." E 500000\n");
+            $printer->text(__('print.bill')."\n");                
             $printer->feed(2);
             
             $printer->text("____________________________________________\n");
-            $printer->text("FACTURA DE VENTA: E ".$service->number."\n");
-            $printer->text("FECHA:  ".$service->date_open."\n");
+            $printer->text(__('print.bill').": E ".$service->number."\n");
+            $printer->text(__('print.date').":  ".$service->date_open."\n");
             $printer->text("____________________________________________\n");
             $printer->feed();
+            $printer->feed();
             
+
+            $line = sprintf("%1$'#2s "."%2$-12s"."%3$-12s"."%4$-10s".'%5$s',
+                '#',                    
+                __('print.article'),
+                str_pad(__('print.quantity'),6," ",STR_PAD_BOTH),
+                __('print.price'),
+                'TOTAL');
+            $printer->text($line);
+            $printer->text("\n");
+            $line = sprintf("%1$'_2s "."%2$-12s"."%3$-12s"."%4$-10s".'%5$s',
+                '_',                    
+                '________',
+                str_pad('________',6," ",STR_PAD_BOTH ),
+                '______',
+                '______');
+            $printer->text("\n");
+
+            $i=1;
+            $sum=0;
 
             foreach ($array as $key => $value) {
                 foreach ($value as $k => $v) {                    
                     $order_product = OrderProduct::find($v['order_product_id']);
                     $product = Product::find($order_product->product_id);
-                    //$printer->setJustification(Printer::JUSTIFY_LEFT);
-                    //$printer->selectCharacterTable($i);
-                    //$printer->setEmphasis(true);
-                    //$printer->textRaw(substr("0".$order_product->volume,strlen("0".$order_product->volume)-2,strlen("0".$i))." - ");
-                    //$printer->textRaw(substr($product->name,0,25));
-                    //echo substr("0".$i,strlen("0".$i)-2,strlen("0".$i));
-                    //echo " ";
-                    //echo substr($product->name,0,25)."\t";
-                    //$printer->selectPrintMode();
-                    //$printer->setJustification();
-                    //$printer->setJustification(Printer::JUSTIFY_RIGHT);
-                    //$printer->text(." - ");
-                    //$printer->setPrintLeftMargin(32);
-                    //$printer->textRaw(intval($order_product->price/1.19,2));
-
-                    //echo $order_product->volume."\t";
-                    //echo round($order_product->price/1.19,2)."\t";
-                    //echo $order_product->volume*round($order_product->price/1.19,2)."\t";
-                    //$sum = $sum + $order_product->volume*round($order_product->price/1.19,2);
-                    //echo "<br>";
-
-                    $line = sprintf('%-10.10s %5.0f %10.2f %10.2f',
-                    substr($product->name,0,10),
-                    $order_product->volume,
-                    $product->price,
-                    $order_product->volume*$product->price);
+                    $line = sprintf('%1$02d '."%2$-16s"."%3$-6s"."$%4$-10s".'$%5$s',
+                        $i,                    
+                        strtoupper(substr($product->name,0,12)),
+                        str_pad(strval($order_product->volume),6," ",STR_PAD_BOTH ),
+                        number_format(round($order_product->price/1.19,2)),
+                        number_format($order_product->volume*round($order_product->price/1.19,2))
+                    );
+                    $sum = $sum + $order_product->volume*round($order_product->price/1.19,2);
                     $printer->text($line);
                     $printer->text("\n");
                     $i++;
                 }
             }
+
+            $line = sprintf("%1$30s: "."$%2$-5s",
+                "SUBTOTAL:",
+                number_format(round($sum),2)           
+            );
+            $printer->text($line);
+            $printer->text("\n"); 
             
-            $printer->setJustification(Printer::JUSTIFY_RIGHT);
+            $line = sprintf("%1$30s  "."$%2$-5.s",
+                "IVA:",
+                number_format(round($sum*0.19),2) 
+            );  
+            $printer->text($line);
+            $printer->text("\n"); 
+            
+            $line = sprintf("%1$30s  "."$%2$-5s",
+                "TOTAL:",
+                number_format(round($sum*1.19),2) 
+            );
+            $printer->text($line);
+            $printer->text("\n"); 
             
             $printer->feed(2);
             $printer->cut();
