@@ -57,12 +57,15 @@ class PrintPosController extends Controller
                 $product = Product::find($order_product->product_id);  
 
                 //printf("[%45s]\n",   $product->name);
-                echo sprintf('%1$02d '."%2$-35s".' %3$d',
+                /*
+                echo sprintf('%1$02d '."%2$'--20s"."%3$'--10d"."\t".'%4$d',
                     $i,
-                    str_pad(substr($product->name,0,9),25,'-'),
+                    //str_pad(substr($product->name,0,15),25,"-"),
+                    substr($product->name,0,10),
+                    $order_product->volume,
                     $product->price);
                 echo "<br>";
-                               
+                */               
 
                 /*
                 echo substr("0".$i,strlen("0".$i)-2,strlen("0".$i));
@@ -74,6 +77,13 @@ class PrintPosController extends Controller
                 $sum = $sum + $order_product->volume*round($order_product->price/1.19,2);
                 echo "<br>";
                 */
+                
+                $line = sprintf('%-10.10s %5.0f %10.2f %10.2f',
+                    substr($product->name,0,10),
+                    $order_product->volume,
+                    $product->price,
+                    8500);
+                
 
                 $i++;
             }
@@ -85,8 +95,8 @@ class PrintPosController extends Controller
         echo 'IVA: '.round($sum*0.19,2);
         echo "<br>";
         echo 'TOTAL: '.round($sum*1.19);       
-        */        
-        dd('Fin');
+        */                
+        //dd($line);
 
         try {
             //$connector = new WindowsPrintConnector("TM-T20");
@@ -127,25 +137,32 @@ class PrintPosController extends Controller
                     $order_product = OrderProduct::find($v['order_product_id']);
                     $product = Product::find($order_product->product_id);
                     //$printer->setJustification(Printer::JUSTIFY_LEFT);
-                    $printer->selectCharacterTable($i);
+                    //$printer->selectCharacterTable($i);
                     //$printer->setEmphasis(true);
-                    $printer->textRaw(substr("0".$order_product->volume,strlen("0".$order_product->volume)-2,strlen("0".$i))." - ");
-                    $printer->textRaw(substr($product->name,0,25));
+                    //$printer->textRaw(substr("0".$order_product->volume,strlen("0".$order_product->volume)-2,strlen("0".$i))." - ");
+                    //$printer->textRaw(substr($product->name,0,25));
                     //echo substr("0".$i,strlen("0".$i)-2,strlen("0".$i));
                     //echo " ";
                     //echo substr($product->name,0,25)."\t";
-                    $printer->selectPrintMode();
-                    $printer->setJustification();
-                    $printer->setJustification(Printer::JUSTIFY_RIGHT);
+                    //$printer->selectPrintMode();
+                    //$printer->setJustification();
+                    //$printer->setJustification(Printer::JUSTIFY_RIGHT);
                     //$printer->text(." - ");
                     //$printer->setPrintLeftMargin(32);
-                    $printer->textRaw(intval($order_product->price/1.19,2));
+                    //$printer->textRaw(intval($order_product->price/1.19,2));
 
                     //echo $order_product->volume."\t";
                     //echo round($order_product->price/1.19,2)."\t";
                     //echo $order_product->volume*round($order_product->price/1.19,2)."\t";
                     //$sum = $sum + $order_product->volume*round($order_product->price/1.19,2);
                     //echo "<br>";
+
+                    $line = sprintf('%-10.10s %5.0f %10.2f %10.2f',
+                    substr($product->name,0,10),
+                    $order_product->volume,
+                    $product->price,
+                    $order_product->volume*$product->price);
+                    $printer->text($line);
                     $printer->text("\n");
                     $i++;
                 }
