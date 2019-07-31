@@ -48,10 +48,19 @@ class PrintPosController extends Controller
         }
         
         try {
-            //$connector = new WindowsPrintConnector("TM-T20");
-            //$printer = new Printer($connector);
-            $connector = new FilePrintConnector("/dev/usb/lp2");
-            $printer = new Printer($connector);
+
+            if(json_decode(\Auth::user()->store()->label,true)['print']['os']){
+                $connector = new WindowsPrintConnector(
+                    json_decode(\Auth::user()->store()->label,true)['print']['conn']);
+                $printer = new Printer($connector);
+            }else{
+                $connector = new FilePrintConnector(
+                    json_decode(\Auth::user()->store()->label,true)['print']['conn']);
+                $printer = new Printer($connector);
+            }
+
+           
+            
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);         
                         

@@ -10,7 +10,12 @@
 
     <title>
         @guest
-            {{ config('app.name', 'Cocolú') }}
+            @isset($store)
+                {{ $store->name }}
+            @else
+                {{ config('app.name', 'Cocolú') }}
+            @endisset
+            
         @else
             @if(Auth::user()->rol()->first()->id != 1)
                 {{Auth::user()->store()->name}}
@@ -40,7 +45,11 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     @guest
-                        {{ config('app.name', 'Cocolú') }}
+                        @isset($store)
+                            {{ $store->name }}
+                        @else
+                            {{ config('app.name', 'Cocolú') }}
+                        @endisset
                     @else
                         @if(Auth::user()->rol()->first()->id != 1)
                             {{Auth::user()->store()->name}}

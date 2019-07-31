@@ -125,3 +125,7 @@ Route::get('message/{id_store}/{id_table}/request', [
 Route::get('message/{id_store}/letter', [
    'as' => 'message.letter', 'uses' => 'Web\MessageController@letter'
 ]);
+
+Route::get('/{store}', [
+   'as' => 'store.index', 'uses' => 'Web\StoreController@index'
+]);

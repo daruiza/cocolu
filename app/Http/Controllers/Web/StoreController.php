@@ -22,7 +22,7 @@ class StoreController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => 'index']);
     }
 
 
@@ -69,9 +69,10 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($store)
     {
-        dd('store.controller');
+        $store = Store::where('name', strtolower($store))->firstOrFail();       
+        return view('store.index',compact('store'));
         //return 'Hola';       
     }
 
