@@ -21,4 +21,5 @@ return [
 	"MessageSendOk" => "Pronto atenderemos tu Solicitud",
 	"NewOrderTableOK" => "Excelete! La orden se registro correctamente",
 	"EditOrderTableOK" => "Super! La orden se editó correctamente",
+	"PrintOK" => "Hecho!, La factura fue impresa ",
 ];

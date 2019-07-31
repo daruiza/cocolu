@@ -89,13 +89,14 @@ class PrintPosController extends Controller
                 __('print.price'),
                 'TOTAL');
             $printer->text($line);
-            $printer->text("\n");
+             $printer->feed(1);
             $line = sprintf("%1$'_2s "."%2$-12s"."%3$-12s"."%4$-10s".'%5$s',
                 '_',                    
-                '________',
+                '__________',
                 str_pad('________',6," ",STR_PAD_BOTH ),
                 '______',
                 '______');
+            $printer->text($line);
             $printer->text("\n");
 
             $i=1;
@@ -118,6 +119,7 @@ class PrintPosController extends Controller
                     $i++;
                 }
             }
+            $printer->feed(2);
 
             $line = sprintf("%1$30s: "."$%2$-5s",
                 "SUBTOTAL:",
@@ -145,7 +147,13 @@ class PrintPosController extends Controller
             $printer->pulse();
             $printer->close();
         }catch (Exception $e) {
-            $printer->text($e->getMessage() . "\n");
+            //$printer->text($e->getMessage() . "\n");
+            Session::flash('danger', [[$e->getMessage()]]);
+            return redirect('table');    
         }
+
+        //retornar        
+        Session::flash('success', [['PrintOK']]);
+        return redirect('table');
     }
 }

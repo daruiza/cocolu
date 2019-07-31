@@ -21,4 +21,5 @@ return [
 	"MessageSendOk" => "We will answer your request soon",
 	"NewOrderTableOK" => "Excellet! your order was created correctly",
 	"EditOrderTableOK" => "Excellet! your order was edited correctly",
+	"PrintOK" => "Done!, the invoice was ptinted",
 ];
