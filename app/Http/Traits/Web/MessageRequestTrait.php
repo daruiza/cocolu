@@ -47,7 +47,7 @@ trait MessageRequestTrait
     	$table = Table::
     		where('id',$request->input('table_id'))
     		->where('store_id',$request->input('store_id'))
-    		->first();
+    		->firstOrFail();
 
     	$message = new Message();          
         $message->issue = $request->input('issue');
