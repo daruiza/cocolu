@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\User;
 use App\Model\Core\Store;
+use App\Model\Core\Product;
 use App\Model\Core\Department;
 use App\Model\Core\City;
 use Illuminate\Http\Request;
@@ -72,7 +73,8 @@ class StoreController extends Controller
     public function index($store)
     {
         $store = Store::where('name', strtolower($store))->firstOrFail();       
-        return view('store.index',compact('store'));
+        $products = Product::where('store_id',$store->id)->get();
+        return view('store.index',compact('store','products'));
         //return 'Hola';       
     }
 

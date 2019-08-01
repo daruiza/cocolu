@@ -11,6 +11,7 @@ return [
     "article"=>"ARTICLE",
     "quantity"=>"QUANTITY",
     "price"=>"PRICE",
+    "attended"=>"ATTENDED BY",
 
 
 ];

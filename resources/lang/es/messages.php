@@ -172,4 +172,5 @@ return [
     "letter" => "Carta de Productos",
     "EditDetail" => "Editar Detalle",
     "DownloadClousure" => "Descargar a Excel",
+    "Wellcome" => "Bienvenido a",
 ];

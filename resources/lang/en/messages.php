@@ -173,5 +173,6 @@ return [
     "letter" => "Product letter",
     "EditDetail" => "Edit Detail",
     "DownloadClousure" => "Excel DownLoad",
+    "Wellcome" => "Wellcome To",
 
 ];

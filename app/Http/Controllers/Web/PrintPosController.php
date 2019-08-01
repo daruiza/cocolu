@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Web;
 use App\Model\Core\Table;
 use App\Model\Core\Store;
 use App\Model\Core\Order;
+use App\Model\Core\Waiter;
 use App\Model\Core\OrderProduct;
 use App\Model\Core\Product;
 use App\Model\Core\City;
@@ -30,7 +31,7 @@ class PrintPosController extends Controller
     {
     	$table = Table::find($request->input('table_id'));        
         $service = $table->tableServiceOpen()->first();
-        $store = Store::find($table->store_id);
+        $store = Store::find($table->store_id);       
 
     	$array = array();    	
         foreach($request->input() as $key=>$value){
@@ -42,11 +43,14 @@ class PrintPosController extends Controller
                 $array[$id_item][$vector[$n-3]]['order_product_id'] = end($vector);                    
             }
         }
+
         foreach ($array as $key => $value) {
             //$key es el id de order
             $order = Order::find($key);                    
         }
-        
+
+        $waiter = Waiter::find($order->waiter_id);
+
         try {
 
             if(json_decode(\Auth::user()->store()->label,true)['print']['os']){
@@ -58,9 +62,6 @@ class PrintPosController extends Controller
                     json_decode(\Auth::user()->store()->label,true)['print']['conn']);
                 $printer = new Printer($connector);
             }
-
-           
-            
 
             $printer->setJustification(Printer::JUSTIFY_CENTER);         
                         
@@ -78,6 +79,14 @@ class PrintPosController extends Controller
             $printer->text(strtoupper($store->adress)."\n");
             $printer->feed();
 
+
+            $printer->text(__('print.attended').": ".
+                strtoupper($waiter->user()->first()->name)." ".
+                strtoupper($waiter->user()->first()->surname));
+
+            $printer->feed();
+            $printer->feed();
+
             $printer->text(__('print.responsible')."\n");
             $printer->text(__('print.ranges').": E 1 ".__('print.until')." E 500000\n");
             $printer->text(__('print.bill')."\n");                
@@ -87,7 +96,7 @@ class PrintPosController extends Controller
             $printer->text(__('print.bill').": E ".$service->number."\n");
             $printer->text(__('print.date').":  ".$service->date_open."\n");
             $printer->text("____________________________________________\n");
-            $printer->feed();
+            $printer->feed();            
             $printer->feed();
             
 

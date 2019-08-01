@@ -23,14 +23,41 @@
     <div class="container">       
         @guest
             <div class="row">
-            
-
-               HELLO 
-            
-            </div>                  
+                <div class="col-md-12">
+                    <h3 class="title">{{ __('messages.Wellcome') }} {{ ucfirst($store->name) }}</h3>
+                </div>
+                <div class="product col-md-12">
+                    products
+                </div>    
+            </div>
         @endguest                       
     </div>
 </div>
+@endsection
+
+@section('style')
+<style type="text/css">
+    .py-4{
+        padding-top: 1rem!important;
+    }
+    .navbar-laravel {
+        background: #ffffff59;
+        position: fixed;
+        width: 100%;
+        top: 0px;
+        z-index: 1;
+        display: none;
+    }
+    .title{
+        color:#ffffff99;
+    }
+    .row{
+        text-align: center;
+    }
+    .product{
+        margin-top: 5rem;
+    }
+</style>
 @endsection
 
 @section('script')    
