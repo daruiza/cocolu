@@ -26,8 +26,21 @@
                 <div class="col-md-12">
                     <h3 class="title">{{ __('messages.Wellcome') }} {{ ucfirst($store->name) }}</h3>
                 </div>
-                <div class="product col-md-12">
-                    products
+                <div class="products col-md-12">
+                    <div class="row">
+                    @foreach($products as $product)
+                        <div class="col-md-5 product col-md-offset-1">                            
+                            <div class="img-product">
+                                {{ Html::image('users/'.$id_myadmin.'/products/'.$product->image1,'Imagen no disponible',array('id'=>'img_product_img'))}}    
+                            </div>                            
+                        </div>
+                        <div class="col-md-5 product-description col-md-offset-1">
+                            <div><h4>{{ ucfirst($product->name)}}</h4></div>
+                            <div><h5>{{ ucfirst($product->description)}}</h5></div>
+                            <div><h4>{{ __('messages.Price') }} ${{ number_format($product->price)}}</h4></div>
+                        </div>                       
+                    @endforeach
+                    </div>
                 </div>    
             </div>
         @endguest                       
@@ -54,20 +67,45 @@
     .row{
         text-align: center;
     }
-    .product{
+    .products{
         margin-top: 5rem;
+    }
+    .product{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .product,.product-description{        
+        color:#ffffff99;        
+        padding: 10px;
+    }
+    .product-description{        
+        color: #22212199;
+        background: #ffffffbf;
+        border-radius: 4%; 
+        height: 300px;    
+    }
+    .img-product{
+        opacity: 0.0;        
+    }
+    .img-product img{        
+        max-width: 100%;
+        max-height: 300px;
     }
 </style>
 @endsection
 
 @section('script')    
     <script type="application/javascript">
-        /*
-        if(window.innerWidth>980){
-            $('#video_background').css('height',window.innerHeight);
-            $('#video_background').css('width',window.innerWidth);
-        }
-        */
+        $(document).ready(function(){setTimeout(refrescar, 30000);});        
+        function refrescar(){location.reload();}        
+        $( ".img-product" ).animate({
+            opacity: 0.95,            
+        },4000, function() {
+    
+        });
+        
+       
     </script>
     @yield('subscript')
 

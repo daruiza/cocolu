@@ -401,5 +401,18 @@ class Product extends Model
                 dimensions:min_width=64,min_width=64',            
         ]);
     }
+
+    //lo usamos para llamar al index store los productos de las store
+    static function productByStore($id,$random){
+
+        return Product::select('products.*')
+        ->where('store_id',$id)
+        ->leftJoin('category_product','category_product.product_id','products.id')
+        ->leftJoin('categories','categories.id','category_product.category_id')
+        ->where('categories.category_id','<>',0)
+        ->where('products.active',1)
+        ->get()
+        ->random($random);
+    }
     
 }

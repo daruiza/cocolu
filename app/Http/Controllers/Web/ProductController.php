@@ -288,7 +288,7 @@ class ProductController extends Controller
             'image1'=>'
                 required|
                 mimes:jpeg,bmp,png|
-                dimensions:max_width=700,max_width=700|
+                dimensions:max_width=900,max_width=900|
                 dimensions:min_width=64,min_width=64',            
         ]);
     }

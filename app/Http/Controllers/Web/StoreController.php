@@ -25,45 +25,7 @@ class StoreController extends Controller
     {
         $this->middleware('auth',['except' => 'index']);
     }
-
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => '
-                required|
-                string|
-                max:16',
-            'department' => '
-                required|
-                string',
-            'city' => '
-                required|
-                string',   
-            'currency' => '
-                required|
-                max:12',
-            //'password' => 'required|string|min:4|confirmed',
-        ]);
-    }
-
-    protected function validatorImage(array $data)
-    {        
-        return Validator::make($data, [
-            'image'=>'
-                required|
-                mimes:jpeg,bmp,png|
-                dimensions:max_width=700,max_width=700|
-                dimensions:min_width=250,min_width=250',            
-        ]);
-    }
-
+    
 
     /**
      * Display a listing of the resource.
@@ -72,9 +34,11 @@ class StoreController extends Controller
      */
     public function index($store)
     {
-        $store = Store::where('name', strtolower($store))->firstOrFail();       
-        $products = Product::where('store_id',$store->id)->get();
-        return view('store.index',compact('store','products'));
+        $store = Store::where('name', strtolower($store))->firstOrFail();
+        $products = Product::productByStore($store->id,1);
+        $user = New User(['rel_store_id'=>$store->id]);        
+        $id_myadmin = $user->myAdmin($store->id);        
+        return view('store.index',compact('store','products','id_myadmin'));
         //return 'Hola';       
     }
 
@@ -208,5 +172,43 @@ class StoreController extends Controller
     {
         //
     }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => '
+                required|
+                string|
+                max:16',
+            'department' => '
+                required|
+                string',
+            'city' => '
+                required|
+                string',   
+            'currency' => '
+                required|
+                max:12',
+            //'password' => 'required|string|min:4|confirmed',
+        ]);
+    }
+
+    protected function validatorImage(array $data)
+    {        
+        return Validator::make($data, [
+            'image'=>'
+                required|
+                mimes:jpeg,bmp,png|
+                dimensions:max_width=700,max_width=700|
+                dimensions:min_width=250,min_width=250',            
+        ]);
+    }
+
     
 }
