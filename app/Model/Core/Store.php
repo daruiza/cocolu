@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
-    protected $fillable = ['id','name','department','city','adress','description','logo','currency','label','active'];
+    protected $fillable = ['id','name','nit','department','city','adress','description','logo','currency','label','active'];
 
     //una tienda puede tener muchas mesas
     public function tables(){
@@ -58,6 +58,7 @@ class Store extends Model
     public function updateStore($data){        
         //guardamos los datos
         $this->name = $data['name'];
+        $this->nit = $data['nit'];
         $this->department = $data['department'];
         $this->city = $data['city'];
         $this->adress = $data['adress'];

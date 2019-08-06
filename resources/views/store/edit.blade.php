@@ -61,6 +61,20 @@
 				                    			</div>
 				                    		</div>
 
+				                    		<div class="form-group row">
+				                    			{!! Form::label('nit','NIT',['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+				                    			<div class="col-md-8">
+				                    				@if($errors->has('nit'))
+				                    					{!! Form::text('nit',null, ['class'=>'form-control is-invalid']) !!}
+				                    					<span class="invalid-feedback">
+					                                        <strong>{{ $errors->first('nit') }}</strong>
+					                                    </span>
+				                    				@else
+				                    					{!! Form::text('nit',null, ['class'=>'form-control']) !!}
+				                    				@endif	
+				                    			</div>
+				                    		</div>
+
 
 				                    		<div class="form-group row">
 				                    			{!! Form::label('department',__('messages.DepartmentLabel'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}

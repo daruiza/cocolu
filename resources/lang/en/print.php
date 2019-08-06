@@ -12,6 +12,7 @@ return [
     "quantity"=>"QUANTITY",
     "price"=>"PRICE",
     "attended"=>"ATTENDED BY",
+    "thankyou"=>"THANKS FOR YOUR PURCHASE",
 
 
 ];

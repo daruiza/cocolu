@@ -73,7 +73,7 @@ class PrintPosController extends Controller
             $printer->feed();
 
             $printer->text(strtoupper($store->name)."\n");            
-            $printer->text(strtoupper($store->description)."\n");
+            $printer->text(strtoupper($store->nit)."\n");
             $printer->text(City::find($store->city)->name.' - '.Department::find($store->department)->name."\n");
             
             $printer->text(strtoupper($store->adress)."\n");
@@ -161,6 +161,9 @@ class PrintPosController extends Controller
             $printer->text("\n"); 
             
             $printer->feed(2);
+            $printer->text(__('print.thankyou')."\n");
+            $printer->text(strtoupper($store->description)."\n");
+
             $printer->cut();
             $printer->pulse();
             $printer->close();

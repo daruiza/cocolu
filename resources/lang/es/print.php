@@ -12,5 +12,6 @@ return [
     "quantity"=>"CANTIDAD",
     "price"=>"PRECIO",
     "attended"=>"ATENDIDO POR",
+    "thankyou"=>"GRACIAS POR TU COMPRA",
 
 ];
