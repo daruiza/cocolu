@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Traits\Web\MessageRequestTrait;
 
+//controlador usado para las notificaciones de usuario
 class MessageController extends Controller
 {
 
