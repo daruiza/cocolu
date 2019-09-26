@@ -44,7 +44,7 @@ class TableController extends Controller
             ->orderBy('id','ASC')
             ->get();
 
-        //listamos las ordenes endientes por atender de esta clousure        
+        //listamos las ordenes pendientes por atender de esta clousure        
         $orders = Order::ordersStatusOne(Auth::user()->store()->id);   
         
 		return view('table.index',compact('tables','orders'))->with('data', []);

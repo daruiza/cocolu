@@ -71,6 +71,11 @@ class Table extends Model
         return collect();
     }
 
+    // Retorna el servicio con las ordenes y su valor total
+    public function getService(){
+
+    }
+
     public function icons()
     {
         return [
