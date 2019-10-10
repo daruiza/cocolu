@@ -251,6 +251,17 @@
 		.alert-heading{
 			width: 85%
 		}
+
+		.service-open-for-pay{
+			border-top: 5px solid {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }};	
+			/* border-right: 5px solid {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }}; */
+			/* border-left: 5px solid {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }}; */
+		}
+
+		.service-open-for-pay i{
+			top: 14px !important;
+			color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }};	
+		}
 	</style>
 
 	@isset($data['ordermodal'])	
