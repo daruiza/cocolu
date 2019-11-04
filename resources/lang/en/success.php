@@ -19,6 +19,7 @@ return [
 	"messageaSendOK" => "Done!, Your message has been send OK",
 	"guest_successful" => "Done!, Your request has been send OK.",
 	"MessageSendOk" => "We will answer your request soon",
+	'messageBull' => 'Your Bull is: $:name',
 	"NewOrderTableOK" => "Excellet! your order was created correctly",
 	"EditOrderTableOK" => "Excellet! your order was edited correctly",
 	"PrintOK" => "Done!, the invoice was ptinted",

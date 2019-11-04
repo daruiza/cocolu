@@ -42,7 +42,7 @@ trait MessageRequestTrait
     }
 
     public function requestStore(Request $request){    	
-    	
+    	        
     	$store = Store::findOrFail($request->input('store_id'));
     	$table = Table::
     		where('id',$request->input('table_id'))
@@ -61,9 +61,21 @@ trait MessageRequestTrait
         broadcast(new NewRequest($table,$message))->toOthers();        
 
         $message = Message::find($message->id);  
-        $message->delete();        
+        $message->delete();
 
-        Session::flash('guest_success', [['MessageSendOk']]);
+        // si se solicito la cuenta
+        if(
+            $request->input('issue') === 'The Bill' ||
+            $request->input('issue') === 'La Cuenta'){
+
+            //calculo de cuanta por pagar
+
+            Session::flash('guest_success', [['messageBull',$table->getOrderTotal()]]);
+
+        }else {
+            Session::flash('guest_success', [['MessageSendOk']]);    
+        }
+        
         return redirect()->route('message.request',['id_store'=>$request->input('store_id'),'id_table'=>$request->input('table_id')]);
         
 

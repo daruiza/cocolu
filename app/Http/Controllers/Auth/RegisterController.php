@@ -62,14 +62,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
-        return User::create([
+    protected function create(array $data)    {
+        
+        $user = User::create([
             'name' => ucwords($data['name']),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),            
             'rel_store_id' => Store::create(['name' => ucwords($data['name']).'-'.'Store'])->id,
-        ]);
-
+        ]);        
+        return $user->clousureInit($user->id);
     }
 }

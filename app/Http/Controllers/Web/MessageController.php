@@ -76,7 +76,7 @@ class MessageController extends Controller
 
         //guardamos el mensaje
 
-        //enviamos la notificación
+        //enviamos la notificación, para los agentes
         if(Auth::user()->rol_id == 3){
             broadcast(new NewMessage(auth()->user(),$message))->toOthers();
         }

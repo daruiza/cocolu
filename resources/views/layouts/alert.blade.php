@@ -73,7 +73,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <!--
+        
         <hr>
         <ul>
             @foreach (Session::get('guest_success') as $message)
@@ -85,7 +85,7 @@
             @endforeach
             {{Session::forget('guest_success')}}
         </ul>                       
-        -->
+        
     </div>
 @endif
 

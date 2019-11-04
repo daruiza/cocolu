@@ -95,12 +95,14 @@ class User extends Authenticatable
     //crea el primer clouure para iniciar la labor
     public function clousureInit($user_id){
         //$user = User::where('id', $user_id);        
-        return Clousure::create([
+        Clousure::create([
             'name' => 'Clousure Init',
             'description' => 'Default Clousure Init',
             'open' => true,
             'store_id' => $this->rel_store_id,
         ]);
+
+        return $this;
     }
 
     //retrorna el id del administrador de la tienda
