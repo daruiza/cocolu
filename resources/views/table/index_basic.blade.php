@@ -62,12 +62,11 @@
 
                                             <div class="object-table
                                             @if(!($value->tableOrderStatusOneOpen()->count()) && $value->getOrderTotal()) service-open-for-pay @endif
-                                            ">
-                                                
+                                            ">                                                
                                                 {{ Form::hidden('table-id', $value->id) }}
     										  	<p class="p-tittle">
                                                     <i class="{{$value->icon}}"> </i>
-                                                    {{$value->name}}                                                            
+                                                    {{$value->name}}
                                                 </p>
 
                                                 <!-- si la mesa tiene ordenes es etado one-->
@@ -83,7 +82,7 @@
     												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
     												<!--<div>{{ __('messages.OpenService') }}</div>-->
     												<div>{{$value->tableServiceOpen()->first()->name}}</div>
-                                                    <div>                                                        
+                                                    <div>    
                                                         @if(!($value->tableOrderStatusOneOpen()->count()) && $value->getOrderTotal())
                                                             ${{number_format($value->getOrderTotal())}}
                                                         @endif
