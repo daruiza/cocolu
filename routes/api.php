@@ -16,8 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/apis', function (Request $request) {
     return $request->user();
 });
-/*
+
 Route::get('/test',function(){
-    return response('Test API', 200)->header('Content-Type', 'application/json');
+    return response('{"hello": "Test API"}', 200)->header('Content-Type', 'application/json');
 });
-*/
+
