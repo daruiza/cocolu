@@ -13,4 +13,5 @@ return [
     "EnvoiceNotEdit"=>"Invoice Can Not be Edit - it is out of Clousure , :NAME",
     "ExpenseEditOutGraceTime" => "Edit Expense Out Grace Time",
     "NO_ORDER_SAVE" => "The order has not been saved",
+    "orderOpen" => "There are still open orders. all orders must be closed"
 ];

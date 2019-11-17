@@ -90,16 +90,19 @@ class ClousureController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, $id)
-    {        
+    {   
+        
         $user = User::findOrFail($id);
         //validación de credenciales de usuario
         if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);
-
         //validar si tiene servicios con odenes sin pagar
         $orders = $user->store()->clousureOpen()->servicesBuilder()
-        ->leftJoin('orders','orders.service_id','services.id')
-        ->where('orders.status_id',1)
-        ->orWhere('orders.status_id',2)
+        ->rightJoin('orders','orders.service_id','services.id')
+        ->where(function ($query){
+            $query
+            ->where('orders.status_id',1)
+            ->orWhere('orders.status_id',2);
+        })
         ->get();
 
         if($orders->count()){            
