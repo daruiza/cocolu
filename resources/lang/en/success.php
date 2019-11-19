@@ -23,4 +23,5 @@ return [
 	"NewOrderTableOK" => "Excellet! your order was created correctly",
 	"EditOrderTableOK" => "Excellet! your order was edited correctly",
 	"PrintOK" => "Done!, the invoice was ptinted",
+	"SERVICE_CLOSE_OK" => "It's done, the service has been closed successfully",
 ];

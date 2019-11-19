@@ -52,8 +52,8 @@ trait ClousureRequestTrait
 	}
 
     public function toExcel(Request $request,$id){
-        $data = Clousure::all();        
         /*
+        $data = Clousure::all();        
         \Excel::create('ReporteCierreExcel',function($excel) use ($data){
             $excel->sheet('Sheet 1',function($sheet) use ($data){
                 $sheet->fromArray($export);

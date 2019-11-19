@@ -97,12 +97,11 @@ trait TableRequestTrait
                     ->orWhere('status_id',3)//orden paga
                     ->orWhere('status_id',4);//orden cerrada
                  })
-                 ->where('order_product.status_paid',false)
+                // ->where('order_product.status_paid',false)
                 ->groupBy('orders.id')
                 ->orderBy('orders.status_id','ASC')
                 ->get();    
         }
-
         //order_product	
         $order_products = array();
         foreach ($orders as $key => $value) {

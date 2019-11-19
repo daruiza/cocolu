@@ -23,4 +23,5 @@ return [
 	"NewOrderTableOK" => "Excelete! La orden se registro correctamente",
 	"EditOrderTableOK" => "Super! La orden se editó correctamente",
 	"PrintOK" => "Hecho!, La factura fue impresa ",
+	"SERVICE_CLOSE_OK" => "Esta echo, el servicio se ha cerrado correctamente",
 ];
