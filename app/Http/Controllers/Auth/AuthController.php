@@ -10,6 +10,7 @@ class AuthController extends Controller
 {
     //Para autenticación de APP
     public function signup(Request $request){
+        
         $request->validate([
             'name'     => 'required|string',
             'email'    => 'required|string|email|unique:users',
@@ -20,6 +21,7 @@ class AuthController extends Controller
             'email'    => $request->email,
             'password' => bcrypt($request->password),
         ]);
+        
         $user->save();
         return response()->json([
             'message' => 'Successfully created user!'], 201);
@@ -31,6 +33,7 @@ class AuthController extends Controller
             'password'    => 'required|string',
             'remember_me' => 'boolean',
         ]);
+        exit($request);
         return response()->json(['message' => 'Successfully user Log!'], 201);
         $credentials = request(['email', 'password']);
         

@@ -18,7 +18,8 @@ Route::middleware('auth:api')->get('/apis', function (Request $request) {
 });
 
 Route::get('/test', function () {
-    return response('{"hello": "Test API"}', 200)->header('Content-Type', 'application/json');
+    $json = '{"hello": "Test API"}';
+    return response($json, 200)->header('Content-Type', 'application/json');
 });
 
 Route::group(['prefix' => 'auth'], function () {
