@@ -45,7 +45,7 @@ class AuthController extends Controller
         }
         
         $user = $request->user();
-        $tokenResult = $user->createToken('mEqpyaFFThYgDiVXRHDKmHeemlyqlOan0ti0LzgH');
+        $tokenResult = $user->createToken('SxrCWnAwSqDBYV0kkieFu86X1u4dvaOtSJgxD0YB');
         $token = $tokenResult->token;
         if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(1);
