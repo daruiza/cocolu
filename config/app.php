@@ -166,6 +166,7 @@ return [
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        // Barryvdh\Cors\ServiceProvider::class,
 
     ],
 
