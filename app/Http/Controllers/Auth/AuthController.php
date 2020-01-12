@@ -36,12 +36,12 @@ class AuthController extends Controller
             'remember_me' => 'boolean',
         ]);
         // exit($request);
-        // return response()->json(['message' => 'Successfully user Log!'], 201);
+        // return response()->json(['message' => $request->all()], 201);
         $credentials = request(['email', 'password']);
         
         if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'Unauthorized'], 401);
+                'message' => 'Credenciales no autorizadas'], 401);
         }
         
         $user = $request->user();
