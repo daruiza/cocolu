@@ -25,6 +25,7 @@ Route::get('/test', function () {
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Auth\AuthController@login');
     Route::post('signup', 'Auth\AuthController@signup');
+    Route::post('checktoken', 'Auth\AuthController@checkToken');
 
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('logout', 'Auth\AuthController@logout');
