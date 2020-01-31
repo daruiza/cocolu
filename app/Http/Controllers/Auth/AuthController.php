@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserController;
 
 class AuthController extends Controller
 {
@@ -57,6 +58,7 @@ class AuthController extends Controller
             'expires_at'   => Carbon::parse(
                 $tokenResult->token->expires_at)
                     ->toDateTimeString(),
+            'user'  => $user     
         ]);
     }
 
