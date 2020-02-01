@@ -58,16 +58,14 @@ class AuthController extends Controller
             'expires_at'   => Carbon::parse(
                 $tokenResult->token->expires_at)
                     ->toDateTimeString(),
-            'user'  => $user     
+            'user'  => $request->user()
         ]);
     }
 
     public function checkToken(Request $request){
         // chequea que el token sea valido y que este vigente
-
         return response()->json([
            'check' => true ], 201);
-
     }
 
     public function logout(Request $request){
