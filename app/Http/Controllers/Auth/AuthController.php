@@ -46,6 +46,10 @@ class AuthController extends Controller
         }
         
         $user = $request->user();
+        $usr = User::findOrFail($request->user()->id);
+        $permits = $usr->userPermitsApi($request->user()->id);
+        $user->permits = $permits;
+
         $tokenResult = $user->createToken('41h1bXt0YXmbRAsdGBQuSfThIRd1YNneEI0IcSNs');
         $token = $tokenResult->token;
         if ($request->remember_me) {
@@ -58,7 +62,8 @@ class AuthController extends Controller
             'expires_at'   => Carbon::parse(
                 $tokenResult->token->expires_at)
                     ->toDateTimeString(),
-            'user'  => $request->user()
+            'user'  => $user
+            
         ]);
     }    
 

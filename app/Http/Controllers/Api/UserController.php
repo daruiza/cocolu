@@ -29,6 +29,9 @@ class UserController extends Controller{
     {
         //Obtiene el usuario en curso
         return response()->json($request->user());
+
+        $usr = User::findOrFail($request->user()->id);
+        $permits = $usr->userPermits($request->user()->id);
     }
 
     /**

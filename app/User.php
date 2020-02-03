@@ -215,7 +215,15 @@ class User extends Authenticatable
             $permits[$option->module()->get()[0]->name]['options'][$option->id]=$option->toArray();
         }
         Session::put('permits', $permits);
-        // return solo para las app
+    }
+
+    public function userPermitsApi($user_id){
+        $user = User::find($user_id);
+        $permits = array();                
+        foreach($user->rol()->get()[0]->options()->get() as $key => $option) {
+            if(!array_key_exists($option->module()->get()[0]->name, $permits))$permits[$option->module()->get()[0]->name]=$option->module()->get()[0]->toArray();
+            $permits[$option->module()->get()[0]->name]['options'][$option->id]=$option->toArray();
+        }
         return $permits;      
     }
 
