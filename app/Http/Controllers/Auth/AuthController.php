@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserController;
 
 class AuthController extends Controller
 {
@@ -45,6 +46,10 @@ class AuthController extends Controller
         }
         
         $user = $request->user();
+        $usr = User::findOrFail($request->user()->id);
+        $permits = $usr->userPermitsApi($request->user()->id);
+        $user->permits = $permits;
+
         $tokenResult = $user->createToken('41h1bXt0YXmbRAsdGBQuSfThIRd1YNneEI0IcSNs');
         $token = $tokenResult->token;
         if ($request->remember_me) {
@@ -57,16 +62,10 @@ class AuthController extends Controller
             'expires_at'   => Carbon::parse(
                 $tokenResult->token->expires_at)
                     ->toDateTimeString(),
+            'user'  => $user
+            
         ]);
-    }
-
-    public function checkToken(Request $request){
-        // chequea que el token sea valido y que este vigente
-
-        return response()->json([
-           'check' => true ], 201);
-
-    }
+    }    
 
     public function logout(Request $request){
         $request->user()->token()->revoke();
