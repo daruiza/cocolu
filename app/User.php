@@ -221,8 +221,13 @@ class User extends Authenticatable
         $user = User::find($user_id);
         $permits = array();                
         foreach($user->rol()->get()[0]->options()->get() as $key => $option) {
-            if(!array_key_exists($option->module()->get()[0]->name, $permits))$permits[$option->module()->get()[0]->name]=$option->module()->get()[0]->toArray();
-            $permits[$option->module()->get()[0]->name]['options'][$option->id]=$option->toArray();
+            if(!array_key_exists($option->module()->get()[0]->name, $permits))
+            {
+                $permits[$option->module()->get()[0]->name] = $option->module()->get()[0]->toArray();
+                $permits[$option->module()->get()[0]->name]['label'] = json_decode($option->module()->get()[0]->label);
+            }
+            $permits[$option->module()->get()[0]->name]['options'][$option->id] = $option->toArray();
+            $permits[$option->module()->get()[0]->name]['options'][$option->id]['label'] = json_decode($option->label);
         }
         return $permits;      
     }
