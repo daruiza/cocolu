@@ -43,7 +43,7 @@ trait AuthenticatesUsers
         }
 
         if ($this->attemptLogin($request)) {
-            // Auth::user()->permits();
+            Auth::user()->permits();
             return $this->sendLoginResponse($request);
         }
 

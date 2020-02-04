@@ -293,7 +293,7 @@ class OptionsTableSeeder extends Seeder
 			)
 		);
 
-		//Modulo option 45		
+		//Modulo option 45
 
     }
 }

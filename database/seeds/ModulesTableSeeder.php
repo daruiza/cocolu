@@ -14,73 +14,73 @@ class ModulesTableSeeder extends Seeder
         \DB::table('modules')->insert(array(
 			'name'=>'Rols',
 			'description'=>'ModuleRols',
-			'label'=>'{"action","rol"}'			
+			'label'=>'{"action":"rol"}'			
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Modules',
 			'description'=>'ModuleModules',
-			'label'=>'{"action","module"}'
+			'label'=>'{"action":"module"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Options',
 			'description'=>'ModuleOptions',
-			'label'=>'{"action","option"}'
+			'label'=>'{"action":"option"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Users',
 			'description'=>'ModuleUsers',
-			'label'=>'{"action","user"}'
+			'label'=>'{"action":"user"}'
 			)
 		);	
 		\DB::table('modules')->insert(array(
 			'name'=>'Stores',
 			'description'=>'ModuleStores',
-			'label'=>'{"action","store"}'
+			'label'=>'{"action":"store"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Tables',
 			'description'=>'ModuleTables',
-			'label'=>'{"action","table"}'
+			'label'=>'{"action":"table"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Services',
 			'description'=>'ModuleServices',
-			'label'=>'{"action","service"}'
+			'label'=>'{"action":"service"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Waiters',
 			'description'=>'ModuleWaiters',
-			'label'=>'{"action","waiter"}'
+			'label'=>'{"action":"waiter"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Products',
 			'description'=>'ModuleProducts',
-			'label'=>'{"action","product"}'
+			'label'=>'{"action":"product"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Categories',
 			'description'=>'ModuleCategories',
-			'label'=>'{"action","category"}'
+			'label'=>'{"action":"category"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Expenses',
 			'description'=>'ModuleExtpenses',
-			'label'=>'{"action","expense"}'
+			'label'=>'{"action":"expense"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Invoices',
 			'description'=>'ModuleInvoices',
-			'label'=>'{"action","invoice"}'
+			'label'=>'{"action":"invoice"}'
 			)
 		);
 		
