@@ -13,31 +13,31 @@ class OptionsTableSeeder extends Seeder
     {
         \DB::table('options')->insert(array(
 			'name'=>'index',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
 			'module_id'=>1			
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'show',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
 			'module_id'=>1	
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'create',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-plus'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>1	
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-cogs'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>1	
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>"{'menu':'page','method':'delete','icon':'fas fa-times-circle'}",
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>1	
 			)
 		);
@@ -45,31 +45,31 @@ class OptionsTableSeeder extends Seeder
 		//Modulo Opciones
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
 			'module_id'=>2			
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'show',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
 			'module_id'=>2	
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'create',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-plus'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>2	
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-cogs'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>2	
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>"{'menu':'page','method':'delete','icon':'fas fa-times-circle'}",
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>2	
 			)
 		);
@@ -78,45 +78,45 @@ class OptionsTableSeeder extends Seeder
 		//Modulo Table opt 11
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
 			'module_id'=>6			
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'show',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
 			'module_id'=>6	
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'create',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-plus'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>6	
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-cogs'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>6
 			)
 		);			
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>"{'menu':'page','method':'delete','icon':'fas fa-times-circle'}",
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>6
 			)
 		);
 
 		\DB::table('options')->insert(array(
 			'name'=>'drag',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-arrows-alt'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-arrows-alt"}',
 			'module_id'=>6
 			)
 		);
 		
 		\DB::table('options')->insert(array(
 			'name'=>'service',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-clipboard'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-clipboard"}',
 			'module_id'=>6			
 			)
 		);	
@@ -124,37 +124,37 @@ class OptionsTableSeeder extends Seeder
 		//Modulo Waiters opt 18
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
 			'module_id'=>8		
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'show',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
 			'module_id'=>8	
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'create',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-plus'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>8	
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-cogs'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>8	
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>"{'menu':'page','method':'delete','icon':'fas fa-times-circle'}",
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>8	
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'changepassword',			
-			'label'=>"{'menu':'page','method':'post','icon':'fas fa-times-circle'}",
+			'label'=>'{"menu":"page","method":"post","icon":"fas fa-times-circle"}',
 			'module_id'=>8	
 			)
 		);
@@ -162,37 +162,37 @@ class OptionsTableSeeder extends Seeder
 		//Modulo Products opt 24
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
 			'module_id'=>9	
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'show',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
 			'module_id'=>9	
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'create',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-plus'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>9
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-cogs'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>9
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>"{'menu':'page','method':'delete','icon':'fas fa-times-circle'}",
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>9	
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'editstock',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-boxes'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-boxes"}',
 			'module_id'=>9	
 			)
 		);
@@ -200,31 +200,31 @@ class OptionsTableSeeder extends Seeder
 		//Modulo Category opt 30
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
 			'module_id'=>10
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'show',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
 			'module_id'=>10
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'create',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-plus'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>10
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-cogs'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>10
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>"{'menu':'page','method':'delete','icon':'fas fa-times-circle'}",
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>10
 			)
 		);		
@@ -232,31 +232,31 @@ class OptionsTableSeeder extends Seeder
 		//Modulo Gastos opt 35
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
 			'module_id'=>11
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'show',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
 			'module_id'=>11
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'create',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-plus'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>11
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-cogs'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>11
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>"{'menu':'page','method':'delete','icon':'fas fa-times-circle'}",
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>11
 			)
 		);
@@ -264,31 +264,31 @@ class OptionsTableSeeder extends Seeder
 		//Modulo Invoice opt 40
 		\DB::table('options')->insert(array(
 			'name'=>'index',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-list"}',
 			'module_id'=>12
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'show',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-list'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-list"}',
 			'module_id'=>12
 			)
 		);
 		\DB::table('options')->insert(array(
 			'name'=>'purchase',			
-			'label'=>"{'menu':'top','method':'get','icon':'fas fa-plus'}",
+			'label'=>'{"menu":"top","method":"get","icon":"fas fa-plus"}',
 			'module_id'=>12
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'edit',			
-			'label'=>"{'menu':'page','method':'get','icon':'fas fa-cogs'}",
+			'label'=>'{"menu":"page","method":"get","icon":"fas fa-cogs"}',
 			'module_id'=>12
 			)
 		);		
 		\DB::table('options')->insert(array(
 			'name'=>'destroy',			
-			'label'=>"{'menu':'page','method':'delete','icon':'fas fa-times-circle'}",
+			'label'=>'{"menu":"page","method":"delete","icon":"fas fa-times-circle"}',
 			'module_id'=>12
 			)
 		);
