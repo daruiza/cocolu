@@ -28,10 +28,13 @@ class UserController extends Controller{
     public function index(Request $request)
     {
         //Obtiene el usuario en curso
-        return response()->json($request->user());
-
+        $user = $request->user();
         $usr = User::findOrFail($request->user()->id);
-        $permits = $usr->userPermits($request->user()->id);
+        $permits = $usr->userPermitsApi($request->user()->id);
+        $user->permits = $permits;
+        return response()->json($user);
+
+        
     }
 
     /**
