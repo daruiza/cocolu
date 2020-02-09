@@ -44,7 +44,7 @@ class ModulesTableSeeder extends Seeder
 		\DB::table('modules')->insert(array(
 			'name'=>'Tables',
 			'description'=>'ModuleTables',
-			'label'=>'{"action":"table","maticon":"fiber_manual_record"}'
+			'label'=>'{"action":"table","maticon":"dashboard"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
@@ -56,31 +56,31 @@ class ModulesTableSeeder extends Seeder
 		\DB::table('modules')->insert(array(
 			'name'=>'Waiters',
 			'description'=>'ModuleWaiters',
-			'label'=>'{"action":"waiter","maticon":"fiber_manual_record"}'
+			'label'=>'{"action":"waiter","maticon":"perm_contact_calendar"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Products',
 			'description'=>'ModuleProducts',
-			'label'=>'{"action":"product","maticon":"fiber_manual_record"}'
+			'label'=>'{"action":"product","maticon":"bookmarks"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Categories',
 			'description'=>'ModuleCategories',
-			'label'=>'{"action":"category","maticon":"fiber_manual_record"}'
+			'label'=>'{"action":"category","maticon":"apps"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Expenses',
 			'description'=>'ModuleExtpenses',
-			'label'=>'{"action":"expense","maticon":"fiber_manual_record"}'
+			'label'=>'{"action":"expense","maticon":"trending_down"}'
 			)
 		);
 		\DB::table('modules')->insert(array(
 			'name'=>'Invoices',
 			'description'=>'ModuleInvoices',
-			'label'=>'{"action":"invoice","maticon":"fiber_manual_record"}'
+			'label'=>'{"action":"invoice","maticon":"assignment"}'
 			)
 		);
 		
