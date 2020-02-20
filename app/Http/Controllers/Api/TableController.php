@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\User;
 use App\Model\Core\Table;
+use App\Model\Core\Service;
 
 use App\Model\Admin\Acount;
 use Illuminate\Http\Request;
@@ -106,8 +107,9 @@ class TableController extends Controller{
     }
 
     // Evalua si una tabla tiene Servico
-    public function tableServiceOpen(Request $request){
-        return response()->json($request);
+    public function tableServiceOpen(Request $request, $id){
+        $table = Table::find($id);
+        return response()->json($table->tableServiceOpen());
     }
 
    

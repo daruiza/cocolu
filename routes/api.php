@@ -34,5 +34,5 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('user', 'Api\UserController@index');
     Route::get('pub', 'Api\WelcomeController@index');
-    Route::get('serviceOpen', 'Api\TableController@tableServiceOpen');
+    Route::get('table/{id}/serviceopen', 'Api\TableController@tableServiceOpen');
 });
