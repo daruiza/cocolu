@@ -1,6 +1,7 @@
 @if(Session::has('permits'))    
     @php($permit = Session::get('permits')[$model])        
-        @if($permit['active'])                                                  
+        @if($permit['active'])
+
             @foreach ($permit['options'] as $key_option => $option)                
                 @if($option['active'])
                     @if(json_decode($option['label'], true)['menu'] == 'page')
