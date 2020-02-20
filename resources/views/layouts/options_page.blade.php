@@ -4,16 +4,7 @@
 
             @foreach ($permit['options'] as $key_option => $option)                
                 @if($option['active'])
-                    @if(json_decode($option['label'], true)['menu'] == 'page')
-                        
-                        <!--
-                        <a class="dropdown-item" href="{{ route(json_decode($permit['label'], true)['action'].'.'.$option['name'],['id'=>'0']) }}"
-                           onclick="event.preventDefault();
-                                         document.getElementById('{{json_decode($permit['label'], true)['action'].'-'.$option['name'].'-form'}}').submit();">
-                            <i class="{{ json_decode($option['label'], true)['icon'] }}"></i>
-                            {{  $option['name'] }}
-                        </a>
-                        -->
+                    @if(json_decode($option['label'], true)['menu'] == 'page')                      
 
                         <a class="dropdown-item option-{{$option['name']}}" href="javascript: {{ json_decode($permit['label'], true)['action'].'_'.$option['name'] }}_submit('{{json_decode($permit['label'], true)['action'].'-'.$option['name']}}-form')">
                             <i class="{{ json_decode($option['label'], true)['icon'] }}"></i>
