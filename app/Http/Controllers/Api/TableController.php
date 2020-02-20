@@ -106,8 +106,8 @@ class TableController extends Controller{
     }
 
     // Evalua si una tabla tiene Servico
-    public function tableOrderStatusOneOpen(Request $request){
-
+    public function tableServiceOpen(Request $request){
+        return response()->json($request);
     }
 
    
