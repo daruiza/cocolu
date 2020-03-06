@@ -118,14 +118,14 @@ class TableController extends Controller{
 
     // Crea un nuevo servico
     public function tableServiceSave(Request $request){
-
-        return response()->json($request->input());
-    	$table = Table::find($request->input('params')['id_table']);        
+        
+        $request->request->add($request->input('params'));
+    	$table = Table::find($request->input('params')['table_id']);        
 
     	// Miramos que no tenga mas servicis
     	// por precausións
         $services = Service::
-            where('table_id',$request->input('params')['id_table'])  
+            where('table_id',$request->input('params')['table_id'])  
             ->where('open',1)            
             ->get();
 
@@ -136,6 +136,7 @@ class TableController extends Controller{
         $service = new Service();
         $today = new DateTime();
 		$today = $today->format('Y-m-d H:i:s');
+        $request->request->add(['date_open' => $today]);
 
 		
 		$cousure = Clousure::
@@ -145,12 +146,17 @@ class TableController extends Controller{
 
         if($cousure->count() <> 1){
         	return response()->json(['message' => 'NO_ONLYONE_CLOUSURE'], 404);
-        }    
-        
+        }
+        $request->request->add(['rel_clousure_id' => $cousure->first()->id]);         
 
+        $max_number = Service::
+            where('tables.store_id',$request->user()['rel_store_id'])
+            ->leftJoin('tables','tables.id','services.table_id')
+            ->get()->max('number');
 
-        return response()->json($cousure);	    
+         $request->request->add(['number' => $max_number + 1]);         
 
+        return response()->json($service::create($request->input()));
     }
 
    

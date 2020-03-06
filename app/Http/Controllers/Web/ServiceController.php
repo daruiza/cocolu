@@ -97,7 +97,7 @@ class ServiceController extends Controller
         }
         
         $number = 0;
-        if($allservices ->max('number')){
+        if($allservices->max('number')){
             $number = $allservices->max('number') + 1;
         }
                 
