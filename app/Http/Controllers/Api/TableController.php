@@ -119,6 +119,7 @@ class TableController extends Controller{
     // Crea un nuevo servico
     public function tableServiceSave(Request $request){
 
+        return response()->json($request->input());
     	$table = Table::find($request->input('params')['id_table']);        
 
     	// Miramos que no tenga mas servicis
