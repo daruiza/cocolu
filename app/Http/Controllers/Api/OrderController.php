@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
+use App\Model\Core\Product;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 
-class TableController extends Controller{
+class OrderController extends Controller{
 
     public function __construct()
     {
@@ -91,7 +94,12 @@ class TableController extends Controller{
     }
 
     public function products(Request $request){
-        return response()->json($request->user());
+        $products = Product::productstByStore($request->user()->rel_store_id);
+        $categories = array();
+        foreach ($products as $value) {
+            if(!in_array($value->category,$categories))$categories[]=$value->category;
+        }
+        return response()->json(['products'=>$products,'categories'=>$categories]);
     }
 
 }

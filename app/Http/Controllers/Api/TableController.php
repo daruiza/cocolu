@@ -120,6 +120,7 @@ class TableController extends Controller{
     public function tableServiceSave(Request $request){
         
         $request->request->add($request->input('params'));
+        
     	$table = Table::find($request->input('params')['table_id']);        
 
     	// Miramos que no tenga mas servicis

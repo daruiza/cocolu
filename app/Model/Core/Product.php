@@ -232,7 +232,20 @@ class Product extends Model
         return $products;
     }
 
-    static function productstByStore(){
+    static function productstByStore($store_id = null){
+        
+        if($store_id){
+            return Product::where('store_id',$store_id)
+            ->where('products.active',1)
+            ->select('products.*','categories.name as category','categories.order as order_category')
+            ->rightJoin('category_product','products.id','product_id')
+            ->leftJoin('categories','category_product.category_id','categories.id')            
+            ->where('categories.active',1)
+            ->where('categories.category_id',"<>",0)
+            ->orderBy('categories.order','ASC')
+            ->orderBy('products.order','ASC')
+            ->get();
+        }
         
         return Product::getProducts()
             ->select('products.*','categories.name as category','categories.order as order_category')
