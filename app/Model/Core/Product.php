@@ -153,7 +153,7 @@ class Product extends Model
         
     }
 
-    //llamado al objrto producto de un ingrediente
+    //llamado al objeto producto de un ingrediente
     public function ingredientsAsProduct(){
         //reutiliza el namespace
         //return $this->hasMany(Product::class,'ingredient_id','id');

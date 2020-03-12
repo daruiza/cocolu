@@ -46,7 +46,7 @@ class OrderController extends Controller{
      */
     public function store(Request $request)
     {
-        //
+        return response()->json($request->user());
     }
 
     /**
@@ -95,12 +95,15 @@ class OrderController extends Controller{
     }
 
     public function products(Request $request){
+        
         $waiters = Waiter::waitersByStoreSelect($request->user()->rel_store_id); 
         $products = Product::productstByStore($request->user()->rel_store_id);
         $categories = array();
+
         foreach ($products as $value) {
             if(!in_array($value->category,$categories))$categories[]=$value->category;
         }
+        
         return response()->json([
             'products'=>$products,
             'categories'=>$categories,

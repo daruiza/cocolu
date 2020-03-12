@@ -161,7 +161,7 @@ class OrderController extends Controller
                 }                
             }
         }
-
+        //dd($products);
         if(!count($products)){
             Session::flash('danger', [['NO_ORDER_SAVE']]);
             return redirect('table');    
