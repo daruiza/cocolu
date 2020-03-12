@@ -62,20 +62,41 @@ class Waiter extends Model
             ->get(); 
     }
 
-    static function waitersByStoreSelect(){
-        
+    static function waitersByStoreSelect($store_id = null){
+
         $waiters = array();
-        $elo_waiters =  Waiter::select('waiters.id','users.name','users.surname')
+        
+        if($store_id){
+
+            $elo_waiters =  Waiter::select('waiters.id','users.name','users.surname')
+            ->leftjoin('users','user_id','users.id')
+            ->where('users.rel_store_id',$store_id)
+            ->where('active',1)
+            ->orderBy('users.id','ASC')
+            ->get()
+            ->toArray();
+
+            foreach ($elo_waiters as $key => $value) {
+                $waiters[] = array(
+                    'id' => $value['id'], 
+                    'name' => $value['name'].' '.$value['surname']
+                );
+            }
+
+        }else{
+
+            $elo_waiters =  Waiter::select('waiters.id','users.name','users.surname')
             ->leftjoin('users','user_id','users.id')
             ->where('users.rel_store_id',Auth::user()->store()->id)
             ->where('active',1)
             ->orderBy('users.id','ASC')
             ->get()
             ->toArray();
-
-        foreach ($elo_waiters as $key => $value) {            
-            $waiters[$value['id']] = $value['name'].' '.$value['surname'];
-        }   
+            foreach ($elo_waiters as $key => $value) {            
+                $waiters[$value['id']] = $value['name'].' '.$value['surname'];
+            }  
+        }
+        
         return $waiters;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\User;
 use App\Model\Core\Product;
+use App\Model\Core\Waiter;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -94,12 +95,17 @@ class OrderController extends Controller{
     }
 
     public function products(Request $request){
+        $waiters = Waiter::waitersByStoreSelect($request->user()->rel_store_id); 
         $products = Product::productstByStore($request->user()->rel_store_id);
         $categories = array();
         foreach ($products as $value) {
             if(!in_array($value->category,$categories))$categories[]=$value->category;
         }
-        return response()->json(['products'=>$products,'categories'=>$categories]);
+        return response()->json([
+            'products'=>$products,
+            'categories'=>$categories,
+            'waiters' =>$waiters
+        ]);
     }
 
 }
