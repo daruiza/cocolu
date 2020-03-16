@@ -180,8 +180,8 @@ class OrderController extends Controller
         $request->request->add(['description' => json_encode($products)]);                
         $request->request->add(['service_id' => $service->id]);
         $request->request->add(['serial' => $order->nextSerial($service)]);
-        $obj_order=$order::create($request->input());
-                
+        
+        $obj_order = $order::create($request->input());
         
         //2. descontar de inventario, 2 procesos (movimiento y descuento)
         //hay que buscar la relación del producto y el ingrediente
@@ -233,6 +233,7 @@ class OrderController extends Controller
                 }
                 //$ingredients[]=$value['ingredients'];                
             }
+            
             if(array_key_exists('groups',$value)){
                 //el descuento del grupo esta dado en su agrupacion
                 foreach ($value['groups'] as  $sub_value) {
@@ -250,9 +251,8 @@ class OrderController extends Controller
 
                         $sub_value['volume']=$stock->volume;
                         //$ingredients['gru'][]=$sub_value;
-                        
 
-                        //desceunto by product
+                        //descuento by product
                         $sub_product = Product::find($sub_value['ingredient_id']);
                         $sub_product->editProductStockIngredient(array(                
                             'rel_id' =>  $sub_value['rel_id'],
