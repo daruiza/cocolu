@@ -160,5 +160,62 @@ class TableController extends Controller{
         return response()->json($service::create($request->input()));
     }
 
+    public function tableServiceClose(Request $request){
+        
+        
+        $table = Table::find($request->input('params')['table_id']);
+        $orders = Order::
+        ordersStatusOneService($table->store_id, $request->input('params')['service_id']);
+
+        if(!count($orders)){
+            $service = Service::
+            where('table_id',$table->id)  
+            ->where('open',1)            
+            ->get()->first();
+
+            $today = new DateTime();
+            $today = $today->format('Y-m-d H:i:s'); 
+
+            $service->description = '';
+            $service->open = 0;
+            $service->date_close = $today;   
+            $service->save();
+
+            return response()->json($service);
+
+        } else {            
+            // no podemos hacer el cierres
+            // a menos que sea obligado que si
+            if($request->input('params')['service_close'] === 'true'){
+                //1. pagamos todas las order_product
+                $orders_product_paid = Order::
+                orderProductStatusOneServicePaid($table->store_id, $request->input('params')['service_id']);
+
+                $order_paid = Order::
+                ordersStatusOneServicePaid($table->store_id, $request->input('params')['service_id']);
+
+                $service = Service::
+                where('table_id',$table->id)  
+                ->where('open',1)            
+                ->get()->first();
+
+                $today = new DateTime();
+                $today = $today->format('Y-m-d H:i:s'); 
+
+                $service->description = '';
+                $service->open = 0;
+                $service->date_close = $today;   
+                $service->save();
+
+                return response()->json($service);
+                
+            } else {
+                return response()->json(['message' => 'NO_SERVER_CLOSE'], 404);    
+            }
+            
+        }       
+        
+    }
+
    
 }

@@ -29,9 +29,29 @@ class OrderController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
+     // Orders by service para la consulta de una mesa dada su servicio
     public function index(Request $request)
     {
-       
+        //Obtiene las ordenes con sus order_product
+        $order_product = OrderProduct::select(
+                'orders.id',
+                'orders.status_id',
+                'orders.description',
+                'orders.date',
+                'order_product.id as order_poduct_id',
+                'order_product.status_paid',
+                'order_product.volume',
+                'order_product.price',
+                'products.name'
+                )
+            ->leftJoin('orders','order_product.order_id','orders.id')
+            ->leftJoin('products','order_product.product_id','products.id')
+            ->leftJoin('services','orders.service_id','services.id')            
+            ->where( function ($q){ $q->where('orders.status_id',1)->orWhere('orders.status_id',2); })
+            ->where('services.open',1)
+            ->where('services.table_id',$request->input('table')['id'])            
+            ->get();    
+       return response()->json($order_product);
     }
 
     /**
@@ -203,6 +223,7 @@ class OrderController extends Controller{
         //
     }
 
+    // Para consultar los productos para realizar una orden
     public function products(Request $request){
         
         $waiters = Waiter::waitersByStoreSelect($request->user()->rel_store_id); 

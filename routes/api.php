@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('pub', 'Api\WelcomeController@index');
     Route::get('table/{id}/serviceopen', 'Api\TableController@tableServiceOpen');
     Route::post('table/servicesave', 'Api\TableController@tableServiceSave');
+    Route::post('table/serviceclose', 'Api\TableController@tableServiceClose');
     Route::get('order/products', 'Api\OrderController@products');
     Route::post('order/store', 'Api\OrderController@store');
+    Route::post('order/index', 'Api\OrderController@index');
 });
