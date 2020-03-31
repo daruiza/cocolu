@@ -96,19 +96,146 @@ class SenderTest extends TestCase
 
     public function testSendPostStreamWillAutomaticallySendTransferEncodingChunked()
     {
+        $outgoing = $this->getMockBuilder('React\HttpClient\Request')->disableOriginalConstructor()->getMock();
+        $outgoing->expects($this->once())->method('write')->with("");
+
         $client = $this->getMockBuilder('React\HttpClient\Client')->disableOriginalConstructor()->getMock();
         $client->expects($this->once())->method('request')->with(
             'POST',
             'http://www.google.com/',
             array('Host' => 'www.google.com', 'Transfer-Encoding' => 'chunked'),
             '1.1'
-        )->willReturn($this->getMockBuilder('React\HttpClient\Request')->disableOriginalConstructor()->getMock());
+        )->willReturn($outgoing);
 
         $sender = new Sender($client, $this->getMockBuilder('Clue\React\Buzz\Message\MessageFactory')->getMock());
 
         $stream = new ThroughStream();
         $request = new Request('POST', 'http://www.google.com/', array(), new ReadableBodyStream($stream));
         $sender->send($request);
+    }
+
+    public function testSendPostStreamWillAutomaticallyPipeChunkEncodeBodyForWriteAndRespectRequestThrottling()
+    {
+        $outgoing = $this->getMockBuilder('React\HttpClient\Request')->disableOriginalConstructor()->getMock();
+        $outgoing->expects($this->once())->method('isWritable')->willReturn(true);
+        $outgoing->expects($this->exactly(2))->method('write')->withConsecutive(array(""), array("5\r\nhello\r\n"))->willReturn(false);
+
+        $client = $this->getMockBuilder('React\HttpClient\Client')->disableOriginalConstructor()->getMock();
+        $client->expects($this->once())->method('request')->willReturn($outgoing);
+
+        $sender = new Sender($client, $this->getMockBuilder('Clue\React\Buzz\Message\MessageFactory')->getMock());
+
+        $stream = new ThroughStream();
+        $request = new Request('POST', 'http://www.google.com/', array(), new ReadableBodyStream($stream));
+        $sender->send($request);
+
+        $ret = $stream->write('hello');
+        $this->assertFalse($ret);
+    }
+
+    public function testSendPostStreamWillAutomaticallyPipeChunkEncodeBodyForEnd()
+    {
+        $outgoing = $this->getMockBuilder('React\HttpClient\Request')->disableOriginalConstructor()->getMock();
+        $outgoing->expects($this->once())->method('isWritable')->willReturn(true);
+        $outgoing->expects($this->exactly(2))->method('write')->withConsecutive(array(""), array("0\r\n\r\n"))->willReturn(false);
+        $outgoing->expects($this->once())->method('end')->with(null);
+
+        $client = $this->getMockBuilder('React\HttpClient\Client')->disableOriginalConstructor()->getMock();
+        $client->expects($this->once())->method('request')->willReturn($outgoing);
+
+        $sender = new Sender($client, $this->getMockBuilder('Clue\React\Buzz\Message\MessageFactory')->getMock());
+
+        $stream = new ThroughStream();
+        $request = new Request('POST', 'http://www.google.com/', array(), new ReadableBodyStream($stream));
+        $sender->send($request);
+
+        $stream->end();
+    }
+
+    public function testSendPostStreamWillRejectWhenRequestBodyEmitsErrorEvent()
+    {
+        $outgoing = $this->getMockBuilder('React\HttpClient\Request')->disableOriginalConstructor()->getMock();
+        $outgoing->expects($this->once())->method('isWritable')->willReturn(true);
+        $outgoing->expects($this->once())->method('write')->with("")->willReturn(false);
+        $outgoing->expects($this->never())->method('end');
+        $outgoing->expects($this->once())->method('close');
+
+        $client = $this->getMockBuilder('React\HttpClient\Client')->disableOriginalConstructor()->getMock();
+        $client->expects($this->once())->method('request')->willReturn($outgoing);
+
+        $sender = new Sender($client, $this->getMockBuilder('Clue\React\Buzz\Message\MessageFactory')->getMock());
+
+        $expected = new \RuntimeException();
+        $stream = new ThroughStream();
+        $request = new Request('POST', 'http://www.google.com/', array(), new ReadableBodyStream($stream));
+        $promise = $sender->send($request);
+
+        $stream->emit('error', array($expected));
+
+        $exception = null;
+        $promise->then(null, function ($e) use (&$exception) {
+            $exception = $e;
+        });
+
+        $this->assertInstanceOf('RuntimeException', $exception);
+        $this->assertEquals('Request failed because request body reported an error', $exception->getMessage());
+        $this->assertSame($expected, $exception->getPrevious());
+    }
+
+    public function testSendPostStreamWillRejectWhenRequestBodyClosesWithoutEnd()
+    {
+        $outgoing = $this->getMockBuilder('React\HttpClient\Request')->disableOriginalConstructor()->getMock();
+        $outgoing->expects($this->once())->method('isWritable')->willReturn(true);
+        $outgoing->expects($this->once())->method('write')->with("")->willReturn(false);
+        $outgoing->expects($this->never())->method('end');
+        $outgoing->expects($this->once())->method('close');
+
+        $client = $this->getMockBuilder('React\HttpClient\Client')->disableOriginalConstructor()->getMock();
+        $client->expects($this->once())->method('request')->willReturn($outgoing);
+
+        $sender = new Sender($client, $this->getMockBuilder('Clue\React\Buzz\Message\MessageFactory')->getMock());
+
+        $stream = new ThroughStream();
+        $request = new Request('POST', 'http://www.google.com/', array(), new ReadableBodyStream($stream));
+        $promise = $sender->send($request);
+
+        $stream->close();
+
+        $exception = null;
+        $promise->then(null, function ($e) use (&$exception) {
+            $exception = $e;
+        });
+
+        $this->assertInstanceOf('RuntimeException', $exception);
+        $this->assertEquals('Request failed because request body closed unexpectedly', $exception->getMessage());
+    }
+
+    public function testSendPostStreamWillNotRejectWhenRequestBodyClosesAfterEnd()
+    {
+        $outgoing = $this->getMockBuilder('React\HttpClient\Request')->disableOriginalConstructor()->getMock();
+        $outgoing->expects($this->once())->method('isWritable')->willReturn(true);
+        $outgoing->expects($this->exactly(2))->method('write')->withConsecutive(array(""), array("0\r\n\r\n"))->willReturn(false);
+        $outgoing->expects($this->once())->method('end');
+        $outgoing->expects($this->never())->method('close');
+
+        $client = $this->getMockBuilder('React\HttpClient\Client')->disableOriginalConstructor()->getMock();
+        $client->expects($this->once())->method('request')->willReturn($outgoing);
+
+        $sender = new Sender($client, $this->getMockBuilder('Clue\React\Buzz\Message\MessageFactory')->getMock());
+
+        $stream = new ThroughStream();
+        $request = new Request('POST', 'http://www.google.com/', array(), new ReadableBodyStream($stream));
+        $promise = $sender->send($request);
+
+        $stream->end();
+        $stream->close();
+
+        $exception = null;
+        $promise->then(null, function ($e) use (&$exception) {
+            $exception = $e;
+        });
+
+        $this->assertNull($exception);
     }
 
     public function testSendPostStreamWithExplicitContentLengthWillSendHeaderAsIs()
