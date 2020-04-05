@@ -34,7 +34,7 @@ class TableController extends Controller{
      */
     public function index(Request $request)
     {
-        //Obtiene las mesas del salon
+        // Obtiene las mesas del salon
         $tables = Table::
             where('store_id',$request->user()->store()->id)
             ->where('active',1)

@@ -38,7 +38,6 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Clousure $clousure){
-        
         if(Auth::check()) {
 
             if(Auth::user()->rol()->first()->id == 1){
@@ -47,8 +46,7 @@ class HomeController extends Controller
             }
             
             if(empty($clousure->id))$clousure = Auth::user()->store()->clousureOpen();
-            
-            
+                        
             if(Auth::user()->rol()->first()->id == 2){
 
                 $page = 'admin_dashboard';

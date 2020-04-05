@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,7 @@ Route::middleware('auth:api')->get('/apis', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/test', function () {
+Route::get('/test', function () {    
     $json = '{"hello": "Test API"}';
     return response($json, 200)->header('Content-Type', 'application/json');
 });
@@ -40,4 +41,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('order/products', 'Api\OrderController@products');
     Route::post('order/store', 'Api\OrderController@store');
     Route::post('order/index', 'Api\OrderController@index');
+    Route::post('order/statusorder', 'Api\OrderController@statusOrder');
+    Route::post('order/cancelorder', 'Api\OrderController@cancelOrder');
+    Route::post('order/statuspayproduct', 'Api\OrderController@statusPayProduct');
+    Route::post('order/cancelproduct', 'Api\OrderController@cancelProduct');
 });

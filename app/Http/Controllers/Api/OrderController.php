@@ -38,7 +38,8 @@ class OrderController extends Controller{
                 'orders.status_id',
                 'orders.description',
                 'orders.date',
-                'order_product.id as order_poduct_id',
+                'order_product.id as order_product_id',
+                'order_product.product_id as order_poduct_id',
                 'order_product.status_paid',
                 'order_product.volume',
                 'order_product.price',
@@ -47,7 +48,12 @@ class OrderController extends Controller{
             ->leftJoin('orders','order_product.order_id','orders.id')
             ->leftJoin('products','order_product.product_id','products.id')
             ->leftJoin('services','orders.service_id','services.id')            
-            ->where( function ($q){ $q->where('orders.status_id',1)->orWhere('orders.status_id',2); })
+            ->where( function ($q){ 
+                $q->where('orders.status_id',1)
+                ->orWhere('orders.status_id',2)
+                ->orWhere('orders.status_id',3)
+                ->orWhere('orders.status_id',4); 
+            })
             ->where('services.open',1)
             ->where('services.table_id',$request->input('table')['id'])            
             ->get();    
@@ -231,7 +237,9 @@ class OrderController extends Controller{
         $categories = array();
 
         foreach ($products as $value) {
-            if(!in_array($value->category,$categories))$categories[]=$value->category;
+            if(!in_array($value->category,$categories)){
+                $categories[]=$value->category;
+            };
         }
         
         return response()->json([
@@ -239,6 +247,49 @@ class OrderController extends Controller{
             'categories'=>$categories,
             'waiters' =>$waiters
         ]);
+    }
+
+    public function statusOrder(Request $request){
+        $status_id = intval($request->input('idStatus'));
+        $statusPaid = $status_id === 3 ? 1 : 0;
+        $order = Order::find($request->input('idOrder'));  
+        $order_product = OrderProduct::
+        where('order_id', $order->id)
+        ->update(['status_paid' => $statusPaid ]);
+        $order->status_id = $status_id;
+        $order->save();
+        return response()->json($order_product);
+    }
+
+    public function cancelOrder(Request $request){
+        return response()->json($request->user());
+    }
+
+    public function statusPayProduct(Request $request){
+        $statusPaid = intval($request->input('statusPaid')) ? 0 : 1;
+        $order = Order::find($request->input('idOrder'));
+        $order_product = OrderProduct::
+        where('id', $request->input('idOrderProduct'))
+        ->where('order_id', $order->id)
+        ->update(['status_paid' => $statusPaid]);
+
+        // Verificamos si todos los product_orders
+        // estan pagos para pagar la orden
+        $order_products = OrderProduct::
+        where('order_id', $order->id)
+        ->where('status_paid', '0')
+        ->get();
+
+        if(!count($order_products)) {
+            $order->status_id = 3;
+            $order->save();
+        }
+
+        return response()->json($order_product);
+    }
+
+    public function cancelProduct(Request $request){
+        return response()->json($request->user());
     }
 
 }
