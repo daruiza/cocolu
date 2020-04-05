@@ -39,7 +39,7 @@ class OrderController extends Controller{
                 'orders.description',
                 'orders.date',
                 'order_product.id as order_product_id',
-                'order_product.product_id as order_poduct_id',
+                'order_product.product_id as product_id',
                 'order_product.status_paid',
                 'order_product.volume',
                 'order_product.price',
@@ -96,10 +96,14 @@ class OrderController extends Controller{
             return response()->json(['message' => 'NO_ORDER_SAVE'], 404);
         }
 
+        $order_product_res = array();
         $obj_res = array(
             'table' => $request->input('table'),
             'service' => $request->input('service'),
-            'order_form' => $request->input('order'),
+            'order_form' => array(
+                'user'=>$request->input('order')['user'],
+                'waiter'=>$request->input('order')['waiter']
+            ),
             'total' => 0
         );
 
@@ -176,11 +180,27 @@ class OrderController extends Controller{
                 'price' => $value_product['price']
             ));
 
-            // respuesta
+            // respuesta order_product
+            $order_product_res[] = array(
+                'id'=>$obj_order->id,
+                'poduct_id' => $value_product['id'],
+                'order_product_id'=>$order_product->id,
+                'date'=>$obj_order->date,
+                'description'=>$obj_order->description,
+                'name'=>$value_product['name'],
+                'price' => $value_product['price'],
+                'status_id' => 1,
+                'status_paid' => 0
+            );
             $obj_res['total'] = $obj_res['total'] + $value_product['price'];
         }  
-
-        $obj_res['order'] = $obj_order;
+        $obj_res['order'] = array(
+            'id' => $obj_order->id,
+            'description' => $obj_order->description,
+            'date' => $obj_order->date,
+            'status_id' => 1,
+            'orders' => $order_product_res,
+        );
         return response()->json($obj_res);
     }
 
