@@ -87,7 +87,7 @@ class Order extends Model
 
     static function ordersStatusOneServicePaid($store_id, $service_id){
         return Order::ordersStatusOneServiceGet($store_id, $service_id)
-        ->update(['status_id' => 2]);
+        ->update(['status_id' => 3]);
     }
 
     static function orderProductStatusOneServicePaid($store_id, $service_id){

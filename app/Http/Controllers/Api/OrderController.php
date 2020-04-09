@@ -57,6 +57,7 @@ class OrderController extends Controller
             })
             ->where('services.open', 1)
             ->where('services.table_id', $request->input('table')['id'])
+            ->orderBy('id', 'DESC')
             ->get();
         return response()->json($order_product);
     }
