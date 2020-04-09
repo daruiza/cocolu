@@ -45,4 +45,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('order/cancelorder', 'Api\OrderController@cancelOrder');
     Route::post('order/statuspayproduct', 'Api\OrderController@statusPayProduct');
     Route::post('order/cancelproduct', 'Api\OrderController@cancelProduct');
+    Route::post('order/cancelorders', 'Api\OrderController@cancelOrders');
+    Route::post('order/payorders', 'Api\OrderController@payOrders');
 });

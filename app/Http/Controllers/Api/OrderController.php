@@ -271,7 +271,6 @@ class OrderController extends Controller
 
     public function statusOrder(Request $request)
     {
-
         $status_id = intval($request->input('idStatus'));
         $statusPaid = $status_id === 3 ? 1 : 0;
         $order = Order::find($request->input('idOrder'));
@@ -319,7 +318,7 @@ class OrderController extends Controller
         $today = $today->format('Y-m-d H:i:s');
 
         // Restaurar Producto
-        $product->editProductStock(array('volume' =>  1),true);        
+        $product->editProductStock(array('volume' =>  1), true);
         // restaurar el stock
         $stock = new Stock();
         $stock->storeStockProduct(array(
@@ -335,10 +334,27 @@ class OrderController extends Controller
         $order_product = OrderProduct::find($request->input('idOrderProduct'))->delete();
 
         // Eliminar la orden si no le quedan productos
-        $order_products = OrderProduct::where('order_id',$request->input('idOrder'))->get();
+        $order_products = OrderProduct::where('order_id', $request->input('idOrder'))->get();
         if (!count($order_products)) {
             Order::find($request->input('idOrder'))->delete();
         }
         return response()->json($order_product);
+    }
+
+    public function cancelOrders(Request $request)
+    {
+        $oders = Order::where('service_id', $request->input('idService'))->delete();
+        return response()->json($oders);
+    }
+
+    public function payOrders(Request $request)
+    {
+        $oders = Order::where('service_id', $request->input('idService'))->get();
+        foreach ($oders as $order) {
+            OrderProduct::where('order_id', $order->id)->update(['status_paid' => 1]);
+            $order->status_id = 3;
+            $order->save();
+        }
+        return response()->json($oders);
     }
 }
