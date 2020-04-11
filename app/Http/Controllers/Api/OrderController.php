@@ -31,8 +31,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     // Orders by service para la consulta de una mesa dada su servicio
-    public function index(Request $request)
-    {
+    public function index(Request $request){
         //Obtiene las ordenes con sus order_product
         $order_product = OrderProduct::select(
             'orders.id',
@@ -221,8 +220,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
 
@@ -233,8 +231,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
 
@@ -244,8 +241,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         //
     }
 
