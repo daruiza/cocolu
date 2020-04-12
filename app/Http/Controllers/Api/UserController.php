@@ -33,8 +33,6 @@ class UserController extends Controller{
         $permits = $usr->userPermitsApi($request->user()->id);
         $user->permits = $permits;
         return response()->json($user);
-
-        
     }
 
     /**

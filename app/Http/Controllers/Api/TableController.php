@@ -146,7 +146,7 @@ class TableController extends Controller{
             ->get();
 
         if($cousure->count() <> 1){
-        	return response()->json(['message' => 'NO_ONLYONE_CLOUSURE'], 404);
+        	return response()->json(['message' => 'No hay una Labor en curso, debes habrir una nueva'], 404);
         }
         $request->request->add(['rel_clousure_id' => $cousure->first()->id]);         
 

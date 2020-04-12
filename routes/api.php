@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('table/{id}/serviceopen', 'Api\TableController@tableServiceOpen');
     Route::post('table/servicesave', 'Api\TableController@tableServiceSave');
     Route::post('table/serviceclose', 'Api\TableController@tableServiceClose');
-    Route::get('order/products', 'Api\OrderController@products');
+    Route::post('order/products', 'Api\OrderController@products');
     Route::post('order/store', 'Api\OrderController@store');
     Route::post('order/index', 'Api\OrderController@index');    
     Route::post('order/statusorder', 'Api\OrderController@statusOrder');
@@ -48,4 +48,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('order/cancelorders', 'Api\OrderController@cancelOrders');
     Route::post('order/payorders', 'Api\OrderController@payOrders');
     Route::post('closure/index', 'Api\ClosureController@index');
+    Route::post('closure/open', 'Api\ClosureController@open');
+    Route::post('closure/close', 'Api\ClosureController@close');
+    Route::post('closure/create', 'Api\ClosureController@create');
 });
