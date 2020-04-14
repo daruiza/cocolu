@@ -62,5 +62,29 @@ class TablesTableSeeder extends Seeder
 			'store_id'=>1,			
 			)
 		);						
+		\DB::table('tables')->insert(array(        	
+			'name'=>'DefaultTable6',
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',		
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
+			'store_id'=>1,			
+			)
+		);
+		\DB::table('tables')->insert(array(        	
+			'name'=>'DefaultTable7',
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',		
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
+			'store_id'=>1,			
+			)
+		);
+		\DB::table('tables')->insert(array(        	
+			'name'=>'DefaultTable8',
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',		
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
+			'store_id'=>1,			
+			)
+		);
     }
 }
