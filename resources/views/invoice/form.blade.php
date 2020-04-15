@@ -20,7 +20,7 @@
 		{!! Form::label('tax_invoice',__('form.Tax'),['class'=>'col-sm-12 col-form-label text-md-center']) !!}
 			<div class="col-md-12">
 				@if($errors->has('tax_invoice'))
-					{!! Form::text('tax_invoice',null, ['class'=>'form-control is-invalid']) !!}
+					{!! Form::number('tax_invoice',null, ['class'=>'form-control is-invalid','min'=>'0']) !!}
 					<span class="invalid-feedback">
 		                <strong>{{ $errors->first('tax_invoice') }}</strong>
 		            </span>

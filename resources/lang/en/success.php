@@ -16,4 +16,12 @@ return [
 	"STORE_Edit_OK" => "Done! The Product Edit OK",
 	"ProductCreateOk" => "All right! the product was created successfully",
 	"EnvoiceSaveOk" => "Done!, the invoice was processed correctly",
+	"messageaSendOK" => "Done!, Your message has been send OK",
+	"guest_successful" => "Done!, Your request has been send OK.",
+	"MessageSendOk" => "We will answer your request soon",
+	'messageBull' => 'Your Bull is: $:name',
+	"NewOrderTableOK" => "Excellet! your order was created correctly",
+	"EditOrderTableOK" => "Excellet! your order was edited correctly",
+	"PrintOK" => "Done!, the invoice was ptinted",
+	"SERVICE_CLOSE_OK" => "It's done, the service has been closed successfully",
 ];

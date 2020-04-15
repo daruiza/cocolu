@@ -173,7 +173,10 @@
         border: 2px solid red;
         background-color: #e47b7b;
     }
-
+    
+    .table-container{
+        text-align: center;
+    }
     .table-header{
         border: 1px solid gainsboro;
         padding-top: 2px;
@@ -193,14 +196,16 @@
         color: #212529
     }
 
-    form#form-expense{
-        display: flex;            
-        align-items: center;
-        justify-content: center;
-    }
-
     .form-search{
         margin: 4px;
+    }
+
+    @media (min-width: 768px) {
+        form#form-expense{
+            display: flex;            
+            align-items: center;
+            justify-content: center;
+        }
     }
 
 </style>

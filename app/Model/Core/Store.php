@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
-    protected $fillable = ['id','name','department','city','adress','description','logo','currency','label','active'];
+    protected $fillable = ['id','name','nit','department','city','adress','description','logo','currency','label','active'];
 
     //una tienda puede tener muchas mesas
     public function tables(){
@@ -55,9 +55,10 @@ class Store extends Model
         return $clousure;
     }
 
-    public function updateStore($data){
+    public function updateStore($data){        
         //guardamos los datos
         $this->name = $data['name'];
+        $this->nit = $data['nit'];
         $this->department = $data['department'];
         $this->city = $data['city'];
         $this->adress = $data['adress'];
@@ -79,11 +80,15 @@ class Store extends Model
         
         //label        
         $label = json_decode($this->label);        
+
         if(!empty($data["storeheight"])){
             $label->table->StoreHeight = $data["storeheight"];            
         } 
         if(!empty($data["tableheight"])){
             $label->table->TableHeight = $data["tableheight"];            
+        } 
+        if(!empty($data["colorbody"])){
+            $label->table->colorbody = $data["colorbody"];          
         } 
         if(!empty($data["selecttable"])){
             $label->table->selectTable = $data["selecttable"];          
@@ -110,14 +115,20 @@ class Store extends Model
         }
         if(!empty($data["ordercancel"])){
             $label->order->OrderCancel = $data["ordercancel"];             
+        }                
+        if(!empty($data["conn"])){
+            $label->print->conn = $data["conn"];             
         }
+        $label->print->os = $data["os"];  
+        $label->behavior->status_server = $data["status_server"];
         
         $this->label = json_encode($label);
-
+        //dd($this->label);
         $this->save();
         
         $this->storeheight = $data["storeheight"];
         $this->tableheight = $data["tableheight"];
+        $this->colorbody = $data["colorbody"];
         $this->selecttable = $data["selecttable"];
         $this->serviceopentable = $data["serviceopentable"];
         $this->colorrow = $data["colorrow"];
@@ -126,6 +137,9 @@ class Store extends Model
         $this->orderok = $data["orderok"];
         $this->orderpay = $data["orderpay"];
         $this->ordercancel = $data["ordercancel"];         
+        $this->os = $data["os"];         
+        $this->conn = $data["conn"]; 
+        $this->status_server = $data["status_server"];         
         
         return $this;
     }

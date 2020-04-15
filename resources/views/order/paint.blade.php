@@ -20,13 +20,13 @@
         {!! Form::hidden('order_waiter', $value->waiter()->first()->user()->first()->name) !!}
 
         {!! Form::hidden('order_status', $value->status_id) !!}        
-
+            <!--
             <div class="col-sm-12" style="text-align: center;">
                 <span>
                 {{$value->service()->first()->table()->first()->name}}
                 </span>                                           
             </div>
-
+            -->
             <div class="col-sm-7 status" style="text-align: center;">
                 <span>
                     {{__('messages.'.$value->status()->first()->name)}}

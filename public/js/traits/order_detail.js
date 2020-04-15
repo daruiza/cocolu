@@ -259,7 +259,8 @@ order_detail.prototype.orders_paint = function(container) {
 	  var div = document.createElement("div");
 	  div.setAttribute("class", "col-sm-8");
 	  var input = document.createElement("input");
-	  input.setAttribute("type", "number");	    
+	  input.setAttribute("type", "number");
+	  input.setAttribute("autofocus", "autofocus");	    
 	  input.setAttribute("class", "form-control");
 	  input.setAttribute("name", "new_volume_"+order_detail.products[index][0].id);
 	  input.setAttribute("value", order_detail.products[index][0].volume_sale);

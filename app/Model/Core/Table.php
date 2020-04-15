@@ -71,6 +71,35 @@ class Table extends Model
         return collect();
     }
 
+    // Retorna el servicio con las ordenes y su valor total
+    public function getOrderTotal(){
+        $sum = 0;
+        if($this->tableServiceOpen()->count()){
+            $orders = Order::select('orders.*','order_status.name as status'
+                ,\DB::raw('SUM(products.price*order_product.volume) as order_price'))
+                ->leftJoin('order_status','order_status.id','orders.status_id')
+                ->leftJoin('order_product','order_product.order_id','orders.id')
+                ->leftJoin('products','products.id','order_product.product_id')
+                ->where('service_id',$this->tableServiceOpen()->first()->id)
+                ->where(function($query){
+                    $query->where('status_id',1)//orden tomada
+                    ->orWhere('status_id',2)//orden lista para entregar
+                    ->orWhere('status_id',3)//orden paga
+                    //->orWhere('status_id',4)//orden cerrada
+                    ;})
+                    ->where('order_product.status_paid',false)
+                ->groupBy('orders.id')
+                ->orderBy('orders.status_id','ASC')
+                ->get();
+
+            foreach($orders as $key => $order){
+                $sum = $sum + $order->order_price;
+            }        
+        }
+        
+        return $sum;
+    }
+
     public function icons()
     {
         return [

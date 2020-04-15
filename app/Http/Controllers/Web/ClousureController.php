@@ -22,6 +22,11 @@ class ClousureController extends Controller
 
     use ClousureRequestTrait;
 
+    public function __construct()
+    {               
+        $this->middleware('auth');
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -85,16 +90,19 @@ class ClousureController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, $id)
-    {        
+    {   
+        
         $user = User::findOrFail($id);
         //validación de credenciales de usuario
         if(!$user->validateUser())return Redirect::back()->with('danger', [['sorryTruncateUser']]);
-
         //validar si tiene servicios con odenes sin pagar
         $orders = $user->store()->clousureOpen()->servicesBuilder()
-        ->leftJoin('orders','orders.service_id','services.id')
-        ->where('orders.status_id',1)
-        ->orWhere('orders.status_id',2)
+        ->rightJoin('orders','orders.service_id','services.id')
+        ->where(function ($query){
+            $query
+            ->where('orders.status_id',1)
+            ->orWhere('orders.status_id',2);
+        })
         ->get();
 
         if($orders->count()){            
@@ -127,13 +135,13 @@ class ClousureController extends Controller
         $today = $today->format('Y-m-d H:i:s');
 
         $clousure = $user->store()->clousureOpen();
-        Service::closeServices($clousure);
+        Service::closeServices($clousure);//cierra todos los servicios
         $clousure->description = $request->input('description');
         $clousure->date_close = $today;
         $clousure->open = 0;
         $clousure->save();
 
-        //cerramos todos los servicios que pudieron quedar abieertos
+        //cerramos todos los servicios que pudieron quedar abiertos
 
 
         $new_colusure = new Clousure();

@@ -30,12 +30,12 @@
 	{!! Form::label('price',__('messages.Price'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('price'))
-			{!! Form::number('price',null, ['class'=>'form-control is-invalid']) !!}
+			{!! Form::number('price',null, ['class'=>'form-control is-invalid','min'=>'0']) !!}
 			<span class="invalid-feedback">
                 <strong>{{ $errors->first('price') }}</strong>
             </span>
 		@else
-			{!! Form::number('price',null, ['class'=>'form-control']) !!}
+			{!! Form::number('price',null, ['class'=>'form-control','min'=>'0']) !!}
 		@endif	
 	</div>
 </div>
@@ -44,12 +44,12 @@
 	{!! Form::label('buy_price',__('messages.Buy_Price'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('buy_price'))
-			{!! Form::number('buy_price',null, ['class'=>'form-control is-invalid']) !!}
+			{!! Form::number('buy_price',null, ['class'=>'form-control is-invalid','min'=>'0']) !!}
 			<span class="invalid-feedback">
                 <strong>{{ $errors->first('buy_price') }}</strong>
             </span>
 		@else
-			{!! Form::number('buy_price',null, ['class'=>'form-control']) !!}
+			{!! Form::number('buy_price',null, ['class'=>'form-control','min'=>'0']) !!}
 		@endif	
 	</div>
 </div>
@@ -58,12 +58,12 @@
 	{!! Form::label('volume',__('messages.Volume'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('volume'))
-			{!! Form::number('volume',null, ['class'=>'form-control is-invalid']) !!}
+			{!! Form::number('volume',null, ['class'=>'form-control is-invalid','min'=>'0','step'=>'0.5']) !!}
 			<span class="invalid-feedback">
                 <strong>{{ $errors->first('volume') }}</strong>
             </span>
 		@else
-			{!! Form::number('volume',null, ['class'=>'form-control']) !!}
+			{!! Form::number('volume',null, ['class'=>'form-control','min'=>'0','step'=>'0.5']) !!}
 		@endif	
 	</div>
 </div>
@@ -72,12 +72,12 @@
 	{!! Form::label('critical_volume',__('messages.CriticalVolume'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('critical_volume'))
-			{!! Form::number('critical_volume',null, ['class'=>'form-control is-invalid']) !!}
+			{!! Form::number('critical_volume',null, ['class'=>'form-control is-invalid','min'=>'0','step'=>'0.5']) !!}
 			<span class="invalid-feedback">
                 <strong>{{ $errors->first('critical_volume') }}</strong>
             </span>
 		@else
-			{!! Form::number('critical_volume',null, ['class'=>'form-control']) !!}
+			{!! Form::number('critical_volume',null, ['class'=>'form-control','min'=>'0','step'=>'0.5']) !!}
 		@endif	
 	</div>
 </div>
@@ -86,12 +86,12 @@
 	{!! Form::label('order',__('messages.Order'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
 		@if($errors->has('order'))
-			{!! Form::number('order',null, ['class'=>'form-control is-invalid']) !!}
+			{!! Form::number('order',null, ['class'=>'form-control is-invalid','min'=>'0']) !!}
 			<span class="invalid-feedback">
                 <strong>{{ $errors->first('order') }}</strong>
             </span>
 		@else
-			{!! Form::number('order',$order_max, ['class'=>'form-control']) !!}
+			{!! Form::number('order',$order_max, ['class'=>'form-control','min'=>'0']) !!}
 		@endif	
 	</div>
 </div>

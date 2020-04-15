@@ -4,6 +4,7 @@ namespace App;
 
 use App\Model\Core\Store;
 use App\Model\Core\Clousure;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -57,29 +58,13 @@ class User extends Authenticatable
 
     public function rol_options_dashboard(){
         return json_decode(\Auth::user()->rol->label,true)['options_dashboard'];        
-    }
+    }    
 
     public function edit($id){
         //verificación de usuario.
         if( \Auth::user()->id == $id) return true;
         return false;        
-    }
-
-    public function validateUser(){        
-        //verificación de usuario.
-        if( \Auth::user()->id == $this->id) return true;
-        return false;        
-    }
-
-    public function validateUserStore($store_id){
-        $users = User::where('users.rel_store_id',$store_id)->get();           
-        if($users->count()){
-            foreach ($users as $key => $value) {
-                if($value->id == \Auth::user()->id)return true;
-            }            
-        } 
-        return false;
-    }
+    }    
 
     public function updateUser($data){
         //guardamos los datos
@@ -111,12 +96,25 @@ class User extends Authenticatable
     //crea el primer clouure para iniciar la labor
     public function clousureInit($user_id){
         //$user = User::where('id', $user_id);        
-        return Clousure::create([
+        Clousure::create([
             'name' => 'Clousure Init',
             'description' => 'Default Clousure Init',
             'open' => true,
             'store_id' => $this->rel_store_id,
         ]);
+
+        return $this;
+    }
+
+    //retrorna el id del administrador de la tienda
+    public function myAdmin(){
+        $users = User::where('users.rel_store_id',$this->rel_store_id)->get();           
+        if($users->count()){
+            foreach ($users as $key => $value) {
+                if($value->rol_id == 2)return $value->id;
+            }            
+        } 
+        return 0;
     }
 
     //crea el directorio del usuario, para el registro de tenderos
@@ -215,8 +213,39 @@ class User extends Authenticatable
         foreach($user->rol()->get()[0]->options()->get() as $key => $option) {
             if(!array_key_exists($option->module()->get()[0]->name, $permits))$permits[$option->module()->get()[0]->name]=$option->module()->get()[0]->toArray();
             $permits[$option->module()->get()[0]->name]['options'][$option->id]=$option->toArray();
-        }        
+        }
         Session::put('permits', $permits);
+    }
+
+    public function userPermitsApi($user_id){
+        $user = User::find($user_id);
+        $permits = array();                
+        foreach($user->rol()->get()[0]->options()->get() as $key => $option) {
+            if(!array_key_exists($option->module()->get()[0]->name, $permits))
+            {
+                $permits[$option->module()->get()[0]->name] = $option->module()->get()[0]->toArray();
+                $permits[$option->module()->get()[0]->name]['label'] = json_decode($option->module()->get()[0]->label);
+            }
+            $permits[$option->module()->get()[0]->name]['options'][$option->id] = $option->toArray();
+            $permits[$option->module()->get()[0]->name]['options'][$option->id]['label'] = json_decode($option->label);
+        }
+        return $permits;      
+    }
+
+    public function validateUser(){        
+        //verificación de usuario.
+        if( \Auth::user()->id == $this->id) return true;
+        return false;        
+    }
+
+    public function validateUserStore($store_id){
+        $users = User::where('users.rel_store_id',$store_id)->get();           
+        if($users->count()){
+            foreach ($users as $key => $value) {
+                if($value->id == \Auth::user()->id)return true;
+            }            
+        } 
+        return false;
     }
 
 }

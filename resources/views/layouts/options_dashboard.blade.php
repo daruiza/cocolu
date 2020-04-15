@@ -19,3 +19,11 @@
     @csrf                               
     <input type="hidden" name="id" value="{{ \Auth::user()->id }}">
 </form>
+
+<form id="sendMessage" action="{{ route('message.create') }}" method="GET"></form>
+
+<form id="clousureToExcel" action="{{ route('clousure.toexcel', \Auth::user()->id ) }}" method="GET">
+    @if(isset($clousure))
+    <input type="hidden" name="id" value="{{ $clousure->id }}">    
+    @endif
+</form>

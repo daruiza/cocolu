@@ -38,7 +38,6 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Clousure $clousure){
-        
         if(Auth::check()) {
 
             if(Auth::user()->rol()->first()->id == 1){
@@ -47,8 +46,7 @@ class HomeController extends Controller
             }
             
             if(empty($clousure->id))$clousure = Auth::user()->store()->clousureOpen();
-            
-            
+                        
             if(Auth::user()->rol()->first()->id == 2){
 
                 $page = 'admin_dashboard';
@@ -77,13 +75,15 @@ class HomeController extends Controller
                 //gastos
                 $totalexpense = Expense::totalexpenseClousure($clousure);
                 
-                return view('welcome',compact('page','store','orders','orderpaid','orderstopay','services','ordercount','orderclosecount','products','ingredients','totalexpense'))
+                return view('welcome',compact('page','store','orders','orderpaid','orderstopay','services','ordercount','orderclosecount','products','ingredients','totalexpense','clousure'))
                 ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);    
             }
 
             if(Auth::user()->rol()->first()->id == 3){  
                 $page = 'waiter_dashboard';              
-                return view('welcome',compact('page'));      
+                return 
+                view('welcome',compact('page'))
+                ->with('data',['options'=>Auth::user()->rol_options_dashboard()]);
             }            
         }
 

@@ -15,6 +15,7 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->increments('id');
+            $table->bigInteger('number')->nullable();
             $table->string('name',128)->nullable()->default(null);
             $table->string('description',512)->nullable()->default(null);
             $table->dateTime('date_open')->default(\DB::raw('CURRENT_TIMESTAMP'));

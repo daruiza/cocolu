@@ -10,7 +10,12 @@
 
     <title>
         @guest
-            {{ config('app.name', 'Cocolú') }}
+            @isset($store)
+                {{ $store->name }}
+            @else
+                {{ config('app.name', 'Cocolú') }}
+            @endisset
+            
         @else
             @if(Auth::user()->rol()->first()->id != 1)
                 {{Auth::user()->store()->name}}
@@ -19,30 +24,32 @@
             @endif
         @endguest       
     </title>
-
-    <!-- Scripts -->
-    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
-
-    <!-- Fonts -->
-
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    
-    <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--> 
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">   
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">    
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    @auth    
+    <style type="text/css">
+        body{
+            background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['colorbody'] }};
+        }
+    </style>
+    @endauth
+
     @yield('template')
     @yield('style')
 </head>
 <body>
     <div id="app">
+        @include('layouts.events')            
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                     @guest
-                        {{ config('app.name', 'Cocolú') }}
+                    @guest
+                        @isset($store)
+                            {{ $store->name }}
+                        @else
+                            {{ config('app.name', 'Cocolú') }}
+                        @endisset
                     @else
                         @if(Auth::user()->rol()->first()->id != 1)
                             {{Auth::user()->store()->name}}
@@ -65,7 +72,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <div class="dropdown">
+                            <div class="dropdown lang-flat">
                                 <button class="btn dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-flag"></i>
                                 </button>
@@ -84,10 +91,10 @@
                                     
                                     @if($permit['active'])
                                         <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            <a id="navbarDropdown{{$key_permit}}" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                                 {{ __('options.'.$key_permit) }} <span class="caret"></span>
                                             </a>
-                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">                                       
+                                            <div class="dropdown-menu" aria-labelledby="navbarDropdown{{$key_permit}}">                                       
                                             @foreach ($permit['options'] as $key_option => $option)
                                                 
                                                 @if($option['active'])
@@ -110,13 +117,22 @@
                                     @endif
                                 @endforeach
                             @endif
-
+                            <li class="nav-item dropdown alert-option">
+                                <a id="navbarDropdownAlert" class="nav-link  dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge"></span>                                    
+                                </a>
+                                <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownAlert">
+                                </div>
+                            </li>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                <a id="navbarDropdownUser" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <i class="fas fa-user"></i>
+                                    {{ Auth::user()->name }} 
+                                    <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownUser">
 
                                     <a class="dropdown-item" href="{{ route('user.index') }}" onclick="event.preventDefault();
                                                      document.getElementById('profile-form').submit();">
@@ -135,10 +151,9 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-
-
                                 </div>
                             </li>
+
                         @endguest
                     </ul>
                 </div>
@@ -154,9 +169,8 @@
             {!! Form::hidden('lang','es') !!}            
         {!! Form::close() !!}
 
-        <main class="py-4">
+        <main class="py-4">            
             @yield('content')
-            
             @auth               
                 <footer>
                     <p>
@@ -171,22 +185,20 @@
                         @endguest
                     </p>                    
                 </footer> 
-                
             @endauth
         </main>
 
         @yield('modal')
         @include('layouts.modal_alert')        
 
-        <!--Bootatrap JS, Popper.js, and jQuery-->        
-        <script type="application/javascript" src="{{ url('js/jquery.min.js') }}"></script>        
-        <script type="application/javascript" src="{{ url('js/jquery-ui.min.js') }}"></script>
-        <script type="application/javascript" src="{{ asset('js/popper.min.js') }}"></script> 
-        <script type="application/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>        
-        <script type="application/javascript" src="{{ asset('js/ajaxobject.js') }}"></script> 
-        <script type="application/javascript" src="{{ asset('js/entity/store.js') }}"></script>   
-         
-        @yield('script')        
     </div>
+    
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('js/ajaxobject.js') }}"></script> 
+    <script type="application/javascript" src="{{ asset('js/entity/store.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/traits/alert_events.js') }}"></script>            
+
+    @yield('script')
+            
 </body>
 </html>

@@ -153,7 +153,7 @@ class Product extends Model
         
     }
 
-    //llamado al objrto producto de un ingrediente
+    //llamado al objeto producto de un ingrediente
     public function ingredientsAsProduct(){
         //reutiliza el namespace
         //return $this->hasMany(Product::class,'ingredient_id','id');
@@ -232,7 +232,20 @@ class Product extends Model
         return $products;
     }
 
-    static function productstByStore(){
+    static function productstByStore($store_id = null){
+        
+        if($store_id){
+            return Product::where('store_id',$store_id)
+            ->where('products.active',1)
+            ->select('products.*','categories.name as category','categories.order as order_category')
+            ->rightJoin('category_product','products.id','product_id')
+            ->leftJoin('categories','category_product.category_id','categories.id')            
+            ->where('categories.active',1)
+            ->where('categories.category_id',"<>",0)
+            ->orderBy('categories.order','ASC')
+            ->orderBy('products.order','ASC')
+            ->get();
+        }
         
         return Product::getProducts()
             ->select('products.*','categories.name as category','categories.order as order_category')
@@ -400,6 +413,19 @@ class Product extends Model
                 dimensions:max_width=700,max_width=700|
                 dimensions:min_width=64,min_width=64',            
         ]);
+    }
+
+    //lo usamos para llamar al index store los productos de las store
+    static function productByStore($id,$random){
+
+        return Product::select('products.*')
+        ->where('store_id',$id)
+        ->leftJoin('category_product','category_product.product_id','products.id')
+        ->leftJoin('categories','categories.id','category_product.category_id')
+        ->where('categories.category_id','<>',0)
+        ->where('products.active',1)
+        ->get()
+        ->random($random);
     }
     
 }

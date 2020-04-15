@@ -61,4 +61,7 @@ return [
     "createExpense" => "Crear Gasto",
     "ProductEditStock"=>"Descripción Edición",
     "EditStockProduct"=>"Editar inventario",
+    "EditDetail"=>"Edit Detalle",
+    "Edit"=>"Editar",
+    "Delete"=>"Eliminar",
 ];

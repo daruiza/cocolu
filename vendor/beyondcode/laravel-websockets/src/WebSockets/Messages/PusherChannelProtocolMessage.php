@@ -2,10 +2,10 @@
 
 namespace BeyondCode\LaravelWebSockets\WebSockets\Messages;
 
-use stdClass;
+use BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager;
 use Illuminate\Support\Str;
 use Ratchet\ConnectionInterface;
-use BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager;
+use stdClass;
 
 class PusherChannelProtocolMessage implements PusherMessage
 {
@@ -31,7 +31,7 @@ class PusherChannelProtocolMessage implements PusherMessage
     {
         $eventName = Str::camel(Str::after($this->payload->event, ':'));
 
-        if (method_exists($this, $eventName)) {
+        if (method_exists($this, $eventName) && $eventName !== 'respond') {
             call_user_func([$this, $eventName], $this->connection, $this->payload->data ?? new stdClass());
         }
     }

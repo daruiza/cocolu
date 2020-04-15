@@ -21,6 +21,8 @@ use App\Http\Traits\Web\OrderRequestTrait;
 
 use DateTime;
 
+use App\Http\Controller\Web\PrinterPosController;
+
 class OrderController extends Controller
 {
 
@@ -46,7 +48,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
-    {
+    {        
         $table = Table::find($request->input('table-id'));
         //$service = $table->tableServiceOpen();
 
@@ -82,7 +84,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         //validamos        
         $table = Table::find($request->input('table-id'));
         $service = $table->tableServiceOpen()->first();
@@ -159,7 +161,7 @@ class OrderController extends Controller
                 }                
             }
         }
-
+        //dd($products);
         if(!count($products)){
             Session::flash('danger', [['NO_ORDER_SAVE']]);
             return redirect('table');    
@@ -167,6 +169,10 @@ class OrderController extends Controller
         
         //1. crear la orden de pedido
         $order = new Order();
+        //comportamiento - sin servir
+        if(json_decode(Auth::user()->store()->label,true)['behavior']['status_server']){
+            $request->request->add(['status_id' => 2]);
+        }
         //fecha y hora
         $today = new DateTime();
         $today = $today->format('Y-m-d H:i:s');     
@@ -174,8 +180,8 @@ class OrderController extends Controller
         $request->request->add(['description' => json_encode($products)]);                
         $request->request->add(['service_id' => $service->id]);
         $request->request->add(['serial' => $order->nextSerial($service)]);
-        $obj_order=$order::create($request->input());
-                
+        
+        $obj_order = $order::create($request->input());
         
         //2. descontar de inventario, 2 procesos (movimiento y descuento)
         //hay que buscar la relación del producto y el ingrediente
@@ -227,6 +233,7 @@ class OrderController extends Controller
                 }
                 //$ingredients[]=$value['ingredients'];                
             }
+            
             if(array_key_exists('groups',$value)){
                 //el descuento del grupo esta dado en su agrupacion
                 foreach ($value['groups'] as  $sub_value) {
@@ -244,9 +251,8 @@ class OrderController extends Controller
 
                         $sub_value['volume']=$stock->volume;
                         //$ingredients['gru'][]=$sub_value;
-                        
 
-                        //desceunto by product
+                        //descuento by product
                         $sub_product = Product::find($sub_value['ingredient_id']);
                         $sub_product->editProductStockIngredient(array(                
                             'rel_id' =>  $sub_value['rel_id'],
@@ -267,10 +273,10 @@ class OrderController extends Controller
             
             $ingredients = array();//para almacenar los ingredientes
             if(array_key_exists('ingredients', $value)){
-                $ingredients = [
-                    'ingredients'=>$value['ingredients'],
-                    'groups'=>$value['groups']
-                ];
+                $ingredients = ['ingredients'=>$value['ingredients']];                
+                if(array_key_exists('groups',$value)){
+                    $ingredients['groups']=$value['groups'];
+                }
             }
             
             //2.1 relacion con order products    
@@ -283,9 +289,11 @@ class OrderController extends Controller
                 'price' => $value['price']
             ));        
         }
-                
-        //notificar
-        //broadcast(new NewOrder(auth()->user(),$obj_order))->toOthers();
+
+        //notificar solo por los meseros
+        if(Auth::user()->rol_id == 3){
+            broadcast(new NewOrder(auth()->user(),$obj_order))->toOthers();
+        }        
 
         //retornar        
         Session::flash('success', [['NewOrderTableOK']]);
@@ -322,7 +330,7 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {           
+    {        
         //validamos            
         $table = Table::find($request->input('table_id'));        
         $service = $table->tableServiceOpen()->first();
@@ -333,7 +341,7 @@ class OrderController extends Controller
         }
 
         //Se pretende recuperar la orden
-        if($request->input('next_status') == 5){
+        if($request->input('next_status') == 5){            
             $order = Order::find($request->input('order_id'));
             $description = json_decode($order->description,true);
             $today = new DateTime();
@@ -353,8 +361,7 @@ class OrderController extends Controller
         }
 
         //validamos que todos los detalles esten servidos
-        $array = array();       
-        
+        $array = array();        
         if($request->input('next_status') == 2){
             foreach($request->input() as $key=>$value){
                 if(strpos($key,'status_serve') !== false){
@@ -373,13 +380,13 @@ class OrderController extends Controller
             }
         }
 
-        if($request->input('next_status') == 3){
+        if($request->input('next_status') == 3){            
             foreach($request->input() as $key=>$value){
                 if(strpos($key,'status_paid') !== false){
                     $vector=explode('-',$key);
                     $n=count($vector);
-                    $id_item = $vector[$n-3];
-                    $array[$id_item][$vector[$n-3]] = ucfirst($value);
+                    $id_item = $vector[$n-2];
+                    $array[$id_item][$vector[$n-2]] = ucfirst($value);
                     $array[$id_item]['id'] = end($vector);                    
                 }
             }            
@@ -408,10 +415,19 @@ class OrderController extends Controller
                         $n=count($vector);
                         $id_item = $vector[$n-2];
                         $array[$id_item][$vector[$n-3]]['order_id'] = $id_item;
-                        $array[$id_item][$vector[$n-3]]['order_product_id'] = end($vector);                    
+                        $array[$id_item][$vector[$n-3]]['order_product_id'] = end($vector);
                     }
                 }
+                
                 foreach ($array as $key => $value) {
+
+                    //actualizamos los productos
+                    foreach ($value as $llave => $valor) {
+                        $order_product = OrderProduct::find($valor['order_product_id']);            
+                        $order_product->status_paid = 1;
+                        $order_product->save();
+                    }
+
                     //$key es el id de order
                     $order = Order::find($key);                    
                     if(count($value) == $order->products()->count()){
@@ -419,10 +435,16 @@ class OrderController extends Controller
                         $order->status_id = $request->input('next_status');
                         $order->save();
                     }
+
+
                     
                     
                 }
+            }
 
+            //se pretende imprimir
+            if($request->input('next_status') == 6){
+                return (new PrintPosController)->printPos($request);
             }
             
         }

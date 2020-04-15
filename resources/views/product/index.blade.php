@@ -194,7 +194,9 @@
 
 @section('style')	
 	<link href="{{ asset('css/custom/col_md_custom.css') }}" rel="stylesheet"> 
+    <!--
     <link href="{{ asset('css/jquery-ui.min.autocomplete.css') }}" rel="stylesheet"> 
+    -->
 	<style type="text/css">
 
         .table-container{
@@ -226,18 +228,16 @@
             background-color: #e47b7b;
         }
 
-        form#form-product{
-            display: flex;            
-            align-items: center;
-            justify-content: center;
-        }
-
         .form-search{
             margin: 4px;
         }
 
         .page-header{
             margin: 10px;   
+        }
+
+        .table-container{
+            text-align: center;
         }
 
         .table-header{
@@ -259,7 +259,21 @@
             color: #212529
         }
 
-        
+        @media (min-width: 768px) {
+            form#form-product{
+                display: flex;            
+                align-items: center;
+                justify-content: center;
+            }
+
+            .card-body {                
+                padding: 0.25rem;
+            }
+            
+            .object-product{
+                font-size: 14px;
+            }
+        }
 
 	</style>	
 @endsection

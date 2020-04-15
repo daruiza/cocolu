@@ -60,7 +60,7 @@
                                 @if($product->category == $category)
                                   
                                   <div class="col-md-3 ">
-                                    <div class="product-conteiner option_add_product" id ="{{$product->id}}_{{$product->store_id}}_{{$product->name}}"  style = "background-image: url({{url('users/'.\Auth::user()->id.'/products/'.$product->image1)}});">
+                                    <div class="product-conteiner option_add_product" id ="{{$product->id}}_{{$product->store_id}}_{{$product->name}}"  style = "background-image: url({{url('users/'.\Auth::user()->myAdmin().'/products/'.$product->image1)}});">
                                       <div class="product-name noselect">{{$product->name}}</div>
                                       <div class="noselect">{{\Auth::user()->store()->currency}} {{$product->price}}</div>
                                       <div class="product-volume noselect">{{ __('messages.Volume') }}:{{$product->volume}}</div>
@@ -84,14 +84,16 @@
 
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" form="form-table-order">{{ __('form.Send') }}</button>
+        <button id="btn-submit-form-order" type="submit" class="btn btn-primary" form="form-table-order" autofocus>{{ __('form.Send') }}</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('form.Cancel') }}</button>
       </div>
     </div>
   </div>
 </div>
 
-<div id="modal_order_conponents" class="modal" tabindex="-1" role="dialog">
+<div 
+  id="modal_order_conponents" class="modal" tabindex="-1" role="dialog" 
+  onwheel="table.mouseWheel(event,'form_modal_order_conponents',1)">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       
@@ -107,20 +109,24 @@
       </div>
 
       <div class="modal-body">
+
+        <form id="form_modal_order_conponents">          
         <div class="container">          
           <div class="row">
             <div class="col-sm-12"> 
-              <div class="card">
-                  <div class="card-body">
-                  </div>
+              <div class="card">                  
+                    <div class="card-body">
+                    </div>                  
               </div>
             </div>
           </div>
         </div>
+        </form>
+
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-send" form="" data-dismiss="modal" >{{ __('form.Send') }}</button>
+        <button type="submit" class="btn btn-primary btn-send" form="form_modal_order_conponents" data-dismiss="modal" >{{ __('form.Send') }}</button>
         <button type="button" class="btn btn-secondary btn-close"  data-dismiss="modal">{{ __('form.Cancel') }}</button>
       </div>
     </div>
@@ -128,7 +134,9 @@
   </div>
 </div>
 
-<div id="modal_detail" class="modal" tabindex="-1" role="dialog">
+<div 
+  id="modal_detail" class="modal" tabindex="-1" role="dialog" 
+  onwheel="table.mouseWheel(event,'form_modal_order_details',2)">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -144,6 +152,8 @@
       </div>
 
       <div class="modal-body">
+
+        <form id="form_modal_order_details">
         <div class="container">          
           <div class="row">
             <div class="col-sm-12"> 
@@ -155,10 +165,12 @@
             </div>
           </div>
         </div>
+        </form>
+
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary btn-edit" form="" data-dismiss="modal" >{{ __('form.Edit') }}</button>
+        <button type="submit" class="btn btn-primary btn-edit" form="form_modal_order_details" data-dismiss="modal" >{{ __('form.Edit') }}</button>
         <button type="button" class="btn btn-secondary btn-delete" data-dismiss="modal">{{ __('form.Delete') }}</button>
       </div>
 

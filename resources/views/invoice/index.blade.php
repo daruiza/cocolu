@@ -201,13 +201,7 @@
 
     .selected-object{
         background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['selectTable'] }} !important;
-    }
-
-    form#form-invoice{
-        display: flex;            
-        align-items: center;
-        justify-content: center;
-    }
+    }    
 
     .form-search{
         margin: 4px;
@@ -234,6 +228,14 @@
     }
     .selected-object{
         color: #212529
+    }
+
+    @media (min-width: 768px) {
+        form#form-invoice{
+            display: flex;            
+            align-items: center;
+            justify-content: center;
+        }
     }
 
 </style>

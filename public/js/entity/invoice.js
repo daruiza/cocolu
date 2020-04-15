@@ -47,6 +47,7 @@ invoice.prototype.addProduct = function() {
 
     var input = document.createElement("input");
     input.setAttribute("class", "form-control price_input");
+    input.setAttribute("min", "0");    
     input.setAttribute("type", "number");
     input.setAttribute("name", "item_price_"+n);
     input.setAttribute("placeholder", $( "input[name='input_placeholder_price']" ).val());  

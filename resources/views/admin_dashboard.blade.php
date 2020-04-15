@@ -8,7 +8,7 @@
                     <div class="row">                                
                         <div class="col-md-12 ">
                             @if (!empty($data['options']))
-                                @include('layouts.options_dashboard')                            
+                                @include('layouts.options_dashboard') 
                             @endif                      
                         </div>
                     </div>                                                  
@@ -19,30 +19,43 @@
     </div>   
     <div class="col-md-9">
         @include('layouts.alert')
-        <div class="card">
+        <div class="card card-body-table">
             <div class="card-header">{{ __('messages.DashboardImform') }}</div>
             <div class="card-body">
                 <div class="container">
-                    <div class="row row-info">
-                        <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.ordersPaid')}}:</span> 
-                            ${{number_format($orderpaid)}}
+                    <div class="row ">
+                        <div class="col-md-11 col-md-offset-0">
+                            <div class="row row-info">
+                            <div class="col-md-3 col-md-offset-0">
+                                <span>{{ __('messages.ordersPaid')}}:</span> 
+                                ${{number_format($orderpaid)}}
+                            </div>                            
+                            <div class="col-md-3 col-md-offset-0">
+                                <span>{{ __('messages.ordersToPay')}}:</span> ${{number_format($orderstopay)}}
+                            </div>
+                            <div class="col-md-3 col-md-offset-0">
+                                <span>{{ __('messages.Services')}}:</span> 
+                                {{number_format($services)}}
+                            </div>
+                            <div class="col-md-3 col-md-offset-0">
+                                <span>{{ __('messages.Orders')}}:</span> 
+                                {{number_format($ordercount)}} [{{number_format($orderclosecount)}}]
+                            </div>
+                            <div class="col-md-3 col-md-offset-0">
+                                <span>{{ __('messages.TotalExpenses')}}:</span> 
+                                ${{number_format($totalexpense)}}
+                            </div>                            
+                            </div>
                         </div>
-                        <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.ordersToPay')}}:</span> ${{number_format($orderstopay)}}
+                        <div class="col-md-1 col-md-offset-0 row-download-conteiner">
+                            <i onclick="
+                                event.preventDefault();
+                                document.getElementById('clousureToExcel').submit()"
+                                class="fas fa-file-download"
+                                data-toggle="tooltip"
+                                title="{{__('messages.DownloadClousure')}}"></i>
                         </div>
-                        <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.Services')}}:</span> 
-                            {{number_format($services)}}
-                        </div>
-                        <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.Orders')}}:</span> 
-                            {{number_format($ordercount)}} [{{number_format($orderclosecount)}}]
-                        </div>
-                        <div class="col-md-3 col-md-offset-0">
-                            <span>{{ __('messages.TotalExpenses')}}:</span> 
-                            ${{number_format($totalexpense)}}
-                        </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-md-offset-0">
@@ -60,11 +73,6 @@
         </div>
     </div> 
 </div>
-
-<neworder-component 
-    :user="{{ auth()->user() }}">        
-</neworder-component>
-
 
 @if(Session::has('data.clousures'))
     @include('clousure.showModal')
@@ -102,7 +110,7 @@
           $($(this).children()[0]).submit();
         });
     @endif
-    
+    $('[data-toggle="tooltip"]').tooltip();   
 </script>
 @endsection
 
@@ -110,7 +118,7 @@
 <style type="text/css">
     
     .navbar-laravel{           
-        background: none;
+        /*background: none;*/
         position: relative;
         width: auto;        
     }
@@ -185,11 +193,32 @@
 
     @endif    
 
+    .row-download-conteiner{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    .row-download-conteiner i{
+        font-size: 30px;
+        color: rgba(0,0,0,.5);
+    }
+
+    .row-download-conteiner i:hover{
+        cursor: pointer;
+        color: rgba(0,0,0,.7);
+    }    
+
+    .tooltip-inner {     
+        background-color: rgba(0,0,0,.7);       
+    }
+    
+
     @media (max-width: 768px) {
         .col-lateral-table div:nth-of-type(1){
             padding-right: 0px;
             padding-left: 0px;
-        }
+        }        
     }
     
 </style>

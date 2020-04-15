@@ -7,6 +7,7 @@
         props: ['user'],
         mounted() {
             Echo.join(`neworder.${this.user.rel_store_id}`)
+            /*
             .here((users) => {
                 console.log(users)
             })
@@ -16,8 +17,15 @@
             .leaving((user) => {
                 console.log(`${user.name} leaved`);
             })
+            */
             .listen('NewOrder', (e) => {
-                console.log(e);
+                if(!("events" in sessionStorage)){
+                    //creamos evenst
+                    var events = [];
+                    sessionStorage.setItem('events', JSON.stringify(events));
+                }
+                //agrega un nuevo evento
+                alert_events.addEvent(e);                
             });            
         }
     }

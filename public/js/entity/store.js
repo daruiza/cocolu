@@ -1,5 +1,4 @@
-function store() {
-	
+function store() {    
 }
 	
 store.prototype.onjquery = function() {	
@@ -26,10 +25,7 @@ store.prototype.consultaRespuestaCity = function(result) {
             });
         }
     }
-    //reiniciamos en chossen
-    //$("#municipio").trigger("liszt:updated");
-    //$("#city").trigger("chosen:updated");
+    
 };
-
 
 var store = new store();

@@ -5,11 +5,15 @@
         	<div class="col-md-3 col-lateral-table">
                 <div class="col-md-12">
                 <div class="card card-menu-table">
-                    <div class="card-header">{{ __('messages.TableService') }}</div>
+                    <div class="card-header">
+                        {{ __('messages.TableService') }}
+                    </div>
                     <div class="card-body">
                         <div class="container services-table">
-                            <div class="row">                                
-								<div class="col-md-12 table"></div>								
+                            <div class="row">
+                                <div class="col-md-12 table"></div>
+                                <div class="col-md-12 totals-orders"></div>  
+                                <div class="col-md-12 new-orders"></div>                   
 								<div class="col-md-12 orders_menu">
                                     @isset($orders)
                                     @empty(!$orders)                                        
@@ -17,12 +21,11 @@
                                     @endempty
                                     @endisset
                                 </div>
-								<div class="col-md-12 new-orders"></div>
                             </div>                                                  
                         </div>                  
                     </div>                            
                 </div>
-                </div>
+                </div>  
                 <div class="col-md-12">
                 <div class="card card-menu-table">
                     <div class="card-header">{{ __('messages.TableOptions') }}</div>
@@ -36,11 +39,11 @@
                         </div>                  
                     </div>                            
                 </div>
-                </div>
+                </div>              
             </div>   
 
-        	<div class="col-md-9">            		
-        		@include('layouts.alert')
+        	<div class="col-md-9">
+                @include('layouts.alert')         		        		
         		<div class="card">
                     <div class="card-header">{{ __('messages.indexTable') }}</div>
                     <div class="card-body">
@@ -57,18 +60,19 @@
                                             bottom: {{json_decode($value->label)->position[2]}};
                                             left: {{json_decode($value->label)->position[3]}}; ">
 
-                                            <div class="object-table">
-                                                
+                                            <div class="object-table
+                                            @if(!($value->tableOrderStatusOneOpen()->count()) && $value->getOrderTotal()) service-open-for-pay @endif
+                                            ">                                                
                                                 {{ Form::hidden('table-id', $value->id) }}
     										  	<p class="p-tittle">
                                                     <i class="{{$value->icon}}"> </i>
-                                                    {{$value->name}}        
+                                                    {{$value->name}}
                                                 </p>
 
                                                 <!-- si la mesa tiene ordenes es etado one-->
                                                 @if($value->tableOrderStatusOneOpen()->count())
                                                     <a class="a-brange" href="#">
-                                                        <span class="badge">
+                                                        <span class="badge badge-table">
                                                             {{$value->tableOrderStatusOneOpen()->count()}}
                                                         </span>
                                                     </a>
@@ -76,9 +80,13 @@
                                                 				
     											@if($value->tableServiceOpen()->count())
     												{!!Form::hidden('service-id', $value->tableServiceOpen()->first()->id)!!}
-    												<div>{{ __('messages.OpenService') }}</div>
-    												<div>{{$value->tableServiceOpen()->first()->date}}</div>
-    												                      
+    												<!--<div>{{ __('messages.OpenService') }}</div>-->
+    												<div>{{$value->tableServiceOpen()->first()->name}}</div>
+                                                    <div>    
+                                                        @if(!($value->tableOrderStatusOneOpen()->count()) && $value->getOrderTotal())
+                                                            ${{number_format($value->getOrderTotal())}}
+                                                        @endif
+                                                    </div>
     											@endif
 
                                             </div>
@@ -96,7 +104,14 @@
 
                                                 {!! Form::open(array('id'=>'table_order_paid'.$value->id,'route'=>'order.order_paid','method' =>'POST')) !!}
                                                     {{ Form::hidden('store-id',Auth::user()->store()->id) }}
-                                                    {{ Form::hidden('table-id', $value->id) }}                          
+                                                    {{ Form::hidden('table-id', $value->id) }}
+                                                    {{ Form::hidden('status-id', 2) }}                          
+                                                {!! Form::close() !!}
+
+                                                {!! Form::open(array('id'=>'table_order_print'.$value->id,'route'=>'order.order_paid','method' =>'POST')) !!}
+                                                    {{ Form::hidden('store-id',Auth::user()->store()->id) }}
+                                                    {{ Form::hidden('table-id', $value->id) }}
+                                                    {{ Form::hidden('status-id', 3) }}                                     
                                                 {!! Form::close() !!}
 
                                             </div>
@@ -124,10 +139,12 @@
 {!! Form::hidden('mesage_send', __('messages.Send') ) !!}
 {!! Form::hidden('mesage_serve', __('form.Serve') ) !!}
 {!! Form::hidden('mesage_pay', __('messages.Pay') ) !!}
+{!! Form::hidden('mesage_print', __('messages.Print') ) !!}
 {!! Form::hidden('mesage_recover', __('messages.Recover') ) !!}
 {!! Form::hidden('mesage_without', __('messages.Without') ) !!}
 {!! Form::hidden('mesage_openService', __('options.service') ) !!}
 {!! Form::hidden('mesage_closeService', __('options.closeService') ) !!}
 {!! Form::hidden('mesage_orderPaid', __('options.orderPaid') ) !!}
+{!! Form::hidden('mesage_orderPrint', __('options.orderPrint') ) !!}
 
 

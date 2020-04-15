@@ -4,6 +4,7 @@ namespace App\Events;
 
 use App\User;
 use App\Model\Core\Order;
+use App\Model\Core\Table;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -27,9 +28,18 @@ class NewOrder implements ShouldBroadcast
     /**
      * Order details
      *
-     * @var Oorder
+     * @var Order
      */
     public $order;
+
+    /**
+     * Table that sent the message
+     *
+     * @var Table
+     */
+    public $table;
+
+
     /**
      * Create a new event instance.
      *
@@ -39,6 +49,7 @@ class NewOrder implements ShouldBroadcast
     {
         $this->user = $user;
         $this->order = $order;
+        $this->table = $order->service()->first()->table()->first();
     }
 
     /**

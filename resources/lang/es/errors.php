@@ -12,4 +12,6 @@ return [
     "NumberEnvoiceNowExist"=>'El número de la facruta ya existe para el Proveedor, :NAME',
     "EnvoiceNotEdit"=>"Factura No puede ser Editada - esta fuera del Cierre , :NAME",
     "ExpenseEditOutGraceTime" => "Edición de Gastos fuera del tiempo de gracia",
+    "NO_ORDER_SAVE" => "La orden no se ha guardado",
+    "orderOpen" => "Aún hay ordenes abiertas. se debe cerrar todas las ordenes"
 ];

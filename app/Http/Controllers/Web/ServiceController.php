@@ -52,7 +52,7 @@ class ServiceController extends Controller
 	 *4. Para crar un nuevo servio la mesa debe tener todos los demas servicios deactivados
      */
     public function create(Request $request)
-    {
+    {        
 		//$request bring table id
 		//1 validate owner table
 		//validar store
@@ -78,7 +78,12 @@ class ServiceController extends Controller
             where('table_id',$table->id)  
             ->where('open',1)            
             ->get();
-            
+
+        $allservices = Service::
+            where('tables.store_id',Auth::user()->store()->id)
+            ->leftJoin('tables','tables.id','services.table_id')                      
+            ->get();    
+        
         if($services->count()){            
             //now exist a service active
             if($table->tableOrderStatusOneTwoOpen()->count()){
@@ -90,11 +95,16 @@ class ServiceController extends Controller
             }
             return redirect('table');               
         }
-
+        
+        $number = 0;
+        if($allservices->max('number')){
+            $number = $allservices->max('number') + 1;
+        }
+                
         //Session::flash('data', ['servicemodal'=>true]);
         //$data = ['servicemodal'=>true];
         //return redirect('table')->with(compact('table','data'))->with('data',['servicemodal'=>true]);
-        return view('table.index',compact('tables','table','orders'))
+        return view('table.index',compact('tables','table','orders','number'))
         ->with('data', ['servicemodal'=>true]);		
     }
 

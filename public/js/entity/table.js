@@ -2,7 +2,8 @@ function table() {
 }
 	
 table.prototype.onjquery = function() {		
-	table.selectTable('object-table','selected-table');	
+	table.selectTable('object-table','selected-table');
+	//para hacer focus a cualquier modal dentro de table	
 };
 
 table.prototype.selectTable = function(objectClass,selectClass) {
@@ -46,6 +47,7 @@ table.prototype.selectServiceResponse = function(result) {
 
     var sum_service = 0;
     var sum_order_paid = 0;
+    var sum_order_print = 0;   
 
     for(obj in result.data.orders) {
     	var subnode = document.createElement("div");
@@ -102,6 +104,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    input.setAttribute("value", result.data.orders[obj].status_id);   	    
 	    subnode.appendChild(input);
 
+	    /*
 	    var div = document.createElement("div");
 		div.setAttribute("class", "col-sm-12");		
 		div.setAttribute("style", "text-align: center;"); 
@@ -110,6 +113,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    span.innerHTML = result.data.table[0].name;
 	    div.appendChild(span);		    
 	    subnode.appendChild(div);
+	    */
 
 	    var div = document.createElement("div");
 		div.setAttribute("class", "col-sm-7 status");		
@@ -132,7 +136,7 @@ table.prototype.selectServiceResponse = function(result) {
 	    var div = document.createElement("div");
 		div.setAttribute("class", "col-sm-12 date");		
 		div.setAttribute("style", "text-align: center;");
-		if(result.data.orders[obj].status_id ==3)div.setAttribute("style", "text-decoration: line-through;");		
+		if(result.data.orders[obj].status_id == 3 || result.data.orders[obj].status_id == 4)div.setAttribute("style", "text-decoration: line-through;");		
 		var span = document.createElement("span");		
 	    span.setAttribute("class", "");			    			    
 	    span.innerHTML = "SubTotal: $"+parseInt(result.data.orders[obj].order_price).toLocaleString();
@@ -154,8 +158,14 @@ table.prototype.selectServiceResponse = function(result) {
 	    	sum_service = sum_service + parseInt(result.data.orders[obj].order_price);
 	    }
 
+	    //ordenes servidas, listas para pagar
 	    if(result.data.orders[obj].status_id == 2){
 	    	sum_order_paid = sum_order_paid+1;
+	    }
+
+	    //ordenes pagas listas para imprimir
+	    if(result.data.orders[obj].status_id == 3){
+	    	sum_order_print = sum_order_print+1;
 	    }
     }
 
@@ -170,17 +180,25 @@ table.prototype.selectServiceResponse = function(result) {
     node.appendChild(div);
 
 	orders.appendChild(node);
+
+	$(".totals-orders").html("Total: $"+sum_service.toLocaleString());
+
 	//Orden Boton nueva orden solo si hay servicio
 	if(result.data.service.length ){
 		$('.services-table .new-orders').html('<a class="dropdown-item" href="javascript: order_create_submit(\'table'+result.data.table[0].id+'\')"><i class="fas fa-clipboard"></i><span>'+$('.span-order').html()+'</span></a>');	
 	}
 
-	if(sum_order_paid ){
+	if(sum_order_paid){
 		$('.services-table .new-orders').html($('.services-table .new-orders').html()+'<a class="dropdown-item" href="javascript: order_paid_submit(\'table_order_paid'+result.data.table[0].id+'\')"><i class="fas fa-money-check-alt"></i><span>'+$( "input[name='mesage_orderPaid']" ).val()+'</span></a>');	
+	}
+
+	if(sum_order_print){
+		$('.services-table .new-orders').html($('.services-table .new-orders').html()+'<a class="dropdown-item" href="javascript: order_print_submit(\'table_order_print'+result.data.table[0].id+'\')"><i class="fas fa-print"></i><span>'+$( "input[name='mesage_orderPrint']" ).val()+'</span></a>');	
 	}
 
 	//pintar el modal
 	order.showOrderModal();
+	
 
 	//cambio de opción deacuerdo a si tiene un servicio abierto
 	if(result.data.service.length){
@@ -231,7 +249,9 @@ table.prototype.orderPaidResponse = function(result) {
 	div.setAttribute("class", "col-sm-1");
 	div.setAttribute("style", "text-align: center;");						
 	var input = document.createElement("input");
-	input.setAttribute("type", "checkbox");
+	input.setAttribute("type", "checkbox");	
+	//input.setAttribute("checked", "checked");	
+	input.setAttribute("autofocus", "autofocus");	
 	input.setAttribute("name", "")		;
     input.setAttribute("class","form-control control-checkbox-header")	
     div.appendChild(input);
@@ -278,7 +298,8 @@ table.prototype.orderPaidResponse = function(result) {
 	    input.setAttribute("class","form-control control-checkbox")
 	    if(result.data.order_product[obj].status_paid == 1){
 	    	input.setAttribute("checked", "checked");
-	    	flat_checkbox = false;	
+	    	input.setAttribute("style", "display: none;");
+	    	//flat_checkbox = false;	
 	    }		    
 	    div.appendChild(input);			
 	    subsubnode.appendChild(div);
@@ -418,8 +439,14 @@ table.prototype.orderPaidResponse = function(result) {
 
 	if(flat_checkbox){
 		$('.control-checkbox-header').change(function(){
-			$('.control-checkbox').attr('checked', $(this).is( ":checked" ));
-			$( ".control-checkbox" ).prop( "checked", $(this).is( ":checked" ) );
+			/*solo los qu no esten ocultos*/
+			for (var i = $( ".control-checkbox" ).length - 1; i >= 0; i--) {
+				if($( ".control-checkbox" )[i].style.display != "none" ){
+					$('.control-checkbox').attr('checked', $(this).is( ":checked" ));				
+					$( ".control-checkbox" ).prop( "checked", $(this).is( ":checked" ) );
+				}
+					
+			}
 			//actualizamos el total
 
 			var sum = 0;
@@ -433,6 +460,13 @@ table.prototype.orderPaidResponse = function(result) {
 			
 		});	
 	}
+	
+}
+
+table.prototype.orderPrintResponse = function(result) {
+	table.orderPaidResponse(result);
+	$('#modal_order_view .btn-send').html($( "input[name='mesage_print']" ).val())
+	$( "input[name='next_status']" ).val(6);
 	
 }
 
@@ -468,8 +502,12 @@ table.prototype.returnAddProduct = function(result) {
     var div = document.createElement("div");
 	div.setAttribute("class", "col-sm-8");
     var input = document.createElement("input");	    
+    input.setAttribute("type", "number");
     input.setAttribute("class", "form-control");
+    input.setAttribute("autofocus", "autofocus");    
+    input.setAttribute("min", "0");
     input.setAttribute("name", "volume_"+result.data[0].id);
+    input.value = "1";
     div.appendChild(input);
     subnode.appendChild(div);
 
@@ -561,5 +599,23 @@ table.prototype.returnAddProduct = function(result) {
 
 	$('#modal_order_conponents').modal('toggle');
 };
+
+/*Controlador de scroll de modal  modal_order_conponents */
+table.prototype.mouseWheel = function(evt,form,index) {
+	//var name_input_volume = $($("#"+evt.target.id+" form")[0]).serializeArray()[1].name;;
+	var name_input_volume = $("#"+form).serializeArray()[index].name;;
+	if(evt.deltaY>0){
+		if($( "input[name='"+name_input_volume+"']" ).val()>1){
+			$( "input[name='"+name_input_volume+"']" ).val(
+				parseInt($( "input[name='"+name_input_volume+"']" ).val())-1
+			);	
+		}		
+
+	}else{
+		$( "input[name='"+name_input_volume+"']" ).val(
+			parseInt($( "input[name='"+name_input_volume+"']" ).val())+1
+		);		
+	}
+}
 
 var table = new table();

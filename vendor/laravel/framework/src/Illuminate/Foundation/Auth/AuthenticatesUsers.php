@@ -43,7 +43,6 @@ trait AuthenticatesUsers
         }
 
         if ($this->attemptLogin($request)) {
-            Auth::user()->permits();
             return $this->sendLoginResponse($request);
         }
 
@@ -159,6 +158,8 @@ trait AuthenticatesUsers
         $this->guard()->logout();
 
         $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
         return $this->loggedOut($request) ?: redirect('/');
     }

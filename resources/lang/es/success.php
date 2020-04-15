@@ -16,4 +16,12 @@ return [
 	"STORE_Edit_OK" => "Bien hecho! El producto se ha editado perfectamente!",
 	"ProductCreateOk" => "Bien! el producto fue creado satisfactoriamente",
 	"EnvoiceSaveOk" => "Hecho!, la factura fue procesada correctamente",
+	"messageaSendOK" => "Hecho!, Tu mensaje fue enviado correctamente",
+	"guest_successful" => "Hecho!, Tu solicitud nos ha llegado.",
+	"MessageSendOk" => "Pronto atenderemos tu Solicitud",
+	'messageBull' => 'Tu cuenta es: $:name',
+	"NewOrderTableOK" => "Excelete! La orden se registro correctamente",
+	"EditOrderTableOK" => "Super! La orden se editó correctamente",
+	"PrintOK" => "Hecho!, La factura fue impresa ",
+	"SERVICE_CLOSE_OK" => "Esta echo, el servicio se ha cerrado correctamente",
 ];

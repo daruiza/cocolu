@@ -2,13 +2,13 @@
 
 namespace BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManagers;
 
+use BeyondCode\LaravelWebSockets\WebSockets\Channels\Channel;
+use BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager;
+use BeyondCode\LaravelWebSockets\WebSockets\Channels\PresenceChannel;
+use BeyondCode\LaravelWebSockets\WebSockets\Channels\PrivateChannel;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Ratchet\ConnectionInterface;
-use BeyondCode\LaravelWebSockets\WebSockets\Channels\Channel;
-use BeyondCode\LaravelWebSockets\WebSockets\Channels\ChannelManager;
-use BeyondCode\LaravelWebSockets\WebSockets\Channels\PrivateChannel;
-use BeyondCode\LaravelWebSockets\WebSockets\Channels\PresenceChannel;
 
 class ArrayChannelManager implements ChannelManager
 {
@@ -55,9 +55,11 @@ class ArrayChannelManager implements ChannelManager
     public function getConnectionCount(string $appId): int
     {
         return collect($this->getChannels($appId))
-            ->sum(function ($channel) {
-                return count($channel->getSubscribedConnections());
-            });
+            ->flatMap(function (Channel $channel) {
+                return collect($channel->getSubscribedConnections())->pluck('socketId');
+            })
+            ->unique()
+            ->count();
     }
 
     public function removeFromAllChannels(ConnectionInterface $connection)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\User;
 use App\Model\Core\Store;
+use App\Model\Core\Product;
 use App\Model\Core\Department;
 use App\Model\Core\City;
 use Illuminate\Http\Request;
@@ -22,56 +23,22 @@ class StoreController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => 'index']);
     }
-
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => '
-                required|
-                string|
-                max:16',
-            'department' => '
-                required|
-                string',
-            'city' => '
-                required|
-                string',   
-            'currency' => '
-                required|
-                max:12',
-            //'password' => 'required|string|min:4|confirmed',
-        ]);
-    }
-
-    protected function validatorImage(array $data)
-    {        
-        return Validator::make($data, [
-            'image'=>'
-                required|
-                mimes:jpeg,bmp,png|
-                dimensions:max_width=700,max_width=700|
-                dimensions:min_width=250,min_width=250',            
-        ]);
-    }
-
+    
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($store)
     {
-        dd('store.controller');
+        $store = Store::where('name', strtolower($store))->firstOrFail();
+        $products = Product::productByStore($store->id,1);
+        $user = New User(['rel_store_id'=>$store->id]);        
+        $id_myadmin = $user->myAdmin($store->id);        
+        return view('store.index',compact('store','products','id_myadmin'));
         //return 'Hola';       
     }
 
@@ -114,7 +81,8 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {        
+    {     
+
         $user = new User();
         $user = User::findOrFail($id);        
         //validación de credenciales de usuario
@@ -122,6 +90,7 @@ class StoreController extends Controller
         $store = $user->store();        
         $store->storeheight = json_decode($store->label)->table->StoreHeight;
         $store->tableheight = json_decode($store->label)->table->TableHeight;
+        $store->colorbody = json_decode($store->label)->table->colorbody;        
         $store->selecttable = json_decode($store->label)->table->selectTable;
         $store->serviceopentable = json_decode($store->label)->table->serviceOpenTable;
         $store->colorrow = json_decode($store->label)->table->colorRow;
@@ -129,7 +98,11 @@ class StoreController extends Controller
         $store->ordernew = json_decode($store->label)->order->OrderNew;
         $store->orderok = json_decode($store->label)->order->OrderOK;
         $store->orderpay = json_decode($store->label)->order->OrderPay;
-        $store->ordercancel = json_decode($store->label)->order->OrderCancel;        
+        $store->ordercancel = json_decode($store->label)->order->OrderCancel;
+        $store->os = json_decode($store->label)->print->os;
+        $store->conn = json_decode($store->label)->print->conn;
+        $store->status_server = json_decode($store->label)->behavior->status_server;
+
                 
         $departments = Department::departments();
         $cities = [];
@@ -199,5 +172,43 @@ class StoreController extends Controller
     {
         //
     }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => '
+                required|
+                string|
+                max:16',
+            'department' => '
+                required|
+                string',
+            'city' => '
+                required|
+                string',   
+            'currency' => '
+                required|
+                max:12',
+            //'password' => 'required|string|min:4|confirmed',
+        ]);
+    }
+
+    protected function validatorImage(array $data)
+    {        
+        return Validator::make($data, [
+            'image'=>'
+                required|
+                mimes:jpeg,bmp,png|
+                dimensions:max_width=700,max_width=700|
+                dimensions:min_width=250,min_width=250',            
+        ]);
+    }
+
     
 }

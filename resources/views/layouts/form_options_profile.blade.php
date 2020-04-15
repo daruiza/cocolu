@@ -3,7 +3,7 @@
 	<ul class="list-group">	                    			
 		@foreach( $data['options'] as $option )
 			<li class="list-group-item li-option" onclick="event.preventDefault();
-                         document.getElementById('{{ $option }}').submit()";>
+                         document.getElementById('{{ $option }}').submit()">
 				{{ __('messages.'. $option) }} 	
 			</li>
 		@endforeach
@@ -11,11 +11,11 @@
 </div>
 
 
-<form id="editProfile" action="{{ route('user.edit', \Auth::user()->id ) }}" method="GET" "></form>
+<form id="editProfile" action="{{ route('user.edit', \Auth::user()->id ) }}" method="GET"></form>
 
-<form id="editStore" action="{{ route('store.edit', \Auth::user()->id ) }}" method="GET" "></form>
+<form id="editStore" action="{{ route('store.edit', \Auth::user()->id ) }}" method="GET"></form>
 
-<form id="editClousure" action="{{ route('clousure.edit', \Auth::user()->id ) }}" method="GET" "></form>
+<form id="editClousure" action="{{ route('clousure.edit', \Auth::user()->id ) }}" method="GET"></form>
 
 <!--
 <form id="workClousure" action="{{ route('clousure.update', \Auth::user()->id ) }}" method="POST">
@@ -25,7 +25,7 @@
 </form>
 -->
 
-<form id="passwordChange" action="{{ route('user.changepassword') }}" method="POST" ">
+<form id="passwordChange" action="{{ route('user.changepassword') }}" method="POST">
 	@csrf                            	
 	<input type="hidden" name="id" value="{{ \Auth::user()->id }}">
 </form>

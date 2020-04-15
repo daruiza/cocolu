@@ -48,6 +48,5 @@ class Clousure extends Model
     public function servicesBuilder(){
         return Service::where('rel_clousure_id', $this->id)
         ->where('open',1);        
-    }
-    
+    }    
 }

@@ -7,11 +7,11 @@ window._ = require('lodash');
  */
 
 try {
-    /*
-    window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
-    require('bootstrap');
-    */
+    //window.$ = window.jQuery = require('jquery');
+    //window.Popper = require('popper.js').default;    
+    global.$ = global.jQuery = require('jquery');
+    global.Popper = require('popper.js').default;    
+    require('bootstrap');    
 } catch (e) {}
 
 /**
@@ -49,11 +49,15 @@ import Echo from 'laravel-echo'
 window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
-    authEndpoint : 'http://localhost/backend/cocolu/public/broadcasting/auth',
+    authEndpoint : 'http://cocolu.temposolutions.co/broadcasting/auth',
+    //authEndpoint : 'http://localhost:8080/web/cocolu/public/broadcasting/auth',
+    //authEndpoint : 'http://localhost/backend/cocolu/public/broadcasting/auth',
+    //authEndpoint : 'http://localhost/cocolu/public/broadcasting/auth',
     broadcaster: 'pusher',
-    key: 'mykey',
-    wsHost: window.location.hostname,
+    key: 'mykey',        
+    wsHost: window.location.hostname,//wsHost: 'localhost',
     wsPort: 6001,
+    wssPort: 6001,
     disableStats: true,
     enabledTransports: ['ws', 'wss']
  });

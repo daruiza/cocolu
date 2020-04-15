@@ -96,19 +96,31 @@
 			return false;			
 		}
 
-		function order_paid_submit(id){			
+		function order_paid_submit(id){		
 			//$('#'+id)[0].submit();
 			
 			var data = new Array();
 			data['store_id'] = $("#"+id+" input[name=store-id]").val();			
-			data['table_id'] = $("#"+id+" input[name=table-id]").val();				
+			data['table_id'] = $("#"+id+" input[name=table-id]").val();
+			data['status_id'] = $("#"+id+" input[name=status-id]").val();				
 			ajaxobject.peticionajax($('#'+id).attr('action'),data,"table.orderPaidResponse");
+		}
+
+		function order_print_submit(id){		
+			//$('#'+id)[0].submit();
+			
+			var data = new Array();
+			data['store_id'] = $("#"+id+" input[name=store-id]").val();			
+			data['table_id'] = $("#"+id+" input[name=table-id]").val();	
+			data['status_id'] = $("#"+id+" input[name=status-id]").val();			
+			ajaxobject.peticionajax($('#'+id).attr('action'),data,"table.orderPrintResponse");
 		}		
 
 		$("#containment-wrapper").height($("#containment-wrapper").height()+
 			{!! json_decode(Auth::user()->store()->label,true)['table']['StoreHeight'] !!});
 		
 		/*Multiple Modal*/
+		
 		$(document).on('show.bs.modal', '.modal', function (event) {
             var zIndex = 1040 + (10 * $('.modal:visible').length);
             $(this).css('z-index', zIndex);
@@ -116,6 +128,25 @@
                 $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
             }, 0);
         });
+		
+        $('.modal').on('shown.bs.modal', function() {
+			$(this).find('[autofocus]').focus();		
+		});
+
+
+		$('.modal').on('hidden.bs.modal', function() {
+			//por si sigue un otro modal			
+			$('.modal').find('[autofocus]').focus();				
+		});
+
+        $('#modal_order_conponents , #modal_detail').on('hidden.bs.modal', function () {		    
+		    $('body').addClass('modal-open');
+		    $('#btn-submit-form-order').focus();
+		});
+
+		/*FIN Multiple Modal*/
+
+
 	</script>
 		
 	@isset($data['servicemodal'])	
@@ -169,7 +200,7 @@
 			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};
 		}
 
-		.badge{	
+		.badge-table{	
 			color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderNew'] }};
 		}
 
@@ -203,9 +234,33 @@
 			*/
 		}
 
+		.status-OrderCancel{
+			background-color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderCancel'] }};
+		}
+
 		.control-checkbox{
 			height: calc(2.25rem + 2px);
     		width: 100%;
+		}
+		.table {		    
+		    margin-bottom: 0rem;
+		}
+		.totals-orders, .new-orders{
+			margin-bottom: 1rem;
+		}
+		.alert-heading{
+			width: 85%
+		}
+
+		.service-open-for-pay{
+			border-top: 5px solid {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }};	
+			/* border-right: 5px solid {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }}; */
+			/* border-left: 5px solid {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }}; */
+		}
+
+		.service-open-for-pay i{
+			top: 14px !important;
+			color: {{ json_decode(Auth::user()->store()->label,true)['order']['OrderOK'] }};	
 		}
 	</style>
 

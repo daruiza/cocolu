@@ -2,13 +2,13 @@
 
 namespace Illuminate\Database\Schema;
 
-use Closure;
 use BadMethodCallException;
-use Illuminate\Support\Fluent;
+use Closure;
 use Illuminate\Database\Connection;
-use Illuminate\Support\Traits\Macroable;
-use Illuminate\Database\SQLiteConnection;
 use Illuminate\Database\Schema\Grammars\Grammar;
+use Illuminate\Database\SQLiteConnection;
+use Illuminate\Support\Fluent;
+use Illuminate\Support\Traits\Macroable;
 
 class Blueprint
 {
@@ -119,7 +119,7 @@ class Blueprint
         foreach ($this->commands as $command) {
             $method = 'compile'.ucfirst($command->name);
 
-            if (method_exists($grammar, $method)) {
+            if (method_exists($grammar, $method) || $grammar::hasMacro($method)) {
                 if (! is_null($sql = $grammar->$method($this, $command, $connection))) {
                     $statements = array_merge($statements, (array) $sql);
                 }
@@ -202,6 +202,7 @@ class Blueprint
                 // index method can be called without a name and it will generate one.
                 if ($column->{$index} === true) {
                     $this->{$index}($column->name);
+                    $column->{$index} = false;
 
                     continue 2;
                 }
@@ -211,6 +212,7 @@ class Blueprint
                 // the index since the developer specified the explicit name for this.
                 elseif (isset($column->{$index})) {
                     $this->{$index}($column->name, $column->{$index});
+                    $column->{$index} = false;
 
                     continue 2;
                 }
@@ -789,7 +791,9 @@ class Blueprint
      */
     public function float($column, $total = 8, $places = 2)
     {
-        return $this->addColumn('float', $column, compact('total', 'places'));
+        return $this->addColumn('float', $column, [
+            'total' => $total, 'places' => $places, 'unsigned' => false,
+        ]);
     }
 
     /**
@@ -802,7 +806,9 @@ class Blueprint
      */
     public function double($column, $total = null, $places = null)
     {
-        return $this->addColumn('double', $column, compact('total', 'places'));
+        return $this->addColumn('double', $column, [
+            'total' => $total, 'places' => $places, 'unsigned' => false,
+        ]);
     }
 
     /**
@@ -815,7 +821,9 @@ class Blueprint
      */
     public function decimal($column, $total = 8, $places = 2)
     {
-        return $this->addColumn('decimal', $column, compact('total', 'places'));
+        return $this->addColumn('decimal', $column, [
+            'total' => $total, 'places' => $places, 'unsigned' => false,
+        ]);
     }
 
     /**
@@ -1181,6 +1189,17 @@ class Blueprint
     }
 
     /**
+     * Create a new multipolygon column on the table.
+     *
+     * @param  string  $column
+     * @return \Illuminate\Database\Schema\ColumnDefinition
+     */
+    public function multiPolygonZ($column)
+    {
+        return $this->addColumn('multipolygonz', $column);
+    }
+
+    /**
      * Create a new generated, computed column on the table.
      *
      * @param  string  $column
@@ -1220,6 +1239,38 @@ class Blueprint
         $this->string("{$name}_type")->nullable();
 
         $this->unsignedBigInteger("{$name}_id")->nullable();
+
+        $this->index(["{$name}_type", "{$name}_id"], $indexName);
+    }
+
+    /**
+     * Add the proper columns for a polymorphic table using UUIDs.
+     *
+     * @param  string  $name
+     * @param  string|null  $indexName
+     * @return void
+     */
+    public function uuidMorphs($name, $indexName = null)
+    {
+        $this->string("{$name}_type");
+
+        $this->uuid("{$name}_id");
+
+        $this->index(["{$name}_type", "{$name}_id"], $indexName);
+    }
+
+    /**
+     * Add nullable columns for a polymorphic table using UUIDs.
+     *
+     * @param  string  $name
+     * @param  string|null  $indexName
+     * @return void
+     */
+    public function nullableUuidMorphs($name, $indexName = null)
+    {
+        $this->string("{$name}_type")->nullable();
+
+        $this->uuid("{$name}_id")->nullable();
 
         $this->index(["{$name}_type", "{$name}_id"], $indexName);
     }

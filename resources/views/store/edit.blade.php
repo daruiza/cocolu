@@ -3,7 +3,9 @@
 @section('template')
   	<link href="{{ asset('css/custom/edit.css') }}" rel="stylesheet">    
   	<link href="{{ asset('css/custom/perfil.css') }}" rel="stylesheet">
+  	<!--
   	<link href="{{ asset('css/bootstrap-colorpicker.min.css') }}" rel="stylesheet">
+  	-->
 @endsection
 
 @section('content')
@@ -12,7 +14,7 @@
 	        <div class="row row-edit-perfil">
 
 	        	<div class="col-md-4 ">
-            		<div class="card">
+            		<div class="card card-menu-table">
 	                    <div class="card-header">{{ __('messages.Options') }}</div>
 	                    @if (!empty($data['options']) )
 	                    	@include('layouts.form_options_profile')
@@ -38,6 +40,9 @@
 										<li class="nav-item">
 									    	<a class="nav-link" id="component-tab" data-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="false">{{ __('messages.Components') }}</a>
 										</li>
+										<li class="nav-item">
+									    	<a class="nav-link" id="advance-tab" data-toggle="tab" href="#advance" role="tab" aria-controls="advance" aria-selected="false">{{ __('messages.Advance') }}</a>
+										</li>
 									</ul>
 
 									<div class="tab-content" id="myTabContent">
@@ -52,6 +57,20 @@
 					                                    </span>
 				                    				@else
 				                    					{!! Form::text('name',null, ['class'=>'form-control']) !!}
+				                    				@endif	
+				                    			</div>
+				                    		</div>
+
+				                    		<div class="form-group row">
+				                    			{!! Form::label('nit','NIT',['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+				                    			<div class="col-md-8">
+				                    				@if($errors->has('nit'))
+				                    					{!! Form::text('nit',null, ['class'=>'form-control is-invalid']) !!}
+				                    					<span class="invalid-feedback">
+					                                        <strong>{{ $errors->first('nit') }}</strong>
+					                                    </span>
+				                    				@else
+				                    					{!! Form::text('nit',null, ['class'=>'form-control']) !!}
 				                    				@endif	
 				                    			</div>
 				                    		</div>
@@ -164,6 +183,25 @@
 				                    		</div>
 
 				                    		<div class="form-group row">
+				                    			{!! Form::label('colorbody',__('messages.colorBody'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+				                    			<div class="col-md-8">
+				                    				<div id="cnt-colorbody" class="input-group">
+				                    					@if($errors->has('colorbody'))
+				                    						{!! Form::text('colorbody',null, ['class'=>'form-control is-invalid ']) !!}
+					                    					<span class="invalid-feedback">
+						                                        <strong>{{ $errors->first('colorbody') }}</strong>
+						                                    </span>
+					                    				@else
+					                    					{!! Form::text('colorbody',null, ['class'=>'form-control']) !!}
+					                    				@endif
+					                    				<span class="input-group-append">
+															<span class="input-group-text colorpicker-input-addon"><i></i></span>
+														</span>
+				                    				</div>
+				                    			</div>
+				                    		</div>
+
+				                    		<div class="form-group row">
 				                    			{!! Form::label('selecttable',__('messages.selectTable'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 				                    			<div class="col-md-8">
 				                    				<div id="cnt-selecttable" class="input-group">
@@ -183,7 +221,7 @@
 				                    		</div>
 
 				                    		<div class="form-group row">
-				                    			{!! Form::label('selecttable',__('messages.serviceOpenTable'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+				                    			{!! Form::label('serviceopentable',__('messages.serviceOpenTable'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 				                    			<div class="col-md-8">
 				                    				<div id="cnt-serviceopentable" class="input-group">
 				                    					@if($errors->has('serviceopentable'))
@@ -311,13 +349,46 @@
 					                    				<span class="input-group-append">
 															<span class="input-group-text colorpicker-input-addon"><i></i></span>
 														</span>
-				                    				</div>				                    			
-												</div>				                    			
+				                    				</div>		
+												</div>
 				                    		</div>
-
-				                    		
-				                    		
-
+										</div>
+										<div class="tab-pane fade show" id="advance" role="tabpanel" aria-labelledby="component-tab">
+											<div class="form-group row">
+				                    			{!!Form::label('os',__('messages.os'),['class'=>'col-sm-4 col-form-label text-md-right'])!!}
+				                    			<div class="col-md-8">
+				                    				{!! Form::select('os',['Linux','Windows'],null, array('class' => 'form-control chosen-select')) !!}
+				                    				@if ($errors->has('os'))
+							                            <span class="invalid-feedback" style="display: block;">
+							                                <strong>{{ $errors->first('os') }}</strong>
+							                            </span>
+							                        @endif
+				                    			</div>
+				                    		</div>
+				                    		<div class="form-group row">
+				                    			{!! Form::label('conn',__('messages.conn'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+				                    			<div class="col-md-8">
+				                    				@if($errors->has('conection'))
+				                    					{!! Form::text('conn',null, ['class'=>'form-control is-invalid']) !!}
+				                    					<span class="invalid-feedback">
+					                                        <strong>{{ $errors->first('conn') }}</strong>
+					                                    </span>
+				                    				@else
+				                    					{!! Form::text('conn',null, ['class'=>'form-control']) !!}
+				                    				@endif	
+				                    			</div>
+				                    		</div>
+				                    		<div class="form-group row">
+				                    			{!!Form::label('status_server',__('messages.OrderOK'),['class'=>'col-sm-4 col-form-label text-md-right'])!!}
+				                    			<div class="col-md-8">
+				                    				{!! Form::select('status_server',[__('messages.Yes'),__('messages.Not')],null, array('class' => 'form-control chosen-select')) !!}
+				                    				@if ($errors->has('status_server'))
+							                            <span class="invalid-feedback" style="display: block;">
+							                                <strong>{{ $errors->first('status_server') }}</strong>
+							                            </span>
+							                        @endif
+				                    			</div>
+				                    		</div>
 										</div>
 									</div>
 
@@ -354,8 +425,10 @@
 
 
 @section('script')
-	<script type="text/javascript" src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>	
-	<script type="text/javascript"> 
+	<!--
+	<script type="application/javascript" src="{{ asset('js/bootstrap-colorpicker.min.js') }}"></script>
+	-->
+	<script type="application/javascript"> 
 		$('#img_store').change(function(e) {
 	    	var file = e.target.files[0],
 		    imageType = /image.*/;
@@ -377,6 +450,7 @@
 			ajaxobject.peticionajax($('#form_consult_city').attr('action'),datos,"store.consultaRespuestaCity");
 		});
 
+	    colorPiker('cnt-colorbody');
 		colorPiker('cnt-selecttable');
 	    colorPiker('cnt-serviceopentable');
 	    colorPiker('cnt-colorrow');

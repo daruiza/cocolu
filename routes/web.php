@@ -27,22 +27,23 @@ Route::get('invoice/purchase', [
 ]);
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::post('locale', 'HomeController@postLocale')->name('locale');
-Route::resource('rol', 'Web\RolController');
-Route::resource('user', 'Web\UserController');
-Route::resource('module', 'Web\ModuleController');
-Route::resource('store', 'Web\StoreController');
-Route::resource('category', 'Web\CategoryController');
+Route::post('locale',      'HomeController@postLocale')->name('locale');
+Route::resource('rol',     'Web\RolController');
+Route::resource('user',    'Web\UserController');
+Route::resource('module',  'Web\ModuleController');
+Route::resource('store',   'Web\StoreController');
+Route::resource('category','Web\CategoryController');
 Route::resource('product', 'Web\ProductController');
-Route::resource('table', 'Web\TableController');
+Route::resource('table',   'Web\TableController');
 Route::resource('service', 'Web\ServiceController');
-Route::resource('clousure', 'Web\ClousureController');
-Route::resource('waiter', 'Web\WaiterController');
+Route::resource('clousure','Web\ClousureController');
+Route::resource('waiter',  'Web\WaiterController');
 Route::resource('procuct', 'Web\ProductController');
-Route::resource('order', 'Web\OrderController');
+Route::resource('order',   'Web\OrderController');
 Route::resource('expense', 'Web\ExpenseController');
 Route::resource('invoice', 'Web\InvoiceController');
-Route::resource('provider', 'Web\ProviderController');
+Route::resource('provider','Web\ProviderController');
+Route::resource('message', 'Web\MessageController');
 
 Route::post('storecitytrait', 'Web\StoreController@consultarcity');
 //Route::post('storecitytrait', 'Web\HomeController@consultarcity');
@@ -92,15 +93,39 @@ Route::post('product/{id}/savestock', [
 Route::post('table/{id}/saveorder', [
    'as' => 'table.saveorder', 'uses' => 'Web\TableController@saveOrder'
 ]);
+Route::get('table/{id}/qrcode', [
+   'as' => 'table.qrcode', 'uses' => 'Web\TableController@qrcode'
+]);
 Route::get('clousure/{id}/showclousures', [
    'as' => 'clousure.showclousures', 'uses' => 'Web\ClousureController@showClousures'
 ]);
 Route::post('clousure/{id}/consultclousure', [
    'as' => 'clousure.consultclousure', 'uses' => 'Web\ClousureController@consultClousure'
-]);
+])->middleware('auth');
+Route::get('clousure/{id}/toexcel', [
+   'as' => 'clousure.toexcel', 'uses' => 'Web\ClousureController@toExcel'
+])->middleware('auth');
 Route::post('provider/consultprovider', [
    'as' => 'provider.consultprovider', 'uses' => 'Web\ProviderController@consultProvider'
 ]);
 Route::post('order/order_paid', [
    'as' => 'order.order_paid', 'uses' => 'Web\OrderController@orderPaid'
+]);
+/*
+Route::post('order/order_print', [
+   'as' => 'order.order_print', 'uses' => 'Web\OrderController@orderPrint'
+]);
+*/
+Route::post('message/requeststore', [
+   'as' => 'message.requeststore', 'uses' => 'Web\MessageController@requestStore'
+]);
+Route::get('message/{id_store}/{id_table}/request', [
+   'as' => 'message.request', 'uses' => 'Web\MessageController@request'
+]);
+Route::get('message/{id_store}/letter', [
+   'as' => 'message.letter', 'uses' => 'Web\MessageController@letter'
+]);
+
+Route::get('/{store}', [
+   'as' => 'store.index', 'uses' => 'Web\StoreController@index'
 ]);

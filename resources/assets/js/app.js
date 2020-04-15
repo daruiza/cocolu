@@ -1,4 +1,4 @@
-
+//import { Popper } from 'popper.js'
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -6,6 +6,14 @@
  */
 
 require('./bootstrap');
+
+import 'jquery-ui/ui/widgets/autocomplete.js';
+import 'jquery-ui/ui/core.js';
+import 'jquery-ui/ui/widget.js';
+import 'jquery-ui/ui/widgets/mouse.js';
+import 'jquery-ui/ui/widgets/draggable.js';
+
+import 'bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js';
 
 window.Vue = require('vue');
 
@@ -16,6 +24,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('neworder-component', require('./components/NewOrderComponent.vue').default);
+Vue.component('newmessage-component', require('./components/NewMessageComponent.vue').default);
+Vue.component('newrequest-component', require('./components/NewRequestComponent.vue').default);
 
 const app = new Vue({
     el: '#app'

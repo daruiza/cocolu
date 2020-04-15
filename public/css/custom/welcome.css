@@ -1,10 +1,15 @@
 .video-container{
-	position: absolute;
+	/*position: absolute;*/
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
 	top: 0px;
 	z-index: -100; 
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .video-container video {
@@ -14,21 +19,13 @@
 
 /*media-query*/
 @media screen and (min-width: 768px) {
-	.navbar-laravel{		   
-	    background: #ffffff99;
-	    position: fixed;
-	    width: 100%;       
-	    top: 0px;
-	    z-index: 1;	    
-	}
-	.pb-4, .py-4 {
-	    padding-bottom: 0rem!important;
-	    padding-top: 5rem!important;
-	}
-	.flex-center .container .row .card,
-	.container .login-card .card{
-		background: #ffffff99;
-	}  
+	.navbar-laravel{           
+        background: #ffffffbb;
+        position: fixed;
+        width: 100%;       
+        top: 0px;
+        z-index: 1;     
+    }
 }
 
 @media screen and (max-width: 767px) {

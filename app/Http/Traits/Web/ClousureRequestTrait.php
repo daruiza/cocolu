@@ -4,6 +4,7 @@ namespace App\Http\Traits\Web;
 
 use App\Model\Core\Clousure;
 use Illuminate\Http\Request;
+use App\Model\Exports\ClousureExports;
 //use App\Http\Controllers\HomeController;
 
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,7 @@ trait ClousureRequestTrait
         	->leftJoin('order_product','orders.id','order_product.order_id')
         	->leftJoin('products','order_product.product_id','products.id')
 	        ->where('clousures.open',0)
+            ->where('orders.status_id',3)
 	        ->where('clousures.store_id',Auth::user()->store()->id)
 	        ->orderBy('clousures.id','DESC')
 	        ->groupBy('clousures.id')	        
@@ -47,6 +49,20 @@ trait ClousureRequestTrait
         //return $home->index(Clousure::find($request->input('clousure-id')));
 		return  app('App\Http\Controllers\HomeController')->index(Clousure::find($request->input('clousure-id')));
 		
-	}	
+	}
+
+    public function toExcel(Request $request,$id){
+        /*
+        $data = Clousure::all();        
+        \Excel::create('ReporteCierreExcel',function($excel) use ($data){
+            $excel->sheet('Sheet 1',function($sheet) use ($data){
+                $sheet->fromArray($export);
+            });
+        })->download('xlsx');
+        */
+
+        return \Excel::download(new ClousureExports, 'users.xlsx');
+
+    }	
 	
 }

@@ -36,7 +36,7 @@ class TableController extends Controller
      */
     public function index()
     {        
-        //dd(Table::find(1)->store()->get());
+        
         //$tables = Table::all()->where('active',1);
         $tables = Table::
             where('store_id',Auth::user()->store()->id)
@@ -44,9 +44,8 @@ class TableController extends Controller
             ->orderBy('id','ASC')
             ->get();
 
-        //listamos las ordenes endientes por atender de esta clousure        
-        $orders = Order::ordersStatusOne(Auth::user()->store()->id);   
-        
+        //listamos las ordenes pendientes por atender de esta clousure        
+        $orders = Order::ordersStatusOne(Auth::user()->store()->id);
 		return view('table.index',compact('tables','orders'))->with('data', []);
     }
 
@@ -175,11 +174,11 @@ class TableController extends Controller
                 string|
                 max:16',
             'description' => '
-                max:64',
+                max:512',
             'icon' => '
                 required|
                 string|                
-                max:16',
+                max:32',
             'order' => '                
                 numeric|                
                 digits_between:1,512',

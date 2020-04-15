@@ -164,6 +164,10 @@
             background-color: {{ json_decode(Auth::user()->store()->label,true)['table']['selectTable'] }} !important;
         }
 
+        .table-container{
+            text-align: center;
+        }
+
         .table-header{
             border: 1px solid gainsboro;
             padding-top: 2px;
@@ -183,14 +187,16 @@
             color: #212529
         }
 
-        form#form-category{
-            display: flex;            
-            align-items: center;
-            justify-content: center;
-        }
-
         .form-search{
             margin: 4px;
+        }
+
+        @media (min-width: 768px) {
+            form#form-category{
+                display: flex;            
+                align-items: center;
+                justify-content: center;
+            }
         }
         
 	</style>	

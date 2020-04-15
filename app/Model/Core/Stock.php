@@ -41,7 +41,7 @@ class Stock extends Model
         if(array_key_exists('rel_clousure_id',$data))$this->rel_clousure_id = $data['rel_clousure_id'];
         //$this->volume = $relation->volume;
 
-        $this->save();        
+        $this->save();
     }
 
     static function productByClousure(Clousure $clousure){

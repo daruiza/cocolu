@@ -65,9 +65,40 @@ class Order extends Model
         ->where('clousures.open',1)
         ->where('orders.status_id',1)
         ->orderBy('id','ASC')
-        ->get();     
+        ->get();  
         return $orders;    
     }
+
+
+    static function ordersStatusOneServiceGet($store_id, $service_id){
+        return Order::select('orders.*')
+        ->leftJoin('services','orders.service_id','services.id')
+        ->leftJoin('clousures','services.rel_clousure_id','clousures.id')
+        ->where('clousures.store_id',$store_id)
+        ->where('orders.service_id',$service_id)
+        ->where('clousures.open',1)
+        ->where('orders.status_id',1)
+        ->orderBy('id','ASC');
+    }
+
+    static function ordersStatusOneService($store_id, $service_id){
+        return Order::ordersStatusOneServiceGet($store_id, $service_id)->get();
+    }
+
+    static function ordersStatusOneServicePaid($store_id, $service_id){
+        return Order::ordersStatusOneServiceGet($store_id, $service_id)
+        ->update(['status_id' => 3]);
+    }
+
+    static function orderProductStatusOneServicePaid($store_id, $service_id){
+        return Order::
+        ordersStatusOneServiceGet($store_id, $service_id)
+        ->select('orders.*', 'order_product.status_paid')
+        ->leftJoin('order_product','order_product.order_id','orders.id')
+        ->update(['status_paid' => 1]);
+    }
+
+
 
     public function orderPrice(){
         $order = Order::

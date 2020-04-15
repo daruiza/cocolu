@@ -15,7 +15,7 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable Name Long',
 			'description'=>'Description',
 			'icon' => 'fas fa-beer',
-			'label'=>'{	"options":["serviceCreate","orderCreate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',
 			'store_id'=>1,			
 			)
 		);
@@ -24,7 +24,7 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
-			'label'=>'{	"options":["serviceCreate","orderCreate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
 			'store_id'=>1,			
 			)
 		);		
@@ -33,7 +33,7 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable2',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
-			'label'=>'{	"options":["serviceCreate","orderCreate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',
 			'store_id'=>1,			
 			)
 		);
@@ -42,7 +42,7 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable3',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
-			'label'=>'{	"options":["serviceCreate","orderCreate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
 			'store_id'=>1,			
 			)
 		);
@@ -50,7 +50,7 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable4',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
-			'label'=>'{	"options":["serviceCreate","orderCreate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
 			'store_id'=>1,			
 			)
 		);
@@ -58,9 +58,33 @@ class TablesTableSeeder extends Seeder
 			'name'=>'DefaultTable5',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',		
-			'label'=>'{	"options":["serviceCreate","orderCreate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
 			'store_id'=>1,			
 			)
 		);						
+		\DB::table('tables')->insert(array(        	
+			'name'=>'DefaultTable6',
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',		
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
+			'store_id'=>1,			
+			)
+		);
+		\DB::table('tables')->insert(array(        	
+			'name'=>'DefaultTable7',
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',		
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
+			'store_id'=>1,			
+			)
+		);
+		\DB::table('tables')->insert(array(        	
+			'name'=>'DefaultTable8',
+			'description'=>'DescriptionTable',
+			'icon' => 'fas fa-beer',		
+			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
+			'store_id'=>1,			
+			)
+		);
     }
 }
