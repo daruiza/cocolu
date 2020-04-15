@@ -759,6 +759,7 @@ class ComposerStaticInit4d1459ba26a4a09867ff20b5ebb040a4
         'App\\Events\\NewOrder' => __DIR__ . '/../..' . '/app/Events/NewOrder.php',
         'App\\Events\\NewRequest' => __DIR__ . '/../..' . '/app/Events/NewRequest.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Api\\ClosureController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ClosureController.php',
         'App\\Http\\Controllers\\Api\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/OrderController.php',
         'App\\Http\\Controllers\\Api\\TableController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/TableController.php',
         'App\\Http\\Controllers\\Api\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/UserController.php',

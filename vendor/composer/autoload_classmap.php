@@ -12,6 +12,7 @@ return array(
     'App\\Events\\NewOrder' => $baseDir . '/app/Events/NewOrder.php',
     'App\\Events\\NewRequest' => $baseDir . '/app/Events/NewRequest.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\Api\\ClosureController' => $baseDir . '/app/Http/Controllers/Api/ClosureController.php',
     'App\\Http\\Controllers\\Api\\OrderController' => $baseDir . '/app/Http/Controllers/Api/OrderController.php',
     'App\\Http\\Controllers\\Api\\TableController' => $baseDir . '/app/Http/Controllers/Api/TableController.php',
     'App\\Http\\Controllers\\Api\\UserController' => $baseDir . '/app/Http/Controllers/Api/UserController.php',
