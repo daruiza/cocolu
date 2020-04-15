@@ -33,6 +33,7 @@ trait RegistersUsers
         event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
+        Auth::user()->userPermits($user->id);
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
