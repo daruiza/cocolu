@@ -29,10 +29,16 @@ class ClosureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // Orders by service para la consulta de una mesa dada su servicio
+    // Sirve todos los cierres
     public function index(Request $request)
     {
-        return response()->json($request->user());
+        $closures = Clousure::
+        // where(1)
+        // ->orderBy('name', 'desc')
+        take(10)
+        ->get();
+        return response()->json($closures);
+        // return response()->json($request->input());
     }
 
     /**

@@ -16,6 +16,13 @@ class WaitersTableSeeder extends Seeder
 			'label'=>'',						
 			'user_id'=>3
 			)
+        );
+        
+        \DB::table('waiters')->insert(array(
+			'description'=>'',
+			'label'=>'',						
+			'user_id'=>4
+			)
 		);
 		
     }

@@ -45,6 +45,18 @@ class UsersTableSeeder extends Seeder
 			'rel_store_id'=>1
 			)
 		);
+
+		\DB::table('users')->insert(array(
+			'name'=>'agentetwo',
+			'surname'=>'agentetwo',
+			'email'=>'agentetwo@yopmail.com',
+			'phone'=>'31122222222',
+			'password'=>\Hash::make('0000'),						
+			'rol_id'=>3,
+			'acount_id'=>1,
+			'rel_store_id'=>1
+			)
+		);
 		
     }
 }
