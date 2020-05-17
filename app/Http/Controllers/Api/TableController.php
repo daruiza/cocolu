@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Api;
 
@@ -20,7 +20,8 @@ use App\Http\Traits\Web\UserRequestTrait;
 
 use DateTime;
 
-class TableController extends Controller{
+class TableController extends Controller
+{
 
     public function __construct()
     {
@@ -34,14 +35,36 @@ class TableController extends Controller{
      */
     public function index(Request $request)
     {
-        // Obtiene las mesas del salon
-        $tables = Table::
-            where('store_id',$request->user()->store()->id)
-            ->where('active',1)
-            ->orderBy('id','ASC')
-            ->get();
+        $object = new Table();
+        $object->name = trim($request->input('key'));
+        $object->description = trim($request->input('key'));
+        $object->active = $request->input('active');
 
-        return response()->json($tables);    
+        $limit = $request->input('limit');
+        if (!$limit || $limit === 'undefined') {
+            $limit = 5;
+        }
+        $sort = $request->input('sort');
+        if (!$sort || $sort === 'undefined') {
+            $sort = 'ASC';
+        }
+        $page = $request->input('page');
+        if (!$page || $page === 'undefined') {
+            $page = '0';
+        }
+        $page = intval($page) + 1;
+
+
+        // Obtiene las mesas del salon
+        // return response()->json($request->input());
+        $tables = Table::where('store_id', $request->user()->store()->id)
+            ->name($object->name)
+            ->name($object->description)
+            ->active($object->active)
+            ->orderBy('id',  $sort)
+            ->paginate($limit, ['*'], '', $page);
+
+        return response()->json($tables);
     }
 
     /**
@@ -73,7 +96,6 @@ class TableController extends Controller{
      */
     public function show($id)
     {
-        
     }
 
     /**
@@ -111,111 +133,100 @@ class TableController extends Controller{
     }
 
     // Evalua si una tabla tiene Servico y lo retorna
-    public function tableServiceOpen(Request $request, $id){
+    public function tableServiceOpen(Request $request, $id)
+    {
         $table = Table::find($id);
         return response()->json($table->tableServiceOpen());
     }
 
     // Crea un nuevo servico
-    public function tableServiceSave(Request $request){
-        
-        $request->request->add($request->input('params'));
-        
-    	$table = Table::find($request->input('params')['table_id']);        
+    public function tableServiceSave(Request $request)
+    {
 
-    	// Miramos que no tenga mas servicis
-    	// por precausións
-        $services = Service::
-            where('table_id',$request->input('params')['table_id'])  
-            ->where('open',1)            
+        $request->request->add($request->input('params'));
+
+        $table = Table::find($request->input('params')['table_id']);
+
+        // Miramos que no tenga mas servicis
+        // por precausións
+        $services = Service::where('table_id', $request->input('params')['table_id'])
+            ->where('open', 1)
             ->get();
 
-        if($services->count()){
-        	return response()->json(['message' => 'NO_MULTI_SERVERS'], 404);
+        if ($services->count()) {
+            return response()->json(['message' => 'NO_MULTI_SERVERS'], 404);
         }
 
         $service = new Service();
         $today = new DateTime();
-		$today = $today->format('Y-m-d H:i:s');
+        $today = $today->format('Y-m-d H:i:s');
         $request->request->add(['date_open' => $today]);
 
-		
-		$cousure = Clousure::
-            where('store_id',$table->store_id)
-            ->where('open',1)
+
+        $cousure = Clousure::where('store_id', $table->store_id)
+            ->where('open', 1)
             ->get();
 
-        if($cousure->count() <> 1){
-        	return response()->json(['message' => 'No hay una Labor en curso, debes habrir una nueva'], 404);
+        if ($cousure->count() <> 1) {
+            return response()->json(['message' => 'No hay una Labor en curso, debes habrir una nueva'], 404);
         }
-        $request->request->add(['rel_clousure_id' => $cousure->first()->id]);         
+        $request->request->add(['rel_clousure_id' => $cousure->first()->id]);
 
-        $max_number = Service::
-            where('tables.store_id',$request->user()['rel_store_id'])
-            ->leftJoin('tables','tables.id','services.table_id')
+        $max_number = Service::where('tables.store_id', $request->user()['rel_store_id'])
+            ->leftJoin('tables', 'tables.id', 'services.table_id')
             ->get()->max('number');
 
-         $request->request->add(['number' => $max_number + 1]);         
+        $request->request->add(['number' => $max_number + 1]);
 
         return response()->json($service::create($request->input()));
     }
 
-    public function tableServiceClose(Request $request){
-        
-        
-        $table = Table::find($request->input('params')['table_id']);
-        $orders = Order::
-        ordersStatusOneService($table->store_id, $request->input('params')['service_id']);
+    public function tableServiceClose(Request $request)
+    {
 
-        if(!count($orders)){
-            $service = Service::
-            where('table_id',$table->id)  
-            ->where('open',1)            
-            ->get()->first();
+
+        $table = Table::find($request->input('params')['table_id']);
+        $orders = Order::ordersStatusOneService($table->store_id, $request->input('params')['service_id']);
+
+        if (!count($orders)) {
+            $service = Service::where('table_id', $table->id)
+                ->where('open', 1)
+                ->get()->first();
 
             $today = new DateTime();
-            $today = $today->format('Y-m-d H:i:s'); 
+            $today = $today->format('Y-m-d H:i:s');
 
             $service->description = '';
             $service->open = 0;
-            $service->date_close = $today;   
+            $service->date_close = $today;
             $service->save();
 
             return response()->json($service);
-
-        } else {            
+        } else {
             // no podemos hacer el cierres
             // a menos que sea obligado que si
-            if($request->input('params')['service_close'] === 'true'){
+            if ($request->input('params')['service_close'] === 'true') {
                 //1. pagamos todas las order_product
-                $orders_product_paid = Order::
-                orderProductStatusOneServicePaid($table->store_id, $request->input('params')['service_id']);
+                $orders_product_paid = Order::orderProductStatusOneServicePaid($table->store_id, $request->input('params')['service_id']);
 
-                $order_paid = Order::
-                ordersStatusOneServicePaid($table->store_id, $request->input('params')['service_id']);
+                $order_paid = Order::ordersStatusOneServicePaid($table->store_id, $request->input('params')['service_id']);
 
-                $service = Service::
-                where('table_id',$table->id)  
-                ->where('open',1)            
-                ->get()->first();
+                $service = Service::where('table_id', $table->id)
+                    ->where('open', 1)
+                    ->get()->first();
 
                 $today = new DateTime();
-                $today = $today->format('Y-m-d H:i:s'); 
+                $today = $today->format('Y-m-d H:i:s');
 
                 $service->description = '';
                 $service->open = 0;
-                $service->date_close = $today;   
+                $service->date_close = $today;
                 $service->save();
 
                 return response()->json($service);
-                
             } else {
-                return response()->json(['message' => 'NO_SERVER_CLOSE'], 404);    
+                return response()->json(['message' => 'NO_SERVER_CLOSE'], 404);
             }
-            
-        }       
-        
+        }
     }
-
-   
 }

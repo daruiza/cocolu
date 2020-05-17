@@ -12,7 +12,7 @@ class TablesTableSeeder extends Seeder
     public function run()
     {
         \DB::table('tables')->insert(array(        	
-			'name'=>'DefaultTable Name Long',
+			'name'=>'Afuera 1',
 			'description'=>'Description',
 			'icon' => 'fas fa-beer',
 			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',
@@ -21,7 +21,7 @@ class TablesTableSeeder extends Seeder
 		);
 
 		\DB::table('tables')->insert(array(        	
-			'name'=>'DefaultTable',
+			'name'=>'Afuera 2',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
 			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
@@ -30,7 +30,7 @@ class TablesTableSeeder extends Seeder
 		);		
 
 		\DB::table('tables')->insert(array(        	
-			'name'=>'DefaultTable2',
+			'name'=>'Barra 1',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
 			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',
@@ -39,7 +39,7 @@ class TablesTableSeeder extends Seeder
 		);
 
 		\DB::table('tables')->insert(array(        	
-			'name'=>'DefaultTable3',
+			'name'=>'Barra 2',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
 			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
@@ -47,7 +47,7 @@ class TablesTableSeeder extends Seeder
 			)
 		);
 		\DB::table('tables')->insert(array(        	
-			'name'=>'DefaultTable4',
+			'name'=>'Barra',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',			
 			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
@@ -55,7 +55,7 @@ class TablesTableSeeder extends Seeder
 			)
 		);
 		\DB::table('tables')->insert(array(        	
-			'name'=>'DefaultTable5',
+			'name'=>'Mesa 1',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',		
 			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
@@ -63,7 +63,7 @@ class TablesTableSeeder extends Seeder
 			)
 		);						
 		\DB::table('tables')->insert(array(        	
-			'name'=>'DefaultTable6',
+			'name'=>'Mesa 2',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',		
 			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
@@ -71,7 +71,7 @@ class TablesTableSeeder extends Seeder
 			)
 		);
 		\DB::table('tables')->insert(array(        	
-			'name'=>'DefaultTable7',
+			'name'=>'Mesa 3',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',		
 			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
@@ -79,7 +79,7 @@ class TablesTableSeeder extends Seeder
 			)
 		);
 		\DB::table('tables')->insert(array(        	
-			'name'=>'DefaultTable8',
+			'name'=>'Mesa 4',
 			'description'=>'DescriptionTable',
 			'icon' => 'fas fa-beer',		
 			'label'=>'{	"options":["serviceCreate","orderCreate","qrcodeGenerate"],"position":["top","right","bottom","left"],"logo":"table.png","icon":"fas fa-list"}',	
