@@ -77,8 +77,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         // return response()->json($request->user());
         // $table = Table::find($request->input('params'));
         // return response()->json($request->input());
@@ -256,9 +255,9 @@ class OrderController extends Controller
         foreach ($products as $value) {
             if (!in_array($value->category, $categories)) {
                 $categories[] = $value->category;
-            };
+            }
         }
-
+    
         return response()->json([
             'products' => $products,
             'categories' => $categories,

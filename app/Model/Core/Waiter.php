@@ -68,7 +68,7 @@ class Waiter extends Model
         
         if($store_id){
 
-            $elo_waiters =  Waiter::select('waiters.id','users.name','users.surname')
+            $elo_waiters =  Waiter::select('waiters.id','users.name', 'users.surname', 'waiters.user_id')
             ->leftjoin('users','user_id','users.id')
             ->where('users.rel_store_id',$store_id)
             ->where('active',1)
@@ -79,7 +79,8 @@ class Waiter extends Model
             foreach ($elo_waiters as $key => $value) {
                 $waiters[] = array(
                     'id' => $value['id'], 
-                    'name' => $value['name'].' '.$value['surname']
+                    'name' => $value['name'].' '.$value['surname'],
+                    'user_id' => $value['user_id'], 
                 );
             }
 

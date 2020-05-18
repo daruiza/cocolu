@@ -32,6 +32,8 @@ class UserController extends Controller{
         $usr = User::findOrFail($request->user()->id);
         $permits = $usr->userPermitsApi($request->user()->id);
         $user->permits = $permits;
+        // $user->idadmin = User::myAdmin($request->user()->rel_store_id);
+        $user->idadmin = $user->myAdmin($request->user()->rel_store_id);
         return response()->json($user);
     }
 
