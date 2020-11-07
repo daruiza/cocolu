@@ -116,22 +116,25 @@ class User extends Authenticatable
     }
 
     //retrorna el id del administrador de la tienda
-    static function myAdmin($store_id = null){
+    static function myAdmin($store_id = null, $rel_store_id=null){
 
         if ($store_id) {
             $users = User::where('users.rel_store_id', $store_id)->get();
             if ($users->count()) {
                 foreach ($users as $key => $value) {
-                    if ($value->rol_id == 2) return $value->id;
+                    if ($value->rol_id == 2) {return $value->id;}
                 }
             }
         } else {
-            $users = User::where('users.rel_store_id', $this->rel_store_id)->get();
+            
+            // El $this->rel_store_id falla extrepitosamente
+            $users = User::where('users.rel_store_id', $rel_store_id)->get();
             if ($users->count()) {
                 foreach ($users as $key => $value) {
-                    if ($value->rol_id == 2) return $value->id;
+                    if ($value->rol_id == 2) {return $value->id;}
                 }
             }
+
         }
 
         return 0;

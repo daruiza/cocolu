@@ -33,13 +33,12 @@ class StoreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($store)
-    {
+    {        
         $store = Store::where('name', strtolower($store))->firstOrFail();
         $products = Product::productByStore($store->id,1);
         $user = New User(['rel_store_id'=>$store->id]);        
-        $id_myadmin = $user->myAdmin($store->id);        
-        return view('store.index',compact('store','products','id_myadmin'));
-        //return 'Hola';       
+        $id_myadmin = $user->myAdmin($store->id);
+        return view('store.index',compact('store','products','id_myadmin'));          
     }
 
     /**
