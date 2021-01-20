@@ -31,7 +31,8 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     // Orders by service para la consulta de una mesa dada su servicio
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         //Obtiene las ordenes con sus order_product
         $order_product = OrderProduct::select(
             'orders.id',
@@ -77,130 +78,136 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         // return response()->json($request->user());
         // $table = Table::find($request->input('params'));
         // return response()->json($request->input());
 
-        $cousure = Clousure::where('store_id', $request->user()['rel_store_id'])
-            ->where('open', 1)
-            ->get();
+        try {
+            $cousure = Clousure::where('store_id', $request->user()['rel_store_id'])
+                ->where('open', 1)
+                ->get();
 
-        if ($cousure->count() <> 1) {
-            return response()->json(['message' => 'NO_ONLYONE_CLOUSURE'], 404);
-        }
-
-        $products = $request->input('order')['products'];
-        if (!count($products)) {
-            return response()->json(['message' => 'NO_ORDER_SAVE'], 404);
-        }
-
-        $order_product_res = array();
-        $obj_res = array(
-            'table' => $request->input('table'),
-            'service' => $request->input('service'),
-            'order_form' => array(
-                'user' => $request->input('order')['user'],
-                'waiter' => $request->input('order')['waiter']
-            ),
-            'total' => 0
-        );
-
-        //1. crear el servicio y la orden de pedido
-        $service = Service::find($request->input('service')['id']);
-        $order = new Order();
-
-        $today = new DateTime();
-        $today = $today->format('Y-m-d H:i:s');
-
-        $request->request->add(['date' => $today]);
-        $request->request->add(['description' => json_encode($products)]);
-        $request->request->add(['description' => $request->input('order')['user']]);
-        $request->request->add(['service_id' => $service->id]);
-        $request->request->add(['waiter_id' => $request->input('order')['waiter']]);
-        $request->request->add(['serial' => $order->nextSerial($service)]);
-
-        $obj_order = $order::create($request->input());
-
-        foreach ($products as $key_product => $value_product) {
-            $product = Product::find($value_product['id']);
-            if ($product->buy_price) {
-                // descuento de producto
-                $product->editProductStock(array(
-                    'volume' =>  1
-                ));
-
-                //Descuento de producto en stock     
-                $stock = new Stock();
-                $stock->storeStockProduct(array(
-                    'product_id' =>  $product->id,
-                    'volume' =>  1,
-                    'shift' =>  0,
-                    'rel_clousure_id' => $cousure->first()->id,
-                    'description' => 'sold',
-                    'date' =>  $today
-                ));
+            if ($cousure->count() <> 1) {
+                return response()->json(['message' => 'NO_ONLYONE_CLOUSURE'], 404);
             }
 
-            // Los Ingredientes
-            $ingredients = $product->ingredients();
-            if (count($ingredients)) {
-                foreach ($ingredients as $key_ingredient => $value_ingredient) {
-                    // descuento de ingrediente en stock
-                    if (!$value_ingredient->group) {
+            $products = $request->input('order')['products'];
+            if (!count($products)) {
+                return response()->json(['message' => 'NO_ORDER_SAVE'], 404);
+            }
 
-                        // desuento de ingrediente en producto                    
-                        $product_ingredient = Product::find($value_ingredient->ingredient_id);
-                        $product_ingredient->editProductStock(array(
-                            'volume' =>  $value_ingredient->volume_product
-                        ));
+            $order_product_res = array();
+            $obj_res = array(
+                'table' => $request->input('table'),
+                'service' => $request->input('service'),
+                'order_form' => array(
+                    'user' => $request->input('order')['user'],
+                    'waiter' => $request->input('order')['waiter']
+                ),
+                'total' => 0
+            );
 
-                        // descontamos de stock los ingredientes
-                        $stock = new Stock();
-                        $stock->storeStockProduct(array(
-                            'product_id' =>  $value_ingredient->id,
-                            'volume' =>  $value_ingredient->volume_product,
-                            'shift' =>  0,
-                            'rel_clousure_id' => $cousure->first()->id,
-                            'description' => 'sold',
-                            'date' =>  $today
-                        ));
+            //1. crear el servicio y la orden de pedido
+            $service = Service::find($request->input('service')['id']);
+            $order = new Order();
+
+            $today = new DateTime();
+            $today = $today->format('Y-m-d H:i:s');
+
+            $request->request->add(['date' => $today]);
+            $request->request->add(['description' => json_encode($products)]);
+            $request->request->add(['description' => $request->input('order')['user']]);
+            $request->request->add(['service_id' => $service->id]);
+            $request->request->add(['waiter_id' => $request->input('order')['waiter']]);
+            $request->request->add(['serial' => $order->nextSerial($service)]);
+
+            $obj_order = $order::create($request->input());
+
+            foreach ($products as $key_product => $value_product) {
+                $product = Product::find($value_product['id']);
+                if ($product->buy_price) {
+                    // descuento de producto
+                    $product->editProductStock(array(
+                        'volume' =>  1
+                    ));
+
+                    //Descuento de producto en stock     
+                    $stock = new Stock();
+                    $stock->storeStockProduct(array(
+                        'product_id' =>  $product->id,
+                        'volume' =>  1,
+                        'shift' =>  0,
+                        'rel_clousure_id' => $cousure->first()->id,
+                        'description' => 'sold',
+                        'date' =>  $today
+                    ));
+                }
+
+                // Los Ingredientes
+                $ingredients = $product->ingredients();
+                if (count($ingredients)) {
+                    foreach ($ingredients as $key_ingredient => $value_ingredient) {
+                        // descuento de ingrediente en stock
+                        if (!$value_ingredient->group) {
+
+                            // desuento de ingrediente en producto                    
+                            $product_ingredient = Product::find($value_ingredient->ingredient_id);
+                            $product_ingredient->editProductStock(array(
+                                'volume' =>  $value_ingredient->volume_product
+                            ));
+
+                            // descontamos de stock los ingredientes
+                            // falta este descuento, cuidadito
+                            $stock = new Stock();
+                            // $stock->storeStockProduct(array(
+                            //     'product_id' =>  $value_ingredient->id,
+                            //     'volume' =>  $value_ingredient->volume_product,
+                            //     'shift' =>  0,
+                            //     'rel_clousure_id' => $cousure->first()->id,
+                            //     'description' => 'sold',
+                            //     'date' =>  $today
+                            // ));
+                        }
                     }
                 }
+
+                //2.1 relacion con order products
+                $order_product = new OrderProduct();
+                $order_product->storeOrderProduct(array(
+                    'order_id' => $obj_order->id,
+                    'product_id' => $value_product['id'],
+                    'ingredients' =>  json_encode($ingredients),
+                    'volume' =>  1,
+                    'price' => $value_product['price']
+                ));
+
+                // respuesta order_product
+                $order_product_res[] = array(
+                    'id' => $obj_order->id,
+                    'poduct_id' => $value_product['id'],
+                    'order_product_id' => $order_product->id,
+                    'date' => $obj_order->date,
+                    'description' => $obj_order->description,
+                    'name' => $value_product['name'],
+                    'price' => $value_product['price'],
+                    'status_id' => 1,
+                    'status_paid' => 0
+                );
+                $obj_res['total'] = $obj_res['total'] + $value_product['price'];
             }
-
-            //2.1 relacion con order products
-            $order_product = new OrderProduct();
-            $order_product->storeOrderProduct(array(
-                'order_id' => $obj_order->id,
-                'product_id' => $value_product['id'],
-                'ingredients' =>  json_encode($ingredients),
-                'volume' =>  1,
-                'price' => $value_product['price']
-            ));
-
-            // respuesta order_product
-            $order_product_res[] = array(
+            $obj_res['order'] = array(
                 'id' => $obj_order->id,
-                'poduct_id' => $value_product['id'],
-                'order_product_id' => $order_product->id,
-                'date' => $obj_order->date,
                 'description' => $obj_order->description,
-                'name' => $value_product['name'],
-                'price' => $value_product['price'],
+                'date' => $obj_order->date,
                 'status_id' => 1,
-                'status_paid' => 0
+                'orders' => $order_product_res,
             );
-            $obj_res['total'] = $obj_res['total'] + $value_product['price'];
+            return response()->json($obj_res);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
         }
-        $obj_res['order'] = array(
-            'id' => $obj_order->id,
-            'description' => $obj_order->description,
-            'date' => $obj_order->date,
-            'status_id' => 1,
-            'orders' => $order_product_res,
-        );
-        return response()->json($obj_res);
     }
 
     /**
@@ -219,7 +226,8 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
+    public function edit($id)
+    {
         //
     }
 
@@ -230,7 +238,8 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         //
     }
 
@@ -240,7 +249,8 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy($id)
+    {
         //
     }
 
@@ -257,7 +267,7 @@ class OrderController extends Controller
                 $categories[] = $value->category;
             }
         }
-    
+
         return response()->json([
             'products' => $products,
             'categories' => $categories,

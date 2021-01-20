@@ -11,6 +11,7 @@ return array(
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'Highlight\\' => array($vendorDir . '/scrivo/highlight.php'),
     'HighlightUtilities\\' => array($vendorDir . '/scrivo/highlight.php'),
+    'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
     'Evenement' => array($vendorDir . '/evenement/evenement/src'),
     'BaconQrCode' => array($vendorDir . '/bacon/bacon-qr-code/src'),
 );
