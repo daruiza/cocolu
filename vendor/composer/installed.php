@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'c94fc3a89c423694865a3da8430571b418d4e838',
+    'reference' => '804cb88cb3180bf5da1c4f2f558434fc089d2e3a',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -72,6 +72,15 @@
         0 => '*',
       ),
     ),
+    'darkaonline/l5-swagger' => 
+    array (
+      'pretty_version' => '6.0.6',
+      'version' => '6.0.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd0745ba413f679528fe6ba304b4095a6527f6e46',
+    ),
     'davedevelopment/hamcrest-php' => 
     array (
       'replaced' => 
@@ -96,6 +105,15 @@
       array (
       ),
       'reference' => '8f8a6e48c5ecb0f991c2fdcf5f154a47d85f9ffd',
+    ),
+    'doctrine/annotations' => 
+    array (
+      'pretty_version' => '1.12.1',
+      'version' => '1.12.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b17c5014ef81d212ac539f07a1001832df1b6d3b',
     ),
     'doctrine/inflector' => 
     array (
@@ -537,7 +555,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'c94fc3a89c423694865a3da8430571b418d4e838',
+      'reference' => '804cb88cb3180bf5da1c4f2f558434fc089d2e3a',
     ),
     'laravel/passport' => 
     array (
@@ -1340,6 +1358,15 @@
       ),
       'reference' => '90b2282dd29be1e52565e9832dc23af41610ea07',
     ),
+    'swagger-api/swagger-ui' => 
+    array (
+      'pretty_version' => 'v3.46.0',
+      'version' => '3.46.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cc408812fc927e265da158bf68239530740ab4cc',
+    ),
     'swiftmailer/swiftmailer' => 
     array (
       'pretty_version' => 'v6.2.7',
@@ -1606,6 +1633,15 @@
       ),
       'reference' => '0da0e174f728996f5d5072d6a9f0a42259dbc806',
     ),
+    'symfony/yaml' => 
+    array (
+      'pretty_version' => 'v5.2.5',
+      'version' => '5.2.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '298a08ddda623485208506fcee08817807a251dd',
+    ),
     'theseer/tokenizer' => 
     array (
       'pretty_version' => '1.2.0',
@@ -1648,6 +1684,15 @@
       array (
         0 => '^2.2.1',
       ),
+    ),
+    'zircote/swagger-php' => 
+    array (
+      'pretty_version' => '3.1.0',
+      'version' => '3.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9d172471e56433b5c7061006b9a766f262a3edfd',
     ),
   ),
 );
