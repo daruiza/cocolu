@@ -132,7 +132,36 @@ class TableController extends Controller
         //
     }
 
-    // Evalua si una tabla tiene Servico y lo retorna
+    /**
+     * @OA\Get(
+     *      path="/table/{id}/serviceopen",
+     *      operationId="serviceopen",
+     *      tags={"Table"},
+     *      summary="Evalua si una tabla tiene Servico y lo retorna",
+     *      description="Evalua si una tabla tiene Servico y lo retorna",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Table id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
     public function tableServiceOpen(Request $request, $id)
     {
         $table = Table::find($id);

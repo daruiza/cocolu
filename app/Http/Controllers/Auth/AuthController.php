@@ -92,6 +92,27 @@ class AuthController extends Controller
         ]);
     }    
 
+    /**
+     * @OA\Get(
+     *      path="/auth/logout",     
+     *      tags={"Auth"},
+     *      summary="GetOut",
+     *      description="Close session",
+     *      security={ {"bearer": {} }},     
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated"
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
+     */
     public function logout(Request $request){
         $request->user()->token()->revoke();
         return response()->json(['message' => 

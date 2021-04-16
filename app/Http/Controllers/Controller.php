@@ -32,6 +32,18 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  *     description="API EndPoints of Auth"
  * ) 
  * 
+ * @OA\Tag(
+ *     name="Table",
+ *     description="API EndPoints of Table"
+ * )
+ * 
+ * @OA\SecuritySchemes(
+ *     securityDefinition="bearer",
+ *     type="apiKey",
+ *     in="header",
+ *     name="Authorization"
+ * )
+ * 
  */
 class Controller extends BaseController
 {

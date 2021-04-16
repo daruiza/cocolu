@@ -14,11 +14,43 @@
     },
     "servers": [
         {
-            "url": "http://my-default-host.com",
+            "url": "http://127.0.0.1:8080/api",
             "description": "Cocolu API Server"
         }
     ],
     "paths": {
+        "/table/{id}/serviceopen": {
+            "get": {
+                "tags": [
+                    "Table"
+                ],
+                "summary": "Evalua si una tabla tiene Servico y lo retorna",
+                "description": "Evalua si una tabla tiene Servico y lo retorna",
+                "operationId": "serviceopen",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Table id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
         "/auth/login": {
             "post": {
                 "tags": [
@@ -48,6 +80,32 @@
                         "description": "Forbidden"
                     }
                 }
+            }
+        },
+        "/auth/logout": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "GetOut",
+                "description": "Close session",
+                "operationId": "App\\Http\\Controllers\\Auth\\AuthController::logout",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
             }
         }
     },
@@ -84,6 +142,10 @@
         {
             "name": "Auth",
             "description": "API EndPoints of Auth"
+        },
+        {
+            "name": "Table",
+            "description": "API EndPoints of Table"
         }
     ]
 }
