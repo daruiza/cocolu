@@ -25,7 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+        Passport::tokensExpireIn(now()->addDays(env('APP_TOKENESPIREIN')));
+        Passport::refreshTokensExpireIn(now()->addDays(2));
+        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
         Passport::routes();
     }
 }

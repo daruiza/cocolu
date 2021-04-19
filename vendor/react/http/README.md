@@ -1,6 +1,6 @@
 # HTTP
 
-[![Build Status](https://travis-ci.org/reactphp/http.svg?branch=master)](https://travis-ci.org/reactphp/http)
+[![CI status](https://github.com/reactphp/http/workflows/CI/badge.svg)](https://github.com/reactphp/http/actions)
 
 Event-driven, streaming HTTP client and server implementation for [ReactPHP](https://reactphp.org/).
 
@@ -1698,11 +1698,12 @@ so you don't have to. For instance, if the client sends the request using the
 HTTP/1.1 protocol version, the response message will also use the same protocol
 version, no matter what version is returned from the request handler function.
 
-Note that persistent connections (`Connection: keep-alive`) are currently
-not supported.
-As such, HTTP/1.1 response messages will automatically include a
-`Connection: close` header, irrespective of what header values are
-passed explicitly.
+The server supports persistent connections. An appropriate `Connection: keep-alive`
+or `Connection: close` response header will be added automatically, respecting the
+matching request header value and HTTP default header values. The server is
+responsible for handling the `Connection` response header, so you SHOULD NOT pass
+this response header yourself, unless you explicitly want to override the user's
+choice with a `Connection: close` response header.
 
 ### Middleware
 
@@ -1846,7 +1847,7 @@ implementations and ongoing effort to standardize interfaces between these with
 and support this goal.
 As such, this project only bundles a few middleware implementations that are
 required to match PHP's request behavior (see
-[middleware implementations](#react-http-middleware)) and otherwise actively
+[middleware implementations](#reacthttpmiddleware)) and otherwise actively
 encourages third-party middleware implementations.
 
 While we would love to support PSR-15 directly in `react/http`, we understand
@@ -2732,13 +2733,13 @@ This project follows [SemVer](https://semver.org/).
 This will install the latest supported version:
 
 ```bash
-$ composer require react/http:^1.2
+$ composer require react/http:^1.3
 ```
 
 See also the [CHANGELOG](CHANGELOG.md) for details about version upgrades.
 
 This project aims to run on any platform and thus does not require any PHP
-extensions and supports running on legacy PHP 5.3 through current PHP 7+ and
+extensions and supports running on legacy PHP 5.3 through current PHP 8+ and
 HHVM.
 It's *highly recommended to use PHP 7+* for this project.
 

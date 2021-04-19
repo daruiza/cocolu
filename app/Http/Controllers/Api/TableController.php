@@ -139,6 +139,7 @@ class TableController extends Controller
      *      tags={"Table"},
      *      summary="Evalua si una tabla tiene Servico y lo retorna",
      *      description="Evalua si una tabla tiene Servico y lo retorna",
+     *      security={ {"bearer": {} }},
      *      @OA\Parameter(
      *          name="id",
      *          description="Table id",
@@ -150,22 +151,27 @@ class TableController extends Controller
      *      ),
      *      @OA\Response(
      *          response=200,
-     *          description="Successful operation",
+     *          description="Successful operation", @OA\JsonContent()
      *       ),
      *      @OA\Response(
      *          response=401,
-     *          description="Unauthenticated",
+     *          description="Unauthenticated",     
+     *          @OA\JsonContent(@OA\Property(property="message", type="string", example="Unauthenticated."))
      *      ),
      *      @OA\Response(
      *          response=403,
-     *          description="Forbidden"
+     *          description="Forbidden", @OA\JsonContent()
      *      )
      *     )
      */
     public function tableServiceOpen(Request $request, $id)
     {
-        $table = Table::find($id);
-        return response()->json($table->tableServiceOpen());
+        try {
+            $table = Table::find($id);
+            return response()->json($table->tableServiceOpen());
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
     }
 
     // Crea un nuevo servico
