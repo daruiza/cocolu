@@ -79,6 +79,65 @@
                 ]
             }
         },
+        "/table/serviceclose": {
+            "post": {
+                "tags": [
+                    "Table"
+                ],
+                "summary": "Cierra un servicio de una tabla",
+                "description": "Cierra un servicio de una tabla",
+                "operationId": "serviceclose",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Service"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
         "/auth/login": {
             "post": {
                 "tags": [
@@ -139,6 +198,31 @@
     },
     "components": {
         "schemas": {
+            "Service": {
+                "title": "Service",
+                "description": "Service body data",
+                "properties": {
+                    "service_close": {
+                        "title": "name",
+                        "description": "Switch of close Service",
+                        "type": "boolean",
+                        "example": "false"
+                    },
+                    "service_id": {
+                        "title": "service_id",
+                        "description": "Service id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "table_id": {
+                        "title": "table_id",
+                        "description": "Table id",
+                        "type": "integer",
+                        "example": "1"
+                    }
+                },
+                "type": "object"
+            },
             "User": {
                 "title": "User",
                 "description": "User body data",

@@ -216,13 +216,38 @@ class TableController extends Controller
         return response()->json($service::create($request->input()));
     }
 
+    /**
+     * @OA\Post(
+     *      path="/table/serviceclose",
+     *      operationId="serviceclose",
+     *      tags={"Table"},
+     *      summary="Cierra un servicio de una tabla",
+     *      description="Cierra un servicio de una tabla",
+     *      security={ {"bearer": {} }},
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Service")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation", @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",     
+     *          @OA\JsonContent(@OA\Property(property="message", type="string", example="Unauthenticated."))
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden", @OA\JsonContent()
+     *      )
+     *     )
+     */
     public function tableServiceClose(Request $request)
     {
-
-
         $table = Table::find($request->input('params')['table_id']);
+        // ordersStatusOneService Retorna las ordenes en estado OrderNew
         $orders = Order::ordersStatusOneService($table->store_id, $request->input('params')['service_id']);
-
         if (!count($orders)) {
             $service = Service::where('table_id', $table->id)
                 ->where('open', 1)
